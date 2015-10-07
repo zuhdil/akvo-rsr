@@ -18,8 +18,7 @@ class ProjectUpdateSerializer(BaseRSRSerializer):
 
     """Serializer for project updates."""
 
-    locations = ProjectUpdateLocationNestedSerializer(source='locations', many=True, required=False,
-                                                      allow_add_remove=True)
+    locations = ProjectUpdateLocationNestedSerializer(many=True, required=False,)
     photo = Base64ImageField(required=False, allow_empty_file=True)
 
     class Meta:
@@ -33,7 +32,7 @@ class ProjectUpdateExtraSerializer(BaseRSRSerializer):
     photo = Base64ImageField(required=False, allow_empty_file=True)
     primary_location = ProjectUpdateLocationExtraSerializer()
     # Limit project data to its PK, this is needed because of Meta.depth = 2
-    project = serializers.Field(source='project.pk')
+    project = serializers.ReadOnlyField(source='project.pk')
     user = UserSerializer()
 
     class Meta:

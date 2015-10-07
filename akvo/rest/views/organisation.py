@@ -6,9 +6,11 @@
 
 from django.conf import settings
 
-from rest_framework.compat import etree, six
+from rest_framework.compat import six
 from rest_framework.exceptions import ParseError
-from rest_framework.parsers import XMLParser, JSONParser
+from rest_framework.parsers import JSONParser
+from rest_framework_xml.compat import etree
+from rest_framework_xml.parsers import XMLParser
 
 from akvo.rsr.models import Organisation, Country
 

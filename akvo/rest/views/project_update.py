@@ -39,23 +39,23 @@ class ProjectUpdateViewSet(BaseRSRViewSet):
         datetime for last_modified_at, and they only support a date, not datetime.
         """
         queryset = self.queryset
-        created_at__gt = self.request.QUERY_PARAMS.get('created_at__gt', None)
+        created_at__gt = self.request.query_params.get('created_at__gt', None)
         if created_at__gt is not None:
             queryset = queryset.filter(created_at__gt=created_at__gt)
-        created_at__lt = self.request.QUERY_PARAMS.get('created_at__lt', None)
+        created_at__lt = self.request.query_params.get('created_at__lt', None)
         if created_at__lt is not None:
             queryset = queryset.filter(created_at__lt=created_at__lt)
-        last_modified_at__gt = self.request.QUERY_PARAMS.get('last_modified_at__gt', None)
+        last_modified_at__gt = self.request.query_params.get('last_modified_at__gt', None)
         if last_modified_at__gt is not None:
             queryset = queryset.filter(last_modified_at__gt=last_modified_at__gt)
-        last_modified_at__lt = self.request.QUERY_PARAMS.get('last_modified_at__lt', None)
+        last_modified_at__lt = self.request.query_params.get('last_modified_at__lt', None)
         if last_modified_at__lt is not None:
             queryset = queryset.filter(last_modified_at__lt=last_modified_at__lt)
         # Get updates per organisation
-        project__partners = self.request.QUERY_PARAMS.get('project__partners', None)
+        project__partners = self.request.query_params.get('project__partners', None)
         if project__partners:
             queryset = queryset.filter(project__partners=project__partners)
-        user__organisations = self.request.QUERY_PARAMS.get('user__organisations', None)
+        user__organisations = self.request.query_params.get('user__organisations', None)
         if user__organisations:
             queryset = queryset.filter(user__organisations=user__organisations)
         return queryset
@@ -105,23 +105,23 @@ class ProjectUpdateExtraViewSet(BaseRSRViewSet):
         datetime for last_modified_at, and they only support a date, not datetime.
         """
         queryset = self.queryset
-        created_at__gt = self.request.QUERY_PARAMS.get('created_at__gt', None)
+        created_at__gt = self.request.query_params.get('created_at__gt', None)
         if created_at__gt is not None:
             queryset = queryset.filter(created_at__gt=created_at__gt)
-        created_at__lt = self.request.QUERY_PARAMS.get('created_at__lt', None)
+        created_at__lt = self.request.query_params.get('created_at__lt', None)
         if created_at__lt is not None:
             queryset = queryset.filter(created_at__lt=created_at__lt)
-        last_modified_at__gt = self.request.QUERY_PARAMS.get('last_modified_at__gt', None)
+        last_modified_at__gt = self.request.query_params.get('last_modified_at__gt', None)
         if last_modified_at__gt is not None:
             queryset = queryset.filter(last_modified_at__gt=last_modified_at__gt)
-        last_modified_at__lt = self.request.QUERY_PARAMS.get('last_modified_at__lt', None)
+        last_modified_at__lt = self.request.query_params.get('last_modified_at__lt', None)
         if last_modified_at__lt is not None:
             queryset = queryset.filter(last_modified_at__lt=last_modified_at__lt)
         # Get updates per organisation
-        project__partners = self.request.QUERY_PARAMS.get('project__partners', None)
+        project__partners = self.request.query_params.get('project__partners', None)
         if project__partners:
             queryset = queryset.filter(project__partners=project__partners)
-        user__organisations = self.request.QUERY_PARAMS.get('user__organisations', None)
+        user__organisations = self.request.query_params.get('user__organisations', None)
         if user__organisations:
             queryset = queryset.filter(user__organisations=user__organisations)
         return queryset

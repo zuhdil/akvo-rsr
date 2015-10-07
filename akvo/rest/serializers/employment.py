@@ -14,8 +14,8 @@ from .rsr_serializer import BaseRSRSerializer
 class EmploymentSerializer(BaseRSRSerializer):
 
     # These two can be deleted, but are still used somewhere
-    organisation_name = serializers.Field(source='organisation.long_name')
-    country_name = serializers.Field(source='country.name')
+    organisation_name = serializers.ReadOnlyField(source='organisation.long_name')
+    country_name = serializers.ReadOnlyField(source='country.name')
 
     class Meta:
         model = Employment

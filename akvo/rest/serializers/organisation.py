@@ -15,7 +15,7 @@ from .rsr_serializer import BaseRSRSerializer
 
 class OrganisationSerializer(BaseRSRSerializer):
 
-    locations = OrganisationLocationSerializer(source='locations', many=True, required=False, allow_add_remove=True)
+    locations = OrganisationLocationSerializer(many=True, required=False,)
     logo = Base64ImageField(required=False, allow_empty_file=True)
 
     class Meta:
