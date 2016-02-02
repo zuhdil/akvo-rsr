@@ -2898,6 +2898,7 @@ WHERE rsr_partnership.organisation_id = ?
         </label>
         <grid id="674">
             <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
             <property name="width">2.8645833333333335in</property>
             <column id="675">
                 <property name="width">2.0729166666666665in</property>
@@ -3023,7 +3024,9 @@ WHERE rsr_partnership.organisation_id = ?
             <property name="fontSize">14pt</property>
             <property name="fontWeight">bold</property>
             <property name="marginTop">30pt</property>
+            <property name="masterPage">A4L MasterPage</property>
             <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakInside">avoid</property>
             <expression name="bookmark" type="javascript">"Projects still active past planned end"</expression>
             <structure name="toc">
                 <expression name="expressionValue" type="javascript">"Projects with planned end data overdue"</expression>
@@ -3032,6 +3035,10 @@ WHERE rsr_partnership.organisation_id = ?
         </label>
         <label id="560">
             <property name="fontFamily">"Calibri"</property>
+            <property name="masterPage">A4L MasterPage</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
             <text-property name="text">Sorted by country and id</text-property>
         </label>
         <table id="392">
@@ -3042,7 +3049,9 @@ WHERE rsr_partnership.organisation_id = ?
             <property name="borderTopStyle">none</property>
             <property name="textAlign">left</property>
             <property name="masterPage">A4L MasterPage</property>
-            <property name="pageBreakAfter">always</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">auto</property>
             <property name="width">11.125in</property>
             <property name="dataSet">Planned end date overdue</property>
             <list-property name="boundDataColumns">
@@ -3362,7 +3371,10 @@ WHERE rsr_partnership.organisation_id = ?
             <property name="fontWeight">bold</property>
             <property name="marginTop">30pt</property>
             <property name="textAlign">left</property>
+            <property name="masterPage">A4L MasterPage</property>
             <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="pageBreakInside">avoid</property>
             <expression name="bookmark" type="javascript">"Projects with no recent activity"</expression>
             <structure name="toc">
                 <expression name="expressionValue" type="javascript">"Projects with no edits or updates last 3 months"</expression>
@@ -3371,16 +3383,20 @@ WHERE rsr_partnership.organisation_id = ?
         </label>
         <label id="561">
             <property name="fontFamily">"Calibri"</property>
+            <property name="masterPage">A4L MasterPage</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
             <text-property name="text">Sorted by country and id</text-property>
         </label>
-        <data id="678"/>
         <table id="232">
             <property name="fontFamily">"Calibri"</property>
             <property name="fontSize">10pt</property>
             <property name="textAlign">left</property>
             <property name="masterPage">A4L MasterPage</property>
-            <property name="pageBreakAfter">always</property>
+            <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">auto</property>
             <property name="width">11.152777777777779in</property>
             <property name="dataSet">Not edited last 3 months</property>
             <list-property name="boundDataColumns">
@@ -3635,6 +3651,8 @@ WHERE rsr_partnership.organisation_id = ?
             <property name="marginTop">30pt</property>
             <property name="textAlign">left</property>
             <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="pageBreakInside">avoid</property>
             <expression name="bookmark" type="javascript">"Projects Needing Funding"</expression>
             <structure name="toc">
                 <expression name="expressionValue" type="javascript">"Projects that need funding"</expression>
@@ -3643,13 +3661,18 @@ WHERE rsr_partnership.organisation_id = ?
         </label>
         <label id="562">
             <property name="fontFamily">"Calibri"</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
             <text-property name="text">Sorted by country and id, only active and completed projects</text-property>
         </label>
         <table id="468">
             <property name="fontFamily">"Calibri"</property>
             <property name="textAlign">left</property>
             <property name="masterPage">A4L MasterPage</property>
+            <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">auto</property>
             <property name="width">11.177083333333334in</property>
             <property name="dataSet">Needs funding</property>
             <list-property name="boundDataColumns">
@@ -4009,6 +4032,8 @@ WHERE rsr_partnership.organisation_id = ?
             <property name="marginTop">30pt</property>
             <property name="textAlign">left</property>
             <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="pageBreakInside">avoid</property>
             <expression name="bookmark" type="javascript">"ProjectsWithoutPhotos"</expression>
             <structure name="toc">
                 <expression name="expressionValue" type="javascript">"Projects without photos"</expression>
@@ -4019,7 +4044,9 @@ WHERE rsr_partnership.organisation_id = ?
             <property name="color">black</property>
             <property name="textAlign">left</property>
             <property name="masterPage">A4L MasterPage</property>
+            <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">auto</property>
             <property name="width">11.125in</property>
             <property name="dataSet">No photo</property>
             <list-property name="boundDataColumns">
