@@ -1324,6 +1324,7 @@ order by rsr_result.id, rsr_indicator.id, rsr_indicatorperiod.period_start]]></x
                     <row id="5">
                         <cell id="6">
                             <text name="footer" id="7">
+                                <property name="fontStyle">italic</property>
                                 <property name="marginTop">8pt</property>
                                 <property name="marginLeft">8pt</property>
                                 <property name="contentType">html</property>
