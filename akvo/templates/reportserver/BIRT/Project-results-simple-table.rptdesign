@@ -8,7 +8,7 @@
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
-        <scalar-parameter name="TheProjectId" id="225">
+        <scalar-parameter name="ID" id="225">
             <text-property name="helpText">Id number of the project</text-property>
             <text-property name="promptText">Project id</text-property>
             <property name="valueType">static</property>
@@ -102,7 +102,7 @@
             <list-property name="parameters">
                 <structure>
                     <property name="name">projid</property>
-                    <property name="paramName">TheProjectId</property>
+                    <property name="paramName">ID</property>
                     <property name="nativeName"></property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
