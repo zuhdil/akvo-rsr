@@ -778,7 +778,7 @@ GROUP BY rsr_country.name, p1.id
             <xml-property name="queryText"><![CDATA[SELECT
   p1.id, p1.budget, p1.currency, p1.funds, p1.funds_needed, p1.date_start_planned, p1.date_end_planned, p1.title, p1.iati_activity_id,
   count(DISTINCT rsr_projectupdate.id) AS update_count,
-  rsr_country.name, concat('http://rsr.test.akvo.org/en/project/', p1.id::text) AS project_url
+  rsr_country.name, concat('http://rsr.akvo.org/en/project/', p1.id::text) AS project_url
 
 FROM rsr_project p1
   LEFT JOIN rsr_publishingstatus ON p1.id = rsr_publishingstatus.project_id
@@ -813,6 +813,9 @@ GROUP BY rsr_country.name, p1.id]]></xml-property>
           <design:scale>0</design:scale>
           <design:nullability>Unknown</design:nullability>
         </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
       </design:ParameterDefinition>
     </parameter>
   </DataSetParameters>
@@ -1060,7 +1063,7 @@ GROUP BY rsr_country.name, p1.id]]></xml-property>
             <xml-property name="queryText"><![CDATA[SELECT
   p1.id, p1.budget, p1.currency, p1.funds, p1.funds_needed, p1.date_start_planned, p1.date_end_planned, p1.title, p1.iati_activity_id,
   count(DISTINCT rsr_projectupdate.id) AS update_count,
-  rsr_country.name, concat('http://rsr.test.akvo.org/en/project/', p1.id::text) AS project_url
+  rsr_country.name, concat('http://rsr.akvo.org/en/project/', p1.id::text) AS project_url
 
 FROM rsr_project p1
   LEFT JOIN rsr_publishingstatus ON p1.id = rsr_publishingstatus.project_id
@@ -1876,7 +1879,7 @@ WHERE id = ?
   (SELECT string_agg(k.label, ', ')
     FROM rsr_project p2, rsr_keyword k, rsr_project_keywords pk
     WHERE k.id = pk.keyword_id AND p2.id = pk.project_id AND p2.id = p1.id
-    group by pk.project_id) keywords, p1.last_modified_at, concat('http://rsr.test.akvo.org/en/project/', p1.id::text) AS project_url
+    group by pk.project_id) keywords, p1.last_modified_at, concat('http://rsr.akvo.org/en/project/', p1.id::text) AS project_url
 
 FROM rsr_project p1
   LEFT JOIN rsr_publishingstatus ON p1.id = rsr_publishingstatus.project_id
