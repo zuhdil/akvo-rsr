@@ -792,8 +792,7 @@ WHERE rsr_partnership.organisation_id = ?
       AND p1.funds_needed > '5'
       AND p1.status IN ('A', 'C')
  
-      
-      
+            
 
 GROUP BY rsr_country.name, p1.id]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -813,9 +812,6 @@ GROUP BY rsr_country.name, p1.id]]></xml-property>
           <design:scale>0</design:scale>
           <design:nullability>Unknown</design:nullability>
         </design:attributes>
-        <design:inputAttributes>
-          <design:elementAttributes/>
-        </design:inputAttributes>
       </design:ParameterDefinition>
     </parameter>
   </DataSetParameters>
