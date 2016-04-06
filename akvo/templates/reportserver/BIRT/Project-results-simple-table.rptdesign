@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/grouped_listing.gif</property>
     <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.groupedlisting</property>
@@ -1337,6 +1337,7 @@ order by rsr_result.id, rsr_indicator.id, rsr_indicatorperiod.period_start]]></x
     </page-setup>
     <body>
         <table id="299">
+            <property name="fontFamily">"Calibri"</property>
             <property name="width">11.125in</property>
             <property name="dataSet">Project_results_indicators_periods</property>
             <list-property name="boundDataColumns">
