@@ -15384,10 +15384,10 @@ select ? as number, 'D' as name
         <style name="Sectionheader" id="265">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">18pt</property>
-            <property name="fontWeight">normal</property>
+            <property name="fontWeight">bolder</property>
             <property name="color">#0B80C7</property>
-            <property name="marginTop">8pt</property>
-            <property name="marginBottom">14pt</property>
+            <property name="marginTop">14pt</property>
+            <property name="marginBottom">8pt</property>
         </style>
         <style name="NewStyle" id="290">
             <structure name="numberFormat">
@@ -15418,6 +15418,7 @@ select ? as number, 'D' as name
             </structure>
         </style>
         <style name="Subsectionheader" id="705">
+            <property name="fontFamily">sans-serif</property>
             <property name="fontSize">14pt</property>
             <property name="color">#0B80C7</property>
         </style>
@@ -15579,7 +15580,7 @@ reportContext.setGlobalVariable("show_bars",true);
             <structure name="toc">
                 <expression name="expressionValue" type="javascript">"Summary"</expression>
             </structure>
-            <text-property name="text">Summary</text-property>
+            <text-property name="text">Summary </text-property>
         </label>
         <text-data id="348">
             <property name="dataSet">Framework</property>
@@ -15671,6 +15672,59 @@ reportContext.setGlobalVariable("show_bars",true);
                 <expression name="expressionValue" type="javascript">"Themes"</expression>
             </structure>
             <header>
+                <text-data id="781">
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">all</property>
+                            <expression name="valueExpr" type="javascript">true</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="valueExpr">function markdown_html(src)&#13;
+{&#13;
+	var h='';&#13;
+&#13;
+	function escape(t)&#13;
+	{&#13;
+		return t;&#13;
+	}&#13;
+	function inlineEscape(s)&#13;
+	{&#13;
+		return escape(s)&#13;
+			.replace(/!\[([^\]]*)]\(([^(]+)\)/g, '&lt;img alt="$1" src="$2">')&#13;
+			.replace(/\[([^\]]+)]\(([^(]+)\)/g, '$1'.link('$2'))&#13;
+			.replace(/`([^`]+)`/g, '&lt;code>$1&lt;/code>')&#13;
+			.replace(/\*\*([^*]+)\*\*/g, '&lt;strong>$1&lt;/strong>')&#13;
+			.replace(/\*([^*]+)\*/g, '&lt;em>$1&lt;/em>');&#13;
+	}&#13;
+&#13;
+	src&#13;
+	.replace(/^\s+|\r|\s+$/g, '')&#13;
+	.replace(/\t/g, '    ')&#13;
+	.split(/\n\n+/)&#13;
+	.forEach(function(b, f, R)&#13;
+	{&#13;
+		f=b[0];&#13;
+		R=&#13;
+		{&#13;
+			'*':[/\n\* /,'&lt;ul>&lt;li>','&lt;/li>&lt;/ul>'],&#13;
+			'1':[/\n[1-9]\d*\.? /,'&lt;ol>&lt;li>','&lt;/li>&lt;/ol>'],&#13;
+			' ':[/\n    /,'&lt;pre>&lt;code>','&lt;/pre>&lt;/code>','\n'],&#13;
+			'>':[/\n> /,'&lt;blockquote>','&lt;/blockquote>','\n']&#13;
+		}[f];&#13;
+		h+=&#13;
+			R?R[1]+('\n'+b)&#13;
+				.split(R[0])&#13;
+				.slice(1)&#13;
+				.map(R[3]?escape:inlineEscape)&#13;
+				.join(R[3]||'&lt;/li>\n&lt;li>')+R[2]:&#13;
+			f=='#'?'&lt;h'+(f=b.indexOf(' '))+'>'+inlineEscape(b.slice(f+1))+'&lt;/h'+f+'>':&#13;
+			f=='&lt;'?b:&#13;
+			'&lt;p>'+inlineEscape(b)+'&lt;/p>';&#13;
+	});&#13;
+	return h;&#13;
+};</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <label id="326">
                     <list-property name="visibility">
                         <structure>
@@ -15688,23 +15742,14 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="marginRight">14pt</property>
                     <property name="display">inline</property>
                     <property name="pageBreakBefore">always</property>
-                    <text-property name="text">LL</text-property>
+                    <text-property name="text">MM</text-property>
                 </label>
-                <label id="712">
+                <text-data id="783">
                     <property name="style">Sectionheader</property>
                     <property name="display">inline</property>
-                    <property name="pageBreakBefore">auto</property>
-                    <text-property name="text">Theme:</text-property>
-                </label>
-                <data id="328">
-                    <property name="style">Sectionheader</property>
-                    <property name="display">inline</property>
-                    <property name="pageBreakAfter">avoid</property>
-                    <structure name="toc">
-                        <expression name="expressionValue" type="javascript">row["title"]</expression>
-                    </structure>
-                    <property name="resultSetColumn">title</property>
-                </data>
+                    <expression name="valueExpr">"Theme: "+ row["title"]</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <image name="framework_image1" id="697">
                     <property name="pageBreakBefore">avoid</property>
                     <property name="width">100%</property>
@@ -15714,75 +15759,81 @@ reportContext.setGlobalVariable("show_bars",true);
                 <label id="691">
                     <property name="style">Subsectionheader</property>
                     <property name="fontSize">14pt</property>
-                    <property name="fontWeight">bold</property>
+                    <property name="fontWeight">normal</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">7pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Summary</text-property>
                 </label>
-                <data id="695">
-                    <property name="resultSetColumn">project_plan_summary</property>
-                </data>
+                <text-data id="782">
+                    <expression name="valueExpr">markdown_html(row["project_plan_summary"]);</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <label id="696">
                     <property name="style">Subsectionheader</property>
                     <property name="fontSize">14pt</property>
-                    <property name="fontWeight">bold</property>
+                    <property name="fontWeight">normal</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">7pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Background</text-property>
                 </label>
-                <data id="693">
-                    <property name="resultSetColumn">background</property>
-                </data>
+                <text-data id="784">
+                    <expression name="valueExpr">markdown_html(row["background"]);</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <label id="687">
                     <property name="style">Subsectionheader</property>
                     <property name="fontSize">14pt</property>
-                    <property name="fontWeight">bold</property>
+                    <property name="fontWeight">normal</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">7pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Project Plan</text-property>
                 </label>
-                <data id="694">
-                    <property name="resultSetColumn">project_plan</property>
-                </data>
+                <text-data id="788">
+                    <expression name="valueExpr">markdown_html(row["project_plan"]);</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <label id="702">
                     <property name="style">Subsectionheader</property>
                     <property name="fontSize">14pt</property>
-                    <property name="fontWeight">bold</property>
+                    <property name="fontWeight">normal</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">7pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Target group</text-property>
                 </label>
-                <data id="699">
-                    <property name="resultSetColumn">target_group</property>
-                </data>
+                <text-data id="787">
+                    <expression name="valueExpr">markdown_html(row["target_group"]);</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <label id="703">
                     <property name="style">Subsectionheader</property>
                     <property name="fontSize">14pt</property>
-                    <property name="fontWeight">bold</property>
+                    <property name="fontWeight">normal</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">7pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Sustainability</text-property>
                 </label>
-                <data id="700">
-                    <property name="resultSetColumn">sustainability</property>
-                </data>
+                <text-data id="786">
+                    <expression name="valueExpr">markdown_html(row["sustainability"]);</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <label id="704">
                     <property name="style">Subsectionheader</property>
                     <property name="fontSize">14pt</property>
-                    <property name="fontWeight">bold</property>
+                    <property name="fontWeight">normal</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">7pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Goals overview</text-property>
                 </label>
-                <data id="701">
-                    <property name="resultSetColumn">goals_overview</property>
-                </data>
+                <text-data id="785">
+                    <expression name="valueExpr">markdown_html(row["goals_overview"]);</expression>
+                    <property name="contentType">html</property>
+                </text-data>
                 <list name="projects_list" id="334">
                     <property name="dataSet">Child_projects</property>
                     <list-property name="visibility">
@@ -16211,7 +16262,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="display">inline</property>
                     <property name="pageBreakAfter">avoid</property>
                     <property name="pageBreakBefore">always</property>
-                    <text-property name="text">LL</text-property>
+                    <text-property name="text">MM</text-property>
                 </label>
                 <label id="481">
                     <property name="style">Sectionheader</property>
@@ -16286,14 +16337,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="569">
                         <cell id="570">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="581">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Name of the project</text-property>
                             </label>
                         </cell>
                         <cell id="571">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <text-data id="685">
                                 <expression name="bookmark" type="javascript">row["id"]</expression>
                                 <structure name="toc">
@@ -16307,14 +16364,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="584">
                         <cell id="585">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="593">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Implementation period (planned)</text-property>
                             </label>
                         </cell>
                         <cell id="586">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <text-data id="602">
                                 <expression name="valueExpr">(row["date_start_planned"] ? Formatter.format(row["date_start_planned"], "d-MMM-yyyy") : "") +&#13;
 " -- " +&#13;
@@ -16326,14 +16389,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="669">
                         <cell id="670">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="671">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Implementation period (actual)</text-property>
                             </label>
                         </cell>
                         <cell id="672">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <text-data id="673">
                                 <expression name="valueExpr">(row["date_start_planned"] ? Formatter.format(row["date_start_planned"], "d-MMM-yyyy") : "") +&#13;
 " -- " +&#13;
@@ -16345,14 +16414,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="573">
                         <cell id="574">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="630">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Financial document number</text-property>
                             </label>
                         </cell>
                         <cell id="575">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <data id="631">
                                 <property name="resultSetColumn">custom_fdn</property>
                             </data>
@@ -16361,14 +16436,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="626">
                         <cell id="627">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="582">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Project code</text-property>
                             </label>
                         </cell>
                         <cell id="628">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <data id="638">
                                 <property name="resultSetColumn">custom_mfa</property>
                             </data>
@@ -16377,14 +16458,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="634">
                         <cell id="635">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="637">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">IATI id</text-property>
                             </label>
                         </cell>
                         <cell id="636">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <data id="625">
                                 <property name="resultSetColumn">iati_activity_id</property>
                             </data>
@@ -16393,14 +16480,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="577">
                         <cell id="578">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="583">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Theme</text-property>
                             </label>
                         </cell>
                         <cell id="579">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <data id="632">
                                 <property name="resultSetColumn">theme_title</property>
                             </data>
@@ -16409,14 +16502,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="588">
                         <cell id="589">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="592">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Geographical location</text-property>
                             </label>
                         </cell>
                         <cell id="590">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <text-data id="601">
                                 <expression name="valueExpr">(row ["cityname"] ? row ["cityname"] +  ", " : "") + (row["countryname"] ? row["countryname"] : "")</expression>
                                 <property name="contentType">html</property>
@@ -16426,14 +16525,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="605">
                         <cell id="606">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="609">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Partners</text-property>
                             </label>
                         </cell>
                         <cell id="607">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <table id="610">
                                 <property name="dataSet">Partners</property>
                                 <list-property name="paramBindings">
@@ -16468,14 +16573,20 @@ reportContext.setGlobalVariable("show_bars",true);
                     <row id="620">
                         <cell id="621">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <label id="624">
                                 <property name="fontWeight">bold</property>
-                                <property name="marginLeft">8pt</property>
+                                <property name="marginLeft">0pt</property>
                                 <text-property name="text">Budget</text-property>
                             </label>
                         </cell>
                         <cell id="622">
                             <property name="paddingTop">8pt</property>
+                            <property name="paddingLeft">8pt</property>
+                            <property name="paddingBottom">8pt</property>
+                            <property name="paddingRight">8pt</property>
                             <table id="642">
                                 <property name="width">4.541666666666667in</property>
                                 <property name="dataSet">Budget_items_for_project</property>
@@ -16540,13 +16651,6 @@ reportContext.setGlobalVariable("show_bars",true);
                                         </cell>
                                     </row>
                                 </detail>
-                                <footer>
-                                    <row id="657">
-                                        <cell id="666"/>
-                                        <cell id="658"/>
-                                        <cell id="659"/>
-                                    </row>
-                                </footer>
                             </table>
                         </cell>
                     </row>
@@ -16584,7 +16688,7 @@ reportContext.setGlobalVariable("show_bars",true);
                 <data id="603">
                     <property name="resultSetColumn">goals_overview</property>
                 </data>
-                <list id="764">
+                <list name="updates_list" id="764">
                     <property name="dataSet">Project_updates</property>
                     <list-property name="paramBindings">
                         <structure>
@@ -16710,6 +16814,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             <property name="dataType">integer</property>
                         </structure>
                     </list-property>
+                    <property name="repeatHeader">false</property>
                     <header>
                         <label id="765">
                             <property name="style">Sectionheader</property>
@@ -16737,6 +16842,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">8pt</property>
                             <property name="display">inline</property>
+                            <property name="pageBreakAfter">avoid</property>
                             <property name="resultSetColumn">created_at</property>
                         </data>
                         <data id="767">
@@ -16744,12 +16850,59 @@ reportContext.setGlobalVariable("show_bars",true);
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">8pt</property>
                             <property name="display">inline</property>
+                            <property name="pageBreakAfter">avoid</property>
                             <property name="resultSetColumn">title</property>
                         </data>
-                        <data id="768">
-                            <property name="marginLeft">14pt</property>
-                            <property name="resultSetColumn">text</property>
-                        </data>
+                        <text-data id="780">
+                            <property name="pageBreakBefore">avoid</property>
+                            <expression name="valueExpr">function mmd(src)&#13;
+{&#13;
+	var h='';&#13;
+&#13;
+	function escape(t)&#13;
+	{&#13;
+		return t;&#13;
+	}&#13;
+	function inlineEscape(s)&#13;
+	{&#13;
+		return escape(s)&#13;
+			.replace(/!\[([^\]]*)]\(([^(]+)\)/g, '&lt;img alt="$1" src="$2">')&#13;
+			.replace(/\[([^\]]+)]\(([^(]+)\)/g, '$1'.link('$2'))&#13;
+			.replace(/`([^`]+)`/g, '&lt;code>$1&lt;/code>')&#13;
+			.replace(/\*\*([^*]+)\*\*/g, '&lt;strong>$1&lt;/strong>')&#13;
+			.replace(/\*([^*]+)\*/g, '&lt;em>$1&lt;/em>');&#13;
+	}&#13;
+&#13;
+	src&#13;
+	.replace(/^\s+|\r|\s+$/g, '')&#13;
+	.replace(/\t/g, '    ')&#13;
+	.split(/\n\n+/)&#13;
+	.forEach(function(b, f, R)&#13;
+	{&#13;
+		f=b[0];&#13;
+		R=&#13;
+		{&#13;
+			'*':[/\n\* /,'&lt;ul>&lt;li>','&lt;/li>&lt;/ul>'],&#13;
+			'1':[/\n[1-9]\d*\.? /,'&lt;ol>&lt;li>','&lt;/li>&lt;/ol>'],&#13;
+			' ':[/\n    /,'&lt;pre>&lt;code>','&lt;/pre>&lt;/code>','\n'],&#13;
+			'>':[/\n> /,'&lt;blockquote>','&lt;/blockquote>','\n']&#13;
+		}[f];&#13;
+		h+=&#13;
+			R?R[1]+('\n'+b)&#13;
+				.split(R[0])&#13;
+				.slice(1)&#13;
+				.map(R[3]?escape:inlineEscape)&#13;
+				.join(R[3]||'&lt;/li>\n&lt;li>')+R[2]:&#13;
+			f=='#'?'&lt;h'+(f=b.indexOf(' '))+'>'+inlineEscape(b.slice(f+1))+'&lt;/h'+f+'>':&#13;
+			f=='&lt;'?b:&#13;
+			'&lt;p>'+inlineEscape(b)+'&lt;/p>';&#13;
+	});&#13;
+	return h;&#13;
+};&#13;
+&#13;
+mmd(row["text"]);</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
                     </detail>
                 </list>
                 <label id="640">
@@ -16768,7 +16921,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="pageBreakAfter">always</property>
-                    <property name="width">181.50416666666666mm</property>
+                    <property name="width">179.12291666666664mm</property>
                     <property name="dataSet">Results_indicators_periods</property>
                     <list-property name="paramBindings">
                         <structure>
@@ -16896,19 +17049,20 @@ null</expression>
 ]]></method>
                     <property name="pageBreakInterval">50</property>
                     <column id="275">
-                        <property name="width">1.2708333333333333in</property>
+                        <property name="width">32.014583333333334mm</property>
                     </column>
                     <column id="35">
-                        <property name="width">55.82708333333333mm</property>
+                        <property name="width">55.03333333333333mm</property>
                     </column>
                     <column id="167">
-                        <property name="width">47.360416666666666mm</property>
+                        <property name="width">46.831250000000004mm</property>
                     </column>
                     <column id="37">
-                        <property name="width">46.037499999999994mm</property>
+                        <property name="width">45.24375mm</property>
                     </column>
                     <header>
                         <row id="14">
+                            <property name="height">16.933333333333334mm</property>
                             <cell id="267">
                                 <property name="colSpan">2</property>
                                 <property name="rowSpan">1</property>
@@ -16947,18 +17101,16 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="contentType">html</property>
                                 </text-data>
                             </cell>
-                            <cell id="17">
-                                <label id="778">
-                                    <text-property name="text">target_comment</text-property>
-                                </label>
-                            </cell>
+                            <cell id="17"/>
                         </row>
                     </header>
                     <group id="18">
                         <property name="groupName">NewTableGroup1</property>
                         <expression name="keyExpr" type="javascript">row["title"]</expression>
+                        <property name="repeatHeader">false</property>
                         <header>
                             <row id="19">
+                                <property name="height">21.43125mm</property>
                                 <cell id="268">
                                     <property name="colSpan">4</property>
                                     <property name="rowSpan">1</property>
@@ -16996,10 +17148,12 @@ reportContext.getGlobalVariable('debug')</expression>
                     <group id="74">
                         <property name="groupName">NewTableGroup2</property>
                         <expression name="keyExpr" type="javascript">row["indicator_title"]</expression>
+                        <property name="repeatHeader">false</property>
                         <property name="hideDetail">false</property>
                         <header>
                             <row id="75">
-                                <property name="backgroundColor">#F0F0F0</property>
+                                <property name="backgroundColor">#FFFFFF</property>
+                                <property name="height">27.25208333333334mm</property>
                                 <list-property name="visibility">
                                     <structure>
                                         <property name="format">all</property>
@@ -17014,29 +17168,32 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="paddingBottom">4pt</property>
                                     <property name="paddingRight">0pt</property>
                                     <grid id="192">
-                                        <property name="width">182.82708333333335mm</property>
+                                        <property name="pageBreakAfter">avoid</property>
+                                        <property name="height">23.28333333333333mm</property>
+                                        <property name="width">178.06458333333336mm</property>
                                         <column id="277">
-                                            <property name="width">35.71875mm</property>
+                                            <property name="width">39.6875mm</property>
                                         </column>
                                         <column id="193">
-                                            <property name="width">52.3875mm</property>
+                                            <property name="width">38.1mm</property>
                                         </column>
                                         <column id="194">
-                                            <property name="width">47.09583333333334mm</property>
+                                            <property name="width">57.94375000000001mm</property>
                                         </column>
                                         <column id="195">
-                                            <property name="width">47.625mm</property>
+                                            <property name="width">42.333333333333336mm</property>
                                         </column>
                                         <row id="279">
-                                            <property name="backgroundColor">silver</property>
+                                            <property name="backgroundColor">#EFF3F8</property>
+                                            <property name="height">12.170833333333333mm</property>
                                             <cell id="280">
                                                 <property name="paddingTop">0pt</property>
                                                 <property name="paddingLeft">0pt</property>
                                                 <property name="paddingBottom">4pt</property>
                                                 <property name="paddingRight">0pt</property>
                                                 <text-data id="213">
-                                                    <property name="backgroundColor">gray</property>
-                                                    <property name="fontSize">12pt</property>
+                                                    <property name="backgroundColor">#C3D6E4</property>
+                                                    <property name="fontSize">10pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="color">white</property>
                                                     <property name="paddingLeft">8pt</property>
@@ -17053,26 +17210,22 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="fontSize">12pt</property>
                                                     <property name="color">#000000</property>
                                                     <property name="paddingLeft">8pt</property>
+                                                    <property name="paddingRight">8pt</property>
                                                     <property name="display">inline</property>
                                                     <expression name="valueExpr">row["indicator_title"]</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
                                         </row>
-                                        <row id="284">
-                                            <cell id="285">
-                                                <property name="colSpan">4</property>
-                                                <property name="rowSpan">1</property>
-                                            </cell>
-                                        </row>
                                         <row id="202">
+                                            <property name="height">6.879166666666666mm</property>
                                             <cell id="276"/>
                                             <cell id="203">
                                                 <label id="186">
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
                                                     <property name="textAlign">center</property>
-                                                    <text-property name="text">Baseline</text-property>
+                                                    <text-property name="text">BASELINE</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="204">
@@ -17082,7 +17235,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="fontStyle">italic</property>
                                                     <property name="color">black</property>
                                                     <property name="textAlign">center</property>
-                                                    <text-property name="text">Actual</text-property>
+                                                    <text-property name="text">ACTUAL</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="205">
@@ -17090,7 +17243,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
                                                     <property name="textAlign">center</property>
-                                                    <text-property name="text">Target</text-property>
+                                                    <text-property name="text">TARGET</text-property>
                                                 </label>
                                             </cell>
                                         </row>
@@ -17098,36 +17251,11 @@ reportContext.getGlobalVariable('debug')</expression>
                                 </cell>
                             </row>
                         </header>
-                        <footer>
-                            <row id="79">
-                                <property name="pageBreakBefore">avoid</property>
-                                <cell id="272">
-                                    <property name="colSpan">4</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="paddingTop">0pt</property>
-                                    <property name="paddingLeft">0pt</property>
-                                    <property name="paddingBottom">8pt</property>
-                                    <property name="paddingRight">0pt</property>
-                                    <label id="211">
-                                        <property name="backgroundColor">silver</property>
-                                        <property name="paddingTop">0pt</property>
-                                        <property name="paddingLeft">8pt</property>
-                                        <property name="pageBreakBefore">avoid</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">!row["indicator_title"]</expression>
-                                            </structure>
-                                        </list-property>
-                                        <text-property name="text"> </text-property>
-                                    </label>
-                                </cell>
-                            </row>
-                        </footer>
                     </group>
                     <detail>
                         <row id="27">
-                            <property name="backgroundColor">#F0F0F0</property>
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <property name="height">12.435416666666665mm</property>
                             <list-property name="visibility">
                                 <structure>
                                     <property name="format">all</property>
@@ -17151,9 +17279,9 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="borderTopStyle">none</property>
                                     <property name="marginTop">0pt</property>
                                     <property name="marginLeft">0pt</property>
-                                    <property name="marginBottom">0pt</property>
-                                    <property name="paddingTop">1pt</property>
-                                    <property name="paddingBottom">1pt</property>
+                                    <property name="marginBottom">-35pt</property>
+                                    <property name="paddingTop">12pt</property>
+                                    <property name="paddingBottom">12pt</property>
                                     <property name="textAlign">center</property>
                                     <property name="display">block</property>
                                     <expression name="valueExpr">(row["progress_pct"] != null)&#13;
@@ -17163,11 +17291,11 @@ reportContext.getGlobalVariable('debug')</expression>
  ""</expression>
                                     <property name="contentType">html</property>
                                 </text-data>
-                                <extended-item extensionName="Chart" name="barbar" id="714">
-                                    <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+                                <extended-item extensionName="Chart" name="clock" id="266">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.6.1</Version>
-  <Type>Bar Chart</Type>
-  <SubType>Stacked</SubType>
+  <Type>Pie Chart</Type>
+  <SubType>Standard</SubType>
   <Block>
     <Children xsi:type="layout:TitleBlock">
       <Bounds>
@@ -17177,9 +17305,9 @@ reportContext.getGlobalVariable('debug')</expression>
         <Height>0.0</Height>
       </Bounds>
       <Insets>
-        <Top>2.0</Top>
+        <Top>24.0</Top>
         <Left>3.0</Left>
-        <Bottom>2.0</Bottom>
+        <Bottom>3.0</Bottom>
         <Right>3.0</Right>
       </Insets>
       <Row>-1</Row>
@@ -17278,12 +17406,6 @@ reportContext.getGlobalVariable('debug')</expression>
           </Color>
           <Visible>false</Visible>
         </Outline>
-        <ShadowColor>
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </ShadowColor>
         <Insets>
           <Top>0.0</Top>
           <Left>0.0</Left>
@@ -17360,7 +17482,7 @@ reportContext.getGlobalVariable('debug')</expression>
         <Visible>true</Visible>
       </Separator>
       <Position>Right</Position>
-      <ItemType>Series</ItemType>
+      <ItemType>Categories</ItemType>
       <Title>
         <Caption>
           <Value></Value>
@@ -17433,6 +17555,7 @@ reportContext.getGlobalVariable('debug')</expression>
   <Dimension>Two_Dimensional</Dimension>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
+  <GridColumnCount>0</GridColumnCount>
   <ExtendedProperties>
     <Name>enable.area.alt</Name>
     <Value>false</Value>
@@ -17444,10 +17567,6 @@ reportContext.getGlobalVariable('debug')</expression>
     <OrthogonalSampleData>
       <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
       <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>12.0,8.0,24.0,16.0,20.0</DataSetRepresentation>
-      <SeriesDefinitionIndex>1</SeriesDefinitionIndex>
     </OrthogonalSampleData>
   </SampleData>
   <Interactivity>
@@ -17486,384 +17605,36 @@ reportContext.getGlobalVariable('debug')</expression>
     </Insets>
     <Visible>false</Visible>
   </EmptyMessage>
-  <Axes>
-    <Type>Text</Type>
-    <Title>
-      <Caption>
-        <Value>X-Axis Title</Value>
-        <Font>
-          <Size>14.0</Size>
-          <Bold>true</Bold>
-          <Alignment>
-            <horizontalAlignment>Center</horizontalAlignment>
-            <verticalAlignment>Center</verticalAlignment>
-          </Alignment>
-        </Font>
-      </Caption>
-      <Background xsi:type="attribute:ColorDefinition">
-        <Transparency>0</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Background>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-      </Outline>
-      <Insets>
-        <Top>0.0</Top>
-        <Left>2.0</Left>
-        <Bottom>0.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Visible>false</Visible>
-    </Title>
-    <TitlePosition>Below</TitlePosition>
-    <AssociatedAxes>
-      <Type>Linear</Type>
-      <Title>
-        <Caption>
-          <Value>Y-Axis Title</Value>
-          <Font>
-            <Size>14.0</Size>
-            <Bold>true</Bold>
-            <Alignment>
-              <horizontalAlignment>Center</horizontalAlignment>
-              <verticalAlignment>Center</verticalAlignment>
-            </Alignment>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Title>
-      <TitlePosition>Left</TitlePosition>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;complete&quot;]</Definition>
-            <Grouping>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>Series 1</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
-          <Stacked>true</Stacked>
-          <Triggers>
-            <Condition>onmouseover</Condition>
-            <Action>
-              <Type>Show_Tooltip</Type>
-              <Value xsi:type="attribute:TooltipValue">
-                <Text></Text>
-                <Delay>200</Delay>
-              </Value>
-            </Action>
-          </Triggers>
-          <Translucent>false</Translucent>
-          <Riser>Rectangle</Riser>
-          <RiserOutline>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </RiserOutline>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <SeriesDefinitions>
-        <Query>
-          <Definition></Definition>
-        </Query>
-        <SeriesPalette>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>192</Red>
-            <Green>192</Green>
-            <Blue>192</Blue>
-          </Entries>
-          <Entries xsi:type="attribute:ColorDefinition">
-            <Transparency>255</Transparency>
-            <Red>128</Red>
-            <Green>128</Green>
-            <Blue>128</Blue>
-          </Entries>
-        </SeriesPalette>
-        <Series xsi:type="type:BarSeries">
-          <Visible>true</Visible>
-          <Label>
-            <Caption>
-              <Value></Value>
-              <Font>
-                <Alignment/>
-              </Font>
-            </Caption>
-            <Background xsi:type="attribute:ColorDefinition">
-              <Transparency>0</Transparency>
-              <Red>255</Red>
-              <Green>255</Green>
-              <Blue>255</Blue>
-            </Background>
-            <Outline>
-              <Style>Solid</Style>
-              <Thickness>1</Thickness>
-              <Color>
-                <Transparency>255</Transparency>
-                <Red>0</Red>
-                <Green>0</Green>
-                <Blue>0</Blue>
-              </Color>
-              <Visible>false</Visible>
-            </Outline>
-            <Insets>
-              <Top>0.0</Top>
-              <Left>2.0</Left>
-              <Bottom>0.0</Bottom>
-              <Right>3.0</Right>
-            </Insets>
-            <Visible>false</Visible>
-          </Label>
-          <DataDefinition>
-            <Definition>row[&quot;remaining&quot;]</Definition>
-            <Grouping>
-              <Enabled>false</Enabled>
-              <GroupType>Text</GroupType>
-              <AggregateExpression>Sum</AggregateExpression>
-            </Grouping>
-          </DataDefinition>
-          <SeriesIdentifier>Series 2</SeriesIdentifier>
-          <DataPoint>
-            <Components>
-              <Type>Orthogonal_Value</Type>
-            </Components>
-            <Separator>, </Separator>
-          </DataPoint>
-          <LabelPosition>Inside</LabelPosition>
-          <Stacked>true</Stacked>
-          <Triggers>
-            <Condition>onmouseover</Condition>
-            <Action>
-              <Type>Show_Tooltip</Type>
-              <Value xsi:type="attribute:TooltipValue">
-                <Text></Text>
-                <Delay>200</Delay>
-              </Value>
-            </Action>
-          </Triggers>
-          <Translucent>false</Translucent>
-          <Riser>Rectangle</Riser>
-          <RiserOutline>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </RiserOutline>
-        </Series>
-        <Grouping>
-          <GroupType>Text</GroupType>
-          <AggregateExpression>Sum</AggregateExpression>
-        </Grouping>
-      </SeriesDefinitions>
-      <Orientation>Vertical</Orientation>
-      <LineAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </LineAttributes>
-      <Label>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Label>
-      <LabelPosition>Left</LabelPosition>
-      <MajorGrid>
-        <LineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>196</Red>
-            <Green>196</Green>
-            <Blue>196</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </LineAttributes>
-        <TickStyle>Across</TickStyle>
-        <TickAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>196</Red>
-            <Green>196</Green>
-            <Blue>196</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </TickAttributes>
-      </MajorGrid>
-      <MinorGrid>
-        <LineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>225</Red>
-            <Green>225</Green>
-            <Blue>225</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </LineAttributes>
-        <TickStyle>Across</TickStyle>
-        <TickAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>225</Red>
-            <Green>225</Green>
-            <Blue>225</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </TickAttributes>
-      </MinorGrid>
-      <Scale>
-        <MinorGridsPerUnit>5</MinorGridsPerUnit>
-        <StepNumber>1</StepNumber>
-        <AutoExpand>true</AutoExpand>
-      </Scale>
-      <Origin>
-        <Type>Min</Type>
-        <Value xsi:type="data:NumberDataElement">
-          <Value>0.0</Value>
-        </Value>
-      </Origin>
-      <PrimaryAxis>true</PrimaryAxis>
-      <Percent>false</Percent>
-      <LabelSpan>1.0</LabelSpan>
-    </AssociatedAxes>
+  <SeriesDefinitions>
+    <Query>
+      <Definition></Definition>
+    </Query>
+    <SeriesPalette>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>52</Red>
+        <Green>181</Green>
+        <Blue>115</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>52</Red>
+        <Green>181</Green>
+        <Blue>115</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>52</Red>
+        <Green>181</Green>
+        <Blue>115</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>192</Red>
+        <Green>192</Green>
+        <Blue>192</Blue>
+      </Entries>
+    </SeriesPalette>
     <SeriesDefinitions>
       <Query>
         <Definition></Definition>
@@ -17871,9 +17642,21 @@ reportContext.getGlobalVariable('debug')</expression>
       <SeriesPalette>
         <Entries xsi:type="attribute:ColorDefinition">
           <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
+          <Red>52</Red>
+          <Green>181</Green>
+          <Blue>115</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>52</Red>
+          <Green>181</Green>
+          <Blue>115</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>52</Red>
+          <Green>181</Green>
+          <Blue>115</Blue>
         </Entries>
         <Entries xsi:type="attribute:ColorDefinition">
           <Transparency>255</Transparency>
@@ -17882,7 +17665,7 @@ reportContext.getGlobalVariable('debug')</expression>
           <Blue>192</Blue>
         </Entries>
       </SeriesPalette>
-      <Series>
+      <Series xsi:type="type:PieSeries">
         <Visible>true</Visible>
         <Label>
           <Caption>
@@ -17917,9 +17700,12 @@ reportContext.getGlobalVariable('debug')</expression>
           <Visible>false</Visible>
         </Label>
         <DataDefinition>
-          <Definition>row[&quot;name&quot;]</Definition>
+          <Definition>row[&quot;number&quot;]</Definition>
+          <Grouping>
+            <GroupType>Text</GroupType>
+            <AggregateExpression>Sum</AggregateExpression>
+          </Grouping>
         </DataDefinition>
-        <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
           <Components>
             <Type>Orthogonal_Value</Type>
@@ -17928,130 +17714,129 @@ reportContext.getGlobalVariable('debug')</expression>
         </DataPoint>
         <LabelPosition>Outside</LabelPosition>
         <Stacked>false</Stacked>
+        <Triggers>
+          <Condition>onmouseover</Condition>
+          <Action>
+            <Type>Show_Tooltip</Type>
+            <Value xsi:type="attribute:TooltipValue">
+              <Text></Text>
+              <Delay>200</Delay>
+            </Value>
+          </Action>
+        </Triggers>
+        <Translucent>true</Translucent>
+        <Explosion>0</Explosion>
+        <Title>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Size>16.0</Size>
+              <Bold>true</Bold>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Title>
+        <TitlePosition>Right</TitlePosition>
+        <LeaderLineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Visible>true</Visible>
+        </LeaderLineAttributes>
+        <LeaderLineLength>10.0</LeaderLineLength>
+        <SliceOutline>
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </SliceOutline>
+        <Ratio>1.0</Ratio>
+        <Rotation>90.0</Rotation>
+        <InnerRadius>66.0</InnerRadius>
       </Series>
       <Grouping>
-        <Enabled>true</Enabled>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
-      <SortKey/>
     </SeriesDefinitions>
-    <Orientation>Horizontal</Orientation>
-    <LineAttributes>
-      <Style>Solid</Style>
-      <Thickness>1</Thickness>
-      <Color>
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Color>
-      <Visible>false</Visible>
-    </LineAttributes>
-    <Label>
-      <Caption>
-        <Value></Value>
-        <Font>
-          <Alignment/>
-        </Font>
-      </Caption>
-      <Background xsi:type="attribute:ColorDefinition">
-        <Transparency>0</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Background>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-      </Outline>
-      <Insets>
-        <Top>0.0</Top>
-        <Left>2.0</Left>
-        <Bottom>0.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Visible>false</Visible>
-    </Label>
-    <LabelPosition>Below</LabelPosition>
-    <MajorGrid>
-      <LineAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>196</Red>
-          <Green>196</Green>
-          <Blue>196</Blue>
-        </Color>
+    <Series>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
         <Visible>false</Visible>
-      </LineAttributes>
-      <TickStyle>Across</TickStyle>
-      <TickAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>196</Red>
-          <Green>196</Green>
-          <Blue>196</Blue>
-        </Color>
-        <Visible>true</Visible>
-      </TickAttributes>
-    </MajorGrid>
-    <MinorGrid>
-      <LineAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>225</Red>
-          <Green>225</Green>
-          <Blue>225</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </LineAttributes>
-      <TickStyle>Across</TickStyle>
-      <TickAttributes>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>225</Red>
-          <Green>225</Green>
-          <Blue>225</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </TickAttributes>
-    </MinorGrid>
-    <Scale>
-      <MinorGridsPerUnit>5</MinorGridsPerUnit>
-      <ShowOutside>false</ShowOutside>
-    </Scale>
-    <Origin>
-      <Type>Min</Type>
-    </Origin>
-    <PrimaryAxis>true</PrimaryAxis>
-    <CategoryAxis>true</CategoryAxis>
-    <Percent>false</Percent>
-  </Axes>
-  <Orientation>Horizontal</Orientation>
-  <UnitSpacing>50.0</UnitSpacing>
-  <Rotation>
-    <Angles>
-      <XAngle>-20.0</XAngle>
-      <YAngle>45.0</YAngle>
-      <ZAngle>0.0</ZAngle>
-      <Type>None</Type>
-    </Angles>
-  </Rotation>
-</model:ChartWithAxes>
+      </Label>
+      <DataDefinition>
+        <Definition>row[&quot;name&quot;]</Definition>
+      </DataDefinition>
+      <DataPoint>
+        <Components>
+          <Type>Orthogonal_Value</Type>
+        </Components>
+        <Separator>, </Separator>
+      </DataPoint>
+      <LabelPosition>Outside</LabelPosition>
+      <Stacked>false</Stacked>
+    </Series>
+    <Grouping>
+      <Enabled>true</Enabled>
+      <GroupType>Text</GroupType>
+      <AggregateExpression>Sum</AggregateExpression>
+    </Grouping>
+    <SortKey/>
+  </SeriesDefinitions>
+  <Coverage>1.0</Coverage>
+</model:ChartWithoutAxes>
 ]]></xml-property>
                                     <property name="outputFormat">SVG</property>
                                     <property name="inheritColumns">false</property>
@@ -18062,47 +17847,63 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="borderRightStyle">none</property>
                                     <property name="marginTop">0pt</property>
                                     <property name="marginBottom">0pt</property>
-                                    <property name="height">12mm</property>
-                                    <property name="width">30mm</property>
-                                    <property name="dataSet">two_cols</property>
+                                    <property name="height">38pt</property>
+                                    <property name="width">38pt</property>
+                                    <property name="dataSet">Four_rows</property>
                                     <list-property name="visibility">
                                         <structure>
                                             <property name="format">all</property>
-                                            <expression name="valueExpr" type="javascript">row._outer["progress_pct"] == null</expression>
+                                            <expression name="valueExpr" type="javascript">null == row._outer["progress_pct"]</expression>
                                         </structure>
                                     </list-property>
                                     <list-property name="paramBindings">
                                         <structure>
-                                            <property name="paramName">completed</property>
+                                            <property name="paramName">param_1</property>
                                             <simple-property-list name="expression">
-                                                <value type="javascript">row["progress_pct"] != null ? Math.max(0,Math.min(100,row["progress_pct"])): 33</value>
+                                                <value type="javascript">(row["progress_pct"] &lt; 33)&#13;
+?&#13;
+Math.max(row["progress_pct"],0)&#13;
+:&#13;
+0</value>
                                             </simple-property-list>
                                         </structure>
                                         <structure>
-                                            <property name="paramName">remaining</property>
+                                            <property name="paramName">param_2</property>
                                             <simple-property-list name="expression">
-                                                <value type="javascript">row["progress_pct"] != null ? (100-Math.max(0,Math.min(100,row["progress_pct"]))) : 67</value>
+                                                <value>(row["progress_pct"] >= 33 &amp;&amp; row["progress_pct"] &lt; 67)&#13;
+?&#13;
+row["progress_pct"]&#13;
+:&#13;
+0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">param_3</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">(row["progress_pct"] >= 67)&#13;
+?&#13;
+Math.min(row["progress_pct"],100)&#13;
+:&#13;
+0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">param_4</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">100-Math.max(Math.min(row["progress_pct"],100),0)</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
                                     <list-property name="boundDataColumns">
                                         <structure>
-                                            <property name="name">name</property>
-                                            <text-property name="displayName">name</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="name">number</property>
+                                            <expression name="expression" type="javascript">dataSetRow["number"]</expression>
                                             <property name="dataType">string</property>
                                         </structure>
                                         <structure>
-                                            <property name="name">complete</property>
-                                            <text-property name="displayName">complete</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["complete"]</expression>
-                                            <property name="dataType">integer</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">remaining</property>
-                                            <text-property name="displayName">remaining</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["remaining"]</expression>
-                                            <property name="dataType">integer</property>
+                                            <property name="name">name</property>
+                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="dataType">string</property>
                                         </structure>
                                     </list-property>
                                     <property name="style">progress_low</property>
@@ -18210,14 +18011,9 @@ reportContext.getGlobalVariable('debug')</expression>
                             </cell>
                         </row>
                         <row id="771">
-                            <property name="backgroundColor">#F0F0F0</property>
+                            <property name="backgroundColor">#EFF3F8</property>
                             <property name="pageBreakBefore">avoid</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">!row["actual_comment"]</expression>
-                                </structure>
-                            </list-property>
+                            <property name="height">6.879166666666666mm</property>
                             <cell id="772">
                                 <property name="colSpan">4</property>
                                 <property name="rowSpan">1</property>
