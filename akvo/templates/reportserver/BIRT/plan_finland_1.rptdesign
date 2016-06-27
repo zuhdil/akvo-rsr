@@ -18279,6 +18279,10 @@ reportContext.setGlobalVariable("show_bars",true);
                         <property name="style">Sectionheader</property>
                         <property name="backgroundColor">#0B80C7</property>
                         <property name="color">#FFFFFF</property>
+                        <property name="paddingTop">7px</property>
+                        <property name="paddingLeft">7px</property>
+                        <property name="paddingBottom">7px</property>
+                        <property name="paddingRight">7px</property>
                         <property name="pageBreakBefore">auto</property>
                         <structure name="toc"/>
                         <property name="resultSetColumn">continent</property>
@@ -18437,7 +18441,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             <label id="637">
                                 <property name="fontWeight">bold</property>
                                 <property name="marginLeft">0pt</property>
-                                <text-property name="text">IATI id</text-property>
+                                <text-property name="text">IATI ID</text-property>
                             </label>
                         </cell>
                         <cell id="636">
@@ -18561,7 +18565,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <table id="642">
-                                <property name="width">4.541666666666667in</property>
+                                <property name="width">115.35833333333335mm</property>
                                 <property name="dataSet">Budget_items_for_project</property>
                                 <list-property name="paramBindings">
                                     <structure>
@@ -18598,13 +18602,13 @@ reportContext.setGlobalVariable("show_bars",true);
                                     </structure>
                                 </list-property>
                                 <column id="667">
-                                    <property name="width">45mm</property>
+                                    <property name="width">45.861111111111114mm</property>
                                 </column>
                                 <column id="661">
-                                    <property name="width">45mm</property>
+                                    <property name="width">46.21388888888889mm</property>
                                 </column>
                                 <column id="662">
-                                    <property name="width">17mm</property>
+                                    <property name="width">22.930555555555557mm</property>
                                 </column>
                                 <detail>
                                     <row id="650">
@@ -18648,7 +18652,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             <label id="877">
                                 <property name="fontWeight">bold</property>
                                 <property name="paddingTop">20pt</property>
-                                <text-property name="text">Self--funding expenditure</text-property>
+                                <text-property name="text">Self-funding expenditure</text-property>
                             </label>
                         </cell>
                         <cell id="794">
@@ -18789,7 +18793,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="fontSize">14pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="marginTop">14pt</property>
-                    <property name="marginBottom">7pt</property>
+                    <property name="marginBottom">0pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Project summary</text-property>
                 </label>
@@ -18800,7 +18804,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="fontSize">14pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="marginTop">14pt</property>
-                    <property name="marginBottom">7pt</property>
+                    <property name="marginBottom">0pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Project plan</text-property>
                 </label>
@@ -18811,7 +18815,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="fontSize">14pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="marginTop">14pt</property>
-                    <property name="marginBottom">7pt</property>
+                    <property name="marginBottom">0pt</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Goals overview</text-property>
                 </label>
@@ -18967,22 +18971,6 @@ reportContext.setGlobalVariable("show_bars",true);
                         </label>
                     </header>
                     <detail>
-                        <data id="766">
-                            <property name="fontSize">12pt</property>
-                            <property name="fontWeight">bold</property>
-                            <property name="marginTop">8pt</property>
-                            <property name="display">inline</property>
-                            <property name="pageBreakAfter">avoid</property>
-                            <property name="resultSetColumn">created_at</property>
-                        </data>
-                        <data id="767">
-                            <property name="fontSize">12pt</property>
-                            <property name="fontWeight">bold</property>
-                            <property name="marginTop">8pt</property>
-                            <property name="display">inline</property>
-                            <property name="pageBreakAfter">avoid</property>
-                            <property name="resultSetColumn">title</property>
-                        </data>
                         <image id="835">
                             <property name="width">100%</property>
                             <property name="source">url</property>
@@ -19053,6 +19041,10 @@ mmd(row["text"]);</expression>
                     </list-property>
                 </label>
                 <table name="results_table" id="13">
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="pageBreakAfter">always</property>
@@ -19264,7 +19256,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <data id="145">
                                         <property name="fontSize">10pt</property>
                                         <property name="paddingLeft">0pt</property>
-                                        <property name="paddingBottom">8pt</property>
+                                        <property name="paddingBottom">0pt</property>
                                         <property name="paddingRight">8pt</property>
                                         <property name="resultSetColumn">title</property>
                                     </data>
@@ -19305,9 +19297,12 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="paddingBottom">4pt</property>
                                     <property name="paddingRight">0pt</property>
                                     <grid id="192">
-                                        <property name="marginTop">10pt</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="marginTop">15pt</property>
                                         <property name="pageBreakAfter">avoid</property>
-                                        <property name="height">21.519444444444446mm</property>
                                         <property name="width">178.06458333333336mm</property>
                                         <column id="277">
                                             <property name="width">39.6875mm</property>
@@ -19324,6 +19319,8 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <row id="279">
                                             <property name="backgroundColor">#EFF3F8</property>
                                             <cell id="280">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
                                                 <property name="paddingBottom">7px</property>
                                                 <property name="paddingRight">7px</property>
                                                 <text-data id="213">
@@ -19347,14 +19344,11 @@ reportContext.getGlobalVariable('debug')</expression>
                                                 <property name="paddingTop">5pt</property>
                                                 <property name="paddingBottom">5pt</property>
                                                 <text-data id="278">
-                                                    <property name="fontSize">10pt</property>
-                                                    <property name="color">#000000</property>
                                                     <property name="marginTop">0px</property>
                                                     <property name="paddingTop">5px</property>
                                                     <property name="paddingLeft">1px</property>
                                                     <property name="paddingBottom">1px</property>
                                                     <property name="paddingRight">8px</property>
-                                                    <property name="display">inline</property>
                                                     <expression name="valueExpr">row["indicator_title"]</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
@@ -19405,7 +19399,6 @@ reportContext.getGlobalVariable('debug')</expression>
                     <detail>
                         <row id="27">
                             <property name="backgroundColor">#FFFFFF</property>
-                            <property name="height">12.435416666666665mm</property>
                             <list-property name="visibility">
                                 <structure>
                                     <property name="format">all</property>
@@ -20069,6 +20062,9 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="color">#000000</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingTop">10px</property>
                                     <property name="paddingLeft">8pt</property>
                                     <property name="paddingBottom">8pt</property>
                                     <property name="textAlign">center</property>
@@ -20088,7 +20084,7 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
-                                    <property name="marginBottom">4pt</property>
+                                    <property name="marginBottom">7pt</property>
                                     <property name="paddingLeft">1pt</property>
                                     <structure name="numberFormat">
                                         <property name="category">Unformatted</property>
@@ -20128,7 +20124,7 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
-                                    <property name="marginBottom">4pt</property>
+                                    <property name="marginBottom">7pt</property>
                                     <property name="paddingLeft">1pt</property>
                                     <property name="textAlign">center</property>
                                     <list-property name="visibility">
@@ -20171,6 +20167,7 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="paddingBottom">1pt</property>
                                 <property name="paddingRight">8pt</property>
                                 <text-data id="887">
+                                    <property name="fontSize">8pt</property>
                                     <property name="paddingTop">7px</property>
                                     <property name="paddingLeft">7px</property>
                                     <property name="paddingBottom">7px</property>
