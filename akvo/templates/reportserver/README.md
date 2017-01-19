@@ -8,9 +8,12 @@ The RSR projects used as test cases were #2849 and its parent project #2081.
 
 
 ## Deployment to reportserver
-The report has one parameter, TheProjectId, which is created on the RS as a Dataset parameter, key=TheProjectId, BIRT, query="select id from rsr_project order by id desc"
+The report has one parameter, ID, which is created on the RS as a Dataset parameter, key=ID, BIRT, query="select id from rsr_project order by id desc"
 
+## Adding custom fonts
+This will only work on Reportserver 3 and later.
 
+Put .ttf files in /usr/share/fonts/truetype/ and restart the webserver
 
 ## Access by URL
 
