@@ -8893,6 +8893,13 @@ where project_id=? and name='Acronyms and abbreviations']]></xml-property>
                     <property name="nativeName">name</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
+<<<<<<< Updated upstream
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">section</property>
+                    <property name="nativeName">section</property>
+=======
                 </structure>
                 <structure>
                     <property name="position">3</property>
@@ -8905,10 +8912,23 @@ where project_id=? and name='Acronyms and abbreviations']]></xml-property>
                     <property name="position">4</property>
                     <property name="name">max_characters</property>
                     <property name="nativeName">max_characters</property>
+>>>>>>> Stashed changes
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
+<<<<<<< Updated upstream
+                    <property name="position">4</property>
+                    <property name="name">max_characters</property>
+                    <property name="nativeName">max_characters</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">help_text</property>
+                    <property name="nativeName">help_text</property>
+=======
                     <property name="position">5</property>
                     <property name="name">help_text</property>
                     <property name="nativeName">help_text</property>
@@ -8919,10 +8939,21 @@ where project_id=? and name='Acronyms and abbreviations']]></xml-property>
                     <property name="position">6</property>
                     <property name="name">value</property>
                     <property name="nativeName">value</property>
+>>>>>>> Stashed changes
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
+<<<<<<< Updated upstream
+                    <property name="position">6</property>
+                    <property name="name">value</property>
+                    <property name="nativeName">value</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+=======
+>>>>>>> Stashed changes
                     <property name="position">7</property>
                     <property name="name">project_id</property>
                     <property name="nativeName">project_id</property>
@@ -19931,9 +19962,353 @@ from rsr_transaction
                                         <property name="name">disbursements_count</property>
                                         <text-property name="displayName">disbursements_count</text-property>
                                         <expression name="expression" type="javascript">dataSetRow["disbursements_count"]</expression>
+<<<<<<< Updated upstream
+=======
                                         <property name="dataType">decimal</property>
                                     </structure>
                                     <structure>
+                                        <property name="name">disbursements_sum</property>
+                                        <text-property name="displayName">disbursements_sum</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["disbursements_sum"]</expression>
+>>>>>>> Stashed changes
+                                        <property name="dataType">decimal</property>
+                                    </structure>
+                                </list-property>
+                                <expression name="valueExpr">(row["disbursements_sum"] * 100.0  / row._outer["budget"] )</expression>
+                                <property name="contentType">html</property>
+                            </text-data>
+                        </cell>
+                    </row>
+                </grid>
+                <label id="676">
+                    <property name="style">H1</property>
+                    <property name="fontSize">18pt</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="marginTop">14pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="pageBreakAfter">avoid</property>
+                    <text-property name="text">Objective</text-property>
+                </label>
+                <data id="603">
+                    <property name="style">text1</property>
+                    <property name="resultSetColumn">goals_overview</property>
+                </data>
+                <label id="151">
+                    <property name="style">H1</property>
+                    <property name="fontSize">18pt</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">avoid</property>
+                    <text-property name="text">Main results</text-property>
+                </label>
+                <table name="results_table" id="1489">
+                    <property name="marginTop">8pt</property>
+                    <property name="marginLeft">8pt</property>
+                    <property name="dataSet">Results_indicators_periods</property>
+                    <list-property name="paramBindings">
+                        <structure>
+                            <property name="paramName">projid</property>
+                            <simple-property-list name="expression">
+                                <value type="javascript">row["id"]</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
+                    <list-property name="boundDataColumns">
+                        <structure>
+                            <property name="name">period_start</property>
+                            <text-property name="displayName">period_start</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
+                            <property name="dataType">date</property>
+                        </structure>
+                        <structure>
+                            <property name="name">actual_value</property>
+                            <text-property name="displayName">actual_value</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
+                            <property name="dataType">string</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">target_value</property>
+                            <text-property name="displayName">target_value</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">baseline_value</property>
+                            <text-property name="displayName">baseline_value</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">title</property>
+                            <text-property name="displayName">title</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["title"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">period_end</property>
+                            <text-property name="displayName">period_end</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["period_end"]</expression>
+                            <property name="dataType">date</property>
+                        </structure>
+                        <structure>
+                            <property name="name">actual_comment</property>
+                            <text-property name="displayName">actual_comment</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">indicator_title</property>
+                            <text-property name="displayName">indicator_title</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["indicator_title"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">baseline_year</property>
+                            <text-property name="displayName">baseline_value</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
+                            <property name="dataType">string</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">baseline_comment</property>
+                            <text-property name="displayName">baseline_comment</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["baseline_comment"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">actual_value_number</property>
+                            <expression name="expression" type="javascript">dataSetRow["actual_value"] &amp;&amp; !isNaN(dataSetRow["actual_value"]) ? dataSetRow["actual_value"] : -1</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">target_value_number</property>
+                            <text-property name="displayName">target_value_number</text-property>
+                            <expression name="expression" type="javascript">(dataSetRow["target_value"] &amp;&amp; !isNaN(dataSetRow["target_value"])) ? dataSetRow["target_value"] : -1</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">progress_pct</property>
+                            <text-property name="displayName">progress_pct</text-property>
+                            <expression name="expression" type="javascript">(row["actual_value"].toLowerCase() == "available" )&#13;
+?&#13;
+100&#13;
+:&#13;
+(row["actual_value"].toLowerCase() == "not available" )&#13;
+?&#13;
+0&#13;
+:&#13;
+(row["actual_value"].toLowerCase() == "operational" )&#13;
+?&#13;
+100&#13;
+:&#13;
+(row["actual_value"].toLowerCase() == "not yet available" )&#13;
+?&#13;
+0&#13;
+:&#13;
+(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > -1 )&#13;
+?&#13;
+(row["baseline_value"] ?&#13;
+Math.round((row["actual_value_number"]-row["baseline_value"]) * 100 / (row["target_value_number"] - row["baseline_value"]))&#13;
+: Math.round(row["actual_value_number"] * 100 / row["target_value_number"])&#13;
+)&#13;
+:&#13;
+null</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">result_sort</property>
+                            <text-property name="displayName">result_sort</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["result_order"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">indicator_sort</property>
+                            <text-property name="displayName">indicator_sort</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["indicator_order"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">result_pk</property>
+                            <text-property name="displayName">result_pk</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["result_pk"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">indicator_pk</property>
+                            <text-property name="displayName">indicator_pk</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["indicator_pk"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">baseline_year_1</property>
+                            <text-property name="displayName">baseline_year</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["baseline_year"]</expression>
+                            <property name="dataType">integer</property>
+                        </structure>
+                        <structure>
+                            <property name="name">indicatorperiod_pk</property>
+                            <text-property name="displayName">indicatorperiod_pk</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["indicatorperiod_pk"]</expression>
+                            <property name="dataType">integer</property>
+                        </structure>
+                        <structure>
+                            <property name="name">target_comment</property>
+                            <text-property name="displayName">target_comment</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["target_comment"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                    </list-property>
+                    <method name="onCreate"><![CDATA[var allan = 7;
+]]></method>
+                    <property name="pageBreakInterval">50</property>
+                    <column id="1544">
+                        <property name="width">1.2708333333333333in</property>
+                    </column>
+                    <column id="1545">
+                        <property name="width">3.0729166666666665in</property>
+                    </column>
+                    <column id="1546">
+                        <property name="width">1.8958333333333333in</property>
+                    </column>
+                    <column id="1547">
+                        <property name="width">1.5625in</property>
+                    </column>
+                    <header>
+                        <row id="1490">
+                            <cell id="1491">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <label id="1492">
+                                    <property name="style">Sectionheader</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">8pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">8pt</property>
+                                    <property name="paddingRight">8pt</property>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(Total.count() &lt; 1)</expression>
+                                        </structure>
+                                    </list-property>
+                                    <text-property name="text">Results</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1493">
+                                <text-data id="1494">
+                                    <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <expression name="valueExpr">var a=1,b=1;&#13;
+reportContext.getGlobalVariable('debug')</expression>
+                                    <property name="contentType">html</property>
+                                </text-data>
+                            </cell>
+                            <cell id="1495"/>
+                        </row>
+                    </header>
+                    <group id="1496">
+                        <property name="groupName">ResultTableGroup</property>
+                        <expression name="keyExpr" type="javascript">row["result_pk"]</expression>
+                        <structure name="toc">
+                            <expression name="expressionValue" type="javascript">row["title"]</expression>
+                        </structure>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">row["result_sort"]</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                            <structure>
+                                <expression name="key" type="javascript">row["result_pk"]</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                        </list-property>
+                        <header>
+                            <row id="1497">
+                                <cell id="1498">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                    <text-data id="1499">
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">14pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">#6D8FAF</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">8pt</property>
+                                        <expression name="valueExpr">b=1, "Result " + a++;</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                    <data id="1500">
+                                        <property name="fontSize">14pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">8pt</property>
+                                        <property name="paddingRight">8pt</property>
+                                        <property name="resultSetColumn">title</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </header>
+                        <footer>
+                            <row id="1501">
+                                <cell id="1502"/>
+                                <cell id="1503"/>
+                                <cell id="1504"/>
+                                <cell id="1505"/>
+                            </row>
+                        </footer>
+                    </group>
+                    <group id="1506">
+                        <property name="groupName">IndicatorTableGroup</property>
+                        <expression name="keyExpr" type="javascript">row["indicator_pk"]</expression>
+                        <structure name="toc">
+                            <expression name="expressionValue" type="javascript">row["indicator_title"]</expression>
+                        </structure>
+                        <property name="hideDetail">false</property>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">row["indicator_sort"]</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                            <structure>
+                                <expression name="key" type="javascript">row["indicator_pk"]</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                        </list-property>
+                        <header>
+                            <row id="1507">
+                                <property name="backgroundColor">#F0F0F0</property>
+                                <list-property name="visibility">
+                                    <structure>
+<<<<<<< Updated upstream
                                         <property name="name">disbursements_sum</property>
                                         <text-property name="displayName">disbursements_sum</text-property>
                                         <expression name="expression" type="javascript">dataSetRow["disbursements_sum"]</expression>
@@ -19976,6 +20351,1030 @@ from rsr_transaction
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Main results</text-property>
                 </label>
+=======
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">!row["indicator_title"]</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="1508">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="backgroundColor">white</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">4pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <grid id="1509">
+                                        <property name="backgroundColor">white</property>
+                                        <property name="width">7.875in</property>
+                                        <column id="1510">
+                                            <property name="width">1.4479166666666667in</property>
+                                        </column>
+                                        <column id="1511">
+                                            <property name="width">2.90625in</property>
+                                        </column>
+                                        <column id="1512">
+                                            <property name="width">1.875in</property>
+                                        </column>
+                                        <column id="1513">
+                                            <property name="width">1.6458333333333333in</property>
+                                        </column>
+                                        <row id="1514">
+                                            <property name="backgroundColor">#F3F6F9</property>
+                                            <cell id="1515">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">4pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <text-data id="1516">
+                                                    <property name="backgroundColor">#D0DEE7</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontWeight">bold</property>
+                                                    <property name="color">white</property>
+                                                    <property name="paddingTop">5pt</property>
+                                                    <property name="paddingLeft">8pt</property>
+                                                    <property name="paddingBottom">5pt</property>
+                                                    <property name="paddingRight">0pt</property>
+                                                    <property name="display">block</property>
+                                                    <expression name="valueExpr">"INDICATOR " + b++</expression>
+                                                    <property name="contentType">html</property>
+                                                </text-data>
+                                            </cell>
+                                            <cell id="1517">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="paddingBottom">20pt</property>
+                                                <text-data id="1518">
+                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="color">#000000</property>
+                                                    <property name="paddingTop">5pt</property>
+                                                    <property name="paddingLeft">8pt</property>
+                                                    <property name="paddingBottom">3pt</property>
+                                                    <property name="paddingRight">8pt</property>
+                                                    <property name="display">block</property>
+                                                    <expression name="valueExpr">row["indicator_title"]</expression>
+                                                    <property name="contentType">html</property>
+                                                </text-data>
+                                            </cell>
+                                        </row>
+                                        <row id="284">
+                                            <cell id="285">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">1</property>
+                                            </cell>
+                                        </row>
+                                        <row id="1519">
+                                            <cell id="1520"/>
+                                            <cell id="1521">
+                                                <label id="1522">
+                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontWeight">bold</property>
+                                                    <property name="fontStyle">italic</property>
+                                                    <property name="color">gray</property>
+                                                    <property name="paddingTop">8pt</property>
+                                                    <property name="paddingLeft">10pt</property>
+                                                    <property name="textAlign">left</property>
+                                                    <text-property name="text">ACTUAL</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1523">
+                                                <property name="color">#F0F0F0</property>
+                                                <label id="1524">
+                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontWeight">bold</property>
+                                                    <property name="fontStyle">italic</property>
+                                                    <property name="color">gray</property>
+                                                    <property name="paddingTop">8pt</property>
+                                                    <property name="textAlign">left</property>
+                                                    <text-property name="text">TARGET</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1525">
+                                                <label id="1526">
+                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontWeight">bold</property>
+                                                    <property name="fontStyle">italic</property>
+                                                    <property name="color">gray</property>
+                                                    <property name="paddingTop">8pt</property>
+                                                    <property name="textAlign">left</property>
+                                                    <text-property name="text">BASELINE</text-property>
+                                                </label>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                        </header>
+                        <footer>
+                            <row id="79">
+                                <property name="pageBreakBefore">avoid</property>
+                                <cell id="272">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">8pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="211">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">8pt</property>
+                                        <property name="pageBreakBefore">avoid</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">!row["indicator_title"]</expression>
+                                            </structure>
+                                        </list-property>
+                                        <text-property name="text"> </text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </footer>
+                    </group>
+                    <detail>
+                        <row id="1527">
+                            <property name="backgroundColor">white</property>
+                            <property name="verticalAlign">top</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">!row["indicator_title"]</expression>
+                                </structure>
+                            </list-property>
+                            <cell id="1528">
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">8pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">8pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text-data name="percentage2" id="1529">
+                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontSize">10pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="color">#34B573</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">-47pt</property>
+                                    <property name="paddingTop">20pt</property>
+                                    <property name="paddingBottom">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="display">block</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">50</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">84</expression>
+                                            <property name="style">progress_middle</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">49</expression>
+                                            <property name="style">progress_low</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">ge</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">85</value>
+                                            </simple-property-list>
+                                            <property name="style">progress_high</property>
+                                        </structure>
+                                    </list-property>
+                                    <expression name="valueExpr" type="javascript">(row["progress_pct"] != null)&#13;
+?&#13;
+ row["progress_pct"] + "%"&#13;
+ :&#13;
+ ""</expression>
+                                    <property name="contentType">html</property>
+                                </text-data>
+                                <extended-item extensionName="Chart" name="clock2" id="1530">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.6.1</Version>
+  <Type>Pie Chart</Type>
+  <SubType>Standard</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>24.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>false</Visible>
+      <Label>
+        <Caption>
+          <Value>77%</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>1.0</Top>
+        <Left>1.0</Left>
+        <Bottom>1.0</Bottom>
+        <Right>1.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>0</HorizontalSpacing>
+      <VerticalSpacing>0</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>false</Visible>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Right</Position>
+      <ItemType>Categories</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>0</Transparency>
+      <Red>255</Red>
+      <Green>255</Green>
+      <Blue>255</Blue>
+    </Background>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <GridColumnCount>0</GridColumnCount>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity>
+    <Enable>false</Enable>
+  </Interactivity>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <SeriesDefinitions>
+    <Query>
+      <Definition></Definition>
+    </Query>
+    <SeriesPalette>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>217</Red>
+        <Green>94</Green>
+        <Blue>117</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>225</Red>
+        <Green>122</Green>
+        <Blue>12</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>52</Red>
+        <Green>181</Green>
+        <Blue>115</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>192</Red>
+        <Green>192</Green>
+        <Blue>192</Blue>
+      </Entries>
+    </SeriesPalette>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>217</Red>
+          <Green>94</Green>
+          <Blue>117</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>122</Green>
+          <Blue>12</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>52</Red>
+          <Green>181</Green>
+          <Blue>115</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series xsi:type="type:PieSeries">
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>row[&quot;number&quot;]</Definition>
+          <Grouping>
+            <GroupType>Text</GroupType>
+            <AggregateExpression>Sum</AggregateExpression>
+          </Grouping>
+        </DataDefinition>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+        <Triggers>
+          <Condition>onmouseover</Condition>
+          <Action>
+            <Type>Show_Tooltip</Type>
+            <Value xsi:type="attribute:TooltipValue">
+              <Text></Text>
+              <Delay>200</Delay>
+            </Value>
+          </Action>
+        </Triggers>
+        <Translucent>true</Translucent>
+        <Explosion>0</Explosion>
+        <Title>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Size>16.0</Size>
+              <Bold>true</Bold>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Title>
+        <TitlePosition>Right</TitlePosition>
+        <LeaderLineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Visible>true</Visible>
+        </LeaderLineAttributes>
+        <LeaderLineLength>10.0</LeaderLineLength>
+        <SliceOutline>
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </SliceOutline>
+        <Ratio>1.0</Ratio>
+        <Rotation>90.0</Rotation>
+        <InnerRadius>66.0</InnerRadius>
+      </Series>
+      <Grouping>
+        <GroupType>Text</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+    </SeriesDefinitions>
+    <Series>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Label>
+      <DataDefinition>
+        <Definition>row[&quot;name&quot;]</Definition>
+      </DataDefinition>
+      <DataPoint>
+        <Components>
+          <Type>Orthogonal_Value</Type>
+        </Components>
+        <Separator>, </Separator>
+      </DataPoint>
+      <LabelPosition>Outside</LabelPosition>
+      <Stacked>false</Stacked>
+    </Series>
+    <Grouping>
+      <Enabled>true</Enabled>
+      <GroupType>Text</GroupType>
+      <AggregateExpression>Sum</AggregateExpression>
+    </Grouping>
+    <SortKey/>
+  </SeriesDefinitions>
+  <Coverage>1.0</Coverage>
+</model:ChartWithoutAxes>
+]]></xml-property>
+                                    <property name="outputFormat">SVG</property>
+                                    <property name="inheritColumns">false</property>
+                                    <property name="display">block</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginBottom">8pt</property>
+                                    <property name="height">60pt</property>
+                                    <property name="width">60pt</property>
+                                    <property name="dataSet">Four_rows</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">null == row._outer["progress_pct"]</expression>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">param_1</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">(row["progress_pct"] &lt; 33)&#13;
+?&#13;
+Math.max(row["progress_pct"],0)&#13;
+:&#13;
+0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">param_2</property>
+                                            <simple-property-list name="expression">
+                                                <value>(row["progress_pct"] >= 33 &amp;&amp; row["progress_pct"] &lt; 67)&#13;
+?&#13;
+row["progress_pct"]&#13;
+:&#13;
+0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">param_3</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">(row["progress_pct"] >= 67)&#13;
+?&#13;
+Math.min(row["progress_pct"],100)&#13;
+:&#13;
+0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">param_4</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">100-Math.max(Math.min(row["progress_pct"],100),0)</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">number</property>
+                                            <expression name="expression" type="javascript">dataSetRow["number"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">name</property>
+                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="style">progress_low</property>
+                                </extended-item>
+                            </cell>
+                            <cell id="1531">
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">8pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">8pt</property>
+                                <property name="verticalAlign">middle</property>
+                                <data id="1532">
+                                    <property name="fontFamily">"Helvetica Neue"</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">16pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Unformatted</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(row["actual_value"] != null) &amp;&amp; (!isNaN(row["actual_value"]))</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">actual_value</property>
+                                </data>
+                                <data id="1533">
+                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">16pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0.0</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">33.0</expression>
+                                            <property name="style">progress_low</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">50</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">84</expression>
+                                            <property name="style">progress_middle</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">ge</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">85</value>
+                                            </simple-property-list>
+                                            <property name="style">progress_high</property>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["actual_value_number"] == -1</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">actual_value_number</property>
+                                </data>
+                            </cell>
+                            <cell id="1534">
+                                <property name="verticalAlign">middle</property>
+                                <data id="1535">
+                                    <property name="fontFamily">"Helvetica Neue"</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(row["target_value"] != null) &amp;&amp; (!isNaN(row["target_value"]))</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">target_value</property>
+                                </data>
+                                <data id="1536">
+                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["target_value_number"] == -1</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">target_value_number</property>
+                                </data>
+                            </cell>
+                            <cell id="1537">
+                                <property name="verticalAlign">middle</property>
+                                <data id="1538">
+                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="resultSetColumn">baseline_year</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="218">
+                            <property name="backgroundColor">#F0F0F0</property>
+                            <property name="pageBreakBefore">avoid</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">!row["actual_comment"]</expression>
+                                </structure>
+                            </list-property>
+                            <cell id="271">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">16pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">8pt</property>
+                                <text-data id="223">
+                                    <property name="style">progress_high</property>
+                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="marginBottom">8pt</property>
+                                    <property name="paddingTop">8pt</property>
+                                    <property name="paddingLeft">14pt</property>
+                                    <property name="paddingBottom">8pt</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">49</expression>
+                                            <property name="style">progress_low</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">50</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">84</expression>
+                                            <property name="style">progress_middle</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">ge</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">85</value>
+                                            </simple-property-list>
+                                            <property name="style">progress_high</property>
+                                        </structure>
+                                    </list-property>
+                                    <expression name="valueExpr">row["actual_comment"]</expression>
+                                    <property name="contentType">html</property>
+                                </text-data>
+                            </cell>
+                        </row>
+                    </detail>
+                    <footer>
+                        <row id="1539">
+                            <cell id="1540"/>
+                            <cell id="1541"/>
+                            <cell id="1542"/>
+                            <cell id="1543"/>
+                        </row>
+                    </footer>
+                </table>
+>>>>>>> Stashed changes
                 <table name="project_results_table" id="13">
                     <property name="borderBottomStyle">none</property>
                     <property name="borderLeftStyle">none</property>
@@ -19983,8 +21382,8 @@ from rsr_transaction
                     <property name="borderTopStyle">none</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
+                    <property name="display">none</property>
                     <property name="pageBreakAfter">always</property>
-                    <property name="width">179.12291666666664mm</property>
                     <property name="dataSet">Results_indicators_periods</property>
                     <list-property name="paramBindings">
                         <structure>
@@ -20250,10 +21649,17 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="color">white</property>
                                                     <property name="marginTop">0px</property>
+<<<<<<< Updated upstream
                                                     <property name="paddingTop">0px</property>
                                                     <property name="paddingLeft">7px</property>
                                                     <property name="paddingBottom">7px</property>
                                                     <property name="paddingRight">7px</property>
+=======
+                                                    <property name="paddingTop">5pt</property>
+                                                    <property name="paddingLeft">8pt</property>
+                                                    <property name="paddingBottom">5pt</property>
+                                                    <property name="paddingRight">7pt</property>
+>>>>>>> Stashed changes
                                                     <property name="display">inline</property>
                                                     <expression name="valueExpr">"INDICATOR " + b++</expression>
                                                     <property name="contentType">html</property>
@@ -21028,6 +22434,7 @@ Math.min(row["progress_pct"],100)&#13;
                                     <structure name="numberFormat">
                                         <property name="category">General Number</property>
                                         <property name="pattern">General Number</property>
+<<<<<<< Updated upstream
                                     </structure>
                                     <property name="textAlign">center</property>
                                     <list-property name="visibility">
@@ -21065,11 +22472,53 @@ Math.min(row["progress_pct"],100)&#13;
                                     <structure name="numberFormat">
                                         <property name="category">General Number</property>
                                         <property name="pattern">General Number</property>
+=======
+>>>>>>> Stashed changes
                                     </structure>
                                     <property name="textAlign">center</property>
                                     <list-property name="visibility">
                                         <structure>
                                             <property name="format">all</property>
+<<<<<<< Updated upstream
+=======
+                                            <expression name="valueExpr" type="javascript">row["actual_value_number"] == -1</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">actual_value_number</property>
+                                </data>
+                            </cell>
+                            <cell id="30">
+                                <property name="verticalAlign">middle</property>
+                                <data id="108">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">7pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["target_value_number"] != -1</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">target_value</property>
+                                </data>
+                                <data id="296">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">General Number</property>
+                                        <property name="pattern">General Number</property>
+                                    </structure>
+                                    <property name="textAlign">center</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+>>>>>>> Stashed changes
                                             <expression name="valueExpr" type="javascript">row["target_value_number"] == -1</expression>
                                         </structure>
                                     </list-property>
@@ -21403,6 +22852,10 @@ reportContext.getGlobalVariable('debug')</expression>
                                 <property name="contentType">html</property>
                             </text-data>
                             <data id="1076">
+<<<<<<< Updated upstream
+=======
+                                <property name="style">text1</property>
+>>>>>>> Stashed changes
                                 <property name="fontSize">10pt</property>
                                 <property name="paddingLeft">0pt</property>
                                 <property name="paddingBottom">0pt</property>
@@ -21431,7 +22884,10 @@ reportContext.getGlobalVariable('debug')</expression>
                 <header>
                     <row id="1083">
                         <property name="backgroundColor">#FFFFFF</property>
+<<<<<<< Updated upstream
                         <property name="height">23.98888888888889mm</property>
+=======
+>>>>>>> Stashed changes
                         <list-property name="visibility">
                             <structure>
                                 <property name="format">all</property>
@@ -21446,15 +22902,25 @@ reportContext.getGlobalVariable('debug')</expression>
                             <property name="paddingBottom">4pt</property>
                             <property name="paddingRight">0pt</property>
                             <grid id="1085">
+<<<<<<< Updated upstream
+=======
+                                <property name="fontFamily">"Arial"</property>
+>>>>>>> Stashed changes
                                 <property name="borderBottomStyle">none</property>
                                 <property name="borderLeftStyle">none</property>
                                 <property name="borderRightStyle">none</property>
                                 <property name="borderTopStyle">none</property>
                                 <property name="marginTop">15pt</property>
                                 <property name="pageBreakAfter">avoid</property>
+<<<<<<< Updated upstream
                                 <property name="width">178.06458333333336mm</property>
                                 <column id="1086">
                                     <property name="width">39.6875mm</property>
+=======
+                                <property name="width">177.8mm</property>
+                                <column id="1086">
+                                    <property name="width">1.448in</property>
+>>>>>>> Stashed changes
                                 </column>
                                 <column id="1087">
                                     <property name="width">38.1mm</property>
@@ -21468,20 +22934,36 @@ reportContext.getGlobalVariable('debug')</expression>
                                 <row id="1090">
                                     <property name="backgroundColor">#EFF3F8</property>
                                     <cell id="1091">
+<<<<<<< Updated upstream
                                         <property name="paddingTop">0pt</property>
                                         <property name="paddingLeft">0pt</property>
                                         <property name="paddingBottom">7px</property>
                                         <property name="paddingRight">7px</property>
+=======
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11pt</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">4pt</property>
+                                        <property name="paddingRight">0pt</property>
+>>>>>>> Stashed changes
                                         <text-data id="1092">
                                             <property name="backgroundColor">#C3D6E4</property>
                                             <property name="fontSize">10pt</property>
                                             <property name="fontWeight">bold</property>
                                             <property name="color">white</property>
                                             <property name="marginTop">0px</property>
+<<<<<<< Updated upstream
                                             <property name="paddingTop">7px</property>
                                             <property name="paddingLeft">7px</property>
                                             <property name="paddingBottom">7px</property>
                                             <property name="paddingRight">7px</property>
+=======
+                                            <property name="paddingTop">5px</property>
+                                            <property name="paddingLeft">8px</property>
+                                            <property name="paddingBottom">5px</property>
+                                            <property name="paddingRight">0px</property>
+>>>>>>> Stashed changes
                                             <property name="display">inline</property>
                                             <expression name="valueExpr">"INDICATOR " + b++</expression>
                                             <property name="contentType">html</property>
@@ -21494,6 +22976,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="paddingBottom">5pt</property>
                                         <text-data id="1094">
                                             <property name="marginTop">0px</property>
+<<<<<<< Updated upstream
                                             <property name="paddingTop">5px</property>
                                             <property name="paddingLeft">1px</property>
                                             <property name="paddingBottom">1px</property>
@@ -21515,10 +22998,35 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <property name="paddingBottom">0pt</property>
                                             <property name="textAlign">center</property>
                                             <text-property name="text">BASELINE</text-property>
+=======
+                                            <property name="paddingTop">8pt</property>
+                                            <property name="paddingLeft">10pt</property>
+                                            <property name="paddingBottom">1pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <expression name="valueExpr">row["indicator_title"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="1096">
+                                    <cell id="1097"/>
+                                    <cell id="1098">
+                                        <label id="1101">
+                                            <property name="style">text1</property>
+                                            <property name="fontSize">11pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="fontStyle">italic</property>
+                                            <property name="color">black</property>
+                                            <property name="paddingTop">0pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text">ACTUAL</text-property>
+>>>>>>> Stashed changes
                                         </label>
                                     </cell>
                                     <cell id="1100">
                                         <property name="color">#F0F0F0</property>
+<<<<<<< Updated upstream
                                         <label id="1101">
                                             <property name="fontWeight">bold</property>
                                             <property name="fontStyle">italic</property>
@@ -21531,12 +23039,34 @@ reportContext.getGlobalVariable('debug')</expression>
                                     </cell>
                                     <cell id="1102">
                                         <label id="1103">
+=======
+                                        <label id="1103">
+                                            <property name="style">text1</property>
+                                            <property name="fontSize">11pt</property>
                                             <property name="fontWeight">bold</property>
                                             <property name="fontStyle">italic</property>
                                             <property name="paddingTop">0pt</property>
                                             <property name="paddingBottom">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text">TARGET</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="1102">
+                                        <label id="1099">
+                                            <property name="style">text1</property>
+                                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
+                                            <property name="fontWeight">bold</property>
+                                            <property name="fontStyle">italic</property>
+                                            <property name="paddingTop">0pt</property>
+                                            <property name="paddingBottom">0pt</property>
+<<<<<<< Updated upstream
                                             <property name="textAlign">center</property>
                                             <text-property name="text">TARGET</text-property>
+=======
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text">BASELINE</text-property>
+>>>>>>> Stashed changes
                                         </label>
                                     </cell>
                                 </row>
@@ -21563,7 +23093,11 @@ reportContext.getGlobalVariable('debug')</expression>
                         <property name="verticalAlign">middle</property>
                         <text-data name="percentage1" id="1106">
                             <property name="fontFamily">sans-serif</property>
+<<<<<<< Updated upstream
                             <property name="fontSize">8pt</property>
+=======
+                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
                             <property name="fontWeight">normal</property>
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
@@ -22207,6 +23741,7 @@ Math.min(row["progress_pct"],100)&#13;
                         <property name="paddingBottom">1pt</property>
                         <property name="paddingRight">8pt</property>
                         <property name="verticalAlign">middle</property>
+<<<<<<< Updated upstream
                         <text-data id="1109">
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
@@ -22231,6 +23766,11 @@ Math.min(row["progress_pct"],100)&#13;
                         <property name="verticalAlign">middle</property>
                         <data id="1111">
                             <property name="fontSize">12pt</property>
+=======
+                        <data id="1111">
+                            <property name="style">text1</property>
+                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
                             <property name="marginBottom">7pt</property>
@@ -22248,7 +23788,12 @@ Math.min(row["progress_pct"],100)&#13;
                             <property name="resultSetColumn">actual_value</property>
                         </data>
                         <data id="1112">
+<<<<<<< Updated upstream
                             <property name="fontSize">12pt</property>
+=======
+                            <property name="style">text1</property>
+                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
                             <property name="marginBottom">4pt</property>
@@ -22267,10 +23812,18 @@ Math.min(row["progress_pct"],100)&#13;
                             <property name="resultSetColumn">actual_value_number</property>
                         </data>
                     </cell>
+<<<<<<< Updated upstream
                     <cell id="1113">
                         <property name="verticalAlign">middle</property>
                         <data id="1114">
                             <property name="fontSize">12pt</property>
+=======
+                    <cell id="1110">
+                        <property name="verticalAlign">middle</property>
+                        <data id="1114">
+                            <property name="style">text1</property>
+                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
                             <property name="marginBottom">7pt</property>
@@ -22285,7 +23838,12 @@ Math.min(row["progress_pct"],100)&#13;
                             <property name="resultSetColumn">target_value</property>
                         </data>
                         <data id="1115">
+<<<<<<< Updated upstream
                             <property name="fontSize">12pt</property>
+=======
+                            <property name="style">text1</property>
+                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
                             <property name="marginBottom">4pt</property>
@@ -22304,6 +23862,18 @@ Math.min(row["progress_pct"],100)&#13;
                             <property name="resultSetColumn">target_value_number</property>
                         </data>
                     </cell>
+<<<<<<< Updated upstream
+=======
+                    <cell id="1113">
+                        <property name="verticalAlign">middle</property>
+                        <data id="1488">
+                            <property name="style">text1</property>
+                            <property name="fontSize">11pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="resultSetColumn">baseline_value</property>
+                        </data>
+                    </cell>
+>>>>>>> Stashed changes
                 </row>
                 <row id="1116">
                     <property name="backgroundColor">#EFF3F8</property>
@@ -22316,7 +23886,11 @@ Math.min(row["progress_pct"],100)&#13;
                         <property name="paddingBottom">1pt</property>
                         <property name="paddingRight">8pt</property>
                         <text-data id="1118">
+<<<<<<< Updated upstream
                             <property name="fontSize">8pt</property>
+=======
+                            <property name="fontSize">11pt</property>
+>>>>>>> Stashed changes
                             <property name="paddingTop">7px</property>
                             <property name="paddingLeft">7px</property>
                             <property name="paddingBottom">7px</property>
