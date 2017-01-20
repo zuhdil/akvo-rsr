@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
     <html-property name="description">Plan Finland MFA reporting</html-property>
     <list-property name="propertyBindings">
         <structure>
@@ -18661,6 +18661,10 @@ from rsr_transaction
             <property name="fontSize">18pt</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
+            <property name="paddingTop">8pt</property>
+            <property name="paddingLeft">8pt</property>
+            <property name="paddingBottom">8pt</property>
+            <property name="paddingRight">8pt</property>
         </style>
         <style name="H1" id="937">
             <property name="backgroundColor">#23325B</property>
@@ -18668,77 +18672,28 @@ from rsr_transaction
             <property name="fontSize">18pt</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
+            <property name="paddingTop">8pt</property>
+            <property name="paddingLeft">8pt</property>
+            <property name="paddingBottom">8pt</property>
+            <property name="paddingRight">8pt</property>
         </style>
         <style name="text1" id="1063">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11pt</property>
+            <property name="color">#333333</property>
+            <property name="paddingTop">8pt</property>
+            <property name="paddingBottom">8pt</property>
+        </style>
+        <style name="Labels_tables" id="1181">
             <property name="fontFamily">"Arial"</property>
         </style>
     </styles>
     <page-setup>
-        <simple-master-page name="TwoColumnPage" id="351">
-            <property name="type">a4</property>
-            <property name="topMargin">0mm</property>
-            <property name="leftMargin">15mm</property>
-            <property name="bottomMargin">10mm</property>
-            <property name="rightMargin">15mm</property>
-            <property name="columns">2</property>
-            <property name="headerHeight">15mm</property>
-            <property name="footerHeight">0mm</property>
-            <page-header>
-                <grid id="360">
-                    <property name="width">6.989583333333333in</property>
-                    <column id="361">
-                        <property name="width">1.21875in</property>
-                    </column>
-                    <column id="362">
-                        <property name="width">5.770833333333333in</property>
-                    </column>
-                    <row id="363">
-                        <cell id="364">
-                            <property name="backgroundColor">#FFAF41</property>
-                            <text-data id="365">
-                                <expression name="valueExpr">""</expression>
-                                <property name="contentType">html</property>
-                            </text-data>
-                        </cell>
-                        <cell id="366">
-                            <property name="backgroundColor">#E4EFF8</property>
-                            <text-data id="367">
-                                <property name="textAlign">right</property>
-                                <property name="dataSet">Framework_w_custom_abc</property>
-                                <list-property name="boundDataColumns">
-                                    <structure>
-                                        <property name="name">title</property>
-                                        <text-property name="displayName">title</text-property>
-                                        <expression name="expression" type="javascript">dataSetRow["title"]</expression>
-                                        <property name="dataType">string</property>
-                                    </structure>
-                                </list-property>
-                                <expression name="valueExpr">row["title"]</expression>
-                                <property name="contentType">html</property>
-                            </text-data>
-                        </cell>
-                    </row>
-                </grid>
-            </page-header>
-        </simple-master-page>
         <simple-master-page name="Onedrop" id="888">
             <property name="topMargin">50px</property>
             <property name="leftMargin">50px</property>
             <property name="bottomMargin">50px</property>
             <property name="rightMargin">50px</property>
-            <page-header>
-                <label id="925">
-                    <property name="backgroundColor">#23345C</property>
-                    <property name="fontFamily">"Arial"</property>
-                    <property name="fontSize">20px</property>
-                    <property name="fontWeight">bold</property>
-                    <property name="color">#FFFFFF</property>
-                    <property name="paddingTop">5px</property>
-                    <property name="paddingBottom">5pt</property>
-                    <property name="textAlign">center</property>
-                    <text-property name="text">FINAL REPORT TEMPLATE</text-property>
-                </label>
-            </page-header>
         </simple-master-page>
     </page-setup>
     <body>
@@ -18749,9 +18704,9 @@ from rsr_transaction
             <property name="color">#FFFFFF</property>
             <property name="marginTop">100pt</property>
             <property name="marginBottom">0pt</property>
-            <property name="paddingTop">5px</property>
+            <property name="paddingTop">8px</property>
             <property name="paddingLeft">5px</property>
-            <property name="paddingBottom">5px</property>
+            <property name="paddingBottom">8px</property>
             <property name="paddingRight">1px</property>
             <property name="textAlign">center</property>
             <property name="display">block</property>
@@ -18761,25 +18716,13 @@ from rsr_transaction
             </structure>
             <text-property name="text">INITIATIVE LAZOS DE AGUA</text-property>
         </label>
-        <label name="period_label" id="927">
-            <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
-            <property name="fontFamily">"Arial"</property>
-            <property name="color">#FFFFFF</property>
-            <property name="marginTop">5pt</property>
-            <property name="paddingTop">5px</property>
-            <property name="paddingLeft">5px</property>
-            <property name="paddingBottom">5px</property>
-            <property name="paddingRight">1px</property>
-            <property name="textAlign">center</property>
-            <property name="display">block</property>
-            <property name="pageBreakBefore">avoid</property>
-            <structure name="toc"/>
-            <text-property name="text">REPORTING PERIOD</text-property>
-        </label>
         <text-data name="reporting_period" id="938">
+            <property name="style">H2</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontSize">18pt</property>
+            <property name="marginTop">8pt</property>
+            <property name="paddingTop">8pt</property>
+            <property name="paddingBottom">8pt</property>
             <property name="textAlign">center</property>
             <property name="dataSet">Framework_w_custom_abc</property>
             <list-property name="boundDataColumns">
@@ -18796,7 +18739,7 @@ from rsr_transaction
                     <property name="dataType">date</property>
                 </structure>
             </list-property>
-            <expression name="valueExpr">row["date_start_planned"] + " - " + row["date_end_planned"]</expression>
+            <expression name="valueExpr">row["date_start_planned"] + " / " + row["date_end_planned"]</expression>
             <property name="contentType">html</property>
         </text-data>
         <image name="framework_image" id="368">
@@ -18837,10 +18780,10 @@ from rsr_transaction
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
-            <property name="paddingTop">5px</property>
-            <property name="paddingLeft">5px</property>
-            <property name="paddingBottom">5px</property>
-            <property name="paddingRight">1px</property>
+            <property name="paddingTop">8px</property>
+            <property name="paddingLeft">8px</property>
+            <property name="paddingBottom">8px</property>
+            <property name="paddingRight">8px</property>
             <property name="textAlign">center</property>
             <property name="display">block</property>
             <property name="pageBreakAfter">always</property>
@@ -18849,16 +18792,16 @@ from rsr_transaction
             <text-property name="text">PRESENTED TO ONEDROP, DATE, YEAR</text-property>
         </label>
         <label name="basic_label" id="941">
-            <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="style">H1</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
-            <property name="paddingTop">5px</property>
-            <property name="paddingLeft">5px</property>
-            <property name="paddingBottom">5px</property>
-            <property name="paddingRight">1px</property>
+            <property name="paddingTop">8px</property>
+            <property name="paddingLeft">8px</property>
+            <property name="paddingBottom">8px</property>
+            <property name="paddingRight">8px</property>
             <property name="textAlign">center</property>
             <property name="display">block</property>
             <property name="pageBreakAfter">avoid</property>
@@ -19143,34 +19086,6 @@ from rsr_transaction
             <column id="955">
                 <property name="width">116.68125mm</property>
             </column>
-            <row id="956">
-                <cell id="957">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                </cell>
-                <cell id="958">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                </cell>
-            </row>
-            <row id="959">
-                <cell id="960">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                </cell>
-                <cell id="961">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                </cell>
-            </row>
             <row id="962">
                 <cell id="963">
                     <property name="paddingTop">8pt</property>
@@ -19178,6 +19093,7 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="964">
+                        <property name="style">Labels_tables</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Name of the project</text-property>
@@ -19205,6 +19121,8 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="969">
+                        <property name="style">Labels_tables</property>
+                        <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Year of approval</text-property>
@@ -19228,6 +19146,8 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="974">
+                        <property name="style">Labels_tables</property>
+                        <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Year of completion</text-property>
@@ -19251,6 +19171,8 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="1044">
+                        <property name="style">Labels_tables</property>
+                        <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Objective of the initialtive</text-property>
@@ -19275,6 +19197,8 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="1048">
+                        <property name="style">Labels_tables</property>
+                        <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Components of the initialtive</text-property>
@@ -19299,6 +19223,8 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="993">
+                        <property name="style">Labels_tables</property>
+                        <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Financing of the intiative</text-property>
@@ -19358,6 +19284,8 @@ from rsr_transaction
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="1008">
+                        <property name="style">Labels_tables</property>
+                        <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <text-property name="text">Disbursement of the initiative</text-property>
                     </label>
@@ -19818,7 +19746,8 @@ from rsr_transaction
             <property name="repeatHeader">false</property>
             <detail>
                 <text-data id="1128">
-                    <property name="style">H2</property>
+                    <property name="style">H1</property>
+                    <property name="textAlign">center</property>
                     <structure name="toc">
                         <expression name="expressionValue" type="javascript">"Project: " + row["title"]</expression>
                     </structure>
@@ -19826,10 +19755,11 @@ from rsr_transaction
                     <property name="contentType">html</property>
                 </text-data>
                 <image name="project_image" id="483">
+                    <property name="marginTop">8pt</property>
                     <property name="display">block</property>
                     <property name="pageBreakBefore">avoid</property>
-                    <property name="height">43.65625mm</property>
-                    <property name="width">177.27083333333331mm</property>
+                    <property name="height">100%</property>
+                    <property name="width">100%</property>
                     <property name="dataSet">Theme</property>
                     <list-property name="paramBindings">
                         <structure>
@@ -19851,15 +19781,18 @@ from rsr_transaction
                     <expression name="uri" type="javascript">"http://rsr.akvo.org/media/"+row["current_image"]</expression>
                 </image>
                 <label id="1167">
-                    <property name="fontSize">14pt</property>
+                    <property name="style">H1</property>
+                    <property name="fontSize">18pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">0pt</property>
+                    <property name="textAlign">center</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Basic information</text-property>
                 </label>
                 <grid id="565">
-                    <property name="backgroundColor">#C9CEEB</property>
+                    <property name="backgroundColor">#FFFFFF</property>
+                    <property name="fontFamily">"Arial"</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">14pt</property>
                     <property name="pageBreakAfter">avoid</property>
@@ -19871,34 +19804,6 @@ from rsr_transaction
                     <column id="567">
                         <property name="width">81.22708333333334mm</property>
                     </column>
-                    <row id="931">
-                        <cell id="932">
-                            <property name="paddingTop">8pt</property>
-                            <property name="paddingLeft">8pt</property>
-                            <property name="paddingBottom">8pt</property>
-                            <property name="paddingRight">8pt</property>
-                        </cell>
-                        <cell id="933">
-                            <property name="paddingTop">8pt</property>
-                            <property name="paddingLeft">8pt</property>
-                            <property name="paddingBottom">8pt</property>
-                            <property name="paddingRight">8pt</property>
-                        </cell>
-                    </row>
-                    <row id="928">
-                        <cell id="929">
-                            <property name="paddingTop">8pt</property>
-                            <property name="paddingLeft">8pt</property>
-                            <property name="paddingBottom">8pt</property>
-                            <property name="paddingRight">8pt</property>
-                        </cell>
-                        <cell id="930">
-                            <property name="paddingTop">8pt</property>
-                            <property name="paddingLeft">8pt</property>
-                            <property name="paddingBottom">8pt</property>
-                            <property name="paddingRight">8pt</property>
-                        </cell>
-                    </row>
                     <row id="569">
                         <cell id="570">
                             <property name="paddingTop">8pt</property>
@@ -20042,16 +19947,35 @@ from rsr_transaction
                     </row>
                 </grid>
                 <label id="676">
-                    <property name="fontSize">14pt</property>
+                    <property name="style">H1</property>
+                    <property name="fontSize">18pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="marginTop">14pt</property>
                     <property name="marginBottom">0pt</property>
+                    <property name="textAlign">center</property>
                     <property name="pageBreakAfter">avoid</property>
                     <text-property name="text">Objective</text-property>
                 </label>
                 <data id="603">
+                    <property name="style">text1</property>
                     <property name="resultSetColumn">goals_overview</property>
                 </data>
+                <label id="151">
+                    <property name="style">H1</property>
+                    <property name="fontSize">18pt</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">avoid</property>
+                    <text-property name="text">Main results</text-property>
+                </label>
                 <table name="project_results_table" id="13">
                     <property name="borderBottomStyle">none</property>
                     <property name="borderLeftStyle">none</property>
@@ -20206,22 +20130,11 @@ null</expression>
                                 <property name="colSpan">2</property>
                                 <property name="rowSpan">1</property>
                                 <property name="textAlign">left</property>
-                                <label id="151">
-                                    <property name="fontSize">14pt</property>
-                                    <property name="fontWeight">bold</property>
-                                    <property name="paddingTop">0pt</property>
-                                    <property name="paddingLeft">0pt</property>
-                                    <property name="paddingBottom">0pt</property>
-                                    <property name="paddingRight">0pt</property>
-                                    <property name="textAlign">left</property>
-                                    <property name="display">block</property>
-                                    <property name="pageBreakAfter">avoid</property>
-                                    <text-property name="text">Main results</text-property>
-                                </label>
                             </cell>
                             <cell id="160">
                                 <text-data id="217">
                                     <property name="textAlign">left</property>
+                                    <property name="display">none</property>
                                     <list-property name="visibility">
                                         <structure>
                                             <property name="format">all</property>
@@ -20247,10 +20160,11 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="colSpan">4</property>
                                     <property name="rowSpan">1</property>
                                     <text-data id="159">
+                                        <property name="fontFamily">"Arial"</property>
                                         <property name="fontSize">14pt</property>
                                         <property name="fontWeight">bold</property>
                                         <property name="color">#6D8FAF</property>
-                                        <property name="paddingTop">8pt</property>
+                                        <property name="paddingTop">0pt</property>
                                         <property name="paddingLeft">0pt</property>
                                         <property name="paddingBottom">1pt</property>
                                         <property name="paddingRight">8pt</property>
@@ -20259,6 +20173,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="contentType">html</property>
                                     </text-data>
                                     <data id="145">
+                                        <property name="style">text1</property>
                                         <property name="fontSize">10pt</property>
                                         <property name="paddingLeft">0pt</property>
                                         <property name="paddingBottom">0pt</property>
@@ -20335,7 +20250,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="color">white</property>
                                                     <property name="marginTop">0px</property>
-                                                    <property name="paddingTop">7px</property>
+                                                    <property name="paddingTop">0px</property>
                                                     <property name="paddingLeft">7px</property>
                                                     <property name="paddingBottom">7px</property>
                                                     <property name="paddingRight">7px</property>
@@ -21222,8 +21137,8 @@ Math.min(row["progress_pct"],100)&#13;
             </footer>
         </list>
         <label name="mainres_label" id="944">
-            <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="style">H1</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -21256,8 +21171,8 @@ Math.min(row["progress_pct"],100)&#13;
             <property name="contentType">html</property>
         </text-data>
         <label name="core_ind_label" id="1064">
-            <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="style">H1</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -22422,8 +22337,8 @@ Math.min(row["progress_pct"],100)&#13;
             </footer>
         </table>
         <label name="chall_label" id="1049">
-            <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="style">H1</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -22456,8 +22371,8 @@ Math.min(row["progress_pct"],100)&#13;
             <property name="contentType">html</property>
         </text-data>
         <label name="sust_label" id="946">
-            <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="style">H1</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -22491,7 +22406,7 @@ Math.min(row["progress_pct"],100)&#13;
         </text-data>
         <label name="rec_label1" id="1052">
             <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -22525,7 +22440,7 @@ Math.min(row["progress_pct"],100)&#13;
         </text-data>
         <label name="stories_label" id="950">
             <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -22685,7 +22600,7 @@ Math.min(row["progress_pct"],100)&#13;
         </list>
         <label name="rec_label" id="948">
             <property name="style">H2</property>
-            <property name="backgroundColor">#C9CEEB</property>
+            <property name="backgroundColor">#24335A</property>
             <property name="fontFamily">"Arial"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
