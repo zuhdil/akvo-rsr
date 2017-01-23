@@ -52,6 +52,42 @@
             <property name="name">rowFetchSize</property>
             <property name="id">224</property>
         </structure>
+        <structure>
+            <property name="name">odaDriverClass</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">odaURL</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">odaUser</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">odaAutoCommit</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">odaIsolationMode</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">odaPassword</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">odaJndiName</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileName</property>
+            <property name="id">122</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileStorePath</property>
+            <property name="id">122</property>
+        </structure>
     </list-property>
     <property name="units">mm</property>
     <property name="iconFile">/templates/grouped_listing.gif</property>
@@ -121,7 +157,7 @@
             <property name="odaDriverClass">org.postgresql.Driver</property>
             <property name="odaURL">jdbc:postgresql://localhost:1234/rsr</property>
             <property name="odaUser">rsr_readonly</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">c2VjcmV0</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cmVtb25zdHJhdGluZ3JvZGVudA==</encrypted-property>
         </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="RSR-live" id="212">
             <list-property name="privateDriverProperties">
@@ -18618,6 +18654,67 @@ from rsr_transaction
  where
   transaction_type = '3' and project_id=?]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="conveners_funding" id="1688">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">funding_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">funding_amount</text-property>
+                    <text-property name="heading">funding_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">organisation_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">organisation_id</text-property>
+                    <text-property name="heading">organisation_id</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">RSR-live</property>
+            <xml-property name="queryText"><![CDATA[select rsr_partnership.funding_amount, rsr_partnership.organisation_id
+FROM rsr_partnership
+
+  LEFT JOIN rsr_project  ON rsr_project.id = rsr_partnership.project_id
+
+WHERE rsr_project.id = '5524'
+
+-- GS: added 3 partners so far. 
+AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>funding_amount</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>funding_amount</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>funding_amount</design:label>
+            <design:formattingHints>
+              <design:displaySize>16</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="38">
@@ -19274,7 +19371,47 @@ from rsr_transaction
                     <property name="paddingLeft">8pt</property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
-                    <table id="995">
+                    <table name="conveners_funding" id="1702">
+                        <property name="width">111.65416666666665mm</property>
+                        <property name="dataSet">conveners_funding</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">funding_amount</property>
+                                <text-property name="displayName">funding_amount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["funding_amount"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">organisation_id</property>
+                                <text-property name="displayName">organisation_id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["organisation_id"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <column id="1708">
+                            <property name="width">44.45mm</property>
+                        </column>
+                        <column id="1709">
+                            <property name="width">67.20416666666667mm</property>
+                        </column>
+                        <detail>
+                            <row id="1703">
+                                <property name="height">7.14375mm</property>
+                                <cell id="1704">
+                                    <data id="1705">
+                                        <property name="resultSetColumn">name</property>
+                                    </data>
+                                </cell>
+                                <cell id="1706">
+                                    <data id="1707">
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">funding_amount</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                    <table name="funders_table" id="995">
                         <property name="width">111.65416666666665mm</property>
                         <property name="dataSet">Funding_partners</property>
                         <list-property name="boundDataColumns">
