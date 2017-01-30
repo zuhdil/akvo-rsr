@@ -282,6 +282,12 @@
                     <text-property name="displayName">period_end</text-property>
                     <text-property name="heading">period_end</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">status</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">status</text-property>
+                    <text-property name="heading">status</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -377,6 +383,11 @@
                         <property name="position">16</property>
                         <property name="name">period_end</property>
                         <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">status</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -494,6 +505,13 @@
                     <property name="dataType">date</property>
                     <property name="nativeDataType">91</property>
                 </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">status</property>
+                    <property name="nativeName">status</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select rsr_result.title,
  rsr_result.id as result_pk,
@@ -510,10 +528,12 @@
  rsr_indicatorperiod.target_value,
  rsr_indicatorperiod.target_comment,
  rsr_indicatorperiod.period_start,
- rsr_indicatorperiod.period_end
+ rsr_indicatorperiod.period_end,
+ rsr_indicatorperioddata.status
 from rsr_result
 left join rsr_indicator on result_id=rsr_result.id
 left join rsr_indicatorperiod on indicator_id=rsr_indicator.id
+left join rsr_indicatorperioddata on rsr_indicatorperioddata.period_id=public.rsr_indicatorperiod.id
 where rsr_result.project_id = ?
 order by result_order, result_pk, indicator_order, indicator_pk, rsr_indicatorperiod.period_start]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
