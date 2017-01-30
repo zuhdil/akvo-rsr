@@ -177,9 +177,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:1235/rsr</property>
-            <property name="odaUser">rsr</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">c2VjcmV0</encrypted-property>
+            <property name="odaURL">jdbc:postgresql://localhost:1234/rsr</property>
+            <property name="odaUser">rsr_readonly</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cmVtb25zdHJhdGluZ3JvZGVudA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -18654,34 +18654,41 @@ from rsr_transaction
  where
   transaction_type = '3' and project_id=?]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="conveners_funding" id="1688">
-            <property name="nullsOrdering">nulls lowest</property>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="conveners_sum" id="1710">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">funding_amount</property>
+                    <property name="columnName">sum</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">funding_amount</text-property>
-                    <text-property name="heading">funding_amount</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">organisation_id</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">organisation_id</text-property>
-                    <text-property name="heading">organisation_id</text-property>
+                    <text-property name="displayName">sum</text-property>
+                    <text-property name="heading">sum</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
-            <structure name="cachedMetaData"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">sum</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">RSR-live</property>
-            <xml-property name="queryText"><![CDATA[select rsr_partnership.funding_amount, rsr_partnership.organisation_id
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">sum</property>
+                    <property name="nativeName">sum</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select sum(rsr_partnership.funding_amount)
 FROM rsr_partnership
 
   LEFT JOIN rsr_project  ON rsr_project.id = rsr_partnership.project_id
 
-WHERE rsr_project.id = '5524'
-
--- GS: added 3 partners so far. 
-AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
+WHERE rsr_project.id = '5562']]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -18792,7 +18799,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
         </style>
         <style name="H2" id="936">
             <property name="backgroundColor">#C9CEEB</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontSize">18pt</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -18803,7 +18810,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
         </style>
         <style name="H1" id="937">
             <property name="backgroundColor">#23325B</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontSize">18pt</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
@@ -18820,7 +18827,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
             <property name="paddingBottom">8pt</property>
         </style>
         <style name="Labels_tables" id="1181">
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
         </style>
     </styles>
     <page-setup>
@@ -18835,7 +18842,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
         <label name="initiative_label" id="347">
             <property name="style">H1</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">80pt</property>
             <property name="marginBottom">0pt</property>
@@ -18853,7 +18860,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
         </label>
         <text-data name="reporting_period" id="938">
             <property name="style">H2</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontSize">18pt</property>
             <property name="marginTop">8pt</property>
             <property name="paddingTop">8pt</property>
@@ -18912,7 +18919,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
         <label name="presented_label" id="926">
             <property name="style">H2</property>
             <property name="backgroundColor">#C9CEEB</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -18930,7 +18937,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
         <label name="basic_label" id="941">
             <property name="style">H1</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -18945,7 +18952,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
             <structure name="toc">
                 <expression name="expressionValue" type="javascript">"Basic information"</expression>
             </structure>
-            <text-property name="text">BASIC INFORMATION</text-property>
+            <text-property name="text">Información General </text-property>
         </label>
         <grid name="basic_grid" id="953">
             <property name="backgroundColor">#FFFFFF</property>
@@ -19232,7 +19239,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="style">Labels_tables</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Name of the project</text-property>
+                        <text-property name="text">Nombre</text-property>
                     </label>
                 </cell>
                 <cell id="965">
@@ -19261,7 +19268,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Year of approval</text-property>
+                        <text-property name="text">Año de aprobación</text-property>
                     </label>
                 </cell>
                 <cell id="970">
@@ -19286,7 +19293,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Year of completion</text-property>
+                        <text-property name="text">Año de finalización</text-property>
                     </label>
                 </cell>
                 <cell id="975">
@@ -19311,7 +19318,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Objective of the initialtive</text-property>
+                        <text-property name="text">Objetivo</text-property>
                     </label>
                 </cell>
                 <cell id="1043">
@@ -19337,7 +19344,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Components of the initialtive</text-property>
+                        <text-property name="text">Componentes</text-property>
                     </label>
                 </cell>
                 <cell id="1047">
@@ -19363,7 +19370,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Financing of the intiative</text-property>
+                        <text-property name="text">Financiamiento</text-property>
                     </label>
                 </cell>
                 <cell id="994">
@@ -19373,19 +19380,20 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                     <property name="paddingRight">8pt</property>
                     <table name="conveners_funding" id="1702">
                         <property name="width">111.65416666666665mm</property>
-                        <property name="dataSet">conveners_funding</property>
+                        <property name="dataSet">conveners_sum</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">funding_amount</property>
-                                <text-property name="displayName">funding_amount</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["funding_amount"]</expression>
+                                <property name="name">sum</property>
+                                <text-property name="displayName">sum</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">organisation_id</property>
-                                <text-property name="displayName">organisation_id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["organisation_id"]</expression>
-                                <property name="dataType">integer</property>
+                                <property name="name">Column Binding</property>
+                                <text-property name="displayName">Sum</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <column id="1708">
@@ -19398,54 +19406,17 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <row id="1703">
                                 <property name="height">7.14375mm</property>
                                 <cell id="1704">
-                                    <data id="1705">
-                                        <property name="resultSetColumn">name</property>
-                                    </data>
+                                    <label id="1711">
+                                        <text-property name="text">Conveners</text-property>
+                                    </label>
                                 </cell>
                                 <cell id="1706">
-                                    <data id="1707">
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">funding_amount</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                    </table>
-                    <table name="funders_table" id="995">
-                        <property name="width">111.65416666666665mm</property>
-                        <property name="dataSet">Funding_partners</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">name</property>
-                                <text-property name="displayName">name</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">funding_amount</property>
-                                <text-property name="displayName">funding_amount</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["funding_amount"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                        </list-property>
-                        <column id="1003">
-                            <property name="width">44.45mm</property>
-                        </column>
-                        <column id="1155">
-                            <property name="width">67.20416666666667mm</property>
-                        </column>
-                        <detail>
-                            <row id="996">
-                                <property name="height">7.14375mm</property>
-                                <cell id="997">
-                                    <data id="1152">
-                                        <property name="resultSetColumn">name</property>
-                                    </data>
-                                </cell>
-                                <cell id="1154">
-                                    <data id="1156">
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">funding_amount</property>
+                                    <data id="1713">
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$###0.0000{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="resultSetColumn">Column Binding</property>
                                     </data>
                                 </cell>
                             </row>
@@ -19463,7 +19434,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                         <property name="style">Labels_tables</property>
                         <property name="fontFamily">"Arial Narrow"</property>
                         <property name="fontWeight">bold</property>
-                        <text-property name="text">Disbursement of the initiative</text-property>
+                        <text-property name="text">Desembolsos</text-property>
                     </label>
                 </cell>
                 <cell id="1010">
@@ -19987,6 +19958,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <label id="581">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="marginLeft">0pt</property>
                                 <text-property name="text">Name</text-property>
@@ -19998,6 +19970,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <text-data id="685">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <expression name="bookmark" type="javascript">row["id"]</expression>
                                 <structure name="toc">
                                     <expression name="expressionValue" type="javascript">row["title"]</expression>
@@ -20014,6 +19987,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <label id="593">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="marginLeft">0pt</property>
                                 <text-property name="text">Year of approval</text-property>
@@ -20025,6 +19999,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <text-data id="602">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <expression name="valueExpr">(row["date_start_planned"] ? Formatter.format(row["date_start_planned"], "yyyy") : "")</expression>
                                 <property name="contentType">html</property>
                             </text-data>
@@ -20037,6 +20012,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <label id="671">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="marginLeft">0pt</property>
                                 <text-property name="text">Year of completion</text-property>
@@ -20048,6 +20024,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <text-data id="673">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <expression name="valueExpr">(row["date_start_actual"] ? Formatter.format(row["date_start_actual"], "yyyy") : "")</expression>
                                 <property name="contentType">html</property>
                             </text-data>
@@ -20060,6 +20037,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <label id="624">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="marginLeft">0pt</property>
                                 <text-property name="text">Total approved amount</text-property>
@@ -20071,6 +20049,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <text-data id="1178">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <expression name="valueExpr">row["budget"] + " " + row["currency"]</expression>
                                 <property name="contentType">html</property>
                             </text-data>
@@ -20083,6 +20062,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <label id="795">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontWeight">bold</property>
                                 <text-property name="text">% Disbursement</text-property>
                             </label>
@@ -20093,6 +20073,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingBottom">8pt</property>
                             <property name="paddingRight">8pt</property>
                             <text-data id="1179">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="dataSet">Sum_disbursements_for_proj</property>
                                 <list-property name="paramBindings">
                                     <structure>
@@ -20135,6 +20116,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                             <property name="paddingRight">8pt</property>
                             <label id="640">
                                 <property name="style">text1</property>
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontSize">11pt</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="textUnderline">underline</property>
@@ -20165,6 +20147,7 @@ AND rsr_partnership.organisation_id IN (3860,3861,3862)]]></xml-property>
                 </label>
                 <data id="603">
                     <property name="style">text1</property>
+                    <property name="fontFamily">"Brandon Grotesque"</property>
                     <property name="resultSetColumn">goals_overview</property>
                 </data>
                 <label name="Label - Main results" id="151">
@@ -20370,6 +20353,7 @@ null</expression>
                                 <property name="rowSpan">1</property>
                                 <label id="1492">
                                     <property name="style">Sectionheader</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">18pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="paddingTop">8pt</property>
@@ -20429,7 +20413,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="colSpan">4</property>
                                     <property name="rowSpan">1</property>
                                     <text-data id="1499">
-                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontFamily">"Brandon Grotesque"</property>
                                         <property name="fontSize">14pt</property>
                                         <property name="fontWeight">bold</property>
                                         <property name="color">#6D8FAF</property>
@@ -20441,6 +20425,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="contentType">html</property>
                                     </text-data>
                                     <data id="1500">
+                                        <property name="fontFamily">"Brandon Grotesque"</property>
                                         <property name="fontSize">14pt</property>
                                         <property name="paddingLeft">0pt</property>
                                         <property name="paddingBottom">8pt</property>
@@ -20519,6 +20504,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                 <property name="paddingRight">0pt</property>
                                                 <text-data id="1516">
                                                     <property name="backgroundColor">#D0DEE7</property>
+                                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                                     <property name="fontSize">12pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="color">white</property>
@@ -20536,7 +20522,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                 <property name="rowSpan">1</property>
                                                 <property name="paddingBottom">20pt</property>
                                                 <text-data id="1518">
-                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                                     <property name="fontSize">12pt</property>
                                                     <property name="color">#000000</property>
                                                     <property name="paddingTop">5pt</property>
@@ -20559,7 +20545,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <cell id="1520"/>
                                             <cell id="1521">
                                                 <label id="1522">
-                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                                     <property name="fontSize">12pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
@@ -20573,7 +20559,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <cell id="1523">
                                                 <property name="color">#F0F0F0</property>
                                                 <label id="1524">
-                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                                     <property name="fontSize">12pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
@@ -20585,7 +20571,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                             </cell>
                                             <cell id="1525">
                                                 <label id="1526">
-                                                    <property name="fontFamily">"Arial"</property>
+                                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                                     <property name="fontSize">12pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
@@ -20644,7 +20630,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                 <property name="textAlign">center</property>
                                 <property name="verticalAlign">middle</property>
                                 <text-data name="percentage2" id="1529">
-                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">10pt</property>
                                     <property name="fontWeight">normal</property>
                                     <property name="color">#34B573</property>
@@ -21319,7 +21305,7 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="paddingRight">8pt</property>
                                 <property name="verticalAlign">middle</property>
                                 <data id="1532">
-                                    <property name="fontFamily">"Helvetica Neue"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
@@ -21338,7 +21324,7 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="resultSetColumn">actual_value</property>
                                 </data>
                                 <data id="1533">
-                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
@@ -21389,7 +21375,7 @@ Math.min(row["progress_pct"],100)&#13;
                             <cell id="1534">
                                 <property name="verticalAlign">middle</property>
                                 <data id="1535">
-                                    <property name="fontFamily">"Helvetica Neue"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
@@ -21405,7 +21391,7 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="resultSetColumn">target_value</property>
                                 </data>
                                 <data id="1536">
-                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
@@ -21428,7 +21414,7 @@ Math.min(row["progress_pct"],100)&#13;
                             <cell id="1537">
                                 <property name="verticalAlign">middle</property>
                                 <data id="1538">
-                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="textAlign">left</property>
@@ -21454,7 +21440,7 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="paddingRight">8pt</property>
                                 <text-data id="223">
                                     <property name="style">progress_high</property>
-                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontFamily">"Brandon Grotesque"</property>
                                     <property name="fontSize">12pt</property>
                                     <property name="fontWeight">normal</property>
                                     <property name="color">black</property>
@@ -21521,7 +21507,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="mainres_label" id="944">
             <property name="style">H1</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -21555,7 +21541,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="core_ind_label" id="1064">
             <property name="style">H1</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -21759,6 +21745,7 @@ null</expression>
                         <property name="rowSpan">1</property>
                         <label id="1621">
                             <property name="style">Sectionheader</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">18pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="paddingTop">8pt</property>
@@ -21818,7 +21805,7 @@ reportContext.getGlobalVariable('debug')</expression>
                             <property name="colSpan">4</property>
                             <property name="rowSpan">1</property>
                             <text-data id="1628">
-                                <property name="fontFamily">"Arial"</property>
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontSize">14pt</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="color">#6D8FAF</property>
@@ -21830,6 +21817,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                 <property name="contentType">html</property>
                             </text-data>
                             <data id="1629">
+                                <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontSize">14pt</property>
                                 <property name="paddingLeft">0pt</property>
                                 <property name="paddingBottom">8pt</property>
@@ -21908,6 +21896,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="paddingRight">0pt</property>
                                         <text-data id="1645">
                                             <property name="backgroundColor">#D0DEE7</property>
+                                            <property name="fontFamily">"Brandon Grotesque"</property>
                                             <property name="fontSize">12pt</property>
                                             <property name="fontWeight">bold</property>
                                             <property name="color">white</property>
@@ -21925,7 +21914,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="rowSpan">1</property>
                                         <property name="paddingBottom">20pt</property>
                                         <text-data id="1647">
-                                            <property name="fontFamily">"Arial"</property>
+                                            <property name="fontFamily">"Brandon Grotesque"</property>
                                             <property name="fontSize">12pt</property>
                                             <property name="color">#000000</property>
                                             <property name="paddingTop">5pt</property>
@@ -21948,7 +21937,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <cell id="1651"/>
                                     <cell id="1652">
                                         <label id="1653">
-                                            <property name="fontFamily">"Arial"</property>
+                                            <property name="fontFamily">"Brandon Grotesque"</property>
                                             <property name="fontSize">12pt</property>
                                             <property name="fontWeight">bold</property>
                                             <property name="fontStyle">italic</property>
@@ -21962,7 +21951,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <cell id="1654">
                                         <property name="color">#F0F0F0</property>
                                         <label id="1655">
-                                            <property name="fontFamily">"Arial"</property>
+                                            <property name="fontFamily">"Brandon Grotesque"</property>
                                             <property name="fontSize">12pt</property>
                                             <property name="fontWeight">bold</property>
                                             <property name="fontStyle">italic</property>
@@ -21974,7 +21963,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     </cell>
                                     <cell id="1656">
                                         <label id="1657">
-                                            <property name="fontFamily">"Arial"</property>
+                                            <property name="fontFamily">"Brandon Grotesque"</property>
                                             <property name="fontSize">12pt</property>
                                             <property name="fontWeight">bold</property>
                                             <property name="fontStyle">italic</property>
@@ -22033,7 +22022,7 @@ reportContext.getGlobalVariable('debug')</expression>
                         <property name="textAlign">center</property>
                         <property name="verticalAlign">middle</property>
                         <text-data name="percentage21" id="1663">
-                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">10pt</property>
                             <property name="fontWeight">normal</property>
                             <property name="color">#34B573</property>
@@ -22708,7 +22697,7 @@ Math.min(row["progress_pct"],100)&#13;
                         <property name="paddingRight">8pt</property>
                         <property name="verticalAlign">middle</property>
                         <data id="1666">
-                            <property name="fontFamily">"Helvetica Neue"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
@@ -22727,7 +22716,7 @@ Math.min(row["progress_pct"],100)&#13;
                             <property name="resultSetColumn">actual_value</property>
                         </data>
                         <data id="1667">
-                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
@@ -22778,7 +22767,7 @@ Math.min(row["progress_pct"],100)&#13;
                     <cell id="1668">
                         <property name="verticalAlign">middle</property>
                         <data id="1669">
-                            <property name="fontFamily">"Helvetica Neue"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
@@ -22794,7 +22783,7 @@ Math.min(row["progress_pct"],100)&#13;
                             <property name="resultSetColumn">target_value</property>
                         </data>
                         <data id="1670">
-                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="marginTop">4pt</property>
@@ -22817,7 +22806,7 @@ Math.min(row["progress_pct"],100)&#13;
                     <cell id="1671">
                         <property name="verticalAlign">middle</property>
                         <data id="1672">
-                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="textAlign">left</property>
@@ -22843,7 +22832,7 @@ Math.min(row["progress_pct"],100)&#13;
                         <property name="paddingRight">8pt</property>
                         <text-data id="1675">
                             <property name="style">progress_high</property>
-                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontFamily">"Brandon Grotesque"</property>
                             <property name="fontSize">12pt</property>
                             <property name="fontWeight">normal</property>
                             <property name="color">black</property>
@@ -22897,7 +22886,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="chall_label" id="1049">
             <property name="style">H1</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -22916,6 +22905,7 @@ Math.min(row["progress_pct"],100)&#13;
         </label>
         <text-data id="1050">
             <property name="style">text1</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="dataSet">Framework_challenges</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -22931,7 +22921,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="sust_label" id="946">
             <property name="style">H1</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -22950,6 +22940,7 @@ Math.min(row["progress_pct"],100)&#13;
         </label>
         <text-data id="947">
             <property name="style">text1</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="dataSet">Framework_w_custom_abc</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -22965,7 +22956,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="rec_label1" id="1052">
             <property name="style">H2</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -22984,6 +22975,7 @@ Math.min(row["progress_pct"],100)&#13;
         </label>
         <text-data id="949">
             <property name="style">text1</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="dataSet">Framework_lessons</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -22999,7 +22991,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="stories_label" id="950">
             <property name="style">H2</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -23158,7 +23150,7 @@ Math.min(row["progress_pct"],100)&#13;
             <detail>
                 <text-data id="1055">
                     <property name="style">text1</property>
-                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontFamily">"Brandon Grotesque"</property>
                     <property name="fontSize">14pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="paddingBottom">4pt</property>
@@ -23168,12 +23160,14 @@ Math.min(row["progress_pct"],100)&#13;
                 </text-data>
                 <text-data id="1056">
                     <property name="style">text1</property>
+                    <property name="fontFamily">"Brandon Grotesque"</property>
                     <property name="paddingTop">0pt</property>
                     <expression name="valueExpr">"Published at: " + row["created_at"]</expression>
                     <property name="contentType">html</property>
                 </text-data>
                 <text-data id="1685">
                     <property name="style">text1</property>
+                    <property name="fontFamily">"Brandon Grotesque"</property>
                     <expression name="valueExpr">row["text"]</expression>
                     <property name="contentType">html</property>
                 </text-data>
@@ -23188,7 +23182,7 @@ Math.min(row["progress_pct"],100)&#13;
         <label name="rec_label" id="948">
             <property name="style">H2</property>
             <property name="backgroundColor">#24335A</property>
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="fontWeight">bold</property>
             <property name="color">#FFFFFF</property>
             <property name="marginTop">20px</property>
@@ -23207,6 +23201,7 @@ Math.min(row["progress_pct"],100)&#13;
         </label>
         <text-data id="951">
             <property name="style">text1</property>
+            <property name="fontFamily">"Brandon Grotesque"</property>
             <property name="dataSet">Framework_looking_fwd</property>
             <list-property name="boundDataColumns">
                 <structure>
