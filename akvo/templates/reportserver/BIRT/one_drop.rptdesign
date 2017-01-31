@@ -52,42 +52,6 @@
             <property name="name">rowFetchSize</property>
             <property name="id">224</property>
         </structure>
-        <structure>
-            <property name="name">odaDriverClass</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">odaURL</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">odaUser</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">odaAutoCommit</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">odaIsolationMode</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">odaPassword</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">odaJndiName</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileName</property>
-            <property name="id">122</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileStorePath</property>
-            <property name="id">122</property>
-        </structure>
     </list-property>
     <property name="units">mm</property>
     <property name="iconFile">/templates/grouped_listing.gif</property>
@@ -282,12 +246,6 @@
                     <text-property name="displayName">period_end</text-property>
                     <text-property name="heading">period_end</text-property>
                 </structure>
-                <structure>
-                    <property name="columnName">status</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">status</text-property>
-                    <text-property name="heading">status</text-property>
-                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -383,11 +341,6 @@
                         <property name="position">16</property>
                         <property name="name">period_end</property>
                         <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">17</property>
-                        <property name="name">status</property>
-                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -505,13 +458,6 @@
                     <property name="dataType">date</property>
                     <property name="nativeDataType">91</property>
                 </structure>
-                <structure>
-                    <property name="position">17</property>
-                    <property name="name">status</property>
-                    <property name="nativeName">status</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select rsr_result.title,
  rsr_result.id as result_pk,
@@ -528,12 +474,10 @@
  rsr_indicatorperiod.target_value,
  rsr_indicatorperiod.target_comment,
  rsr_indicatorperiod.period_start,
- rsr_indicatorperiod.period_end,
- rsr_indicatorperioddata.status
+ rsr_indicatorperiod.period_end
 from rsr_result
 left join rsr_indicator on result_id=rsr_result.id
 left join rsr_indicatorperiod on indicator_id=rsr_indicator.id
-left join rsr_indicatorperioddata on rsr_indicatorperioddata.period_id=public.rsr_indicatorperiod.id
 where rsr_result.project_id = ?
 order by result_order, result_pk, indicator_order, indicator_pk, rsr_indicatorperiod.period_start]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -6289,6 +6233,18 @@ where rsr_project.id=?]]></xml-property>
                     <text-property name="heading">donations</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">date_planned_char</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_planned_char</text-property>
+                    <text-property name="heading">date_planned_char</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date_end_char</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_end_char</text-property>
+                    <text-property name="heading">date_end_char</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">custom_abc</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">custom_abc</text-property>
@@ -6547,6 +6503,16 @@ where rsr_project.id=?]]></xml-property>
                     </structure>
                     <structure>
                         <property name="position">48</property>
+                        <property name="name">date_planned_char</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">49</property>
+                        <property name="name">date_end_char</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">50</property>
                         <property name="name">custom_abc</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -6885,6 +6851,20 @@ where rsr_project.id=?]]></xml-property>
                 </structure>
                 <structure>
                     <property name="position">48</property>
+                    <property name="name">date_planned_char</property>
+                    <property name="nativeName">date_planned_char</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">49</property>
+                    <property name="name">date_end_char</property>
+                    <property name="nativeName">date_end_char</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">50</property>
                     <property name="name">custom_abc</property>
                     <property name="nativeName">custom_abc</property>
                     <property name="dataType">string</property>
@@ -6892,6 +6872,8 @@ where rsr_project.id=?]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select rsr_project.*,
+to_char(rsr_project.date_start_planned, 'dd-mm-YYYY') as date_planned_char,
+to_char(rsr_project.date_end_planned, 'dd-mm-YYYY') as date_end_char,
 (select rsr_projectcustomfield.value
   from rsr_projectcustomfield
   where rsr_projectcustomfield.project_id = rsr_project.id and rsr_projectcustomfield.name = 'Access. Behavior. Capital.'
@@ -18683,7 +18665,6 @@ from rsr_transaction
                     <text-property name="heading">sum</text-property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -18733,6 +18714,68 @@ WHERE rsr_project.id = '5562']]></xml-property>
             <design:label>funding_amount</design:label>
             <design:formattingHints>
               <design:displaySize>16</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Date start planned" id="1715">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">date_planned</property>
+                    <text-property name="displayName">date_planned</text-property>
+                    <text-property name="heading">date_planned</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">date_planned</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">RSR readonly</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">date_planned</property>
+                    <property name="nativeName">date_planned</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT to_char(rsr_project.date_start_planned, 'dd-mm-YYYY') as date_planned
+from rsr_project]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_planned</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_planned</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_planned</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
             </design:formattingHints>
           </design:usageHints>
         </design:resultColumnDefinitions>
@@ -18889,19 +18932,19 @@ WHERE rsr_project.id = '5562']]></xml-property>
             <property name="dataSet">Framework_w_custom_abc</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">date_start_planned</property>
-                    <text-property name="displayName">date_start_planned</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["date_start_planned"]</expression>
-                    <property name="dataType">date</property>
+                    <property name="name">date_planned_char</property>
+                    <text-property name="displayName">date_planned_char</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["date_planned_char"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">date_end_planned</property>
-                    <text-property name="displayName">date_end_planned</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["date_end_planned"]</expression>
-                    <property name="dataType">date</property>
+                    <property name="name">date_end_char</property>
+                    <text-property name="displayName">date_end_char</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["date_end_char"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
-            <expression name="valueExpr">row["date_start_planned"] + " / " + row["date_end_planned"]</expression>
+            <expression name="valueExpr">row["date_planned_char"] + " / " + row["date_end_char"]</expression>
             <property name="contentType">html</property>
         </text-data>
         <image name="framework_image" id="368">
@@ -18952,7 +18995,7 @@ WHERE rsr_project.id = '5562']]></xml-property>
             <property name="pageBreakAfter">always</property>
             <property name="pageBreakBefore">avoid</property>
             <structure name="toc"/>
-            <text-property name="text">PRESENTED TO ONEDROP, DATE, YEAR</text-property>
+            <text-property name="text"></text-property>
         </label>
         <label name="basic_label" id="941">
             <property name="style">H1</property>
@@ -19259,7 +19302,7 @@ WHERE rsr_project.id = '5562']]></xml-property>
                         <property name="style">Labels_tables</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Nombre</text-property>
+                        <text-property name="text">Nombre de la iniciativa</text-property>
                     </label>
                 </cell>
                 <cell id="965">
@@ -19425,16 +19468,12 @@ WHERE rsr_project.id = '5562']]></xml-property>
                         <detail>
                             <row id="1703">
                                 <property name="height">7.14375mm</property>
-                                <cell id="1704">
-                                    <label id="1711">
-                                        <text-property name="text">Conveners</text-property>
-                                    </label>
-                                </cell>
+                                <cell id="1704"/>
                                 <cell id="1706">
                                     <data id="1713">
                                         <structure name="numberFormat">
                                             <property name="category">Currency</property>
-                                            <property name="pattern">$###0.0000{RoundingMode=HALF_UP}</property>
+                                            <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
                                         </structure>
                                         <property name="resultSetColumn">Column Binding</property>
                                     </data>
@@ -19464,151 +19503,25 @@ WHERE rsr_project.id = '5562']]></xml-property>
                     <property name="paddingRight">8pt</property>
                     <table id="1026">
                         <property name="width">110.41944444444445mm</property>
-                        <property name="dataSet">Disbursement_transactions_for_proj</property>
+                        <property name="dataSet">Sum_disbursements_for_proj</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">id</property>
-                                <text-property name="displayName">id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">project_id</property>
-                                <text-property name="displayName">project_id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["project_id"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">reference</property>
-                                <text-property name="displayName">reference</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["reference"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">aid_type</property>
-                                <text-property name="displayName">aid_type</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["aid_type"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">description</property>
-                                <text-property name="displayName">description</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["description"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">disbursement_channel</property>
-                                <text-property name="displayName">disbursement_channel</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["disbursement_channel"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">finance_type</property>
-                                <text-property name="displayName">finance_type</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["finance_type"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">flow_type</property>
-                                <text-property name="displayName">flow_type</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["flow_type"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">tied_status</property>
-                                <text-property name="displayName">tied_status</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["tied_status"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">transaction_date</property>
-                                <text-property name="displayName">transaction_date</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["transaction_date"]</expression>
-                                <property name="dataType">date</property>
-                            </structure>
-                            <structure>
-                                <property name="name">transaction_type</property>
-                                <text-property name="displayName">transaction_type</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["transaction_type"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">value</property>
-                                <text-property name="displayName">value</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["value"]</expression>
+                                <property name="name">disbursements_count</property>
+                                <text-property name="displayName">disbursements_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["disbursements_count"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">value_date</property>
-                                <text-property name="displayName">value_date</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["value_date"]</expression>
-                                <property name="dataType">date</property>
+                                <property name="name">disbursements_sum</property>
+                                <text-property name="displayName">disbursements_sum</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["disbursements_sum"]</expression>
+                                <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">currency</property>
-                                <text-property name="displayName">currency</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["currency"]</expression>
+                                <property name="name">Column Binding</property>
+                                <expression name="expression" type="javascript">dataSetRow["disbursements_sum"]</expression>
                                 <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">provider_organisation_activity</property>
-                                <text-property name="displayName">provider_organisation_activity</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["provider_organisation_activity"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">receiver_organisation_activity</property>
-                                <text-property name="displayName">receiver_organisation_activity</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["receiver_organisation_activity"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">provider_organisation_id</property>
-                                <text-property name="displayName">provider_organisation_id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["provider_organisation_id"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">receiver_organisation_id</property>
-                                <text-property name="displayName">receiver_organisation_id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["receiver_organisation_id"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">recipient_country</property>
-                                <text-property name="displayName">recipient_country</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["recipient_country"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">recipient_region</property>
-                                <text-property name="displayName">recipient_region</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["recipient_region"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">recipient_region_vocabulary</property>
-                                <text-property name="displayName">recipient_region_vocabulary</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["recipient_region_vocabulary"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">humanitarian</property>
-                                <text-property name="displayName">humanitarian</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["humanitarian"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">recipient_region_vocabulary_uri</property>
-                                <text-property name="displayName">recipient_region_vocabulary_uri</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["recipient_region_vocabulary_uri"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">rec_org_name</property>
-                                <text-property name="displayName">rec_org_name</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["rec_org_name"]</expression>
-                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <column id="1038">
@@ -19622,27 +19535,19 @@ WHERE rsr_project.id = '5562']]></xml-property>
                         </column>
                         <detail>
                             <row id="1027">
-                                <cell id="1028">
-                                    <data id="1158">
-                                        <property name="resultSetColumn">rec_org_name</property>
-                                    </data>
-                                </cell>
+                                <cell id="1028"/>
                                 <cell id="1029">
                                     <data id="1030">
                                         <structure name="numberFormat">
                                             <property name="category">Currency</property>
-                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                            <property name="locale">en_US</property>
                                         </structure>
                                         <property name="textAlign">left</property>
-                                        <property name="resultSetColumn">value</property>
+                                        <property name="resultSetColumn">Column Binding</property>
                                     </data>
                                 </cell>
-                                <cell id="1031">
-                                    <data id="1032">
-                                        <property name="textAlign">left</property>
-                                        <property name="resultSetColumn">currency</property>
-                                    </data>
-                                </cell>
+                                <cell id="1031"/>
                             </row>
                         </detail>
                     </table>
