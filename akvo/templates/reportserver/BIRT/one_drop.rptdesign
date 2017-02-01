@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
     <html-property name="description">Plan Finland MFA reporting</html-property>
     <list-property name="propertyBindings">
         <structure>
@@ -141,9 +141,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:1234/rsr</property>
-            <property name="odaUser">rsr_readonly</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cmVtb25zdHJhdGluZ3JvZGVudA==</encrypted-property>
+            <property name="odaURL">jdbc:postgresql://localhost:1235/rsr</property>
+            <property name="odaUser">rsr</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">VVVaQXR1Z2lPMDFvMDlyM0xaeHE3YXA4dncyOU81bmVqTjJranBuVw==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -20306,7 +20306,7 @@ null</expression>
                                             <expression name="valueExpr" type="javascript">true</expression>
                                         </structure>
                                     </list-property>
-                                    <expression name="valueExpr">var a=1,b=1;&#13;
+                                    <expression name="valueExpr">var a=0,b=0,alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
 reportContext.getGlobalVariable('debug')</expression>
                                     <property name="contentType">html</property>
                                 </text-data>
@@ -20346,7 +20346,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="paddingLeft">0pt</property>
                                         <property name="paddingBottom">1pt</property>
                                         <property name="paddingRight">8pt</property>
-                                        <expression name="valueExpr">b=1, "Result " + a++;</expression>
+                                        <expression name="valueExpr">b=0, a++, "Result " + a;</expression>
                                         <property name="contentType">html</property>
                                     </text-data>
                                     <data id="1500">
@@ -20438,7 +20438,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="paddingBottom">5pt</property>
                                                     <property name="paddingRight">0pt</property>
                                                     <property name="display">block</property>
-                                                    <expression name="valueExpr">"INDICATOR " + b++</expression>
+                                                    <expression name="valueExpr">b++, "INDICATOR " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
@@ -21698,7 +21698,7 @@ null</expression>
                                     <expression name="valueExpr" type="javascript">true</expression>
                                 </structure>
                             </list-property>
-                            <expression name="valueExpr">var a=1,b=1;&#13;
+                            <expression name="valueExpr">var a=0,b=0,alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
 reportContext.getGlobalVariable('debug')</expression>
                             <property name="contentType">html</property>
                         </text-data>
@@ -21738,7 +21738,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                 <property name="paddingLeft">0pt</property>
                                 <property name="paddingBottom">1pt</property>
                                 <property name="paddingRight">8pt</property>
-                                <expression name="valueExpr">b=1, "Result " + a++;</expression>
+                                <expression name="valueExpr">b=0, a++, "Result " + a;</expression>
                                 <property name="contentType">html</property>
                             </text-data>
                             <data id="1629">
@@ -21830,7 +21830,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <property name="paddingBottom">5pt</property>
                                             <property name="paddingRight">0pt</property>
                                             <property name="display">block</property>
-                                            <expression name="valueExpr">"INDICATOR " + b++</expression>
+                                            <expression name="valueExpr">b++, "INDICATOR " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
                                             <property name="contentType">html</property>
                                         </text-data>
                                     </cell>
