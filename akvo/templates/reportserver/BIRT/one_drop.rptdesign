@@ -141,9 +141,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:1235/rsr</property>
-            <property name="odaUser">rsr</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">VVVaQXR1Z2lPMDFvMDlyM0xaeHE3YXA4dncyOU81bmVqTjJranBuVw==</encrypted-property>
+            <property name="odaURL">jdbc:postgresql://localhost:1234/rsr</property>
+            <property name="odaUser">rsr_readonly</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cmVtb25zdHJhdGluZ3JvZGVudA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -20320,6 +20320,7 @@ reportContext.getGlobalVariable('debug')</expression>
                         <structure name="toc">
                             <expression name="expressionValue" type="javascript">row["title"]</expression>
                         </structure>
+                        <property name="repeatHeader">false</property>
                         <list-property name="sort">
                             <structure>
                                 <expression name="key" type="javascript">row["result_sort"]</expression>
@@ -20375,6 +20376,7 @@ reportContext.getGlobalVariable('debug')</expression>
                         <structure name="toc">
                             <expression name="expressionValue" type="javascript">row["indicator_title"]</expression>
                         </structure>
+                        <property name="repeatHeader">false</property>
                         <property name="hideDetail">false</property>
                         <list-property name="sort">
                             <structure>
@@ -21712,6 +21714,7 @@ reportContext.getGlobalVariable('debug')</expression>
                 <structure name="toc">
                     <expression name="expressionValue" type="javascript">row["title"]</expression>
                 </structure>
+                <property name="repeatHeader">false</property>
                 <list-property name="sort">
                     <structure>
                         <expression name="key" type="javascript">row["result_sort"]</expression>
@@ -21767,6 +21770,7 @@ reportContext.getGlobalVariable('debug')</expression>
                 <structure name="toc">
                     <expression name="expressionValue" type="javascript">row["indicator_title"]</expression>
                 </structure>
+                <property name="repeatHeader">false</property>
                 <property name="hideDetail">false</property>
                 <list-property name="sort">
                     <structure>
