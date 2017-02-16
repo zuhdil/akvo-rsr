@@ -20956,7 +20956,52 @@ Math.min(row["progress_pct"],100)&#13;
                     <property name="allowExport">true</property>
                 </structure>
             </list-property>
-            <expression name="valueExpr">row["sustainablity"]</expression>
+            <expression name="valueExpr">function markdown_html(src)
+{
+	var h='';
+
+	function escape(t)
+	{
+		return t;
+	}
+	function inlineEscape(s)
+	{
+		return escape(s)
+			.replace(/!\[([^\]]*)]\(([^(]+)\)/g, '&lt;img alt="$1" src="$2">')
+			.replace(/\[([^\]]+)]\(([^(]+)\)/g, '$1'.link('$2'))
+			.replace(/`([^`]+)`/g, '&lt;code>$1&lt;/code>')
+			.replace(/\*\*([^*]+)\*\*/g, '&lt;strong>$1&lt;/strong>')
+			.replace(/\*([^*]+)\*/g, '&lt;em>$1&lt;/em>');
+	}
+
+	src
+	.replace(/^\s+|\r|\s+$/g, '')
+	.replace(/\t/g, '    ')
+	.split(/\n\n+/)
+	.forEach(function(b, f, R)
+	{
+		f=b[0];
+		R=
+		{
+			'*':[/\n\* /,'&lt;ul>&lt;li>','&lt;/li>&lt;/ul>'],
+			'1':[/\n[1-9]\d*\.? /,'&lt;ol>&lt;li>','&lt;/li>&lt;/ol>'],
+			' ':[/\n    /,'&lt;pre>&lt;code>','&lt;/pre>&lt;/code>','\n'],
+			'>':[/\n> /,'&lt;blockquote>','&lt;/blockquote>','\n']
+		}[f];
+		h+=
+			R?R[1]+('\n'+b)
+				.split(R[0])
+				.slice(1)
+				.map(R[3]?escape:inlineEscape)
+				.join(R[3]||'&lt;/li>\n&lt;li>')+R[2]:
+			f=='#'?'&lt;h'+(f=b.indexOf(' '))+'>'+inlineEscape(b.slice(f+1))+'&lt;/h'+f+'>':
+			f=='&lt;'?b:
+			'&lt;p>'+inlineEscape(b)+'&lt;/p>';
+	});
+	return h;
+};
+
+row["sustainablity"]</expression>
             <property name="contentType">html</property>
         </text-data>
         <label name="chall_label" id="1049">
