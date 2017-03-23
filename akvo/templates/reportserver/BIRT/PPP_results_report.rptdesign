@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -4989,12 +4989,12 @@ null</expression>
                                         <expression name="valueExpr" type="javascript">true</expression>
                                     </structure>
                                 </list-property>
-                                <expression name="valueExpr">var indind=0;</expression>
+                                <expression name="valueExpr">var indind=0, stripe=0;</expression>
                                 <property name="contentType">html</property>
                             </text-data>
                         </header>
                         <detail>
-                            <table id="673">
+                            <table name="summary_results_table" id="673">
                                 <property name="borderTopColor">#E6E6E6</property>
                                 <property name="borderTopStyle">solid</property>
                                 <property name="borderTopWidth">medium</property>
@@ -5116,6 +5116,7 @@ null</expression>
                                     </structure>
                                     <structure>
                                         <property name="name">progress_pct</property>
+                                        <text-property name="displayName">progress_pct</text-property>
                                         <expression name="expression" type="javascript">(row["actual_value"].toLowerCase() == "available" )&#13;
 ?&#13;
 100&#13;
@@ -5145,14 +5146,16 @@ null</expression>
                                     </structure>
                                     <structure>
                                         <property name="name">actual_value_number</property>
+                                        <text-property name="displayName">actual_value_number</text-property>
                                         <expression name="expression" type="javascript">dataSetRow["actual_value"] &amp;&amp; !isNaN(dataSetRow["actual_value"]) ? dataSetRow["actual_value"] : -1</expression>
-                                        <property name="dataType">integer</property>
+                                        <property name="dataType">decimal</property>
                                         <property name="allowExport">true</property>
                                     </structure>
                                     <structure>
                                         <property name="name">target_value_number</property>
+                                        <text-property name="displayName">target_value_number</text-property>
                                         <expression name="expression" type="javascript">dataSetRow["target_value"] &amp;&amp; !isNaN(dataSetRow["target_value"]) ? dataSetRow["target_value"] : -1</expression>
-                                        <property name="dataType">integer</property>
+                                        <property name="dataType">decimal</property>
                                         <property name="allowExport">true</property>
                                     </structure>
                                     <structure>
@@ -5209,7 +5212,8 @@ null</expression>
                                                     <property name="marginTop">4pt</property>
                                                     <property name="paddingTop">1pt</property>
                                                     <property name="paddingBottom">1pt</property>
-                                                    <expression name="valueExpr">row["project_title"].indexOf("PPP Phase 3 ") ==0 ?&#13;
+                                                    <expression name="valueExpr">stripe=0,&#13;
+row["project_title"].indexOf("PPP Phase 3 ") ==0 ?&#13;
 row["project_title"].slice(14)&#13;
 :&#13;
 row["project_title"]</expression>
@@ -5243,7 +5247,7 @@ row["project_title"]</expression>
                                                 <structure>
                                                     <property name="operator">eq</property>
                                                     <property name="backgroundColor">#800080</property>
-                                                    <expression name="testExpr" type="javascript">row[0] % 2  </expression>
+                                                    <expression name="testExpr" type="javascript">stripe % 2  </expression>
                                                     <simple-property-list name="value1">
                                                         <value type="javascript">0</value>
                                                     </simple-property-list>
@@ -5256,7 +5260,7 @@ row["project_title"]</expression>
                                                     <property name="paddingTop">1pt</property>
                                                     <property name="paddingBottom">1pt</property>
                                                     <property name="display">block</property>
-                                                    <expression name="valueExpr">++indind + ". " + row["title"]</expression>
+                                                    <expression name="valueExpr">++stripe, ++indind + ". " + row["title"]</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
@@ -5696,15 +5700,16 @@ reportContext.setGlobalVariable("show_bars",true);
                         </structure>
                         <structure>
                             <property name="name">actual_value_number</property>
+                            <text-property name="displayName">actual_value_number</text-property>
                             <expression name="expression" type="javascript">dataSetRow["actual_value"] &amp;&amp; !isNaN(dataSetRow["actual_value"]) ? dataSetRow["actual_value"] : -1</expression>
-                            <property name="dataType">integer</property>
+                            <property name="dataType">decimal</property>
                             <property name="allowExport">true</property>
                         </structure>
                         <structure>
                             <property name="name">target_value_number</property>
                             <text-property name="displayName">target_value_number</text-property>
                             <expression name="expression" type="javascript">(dataSetRow["target_value"] &amp;&amp; !isNaN(dataSetRow["target_value"])) ? dataSetRow["target_value"] : -1</expression>
-                            <property name="dataType">integer</property>
+                            <property name="dataType">decimal</property>
                             <property name="allowExport">true</property>
                         </structure>
                         <structure>
