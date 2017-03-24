@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -5243,10 +5243,11 @@ row["project_title"]</expression>
                                     <property name="hideDetail">false</property>
                                     <header>
                                         <row id="700">
+                                            <property name="backgroundColor">#E9EEF2</property>
                                             <list-property name="highlightRules">
                                                 <structure>
                                                     <property name="operator">eq</property>
-                                                    <property name="backgroundColor">#800080</property>
+                                                    <property name="backgroundColor">#F4F5F9</property>
                                                     <expression name="testExpr" type="javascript">stripe % 2  </expression>
                                                     <simple-property-list name="value1">
                                                         <value type="javascript">0</value>
@@ -5254,6 +5255,8 @@ row["project_title"]</expression>
                                                 </structure>
                                             </list-property>
                                             <cell id="701">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
                                                 <text-data id="741">
                                                     <property name="fontFamily">"Tahoma"</property>
                                                     <property name="fontSize">11pt</property>
@@ -5309,6 +5312,8 @@ row["project_title"]</expression>
                                                     <property name="marginTop">1pt</property>
                                                     <property name="marginLeft">0pt</property>
                                                     <property name="marginRight">8pt</property>
+                                                    <property name="height">0.2777777777777778in</property>
+                                                    <property name="width">0.6805555555555556in</property>
                                                     <list-property name="visibility">
                                                         <structure>
                                                             <property name="format">all</property>
@@ -5316,12 +5321,14 @@ row["project_title"]</expression>
                                                         </structure>
                                                     </list-property>
                                                     <property name="source">embed</property>
-                                                    <property name="imageName">Traffic_green.png</property>
+                                                    <property name="imageName">1.png</property>
                                                 </image>
                                                 <image id="732">
                                                     <property name="marginTop">1pt</property>
                                                     <property name="marginLeft">0pt</property>
                                                     <property name="marginRight">8pt</property>
+                                                    <property name="height">0.278in</property>
+                                                    <property name="width">0.681in</property>
                                                     <list-property name="visibility">
                                                         <structure>
                                                             <property name="format">all</property>
@@ -5329,12 +5336,14 @@ row["project_title"]</expression>
                                                         </structure>
                                                     </list-property>
                                                     <property name="source">embed</property>
-                                                    <property name="imageName">Traffic_yellow.png</property>
+                                                    <property name="imageName">3.png</property>
                                                 </image>
                                                 <image id="733">
                                                     <property name="marginTop">1pt</property>
                                                     <property name="marginLeft">0pt</property>
                                                     <property name="marginRight">8pt</property>
+                                                    <property name="height">0.278in</property>
+                                                    <property name="width">0.681in</property>
                                                     <list-property name="visibility">
                                                         <structure>
                                                             <property name="format">all</property>
@@ -5342,7 +5351,7 @@ row["project_title"]</expression>
                                                         </structure>
                                                     </list-property>
                                                     <property name="source">embed</property>
-                                                    <property name="imageName">Traffic_red.png</property>
+                                                    <property name="imageName">2.png</property>
                                                 </image>
                                             </cell>
                                         </row>
@@ -16773,6 +16782,77 @@ Math.min(row["progress_pct"],100)&#13;
                 PW9h0TN4GE13YERtjCQVPRbxGVsJqsR9mV9eAkWwjvAPdtKjE2o/JjNtVBw4AbcVfZm5mwzath3U7FHR
                 o8avCxJAottQuE3K+L29bzKgAHvyESPX7vUCC+B7vm7tmwwkdOaFHD22m10siaBqXBdDa4bWADV/1NF2
                 wtU75kawXgdM+nDz94+IUfWOuQXJoag5ZJM+LoS2j79nIgbwBx9dD8OwFXfOAAAAAElFTkSuQmCC
+</property>
+        </structure>
+        <structure>
+            <property name="name">1.png</property>
+            <property name="type">image/png</property>
+            <property name="data">
+                iVBORw0KGgoAAAANSUhEUgAAAHgAAAAyCAYAAACXpx/YAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJ
+                TUUH4QMPDjkNdKTUDAAAA71JREFUeNrtmz1oU1EUx38RLVWE+EEypU0giwgtXZycgotg7SAWcbEUXNUK
+                2kGkkzjo4EdWoegiInSxgotkcnKRFqQgQlKdImoDpZbXR3V4R4ghL+bl3XvzAucHWfJx7//d/7v3nnfP
+                CSiKoiiKoiiKoiiKoijKIJCy2Xi9WhsFTgIl4AQwKh+tA++BCvAuW8iv29Lw7evnfcCYaCgB40AaaAAr
+                oqECrGZyxR1bOo69vNK1jrXp8k5iDa5Xa3uBM8B9IA/saXo1s9v0qgE3gdfZQt43ZOwhYBa4A+wN0dGs
+                wQduA4uZXHHDoLE961ibLm8kyuB6tXYCeAUclYuJgg98B85mC/n3Mc09BzwFhiPq8IFtYCaTKy4ZMDe2
+                jrXp8lIiDK5Xa9eAu8CBmE1tAbeyhfyjHpfjh8BlYCiGBg94Asz1smzLcmxUR6/LdsqAsSngHnA15sW0
+                XthjYD5byP/u0twh4AUw2cPqETaLloELmVzRi2CuNR1r02Uv6o/3GBAwD8wZNBdpa07a7pYHBgcVaWdS
+                2mUAdcSfwfVqrQS8MWxu60w+nS3kK13suc8t6fCAi93sybLnWtURdU9OxTB3P1AHDlp+lNsEstlC/leH
+                aPmLZR2bwEin6FqiZSc6okTXcZboSxId2mZY+gpj1oGOYemHAdARfwbLs+5PB7O3+c493PqMLFHzD0c6
+                NoEj7aJqiZqd6ug2qu51Bh+3uO+GBV3H27w/5lDHkPRHgnUYM7hkKAKPorPUZx1hGpKkw5jBp/pg8Ck1
+                2J3BE30weKLN++OOB3Y85LOk6DBmcBr3pBOgI52Q8UjbNrjRB4MbCdDRSMh4NGwb/IEgteWKXemzlRWH
+                OnalPxKsw5jBb/tg8Ns271ccD2zYkWlSdBgzuNIHgytqsDuDPxIcfrvCkz5bWXWow5P+SLAOMwbLkeEN
+                glylbXzgRrtSHjk2XHCgwwcWwpL/cmzoTEeU5H+cZ7dnBGUlttmWvsJYdKBjW/phAHSYMVjSd1OWlyYP
+                mApLFcos3gBmLOrwCGq0OqboJIVnXUfUQrxYpy+SiLe1NPnAwv+S/WLyEkHtkm9Bw5NuC/AkGW9NRy8F
+                eCaO1+4RFJh5hu/Wh9J2t1wnqF3yDQ7qsrTLAOoAtKqy0w2mVZVtTNa66H+N7ntdtNEMiBiTA84Dn+QO
+                9EMOAf5W8Xvy3fNALq65TXvyCEFV5lYHHc0atuT7IybMbdqTe9YR11zjM7jNjNb/Jv27bDv/b5KiKIqi
+                KIqiKIqiKIqiKEoC+APXOZ8fGHgPHgAAAABJRU5ErkJggg==
+</property>
+        </structure>
+        <structure>
+            <property name="name">3.png</property>
+            <property name="type">image/png</property>
+            <property name="data">
+                iVBORw0KGgoAAAANSUhEUgAAAHgAAAAyCAYAAACXpx/YAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJ
+                TUUH4QMPDjktT8r0xAAAA6JJREFUeNrtmzFIG1EYx38xiiWl3eymnpI2UDC6iNCtg44KXUpBih3c26lb
+                hzp10l2kUpTSRaijDt2E4tJGKKQNNbZb3SwGxVzSIV8hhkt6yb33vJTvtwg5fN//7n/v3Xfv+w4URVEU
+                RVEURVEURVEUpRtI2A5QzBcGgLvAGHAHGJBDx8BX4AD44mXSx7Y0fHx6sxcYFg1ZYARIASXgEMiJjqOp
+                lZOyLR2ffhZD65gY9MqxNbiYLySBSeAJcEvi9ATEqwIV+fsLeA3se5m0b8jY68A0MA8km+io1+ADG8Du
+                1MrJqUFjO9YxMeidxsrgYr5wG3gB3JCTaQcf+A289DLpbxHNvQc8A/ra1OEDF8Dy1MrJngFzI+uYGPT2
+                YmFwMV+YBR4D/RGHOgfeeJn0dofL8SIwA/RG0FAGdoDVTpZtWY6N6uhk2U4YMjYBLACzEU+m8cS2gXUv
+                k662Ye5zeTwkDWjwgX3gVTsmi7lWdLRrco8hMx4AcwbNRcaak7HDsmjwoiLjTMq4dKGO6AYX84VsXfJg
+                miQwLzHCPHNnLOhIAjMyfthnrjUdMr6bJbqYL/RLtnfN8tvWGTDvZdLnLbLldcs6zoCFVtm1ZMtOdITN
+                rqPO4PuSHdqmT2I1Y9qBjj6JQxfoiD6Di/lCD/DOweytv3Mfepl0JSCxeutIxxnwKCjhksTKqY4wCVeU
+                GTxkOKkKk3QNBfw+7FDH350oYqzDmMFZHGx1Nqw2QcnWmEMdCYlHjHUYM3jc4GtWWK3jTW60Hocasi1u
+                +DjoMGbw6BXM4NGA30ccz5yRJsfiosOYwSnck4qBjlRMrkfKtsGlKzC4FAMdpZhcj5Jtg79TK225oiox
+                Gzl0qKMq8YixDmMGf6ZWv3RFRWI2knOooyLxiLEOYwbnrmAGB53UgeOZc9DkWFx0GDP4B7WSnivKErOR
+                I4c6yhKPGOswY7BsGa5Rq1XaxgfWGrcpAWTbcNOBDh/YbFYXlm1DZzrC1oWjvph/oNZWYpsLidWMXQc6
+                LiQOXaDDjMFSvluyvDSVgaVmpUKZxafAskUdZWo9Wi1LdFLCs66jnUa8yFtrXiado1YTtrE0+cCGxGiJ
+                NMjtWNDhAzthG/CkQc6ajnYb8EztnW4B7w3fuWUZc6uN/1ml1rvkG7yo+zIuXahDuyr/cYNpV2WAydoX
+                fdno/6cvus5k/bLhssn/z5cNAWbrt0mXl22n3yYpiqIoiqIoiqIoiqIoiqLEgD8A85wbKMtC3wAAAABJ
+                RU5ErkJggg==
+</property>
+        </structure>
+        <structure>
+            <property name="name">2.png</property>
+            <property name="type">image/png</property>
+            <property name="data">
+                iVBORw0KGgoAAAANSUhEUgAAAHgAAAAyCAYAAACXpx/YAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJ
+                TUUH4QMPDjkhRny47wAAA41JREFUeNrtmz9IG1Ecxz8RFSkFOxdiQoaSRY1DqSAEzHJLp1KEghCEIh2b
+                qQjFQQrSyc5FkGKhINKpyy0RAoKlg1WX4lBahc4KRUIatMP9hNTmiPfnvZzh94Gbwr33fe/Lvd/Lve+B
+                oiiKoiiKoiiKoiiKotwEUiYbrznOXWAKKAGTwIj8dATsAFVgu+i6v0zq+Pn927V0ZHJ5Yzq+Hv8YAEaB
+                abnGgGHgFNgHtuQ6KKSzfxJrcM1xUjKRr2VAfS1XK+ct1wHwAqgWXfciJlMj6cjk8hcxGXsHmANeAf0+
+                Olo1NIGXwFohnT1JlME1x7kHvAcmZDBBaAK7wGzRdQ8jmhuLjkwufxjR3EfAO2AooI4mUAfKhXT2YyIM
+                rjnOYxnMrYhNnQHloutuhjQ3Vh2ZXH4zhLEDwBvgKTAYQUMDWAWeh122+2Iy9xmwHsOkIm2sS5tBzY1d
+                h7QZxNxBYAOYj2gucv88sCHt2jdYntwVWYbiYghYkbaDPLlGdEjb12UFeBiiNPjRL+2tWF+ipebuxvTE
+                +C2TE51qstRc4zo61WSpuR9ieHL9lusnQWtyKoK5KeAzcN/wX7kvwAO/3bXslq3p8Ntdy275GLhtUMNv
+                IB1kdx1liS7JLtU0E9JX0nXMxVwe/ErGnK0avBxjnelUg5aTrEN2zUsWdPQDS9KfOYPlDdU49hiXPtu9
+                obKqQ/q8yqihuuu3sx41/QRPxfUXK4DOqQTrmLaoo0/6M2pwqQsTW0qwjp4zeLILEzuZYB1jlg0eM23w
+                CPYZSbCOYcsahk0brPzLaVL7C2vwURcm8SjBOvbxjvpscC79GTV4x+KALge1k2AdW5YN3jJtcLULE1tN
+                sI6eM3i7CxO7nWAdB3iHATZoSH/mDJYM1Z7Fid1rl9uSDJVVHe1yW3IYv4iXxDBJE1gMcvgfZRe9YGFA
+                l4NauAE61vBiNiapSz/YMLiKdwZrml2fupcoHXKEVza4VDfwMlonVgyW89lZvMNwU5zhhfB8E45yPmtF
+                R6ekpRzGrxpYUZrAapgAXqQXHZK0KBtamup44buOyUZJWhjVESBhWQE+xWhyU9qrhLk58pssST9WYp7c
+                OlAJkqyU9KMRHUGSlYV0tgHMAG9jWK4b0s6MtBsYjc120BEmNntJT+WixWQNvv9vcu982SAm66cr7Y3u
+                jW+TrpitH58piqIoiqIoiqIoiqIoinIN/gLVZ5qiATrW1gAAAABJRU5ErkJggg==
 </property>
         </structure>
     </list-property>
