@@ -3094,7 +3094,7 @@ where rsr_partnership.project_id=?]]></xml-property>
             </list-property>
             <xml-property name="queryText"><![CDATA[select rsr_project.id, rsr_project.title, rsr_project.notes
 from rsr_relatedproject left join rsr_project on rsr_relatedproject.related_project_id = rsr_project.id
-where (rsr_relatedproject.relation = '2') and (rsr_relatedproject.project_id = ?)
+where rsr_relatedproject.relation = '2' and rsr_relatedproject.project_id = ?
 order by rsr_project.notes::int ASC]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Parent_projects" id="239">
@@ -6146,7 +6146,7 @@ reportContext.setGlobalVariable("show_bars",true);
                                         <cell id="174">
                                             <data id="179">
                                                 <property name="fontFamily">"Tahoma"</property>
-                                                <property name="fontSize">13pt</property>
+                                                <property name="fontSize">11pt</property>
                                                 <property name="fontWeight">bold</property>
                                                 <property name="color">black</property>
                                                 <property name="paddingTop">4pt</property>
@@ -6175,7 +6175,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             </label>
                             <text-data id="152">
                                 <property name="fontFamily">"Tahoma"</property>
-                                <property name="fontSize">13pt</property>
+                                <property name="fontSize">11pt</property>
                                 <property name="fontWeight">bold</property>
                                 <property name="marginTop">0pt</property>
                                 <property name="marginLeft">0pt</property>
@@ -6215,6 +6215,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="marginTop">8pt</property>
                     <property name="marginLeft">8pt</property>
                     <property name="masterPage">Cover</property>
+                    <property name="pageBreakBefore">avoid</property>
                     <property name="width">7.75in</property>
                     <property name="dataSet">Results_indicators_periods</property>
                     <list-property name="paramBindings">
@@ -6360,6 +6361,34 @@ null</expression>
                             <property name="dataType">integer</property>
                             <property name="allowExport">true</property>
                         </structure>
+                        <structure>
+                            <property name="name">target</property>
+                            <text-property name="displayName">actual_value_number</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
+                            <property name="dataType">string</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">target_2</property>
+                            <text-property name="displayName">target_value_number</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
+                            <property name="dataType">string</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">test</property>
+                            <text-property name="displayName">baseline_value_number</text-property>
+                            <expression name="expression" type="javascript">(dataSetRow["baseline_value"] &amp;&amp; !isNaN(dataSetRow["baseline_value"])) ? dataSetRow["baseline_value"] : -1</expression>
+                            <property name="dataType">decimal</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">test3</property>
+                            <text-property name="displayName">baseline_2_value_number</text-property>
+                            <expression name="expression" type="javascript">(dataSetRow["baseline_value"] &amp;&amp; !isNaN(dataSetRow["baseline_value"])) ? dataSetRow["baseline_value"] : -1</expression>
+                            <property name="dataType">decimal</property>
+                            <property name="allowExport">true</property>
+                        </structure>
                     </list-property>
                     <method name="onCreate"><![CDATA[var allan = 7;
 ]]></method>
@@ -6391,6 +6420,7 @@ null</expression>
                                     <property name="paddingBottom">8pt</property>
                                     <property name="paddingRight">8pt</property>
                                     <property name="textAlign">left</property>
+                                    <property name="pageBreakBefore">avoid</property>
                                     <list-property name="visibility">
                                         <structure>
                                             <property name="format">all</property>
@@ -6403,13 +6433,14 @@ null</expression>
                             <cell id="160">
                                 <text-data id="217">
                                     <property name="textAlign">left</property>
+                                    <property name="pageBreakBefore">avoid</property>
                                     <list-property name="visibility">
                                         <structure>
                                             <property name="format">all</property>
                                             <expression name="valueExpr" type="javascript">true</expression>
                                         </structure>
                                     </list-property>
-                                    <expression name="valueExpr">var a=0,b=0,alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
+                                    <expression name="valueExpr">var a=0,b=0,alphabet = "abcdefghijklmnopqrstuvwxyz".split("");&#13;
 reportContext.getGlobalVariable('debug')</expression>
                                     <property name="contentType">html</property>
                                 </text-data>
@@ -6442,7 +6473,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="rowSpan">1</property>
                                     <text-data id="159">
                                         <property name="fontFamily">"Tahoma"</property>
-                                        <property name="fontSize">14pt</property>
+                                        <property name="fontSize">11pt</property>
                                         <property name="fontWeight">bold</property>
                                         <property name="color">#6D8FAF</property>
                                         <property name="paddingTop">0pt</property>
@@ -6453,7 +6484,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                         <property name="contentType">html</property>
                                     </text-data>
                                     <data id="145">
-                                        <property name="fontSize">14pt</property>
+                                        <property name="fontSize">11pt</property>
                                         <property name="marginBottom">8pt</property>
                                         <property name="paddingLeft">0pt</property>
                                         <property name="paddingBottom">8pt</property>
@@ -6533,7 +6564,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                 <text-data id="213">
                                                     <property name="backgroundColor">#D0DEE7</property>
                                                     <property name="fontFamily">"Tahoma"</property>
-                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontSize">11pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="color">white</property>
                                                     <property name="paddingTop">5pt</property>
@@ -6541,7 +6572,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="paddingBottom">5pt</property>
                                                     <property name="paddingRight">0pt</property>
                                                     <property name="display">block</property>
-                                                    <expression name="valueExpr">b++, "INDICATOR " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
+                                                    <expression name="valueExpr">b++, "Indicator " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
@@ -6551,7 +6582,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                 <property name="paddingBottom">20pt</property>
                                                 <text-data id="278">
                                                     <property name="fontFamily">"Tahoma"</property>
-                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontSize">11pt</property>
                                                     <property name="color">#000000</property>
                                                     <property name="paddingTop">5pt</property>
                                                     <property name="paddingLeft">8pt</property>
@@ -6589,7 +6620,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <cell id="203">
                                                 <label id="169">
                                                     <property name="fontFamily">"Tahoma"</property>
-                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontSize">11pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
                                                     <property name="color">gray</property>
@@ -6603,7 +6634,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                 <property name="color">#F0F0F0</property>
                                                 <label id="188">
                                                     <property name="fontFamily">"Tahoma"</property>
-                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontSize">11pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
                                                     <property name="color">gray</property>
@@ -6615,7 +6646,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <cell id="205">
                                                 <label id="186">
                                                     <property name="fontFamily">"Tahoma"</property>
-                                                    <property name="fontSize">12pt</property>
+                                                    <property name="fontSize">11pt</property>
                                                     <property name="fontWeight">bold</property>
                                                     <property name="fontStyle">italic</property>
                                                     <property name="color">gray</property>
@@ -7349,7 +7380,55 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="verticalAlign">middle</property>
                                 <data id="292">
                                     <property name="fontFamily">"Tahoma"</property>
-                                    <property name="fontSize">12pt</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">16pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0.0</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">33.0</expression>
+                                            <property name="style">progress_low</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">between</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">50</value>
+                                            </simple-property-list>
+                                            <expression name="value2" type="javascript">84</expression>
+                                            <property name="style">progress_middle</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">ge</property>
+                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">85</value>
+                                            </simple-property-list>
+                                            <property name="style">progress_high</property>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(row["actual_value"] != null) &amp;&amp; (!isNaN(row["actual_value"]))</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">target</property>
+                                </data>
+                                <data id="848">
+                                    <property name="fontFamily">"Tahoma"</property>
+                                    <property name="fontSize">11pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
                                     <property name="marginBottom">4pt</property>
@@ -7400,7 +7479,27 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="verticalAlign">middle</property>
                                 <data id="296">
                                     <property name="fontFamily">"Tahoma"</property>
-                                    <property name="fontSize">12pt</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(row["target_value"] != null) &amp;&amp; (!isNaN(row["target_value"]))</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">target_2</property>
+                                </data>
+                                <data id="849">
+                                    <property name="fontFamily">"Tahoma"</property>
+                                    <property name="fontSize">11pt</property>
                                     <property name="fontWeight">bold</property>
                                     <property name="marginTop">4pt</property>
                                     <property name="marginBottom">4pt</property>
@@ -7423,10 +7522,42 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="verticalAlign">middle</property>
                                 <data id="322">
                                     <property name="fontFamily">"Tahoma"</property>
-                                    <property name="fontSize">12pt</property>
+                                    <property name="fontSize">11pt</property>
                                     <property name="fontWeight">bold</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">General Number</property>
+                                        <property name="pattern">General Number</property>
+                                        <property name="locale">nl</property>
+                                    </structure>
                                     <property name="textAlign">left</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(row["baseline_value"] != null) &amp;&amp; (!isNaN(row["baseline_value"]))</expression>
+                                        </structure>
+                                    </list-property>
                                     <property name="resultSetColumn">baseline_year</property>
+                                </data>
+                                <data id="851">
+                                    <property name="fontFamily">"Tahoma"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">4pt</property>
+                                    <property name="marginBottom">4pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <property name="display">block</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["actual_value_number"] == -1</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">test3</property>
                                 </data>
                             </cell>
                         </row>
@@ -7449,7 +7580,7 @@ Math.min(row["progress_pct"],100)&#13;
                                 <text-data id="223">
                                     <property name="style">progress_high</property>
                                     <property name="fontFamily">"Tahoma"</property>
-                                    <property name="fontSize">12pt</property>
+                                    <property name="fontSize">11pt</property>
                                     <property name="fontWeight">normal</property>
                                     <property name="color">black</property>
                                     <property name="marginBottom">8pt</property>
