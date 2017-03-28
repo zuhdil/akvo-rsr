@@ -5167,7 +5167,7 @@ and more efficient.]]></text-property>
                         <property name="paddingBottom">0pt</property>
                         <property name="paddingRight">8pt</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[On a global level MoU's were signed with ABFN Niger Basin, WIN and Volta Basin Authority, and a partnership with Urban WaterS Hub. Cisco and Hilton committed grants for the continued development and scaling of Lumen. 
+                        <text-property name="content"><![CDATA[On a global level MoU's were signed with ABFN Niger Basin and Volta Basin Authority, and a partnership with Urban WaterS Hub. Cisco and Hilton committed grants for the continued development and scaling of Lumen. 
 
 In Sierra Leone a water point inventory at national scale started. We engaged in a partnership with AfDB to publish the water portfolio in RSR-IATI and support national governments in the East Africa region using Flow. In South East Asia Pacific a strategic partnership was signed with the government of Fiji, after receiving recognition for our work in supporting rapid WASH damage assesments after cyclone Winston."
 
@@ -6443,7 +6443,7 @@ null</expression>
                                             <expression name="valueExpr" type="javascript">true</expression>
                                         </structure>
                                     </list-property>
-                                    <expression name="valueExpr">var a=0,b=0,alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
+                                    <expression name="valueExpr">var a=0,b=0,alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
 reportContext.getGlobalVariable('debug')</expression>
                                     <property name="contentType">html</property>
                                 </text-data>
@@ -6575,7 +6575,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="paddingBottom">5pt</property>
                                                     <property name="paddingRight">0pt</property>
                                                     <property name="display">block</property>
-                                                    <expression name="valueExpr">b++, "Indicator " + a + "." + (b&lt;28 ? alphabet[b] : b)</expression>
+                                                    <expression name="valueExpr">b++, "Indicator " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
