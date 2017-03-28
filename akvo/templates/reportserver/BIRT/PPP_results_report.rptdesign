@@ -4965,6 +4965,8 @@ order by rsr_project.notes::int ASC]]></xml-property>
         </simple-master-page>
         <simple-master-page name="NewSimpleMasterPage" id="804">
             <property name="type">a4</property>
+            <property name="topMargin">0in</property>
+            <property name="bottomMargin">0in</property>
         </simple-master-page>
     </page-setup>
     <body>
@@ -5719,7 +5721,7 @@ null</expression>
 ?&#13;
 0&#13;
 :&#13;
-(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > -1 )&#13;
+(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > 0 )&#13;
 ?&#13;
 (row["baseline_value"] ?&#13;
 Math.round((row["actual_value_number"]-row["baseline_value"]) * 100 / (row["target_value_number"] - row["baseline_value"]))&#13;
@@ -6000,13 +6002,14 @@ row["project_title"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
+            <property name="repeatHeader">false</property>
             <detail>
                 <text-data id="110">
                     <property name="fontFamily">"Arial"</property>
                     <property name="fontSize">18pt</property>
                     <property name="fontWeight">bold</property>
                     <property name="color">#5D7785</property>
-                    <property name="marginTop">16pt</property>
+                    <property name="marginTop">0pt</property>
                     <property name="paddingTop">8pt</property>
                     <property name="paddingLeft">16pt</property>
                     <property name="paddingBottom">8pt</property>
@@ -6147,7 +6150,7 @@ reportContext.setGlobalVariable("show_bars",true);
                                             <data id="179">
                                                 <property name="fontFamily">"Tahoma"</property>
                                                 <property name="fontSize">11pt</property>
-                                                <property name="fontWeight">bold</property>
+                                                <property name="fontWeight">normal</property>
                                                 <property name="color">black</property>
                                                 <property name="paddingTop">4pt</property>
                                                 <property name="paddingLeft">8pt</property>
@@ -6176,7 +6179,7 @@ reportContext.setGlobalVariable("show_bars",true);
                             <text-data id="152">
                                 <property name="fontFamily">"Tahoma"</property>
                                 <property name="fontSize">11pt</property>
-                                <property name="fontWeight">bold</property>
+                                <property name="fontWeight">normal</property>
                                 <property name="marginTop">0pt</property>
                                 <property name="marginLeft">0pt</property>
                                 <property name="paddingTop">8pt</property>
@@ -6214,8 +6217,8 @@ reportContext.setGlobalVariable("show_bars",true);
                 <table name="results_table" id="13">
                     <property name="marginTop">8pt</property>
                     <property name="marginLeft">8pt</property>
-                    <property name="masterPage">Cover</property>
-                    <property name="pageBreakBefore">avoid</property>
+                    <property name="masterPage">NewSimpleMasterPage</property>
+                    <property name="pageBreakBefore">auto</property>
                     <property name="width">7.75in</property>
                     <property name="dataSet">Results_indicators_periods</property>
                     <list-property name="paramBindings">
@@ -6322,7 +6325,7 @@ reportContext.setGlobalVariable("show_bars",true);
 ?&#13;
 0&#13;
 :&#13;
-(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > -1 )&#13;
+(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > 0 )&#13;
 ?&#13;
 (row["baseline_value"] ?&#13;
 Math.round((row["actual_value_number"]-row["baseline_value"]) * 100 / (row["target_value_number"] - row["baseline_value"]))&#13;
@@ -6363,14 +6366,14 @@ null</expression>
                         </structure>
                         <structure>
                             <property name="name">target</property>
-                            <text-property name="displayName">actual_value_number</text-property>
+                            <text-property name="displayName">actual_value</text-property>
                             <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
                             <property name="dataType">string</property>
                             <property name="allowExport">true</property>
                         </structure>
                         <structure>
                             <property name="name">target_2</property>
-                            <text-property name="displayName">target_value_number</text-property>
+                            <text-property name="displayName">target_value</text-property>
                             <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
                             <property name="dataType">string</property>
                             <property name="allowExport">true</property>
@@ -6393,7 +6396,7 @@ null</expression>
                     <method name="onCreate"><![CDATA[var allan = 7;
 ]]></method>
                     <property name="repeatHeader">false</property>
-                    <property name="pageBreakInterval">50</property>
+                    <property name="pageBreakInterval">0</property>
                     <column id="275">
                         <property name="width">1.2708333333333333in</property>
                     </column>
@@ -6440,7 +6443,7 @@ null</expression>
                                             <expression name="valueExpr" type="javascript">true</expression>
                                         </structure>
                                     </list-property>
-                                    <expression name="valueExpr">var a=0,b=0,alphabet = "abcdefghijklmnopqrstuvwxyz".split("");&#13;
+                                    <expression name="valueExpr">var a=0,b=0,alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
 reportContext.getGlobalVariable('debug')</expression>
                                     <property name="contentType">html</property>
                                 </text-data>
@@ -6572,7 +6575,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                                     <property name="paddingBottom">5pt</property>
                                                     <property name="paddingRight">0pt</property>
                                                     <property name="display">block</property>
-                                                    <expression name="valueExpr">b++, "Indicator " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
+                                                    <expression name="valueExpr">b++, "Indicator " + a + "." + (b&lt;28 ? alphabet[b] : b)</expression>
                                                     <property name="contentType">html</property>
                                                 </text-data>
                                             </cell>
