@@ -4966,15 +4966,6 @@ order by rsr_project.notes::int ASC]]></xml-property>
             <property name="type">a4</property>
             <property name="topMargin">0in</property>
             <property name="bottomMargin">0in</property>
-            <page-footer>
-                <text id="852">
-                    <property name="textAlign">right</property>
-                    <property name="contentType">html</property>
-                    <text-property name="content"><![CDATA[<viewtime-value-of>
-pageNumber
-</viewtime-value-of>]]></text-property>
-                </text>
-            </page-footer>
         </simple-master-page>
     </page-setup>
     <body>
@@ -6723,7 +6714,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <property name="fontFamily">"Tahoma"</property>
                                     <property name="fontSize">10pt</property>
                                     <property name="fontWeight">normal</property>
-                                    <property name="color">#34B573</property>
+                                    <property name="color">black</property>
                                     <property name="borderBottomStyle">none</property>
                                     <property name="borderLeftStyle">none</property>
                                     <property name="borderRightStyle">none</property>
@@ -6738,7 +6729,7 @@ reportContext.getGlobalVariable('debug')</expression>
                                     <list-property name="highlightRules">
                                         <structure>
                                             <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">50</value>
                                             </simple-property-list>
@@ -6746,17 +6737,16 @@ reportContext.getGlobalVariable('debug')</expression>
                                             <property name="style">progress_middle</property>
                                         </structure>
                                         <structure>
-                                            <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <property name="operator">le</property>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">-1</value>
+                                                <value type="javascript">49</value>
                                             </simple-property-list>
-                                            <expression name="value2" type="javascript">49</expression>
                                             <property name="style">progress_low</property>
                                         </structure>
                                         <structure>
                                             <property name="operator">ge</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">85</value>
                                             </simple-property-list>
@@ -7408,17 +7398,16 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="textAlign">left</property>
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <property name="operator">le</property>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">0.0</value>
+                                                <value type="javascript">49</value>
                                             </simple-property-list>
-                                            <expression name="value2" type="javascript">33.0</expression>
                                             <property name="style">progress_low</property>
                                         </structure>
                                         <structure>
                                             <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">50</value>
                                             </simple-property-list>
@@ -7427,7 +7416,7 @@ Math.min(row["progress_pct"],100)&#13;
                                         </structure>
                                         <structure>
                                             <property name="operator">ge</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">85</value>
                                             </simple-property-list>
@@ -7456,17 +7445,16 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="textAlign">left</property>
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <property name="operator">le</property>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">0.0</value>
+                                                <value type="javascript">49</value>
                                             </simple-property-list>
-                                            <expression name="value2" type="javascript">33.0</expression>
                                             <property name="style">progress_low</property>
                                         </structure>
                                         <structure>
                                             <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">50</value>
                                             </simple-property-list>
@@ -7475,7 +7463,7 @@ Math.min(row["progress_pct"],100)&#13;
                                         </structure>
                                         <structure>
                                             <property name="operator">ge</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">85</value>
                                             </simple-property-list>
@@ -7605,17 +7593,16 @@ Math.min(row["progress_pct"],100)&#13;
                                     <property name="paddingBottom">8pt</property>
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <property name="operator">le</property>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">-1</value>
+                                                <value type="javascript">49</value>
                                             </simple-property-list>
-                                            <expression name="value2" type="javascript">49</expression>
                                             <property name="style">progress_low</property>
                                         </structure>
                                         <structure>
                                             <property name="operator">between</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">50</value>
                                             </simple-property-list>
@@ -7624,7 +7611,7 @@ Math.min(row["progress_pct"],100)&#13;
                                         </structure>
                                         <structure>
                                             <property name="operator">ge</property>
-                                            <expression name="testExpr" type="javascript">Finance.percent(row["target_value_number"],row["actual_value_number"],-1)</expression>
+                                            <expression name="testExpr" type="javascript">row["progress_pct"]</expression>
                                             <simple-property-list name="value1">
                                                 <value type="javascript">85</value>
                                             </simple-property-list>
