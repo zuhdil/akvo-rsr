@@ -4952,7 +4952,6 @@ order by rsr_project.notes::int ASC]]></xml-property>
             <property name="bottomMargin">0in</property>
             <property name="rightMargin">0.08in</property>
             <property name="headerHeight">0in</property>
-            <property name="footerHeight">0in</property>
             <page-footer>
                 <grid id="3">
                     <property name="width">100%</property>
@@ -4967,6 +4966,15 @@ order by rsr_project.notes::int ASC]]></xml-property>
             <property name="type">a4</property>
             <property name="topMargin">0in</property>
             <property name="bottomMargin">0in</property>
+            <page-footer>
+                <text id="852">
+                    <property name="textAlign">right</property>
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<viewtime-value-of>
+pageNumber
+</viewtime-value-of>]]></text-property>
+                </text>
+            </page-footer>
         </simple-master-page>
     </page-setup>
     <body>
@@ -6002,6 +6010,7 @@ row["project_title"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
+            <structure name="toc"/>
             <property name="repeatHeader">false</property>
             <detail>
                 <text-data id="110">
@@ -6014,6 +6023,7 @@ row["project_title"]</expression>
                     <property name="paddingLeft">16pt</property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
+                    <property name="masterPage">NewSimpleMasterPage</property>
                     <property name="pageBreakBefore">always</property>
                     <property name="dataSet">Project</property>
                     <list-property name="paramBindings">
@@ -6044,6 +6054,7 @@ reportContext.setGlobalVariable("show_bars",true);
                     <property name="marginTop">8pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
+                    <property name="masterPage">NewSimpleMasterPage</property>
                     <property name="width">7.861111111111111in</property>
                     <column id="124">
                         <property name="width">4.291666666666667in</property>
@@ -6052,6 +6063,7 @@ reportContext.setGlobalVariable("show_bars",true);
                         <property name="width">3.5694444444444446in</property>
                     </column>
                     <row id="126">
+                        <property name="masterPage">NewSimpleMasterPage</property>
                         <cell id="127">
                             <property name="verticalAlign">middle</property>
                             <label id="132">
@@ -6064,6 +6076,7 @@ reportContext.setGlobalVariable("show_bars",true);
                                 <property name="paddingLeft">16pt</property>
                                 <property name="paddingBottom">8pt</property>
                                 <property name="paddingRight">8pt</property>
+                                <property name="masterPage">NewSimpleMasterPage</property>
                                 <structure name="toc">
                                     <expression name="expressionValue" type="javascript">"Project Summary"</expression>
                                 </structure>
