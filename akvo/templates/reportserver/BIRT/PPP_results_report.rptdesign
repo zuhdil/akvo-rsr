@@ -6471,6 +6471,7 @@ reportContext.getGlobalVariable('debug')</expression>
                         <structure name="toc">
                             <expression name="expressionValue" type="javascript">row["title"]</expression>
                         </structure>
+                        <property name="repeatHeader">false</property>
                         <list-property name="sort">
                             <structure>
                                 <expression name="key" type="javascript">row["result_sort"]</expression>
