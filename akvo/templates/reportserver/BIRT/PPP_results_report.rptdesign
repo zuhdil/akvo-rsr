@@ -4966,6 +4966,16 @@ order by rsr_project.notes::int ASC]]></xml-property>
             <property name="type">a4</property>
             <property name="topMargin">0in</property>
             <property name="bottomMargin">0in</property>
+            <page-footer>
+                <auto-text id="852">
+                    <property name="style">Paragraph</property>
+                    <property name="fontSize">9pt</property>
+                    <property name="color">#4C4C4C</property>
+                    <property name="paddingRight">16pt</property>
+                    <property name="textAlign">right</property>
+                    <property name="type">page-number</property>
+                </auto-text>
+            </page-footer>
         </simple-master-page>
     </page-setup>
     <body>
