@@ -1,5 +1,5 @@
 {% load i18n project_editor %}
-
+<!-- TIMESTAMP: {% the_time %} -->
 <div class="budget-item-item parent" id="budget_item.{{ item|obj_id }}">
     {% include "myrsr/project_editor/partials/related_object_header.html" with rel_obj=item %}
     <div class="hide-partial {% if item.pk %}hidden{% endif %}">

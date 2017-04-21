@@ -7,6 +7,8 @@ Akvo RSR module. For additional details on the GNU license please
 see < http://www.gnu.org/licenses/agpl.html >.
 """
 
+import datetime
+
 from django import template
 from django.db import models
 from django.db.models import get_model
@@ -278,3 +280,11 @@ def mandatory_or_hidden(validations, field):
         )
 
     return indication
+
+time_count = 0
+
+@register.simple_tag
+def the_time(format_string="%S.%f"):
+    global time_count
+    time_count += 1
+    return "{}: {}".format(time_count, datetime.datetime.now().strftime(format_string))
