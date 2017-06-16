@@ -174,13 +174,14 @@ export const getApprovedPeriods = createSelector(
         status == c.UPDATE_STATUS_APPROVED
      */
     [getPeriodIds, getPeriodObjects, getPeriodsChildrenIds, getUpdateObjects],
-    (periodIds, periodObjects, childUpdateIds, updateObjects) => periodIds && childUpdateIds && updateObjects && periodIds.filter(
-        (periodId) =>
-            periodObjects[periodId].locked === false &&
-            childUpdateIds[periodId].length > 0 &&
-            childUpdateIds[periodId].every(
-                (updateId) => updateObjects[updateId].status === c.UPDATE_STATUS_APPROVED
-            )
+    (periodIds, periodObjects, childUpdateIds, updateObjects) =>
+        periodIds && childUpdateIds && updateObjects && periodIds.filter(
+            (periodId) =>
+                periodObjects[periodId].locked === false &&
+                childUpdateIds[periodId].length > 0 &&
+                childUpdateIds[periodId].filter(
+                    (updateId) => updateObjects[updateId].status === c.UPDATE_STATUS_APPROVED
+                ).length > 0
     )
 );
 
