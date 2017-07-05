@@ -4119,7 +4119,7 @@ header[role="banner"] {
 
 main {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 200px);
 
     article.full {
         width: 100%;
@@ -4138,7 +4138,11 @@ main {
     aside.open {
         background: #ddd;
         width: 30%;
-        display: flex;
+
+        /* The sticky */
+        position: -webkit-sticky;
+        position: sticky;
+        top: 60px;
     }
 }
 
@@ -4758,7 +4762,6 @@ main {
                                                     .rc-collapse-content-box {
                                                         padding-left: 20px;
 
-
                                                         ul {
                                                             padding-left: 0;
                                                             list-style-type: none;
@@ -4769,17 +4772,16 @@ main {
                                                                 color: $primary4;
 
                                                                 &.creatorMeta, &.approverMeta, &.statusMeta {
-
                                                                     span {
                                                                         color: initial;
                                                                     }
-
                                                                 }
 
                                                                 &:last-child {
                                                                     margin-right: 0;
                                                                 }
                                                             }
+
                                                             &.valueMeta {
                                                                 li {
                                                                     &.updateValue, &.totalValue {
@@ -4907,7 +4909,6 @@ main {
             margin-top: 30px;
 
             .removeUpdate {
-
                 .btn {
                     background: $akvoTvRed;
                     color: white;

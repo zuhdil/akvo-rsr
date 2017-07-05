@@ -2857,7 +2857,7 @@ header[role="banner"] {
 
 main {
   display: flex;
-  height: 100vh; }
+  height: calc(100vh - 200px); }
   main article.full {
     width: 100%;
     overflow: scroll; }
@@ -2869,7 +2869,10 @@ main {
   main aside.open {
     background: #ddd;
     width: 30%;
-    display: flex; }
+    /* The sticky */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 60px; }
 
 .results {
   background: white;
