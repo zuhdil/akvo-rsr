@@ -35,17 +35,6 @@
   ========================================================================== */
 /* Placeholder
   ========================================================================== */
-/*
-  rc-collapse
- */
-/* $models-colors: (
-  // classname, color, bg-color, content-bg-color, border-color
-  (results, #9F9EC5, #2B2A74, #6867A8, #16155A),
-  (indicators, #4D0015, #962644, #DA7791, #740B27),
-  (periods, #1F4B00, #539325, #9CD474, #35710B),
-  (updates, #554000, #A6882A, #F0D583, #80640D),
-  (comments, #222, #b0b0b0, #999999, #a55)
-); */
 html {
   width: 100%;
   overflow-y: scroll; }
@@ -90,7 +79,7 @@ h6 {
 
 a,
 a:link,
-a:visited {
+a:visited, .btn-link {
   outline: none;
   color: #428bca;
   text-decoration: none;
@@ -101,12 +90,152 @@ a:visited {
   transition: color 0.2s linear; }
   a:link,
   a:link:link,
-  a:visited:link {
+  a:visited:link, .btn-link:link {
     -webkit-tap-highlight-color: #fcd700; }
   a:hover,
   a:link:hover,
-  a:visited:hover {
+  a:visited:hover, .btn-link:hover {
     color: #ca8142; }
+
+/****************** buttons ********************/
+.button, .standardBtn, .btn-primary, button {
+  /* use @extend .button on any element (a or button) or use directly in markup class="button" */
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: pink;
+  color: white !important;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-align: center; }
+  .button:hover, .standardBtn:hover, .btn-primary:hover, button:hover {
+    background: #ff8da1;
+    color: white; }
+  .button.disabled, .standardBtn.disabled, .btn-primary.disabled, button.disabled {
+    cursor: not-allowed;
+    background-color: rgba(128, 128, 128, 0.1) !important;
+    color: rgba(128, 128, 128, 0.4) !important;
+    border: 1px solid transparent; }
+    .button.disabled:hover, .standardBtn.disabled:hover, .btn-primary.disabled:hover, button.disabled:hover {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+  .button.noChanges, .button.disabled, .standardBtn.noChanges, .standardBtn.disabled, .btn-primary.noChanges, .btn-primary.disabled, button.noChanges, button.disabled {
+    cursor: not-allowed;
+    background-color: rgba(128, 128, 128, 0.1) !important;
+    color: rgba(128, 128, 128, 0.4) !important;
+    border: 1px solid transparent; }
+    .button.noChanges:hover, .button.disabled:hover, .standardBtn.noChanges:hover, .standardBtn.disabled:hover, .btn-primary.noChanges:hover, .btn-primary.disabled:hover, button.noChanges:hover, button.disabled:hover {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+
+.btn-default {
+  /* use @extend .button on any element (a or button) or use directly in markup class="button" */
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: #428bca;
+  color: white !important;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-align: center; }
+  .btn-default:hover {
+    background: #3071a9;
+    color: white; }
+  .btn-default.disabled {
+    cursor: not-allowed;
+    background-color: rgba(128, 128, 128, 0.1) !important;
+    color: rgba(128, 128, 128, 0.4) !important;
+    border: 1px solid transparent; }
+    .btn-default.disabled:hover {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+
+.smallButton, .smallBtn {
+  /* use @extend .button on any element (a or button) or use directly in markup class="button" */
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: #428bca;
+  color: white !important;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-align: center;
+  padding: 3px 6px; }
+  .smallButton:hover, .smallBtn:hover {
+    background: #3071a9;
+    color: white; }
+  .smallButton.disabled, .smallBtn.disabled {
+    cursor: not-allowed;
+    background-color: rgba(128, 128, 128, 0.1) !important;
+    color: rgba(128, 128, 128, 0.4) !important;
+    border: 1px solid transparent; }
+    .smallButton.disabled:hover, .smallBtn.disabled:hover {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+
+.btnOutline {
+  /* use @extend .button on any element (a or button) or use directly in markup class="button" */
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: #428bca;
+  color: #428bca !important;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-align: center;
+  background-color: transparent;
+  color: #428bca !important;
+  border: 1px solid #428bca; }
+  .btnOutline:hover {
+    background: #3071a9;
+    color: white; }
+  .btnOutline.disabled {
+    cursor: not-allowed;
+    background-color: rgba(128, 128, 128, 0.1) !important;
+    color: rgba(128, 128, 128, 0.4) !important;
+    border: 1px solid transparent; }
+    .btnOutline.disabled:hover {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+  .btnOutline:hover {
+    color: white !important;
+    border: none;
+    border: 1px solid #428bca;
+    background-color: #428bca; }
+  .btnOutline.disabled {
+    cursor: not-allowed;
+    color: rgba(128, 128, 128, 0.4) !important;
+    border: 1px solid rgba(128, 128, 128, 0.4); }
+    .btnOutline.disabled:hover {
+      cursor: not-allowed;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid rgba(128, 128, 128, 0.4); }
 
 /****************** Miscellanous Typography ********************/
 .inlined {
@@ -188,38 +317,10 @@ div.morePartners {
     float: none;
     width: 100%; } }
 
-.btn {
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  transition: all 0.1s linear; }
-
-a.btn-primary,
-button.btn-primary {
-  border: 1px solid #428bca;
-  color: white;
-  background: #428bca;
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  transition: all 0.1s linear; }
-  a.btn-primary:hover,
-  button.btn-primary:hover {
-    color: white;
-    background: #ca8142;
-    border: 1px solid #ca8142; }
-
 .dropdown-label {
   display: block;
   color: rgba(0, 167, 157, 0.7);
   text-align: left; }
-
-.btn-group button,
-.form-group button {
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px; }
 
 /* Bootstrap style for typeahead dropdown, to be included in CSS file */
 .tt-input,
@@ -669,12 +770,7 @@ div.update-confirm-container {
   margin-bottom: 25px; }
 
 #createProject {
-  margin: -5px 0 0 25px;
-  background: #202024;
-  color: white;
-  border: none; }
-  #createProject:hover {
-    background: #2c2a74; }
+  margin: -5px 0 0 25px; }
 
 .indicator-period-list.parentProject .relatedInfo, .indicator-period-list.childProject .relatedInfo {
   color: #2c2a74; }
@@ -1080,19 +1176,48 @@ h4.detailedInfo {
     position: absolute;
     top: -65px; }
   .searchContainer #search .showFilters {
-    /*background-color: rgba(white,0.2);
-            border: 1px solid rgba($rsrGreen, 0);
-            color: white;*/
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.4s ease-in;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; }
+    /* use @extend .button on any element (a or button) or use directly in markup class="button" */
+    display: inline-block;
+    padding: 5px 8px;
+    background-color: white;
+    color: white !important;
+    text-decoration: none;
+    cursor: pointer;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    text-align: center;
+    background-color: transparent;
+    color: white !important;
+    border: 1px solid white; }
     .searchContainer #search .showFilters:hover {
-      background: rgba(202, 129, 66, 0);
-      border: 1px solid rgba(202, 129, 66, 0.5);
-      color: #ca8142; }
+      background: #e6e6e6;
+      color: white; }
+    .searchContainer #search .showFilters.disabled {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+      .searchContainer #search .showFilters.disabled:hover {
+        cursor: not-allowed;
+        background-color: rgba(128, 128, 128, 0.1) !important;
+        color: rgba(128, 128, 128, 0.4) !important;
+        border: 1px solid transparent; }
+    .searchContainer #search .showFilters:hover {
+      color: white !important;
+      border: none;
+      border: 1px solid #428bca;
+      background-color: #428bca; }
+    .searchContainer #search .showFilters.disabled {
+      cursor: not-allowed;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid rgba(128, 128, 128, 0.4); }
+      .searchContainer #search .showFilters.disabled:hover {
+        cursor: not-allowed;
+        color: rgba(128, 128, 128, 0.4) !important;
+        border: 1px solid rgba(128, 128, 128, 0.4); }
     @media only screen and (max-width: 768px) {
       .searchContainer #search .showFilters {
         display: table;
@@ -1100,13 +1225,48 @@ h4.detailedInfo {
         left: inherit;
         margin: 10px auto 0; } }
   .searchContainer #search.toggled .showFilters {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(0, 167, 157, 0.5);
-    color: #00a79d; }
+    /* use @extend .button on any element (a or button) or use directly in markup class="button" */
+    display: inline-block;
+    padding: 5px 8px;
+    background-color: #00a79d;
+    color: #00a79d !important;
+    text-decoration: none;
+    cursor: pointer;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    text-align: center;
+    background-color: transparent;
+    color: #00a79d !important;
+    border: 1px solid #00a79d; }
     .searchContainer #search.toggled .showFilters:hover {
-      background: rgba(202, 129, 66, 0);
-      border: 1px solid rgba(202, 129, 66, 0.5);
-      color: #ca8142; }
+      background: #00746d;
+      color: white; }
+    .searchContainer #search.toggled .showFilters.disabled {
+      cursor: not-allowed;
+      background-color: rgba(128, 128, 128, 0.1) !important;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid transparent; }
+      .searchContainer #search.toggled .showFilters.disabled:hover {
+        cursor: not-allowed;
+        background-color: rgba(128, 128, 128, 0.1) !important;
+        color: rgba(128, 128, 128, 0.4) !important;
+        border: 1px solid transparent; }
+    .searchContainer #search.toggled .showFilters:hover {
+      color: white !important;
+      border: none;
+      border: 1px solid #428bca;
+      background-color: #428bca; }
+    .searchContainer #search.toggled .showFilters.disabled {
+      cursor: not-allowed;
+      color: rgba(128, 128, 128, 0.4) !important;
+      border: 1px solid rgba(128, 128, 128, 0.4); }
+      .searchContainer #search.toggled .showFilters.disabled:hover {
+        cursor: not-allowed;
+        color: rgba(128, 128, 128, 0.4) !important;
+        border: 1px solid rgba(128, 128, 128, 0.4); }
 
 .showingTxt {
   color: rgba(44, 42, 116, 0.5);
@@ -1462,12 +1622,6 @@ header.projectHeader {
   box-shadow: 0 0 1px rgba(255, 164, 114, 0.8); }
   .donateSection a {
     margin: -10px auto 5px auto; }
-    .donateSection a.donateButton {
-      background: #202024;
-      color: white;
-      border: none; }
-      .donateSection a.donateButton:hover {
-        background: #2c2a74; }
 
 #project-map {
   border: 1px solid #f9d7b9; }
@@ -2035,7 +2189,7 @@ dd.currencyAmount {
     border: 0.5px solid rgba(3, 3, 3, 0.2); }
   .projectReport td.edit-buttons, .projectReport td.empty {
     /*flex: 1 0 90%;
-        text-align: center;*/ } }
+            text-align: center;*/ } }
 
 @media only screen and (max-width: 768px) {
   .projectReport {
