@@ -209,6 +209,12 @@
                     <text-property name="heading">result_pk</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">type</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">type</text-property>
+                    <text-property name="heading">type</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">indicator_title</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">indicator_title</text-property>
@@ -308,61 +314,66 @@
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">indicator_title</property>
+                        <property name="name">type</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">indicator_title</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">indicator_pk</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">baseline_year</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                         <property name="name">baseline_comment</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">8</property>
                         <property name="name">baseline_value</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">9</property>
                         <property name="name">indicatorperiod_pk</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">10</property>
                         <property name="name">actual_value</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">11</property>
                         <property name="name">actual_comment</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">12</property>
                         <property name="name">target_value</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">13</property>
                         <property name="name">target_comment</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">14</property>
                         <property name="name">period_start</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">15</property>
                         <property name="name">period_end</property>
                         <property name="dataType">date</property>
                     </structure>
@@ -386,83 +397,90 @@
                 </structure>
                 <structure>
                     <property name="position">3</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
                     <property name="name">indicator_title</property>
                     <property name="nativeName">indicator_title</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">indicator_pk</property>
                     <property name="nativeName">indicator_pk</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">baseline_year</property>
                     <property name="nativeName">baseline_year</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                     <property name="name">baseline_comment</property>
                     <property name="nativeName">baseline_comment</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">8</property>
                     <property name="name">baseline_value</property>
                     <property name="nativeName">baseline_value</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">9</property>
                     <property name="name">indicatorperiod_pk</property>
                     <property name="nativeName">indicatorperiod_pk</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">10</property>
                     <property name="name">actual_value</property>
                     <property name="nativeName">actual_value</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">11</property>
                     <property name="name">actual_comment</property>
                     <property name="nativeName">actual_comment</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">12</property>
                     <property name="name">target_value</property>
                     <property name="nativeName">target_value</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">13</property>
                     <property name="name">target_comment</property>
                     <property name="nativeName">target_comment</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">14</property>
                     <property name="name">period_start</property>
                     <property name="nativeName">period_start</property>
                     <property name="dataType">date</property>
                     <property name="nativeDataType">91</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">15</property>
                     <property name="name">period_end</property>
                     <property name="nativeName">period_end</property>
                     <property name="dataType">date</property>
@@ -471,6 +489,7 @@
             </list-property>
             <xml-property name="queryText"><![CDATA[select rsr_result.title,
  rsr_result.id as result_pk,
+ rsr_result.type,
  rsr_indicator.title as indicator_title,
  rsr_indicator.id as indicator_pk,
  rsr_indicator.baseline_year,
@@ -487,8 +506,7 @@ from rsr_result
 left join rsr_indicator on result_id=rsr_result.id
 left join rsr_indicatorperiod on indicator_id=rsr_indicator.id
 where rsr_result.project_id = ?
---AND rsr_indicatorperiod.period_end::date < '2017-01-01'
-order by rsr_result.id, rsr_indicator.id, rsr_indicatorperiod.period_start]]></xml-property>
+order by rsr_result.type, rsr_result.title, rsr_result.id, rsr_indicator.id, rsr_indicatorperiod.period_start]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -11083,7 +11101,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <label id="1278">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Monitoring &amp; evalution</text-property>
+                        <text-property name="text">Monitoring &amp; evaluation</text-property>
                     </label>
                 </cell>
                 <cell id="1277">
@@ -12541,8 +12559,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     </text-data>
                 </cell>
             </row>
-            <row id="1383">
-                <cell id="1384">
+            <row id="1392">
+                <cell id="1393">
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="fontWeight">bold</property>
@@ -12556,1262 +12574,397 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="paddingTop">14pt</property>
                         <text-property name="text">Name of the contact person for the action: .................................................</text-property>
                     </label>
+                </cell>
+            </row>
+            <row id="1395">
+                <cell id="1396">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
                     <label id="1390">
                         <property name="fontWeight">normal</property>
                         <property name="marginLeft">0pt</property>
                         <property name="paddingTop">14pt</property>
                         <text-property name="text">Signature: ................................................. Location: .................................................</text-property>
                     </label>
+                </cell>
+            </row>
+            <row id="1383">
+                <cell id="1384">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
                     <label id="1391">
                         <property name="fontWeight">normal</property>
                         <property name="marginLeft">0pt</property>
                         <property name="paddingTop">14pt</property>
                         <text-property name="text">Date report due:  ................................................. Date report sent: .................................................</text-property>
                     </label>
+                    <label id="1469">
+                        <property name="style">H2</property>
+                        <property name="fontFamily">"Verdana"</property>
+                        <property name="color">#7AA80B</property>
+                        <property name="marginTop">4pt</property>
+                        <property name="marginBottom">8pt</property>
+                        <property name="pageBreakBefore">always</property>
+                        <text-property name="text">A. Appendix 1</text-property>
+                    </label>
+                    <table name="Results" id="1398">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="dataSet">Results_indicators_periods</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">title</property>
+                                <text-property name="displayName">title</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["title"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">indicator_title</property>
+                                <text-property name="displayName">indicator_title</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["indicator_title"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">baseline_year</property>
+                                <text-property name="displayName">baseline_year</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["baseline_year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">baseline_value</property>
+                                <text-property name="displayName">baseline_value</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">actual_value</property>
+                                <text-property name="displayName">actual_value</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">actual_comment</property>
+                                <text-property name="displayName">actual_comment</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">target_value</property>
+                                <text-property name="displayName">target_value</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">period_start</property>
+                                <text-property name="displayName">period_start</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                            <structure>
+                                <property name="name">period_end</property>
+                                <text-property name="displayName">period_end</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["period_end"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                        </list-property>
+                        <structure name="toc"/>
+                        <property name="pageBreakInterval">0</property>
+                        <column id="1447">
+                            <property name="width">25%</property>
+                        </column>
+                        <column id="1448">
+                            <property name="width">25%</property>
+                        </column>
+                        <column id="1449"/>
+                        <column id="1450"/>
+                        <column id="1451"/>
+                        <column id="1452"/>
+                        <column id="1453"/>
+                        <header>
+                            <row id="1456">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <cell id="1457">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1401">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Results</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1458">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1403">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Indicators</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1459">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1466">
+                                        <text-property name="text">Baseline</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1461">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1467">
+                                        <text-property name="text">Target</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1463">
+                                    <property name="colSpan">1</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1468">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">Actuals</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="1399">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="textAlign">left</property>
+                                <cell id="1400"/>
+                                <cell id="1402"/>
+                                <cell id="1404">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1405">
+                                        <text-property name="text">Year</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1406">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1407">
+                                        <text-property name="text">baseline_value</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1408">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1409">
+                                        <text-property name="text">Value</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1410">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1411">
+                                        <text-property name="text">Year</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1412">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1413">
+                                        <text-property name="text">Value</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="1418">
+                                <property name="fontWeight">normal</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">left</property>
+                                <cell id="1419">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1420">
+                                        <property name="resultSetColumn">title</property>
+                                    </data>
+                                </cell>
+                                <cell id="1421">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1422">
+                                        <property name="resultSetColumn">indicator_title</property>
+                                    </data>
+                                </cell>
+                                <cell id="1423">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1426">
+                                        <property name="resultSetColumn">baseline_value</property>
+                                    </data>
+                                </cell>
+                                <cell id="1425">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1424">
+                                        <property name="resultSetColumn">baseline_year</property>
+                                    </data>
+                                </cell>
+                                <cell id="1427">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1432">
+                                        <property name="resultSetColumn">target_value</property>
+                                    </data>
+                                </cell>
+                                <cell id="1429">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1430">
+                                        <property name="resultSetColumn">actual_comment</property>
+                                    </data>
+                                </cell>
+                                <cell id="1431">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="1428">
+                                        <property name="resultSetColumn">actual_value</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="1437">
+                                <cell id="1438"/>
+                                <cell id="1439"/>
+                                <cell id="1440"/>
+                                <cell id="1441"/>
+                                <cell id="1442"/>
+                                <cell id="1443"/>
+                                <cell id="1444"/>
+                            </row>
+                        </footer>
+                    </table>
                 </cell>
             </row>
         </grid>
-        <table name="results_table1" id="1064">
-            <property name="borderBottomStyle">none</property>
-            <property name="borderLeftStyle">none</property>
-            <property name="borderRightStyle">none</property>
-            <property name="borderTopStyle">none</property>
-            <property name="marginTop">0pt</property>
-            <property name="marginLeft">0pt</property>
-            <property name="pageBreakAfter">always</property>
-            <property name="pageBreakInside">auto</property>
-            <property name="width">177.27083333333331mm</property>
-            <property name="dataSet">Results_indicators_periods</property>
-            <list-property name="paramBindings">
-                <structure>
-                    <property name="paramName">projid</property>
-                    <simple-property-list name="expression">
-                        <value type="javascript">row["id"]</value>
-                    </simple-property-list>
-                </structure>
-            </list-property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">period_start</property>
-                    <text-property name="displayName">period_start</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
-                    <property name="dataType">date</property>
-                </structure>
-                <structure>
-                    <property name="name">actual_value</property>
-                    <text-property name="displayName">actual_value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">target_value</property>
-                    <text-property name="displayName">target_value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">baseline_value</property>
-                    <text-property name="displayName">baseline_value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">title</property>
-                    <text-property name="displayName">title</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["title"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">period_end</property>
-                    <text-property name="displayName">period_end</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["period_end"]</expression>
-                    <property name="dataType">date</property>
-                </structure>
-                <structure>
-                    <property name="name">actual_comment</property>
-                    <text-property name="displayName">actual_comment</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">indicator_title</property>
-                    <text-property name="displayName">indicator_title</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["indicator_title"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">baseline_year</property>
-                    <text-property name="displayName">baseline_year</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["baseline_year"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">baseline_comment</property>
-                    <text-property name="displayName">baseline_comment</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["baseline_comment"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">actual_value_number</property>
-                    <text-property name="displayName">actual_value#</text-property>
-                    <expression name="expression" type="javascript">var v =dataSetRow["actual_value"];&#13;
-if (v==null) {res = -1;} else&#13;
-if (v=="") {res = -1;} else&#13;
-if (!isNaN(v)) {res = Number(v);} else {&#13;
- var v2 = v.replace(",",".");&#13;
- if (!isNaN(v2)) {res = Number(v2);} else {res = -1;}&#13;
-}&#13;
-res;</expression>
-                    <property name="dataType">float</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">target_value_number</property>
-                    <text-property name="displayName">target_value#</text-property>
-                    <expression name="expression" type="javascript">var v =dataSetRow["target_value"];&#13;
-if (v==null) {res = -1;} else&#13;
-if (v=="") {res = -1;} else&#13;
-if (!isNaN(v)) {res = Number(v);} else {&#13;
- var v2 = v.replace(",",".");&#13;
- if (!isNaN(v2)) {res = Number(v2);} else {res = -1;}&#13;
-}&#13;
-res;</expression>
-                    <property name="dataType">float</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">progress_pct</property>
-                    <text-property name="displayName">progress_pct</text-property>
-                    <expression name="expression" type="javascript">(row["actual_value"] === null )&#13;
-?&#13;
-null&#13;
-:&#13;
-(row["actual_value"].toLowerCase() == "gender neutral" )&#13;
-?&#13;
-100&#13;
-:&#13;
-(row["actual_value"].toLowerCase() == "gender aware" )&#13;
-?&#13;
-100&#13;
-:&#13;
-(row["actual_value"].toLowerCase() == "available" )&#13;
-?&#13;
-100&#13;
-:&#13;
-(row["actual_value"].toLowerCase() == "not available" )&#13;
-?&#13;
-0&#13;
-:&#13;
-(row["actual_value"].toLowerCase() == "operational" )&#13;
-?&#13;
-100&#13;
-:&#13;
-(row["actual_value"].toLowerCase() == "not yet available" )&#13;
-?&#13;
-0&#13;
-:&#13;
-(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > 0 )&#13;
-?&#13;
-(row["baseline_value"] ?&#13;
-Math.round((row["actual_value_number"]-row["baseline_value"]) * 100 / (row["target_value_number"] - row["baseline_value"]))&#13;
-: Math.round(row["actual_value_number"] * 100 / row["target_value_number"])&#13;
-)&#13;
-:&#13;
-null</expression>
-                    <property name="dataType">integer</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">target_comment</property>
-                    <text-property name="displayName">target_comment</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["target_comment"]</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Column Binding</property>
-                    <text-property name="displayName">date_start</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
-                    <property name="dataType">date</property>
-                    <property name="allowExport">true</property>
-                </structure>
-            </list-property>
-            <structure name="toc"/>
-            <method name="onCreate"><![CDATA[var allan = 7;
-]]></method>
-            <property name="repeatHeader">false</property>
-            <property name="pageBreakInterval">0</property>
-            <column id="1117">
-                <property name="width">24.87083333333333mm</property>
-            </column>
-            <column id="1118">
-                <property name="width">37.041666666666664mm</property>
-            </column>
-            <column id="1119">
-                <property name="width">37.041666666666664mm</property>
-            </column>
-            <column id="1120">
-                <property name="width">58.20833333333333mm</property>
-            </column>
-            <column id="1121">
-                <property name="width">19.31458333333333mm</property>
-            </column>
-            <header>
-                <row id="1065">
-                    <property name="pageBreakAfter">auto</property>
-                    <property name="pageBreakInside">auto</property>
-                    <property name="height">16.933333333333334mm</property>
-                    <cell id="1066">
-                        <property name="colSpan">3</property>
-                        <property name="rowSpan">1</property>
-                        <property name="textAlign">left</property>
-                        <label id="1067">
-                            <property name="style">Sectionheader</property>
-                            <property name="fontSize">14pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="marginBottom">0pt</property>
-                            <property name="paddingTop">0pt</property>
-                            <property name="paddingLeft">0pt</property>
-                            <property name="paddingBottom">0pt</property>
-                            <property name="paddingRight">0pt</property>
-                            <property name="textAlign">left</property>
-                            <property name="display">block</property>
-                            <property name="pageBreakAfter">avoid</property>
-                            <property name="pageBreakBefore">avoid</property>
-                            <property name="pageBreakInside">avoid</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">(Total.count() &lt; 1)</expression>
-                                </structure>
-                            </list-property>
-                            <text-property name="text">Results</text-property>
-                        </label>
-                    </cell>
-                    <cell id="1068">
-                        <text-data id="1069">
-                            <property name="textAlign">left</property>
-                            <property name="pageBreakAfter">avoid</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">true</expression>
-                                </structure>
-                            </list-property>
-                            <expression name="valueExpr">var a=0,b=0,alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");&#13;
-reportContext.getGlobalVariable('debug')</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
-                    </cell>
-                    <cell id="1070"/>
-                </row>
-            </header>
-            <group id="1071">
-                <property name="groupName">Results</property>
-                <expression name="keyExpr" type="javascript">row["title"]</expression>
-                <property name="repeatHeader">false</property>
-                <property name="pageBreakBefore">auto</property>
-                <property name="pageBreakInside">auto</property>
-                <header>
-                    <row id="1072">
-                        <property name="pageBreakBefore">auto</property>
-                        <property name="pageBreakInside">auto</property>
-                        <cell id="1073">
-                            <property name="colSpan">5</property>
-                            <property name="rowSpan">1</property>
-                            <text-data id="1074">
-                                <property name="fontSize">12pt</property>
-                                <property name="fontWeight">bold</property>
-                                <property name="color">#6D8FAF</property>
-                                <property name="marginTop">4pt</property>
-                                <property name="paddingTop">0pt</property>
-                                <property name="paddingLeft">0pt</property>
-                                <property name="paddingBottom">1pt</property>
-                                <property name="paddingRight">8pt</property>
-                                <property name="pageBreakAfter">auto</property>
-                                <property name="pageBreakBefore">avoid</property>
-                                <property name="pageBreakInside">auto</property>
-                                <expression name="valueExpr">b=0, a++, "Result " + a;</expression>
-                                <property name="contentType">html</property>
-                            </text-data>
-                            <data id="1075">
-                                <property name="fontSize">10pt</property>
-                                <property name="paddingLeft">0pt</property>
-                                <property name="paddingBottom">0pt</property>
-                                <property name="paddingRight">8pt</property>
-                                <property name="resultSetColumn">title</property>
-                            </data>
-                        </cell>
-                    </row>
-                </header>
-            </group>
-            <group id="1076">
-                <property name="groupName">Indicators</property>
-                <expression name="keyExpr" type="javascript">row["indicator_title"]</expression>
-                <property name="repeatHeader">false</property>
-                <property name="hideDetail">false</property>
-                <property name="pageBreakInside">avoid</property>
-                <header>
-                    <row id="1077">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <list-property name="visibility">
-                            <structure>
-                                <property name="format">all</property>
-                                <expression name="valueExpr" type="javascript">!row["indicator_title"]</expression>
-                            </structure>
-                        </list-property>
-                        <cell id="1078">
-                            <property name="colSpan">5</property>
-                            <property name="rowSpan">1</property>
-                            <property name="paddingTop">0pt</property>
-                            <property name="paddingLeft">0pt</property>
-                            <property name="paddingBottom">4pt</property>
-                            <property name="paddingRight">0pt</property>
-                            <grid id="1079">
-                                <property name="borderBottomStyle">none</property>
-                                <property name="borderLeftStyle">none</property>
-                                <property name="borderRightStyle">none</property>
-                                <property name="borderTopStyle">none</property>
-                                <property name="marginTop">15pt</property>
-                                <property name="pageBreakAfter">avoid</property>
-                                <property name="width">176.0361111111111mm</property>
-                                <column id="1080">
-                                    <property name="width">27.869444444444447mm</property>
-                                </column>
-                                <column id="1081">
-                                    <property name="width">15mm</property>
-                                </column>
-                                <column id="1082">
-                                    <property name="width">36mm</property>
-                                </column>
-                                <column id="1083">
-                                    <property name="width">54.68055555555555mm</property>
-                                </column>
-                                <row id="1084">
-                                    <property name="backgroundColor">#EFF3F8</property>
-                                    <cell id="1085">
-                                        <property name="paddingTop">0pt</property>
-                                        <property name="paddingLeft">0pt</property>
-                                        <property name="paddingBottom">0px</property>
-                                        <property name="paddingRight">7px</property>
-                                        <text-data id="1086">
-                                            <property name="backgroundColor">#C3D6E4</property>
-                                            <property name="fontSize">10pt</property>
-                                            <property name="fontWeight">bold</property>
-                                            <property name="color">white</property>
-                                            <property name="marginTop">0px</property>
-                                            <property name="paddingTop">5pt</property>
-                                            <property name="paddingLeft">8pt</property>
-                                            <property name="paddingBottom">5pt</property>
-                                            <property name="paddingRight">5pt</property>
-                                            <property name="display">inline</property>
-                                            <expression name="valueExpr">var comments=[]; b++, "Indicator " + a + "." + (b&lt;27 ? alphabet[b] : b)</expression>
-                                            <property name="contentType">html</property>
-                                        </text-data>
-                                    </cell>
-                                    <cell id="1087">
-                                        <property name="colSpan">3</property>
-                                        <property name="rowSpan">1</property>
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingBottom">5pt</property>
-                                        <text-data id="1088">
-                                            <property name="marginTop">0px</property>
-                                            <property name="marginBottom">1pt</property>
-                                            <property name="paddingTop">2pt</property>
-                                            <property name="paddingLeft">3pt</property>
-                                            <property name="paddingBottom">4pt</property>
-                                            <property name="paddingRight">5px</property>
-                                            <expression name="valueExpr">row["indicator_title"]</expression>
-                                            <property name="contentType">html</property>
-                                        </text-data>
-                                    </cell>
-                                </row>
-                                <row id="1089">
-                                    <property name="backgroundColor">white</property>
-                                    <cell id="1090">
-                                        <property name="colSpan">2</property>
-                                        <property name="rowSpan">1</property>
-                                        <property name="paddingTop">0pt</property>
-                                        <property name="paddingLeft">0pt</property>
-                                        <property name="paddingBottom">1px</property>
-                                        <property name="paddingRight">7px</property>
-                                        <property name="verticalAlign">bottom</property>
-                                        <text-data id="1091">
-                                            <property name="fontStyle">italic</property>
-                                            <property name="paddingTop">4pt</property>
-                                            <property name="paddingLeft">9pt</property>
-                                            <expression name="valueExpr">'Baseline: '+ row["baseline_value"]+' ('+row["baseline_year"]+')'</expression>
-                                            <property name="contentType">html</property>
-                                        </text-data>
-                                        <label id="1092">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="fontStyle">italic</property>
-                                            <property name="marginTop">8pt</property>
-                                            <property name="marginBottom">1pt</property>
-                                            <property name="paddingTop">1pt</property>
-                                            <property name="paddingLeft">8pt</property>
-                                            <property name="paddingBottom">1pt</property>
-                                            <property name="textAlign">left</property>
-                                            <text-property name="text">Period</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1093">
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingBottom">1pt</property>
-                                        <property name="verticalAlign">bottom</property>
-                                        <label id="1094">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="fontStyle">italic</property>
-                                            <property name="color">black</property>
-                                            <property name="marginTop">8pt</property>
-                                            <property name="marginLeft">1pt</property>
-                                            <property name="marginBottom">1pt</property>
-                                            <property name="marginRight">1pt</property>
-                                            <property name="paddingTop">1pt</property>
-                                            <property name="paddingLeft">1pt</property>
-                                            <property name="paddingBottom">1pt</property>
-                                            <property name="textAlign">left</property>
-                                            <text-property name="text">Actual</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="1095">
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingBottom">1pt</property>
-                                        <property name="textAlign">left</property>
-                                        <property name="verticalAlign">bottom</property>
-                                        <label id="1096">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="fontStyle">italic</property>
-                                            <property name="marginTop">8pt</property>
-                                            <property name="marginBottom">1pt</property>
-                                            <property name="paddingTop">1pt</property>
-                                            <property name="paddingLeft">1pt</property>
-                                            <property name="paddingBottom">1pt</property>
-                                            <property name="textAlign">left</property>
-                                            <text-property name="text">Target</text-property>
-                                        </label>
-                                    </cell>
-                                </row>
-                                <row id="1097">
-                                    <property name="backgroundColor">white</property>
-                                    <cell id="1098">
-                                        <property name="colSpan">2</property>
-                                        <property name="rowSpan">1</property>
-                                        <property name="paddingTop">0pt</property>
-                                        <property name="paddingLeft">0pt</property>
-                                        <property name="paddingBottom">0px</property>
-                                        <property name="paddingRight">7px</property>
-                                    </cell>
-                                    <cell id="1099">
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingBottom">5pt</property>
-                                    </cell>
-                                    <cell id="1100">
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingBottom">5pt</property>
-                                        <property name="textAlign">left</property>
-                                    </cell>
-                                </row>
-                            </grid>
-                        </cell>
-                    </row>
-                </header>
-                <footer>
-                    <row id="1101">
-                        <property name="style">CommentRow</property>
-                        <list-property name="visibility">
-                            <structure>
-                                <property name="format">all</property>
-                                <expression name="valueExpr" type="javascript">comments.length == 0</expression>
-                            </structure>
-                        </list-property>
-                        <cell id="1102">
-                            <property name="colSpan">5</property>
-                            <property name="rowSpan">1</property>
-                            <text-data id="1103">
-                                <property name="fontSize">10pt</property>
-                                <property name="marginBottom">8pt</property>
-                                <property name="paddingTop">4pt</property>
-                                <property name="paddingLeft">8pt</property>
-                                <property name="paddingBottom">4pt</property>
-                                <property name="paddingRight">1pt</property>
-                                <expression name="valueExpr">var cmt=""; for (i=0; i&lt;comments.length; i++) {cmt += comments[i] + "&lt;BR>";}; cmt</expression>
-                                <property name="contentType">html</property>
-                            </text-data>
-                        </cell>
-                    </row>
-                </footer>
-            </group>
-            <detail>
-                <row id="1104">
-                    <property name="backgroundColor">#FFFFFF</property>
-                    <property name="verticalAlign">top</property>
-                    <list-property name="visibility">
-                        <structure>
-                            <property name="format">all</property>
-                            <expression name="valueExpr" type="javascript">!row["indicator_title"]</expression>
-                        </structure>
-                    </list-property>
-                    <cell id="1105">
-                        <property name="paddingTop">1pt</property>
-                        <property name="paddingLeft">1pt</property>
-                        <property name="paddingBottom">1pt</property>
-                        <property name="paddingRight">1pt</property>
-                        <property name="textAlign">center</property>
-                        <property name="verticalAlign">top</property>
-                        <text-data id="1106">
-                            <property name="fontSize">10pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="fontStyle">italic</property>
-                            <property name="paddingTop">3pt</property>
-                            <property name="paddingLeft">6pt</property>
-                            <property name="paddingBottom">4pt</property>
-                            <property name="textAlign">left</property>
-                            <expression name="valueExpr">var yr=(row["period_start"] ? Formatter.format(row["period_start"], "yyyy") : "");&#13;
-if (row["actual_comment"]) {comments.push(yr + ": " + row["actual_comment"])};&#13;
-yr</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
-                    </cell>
-                    <cell id="1107">
-                        <property name="paddingTop">1pt</property>
-                        <property name="paddingLeft">1pt</property>
-                        <property name="paddingBottom">1pt</property>
-                        <property name="paddingRight">1pt</property>
-                        <property name="textAlign">center</property>
-                        <property name="verticalAlign">top</property>
-                    </cell>
-                    <cell id="1108">
-                        <property name="paddingTop">1pt</property>
-                        <property name="paddingLeft">1pt</property>
-                        <property name="paddingBottom">1pt</property>
-                        <property name="paddingRight">1pt</property>
-                        <property name="verticalAlign">top</property>
-                        <data id="1109">
-                            <property name="fontSize">10pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="marginTop">4pt</property>
-                            <property name="marginBottom">7pt</property>
-                            <property name="paddingLeft">8pt</property>
-                            <structure name="numberFormat">
-                                <property name="category">Unformatted</property>
-                            </structure>
-                            <property name="textAlign">left</property>
-                            <property name="display">block</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">row["actual_value_number"] != -1</expression>
-                                </structure>
-                            </list-property>
-                            <property name="resultSetColumn">actual_value</property>
-                        </data>
-                        <data id="1110">
-                            <property name="fontSize">10pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="marginTop">4pt</property>
-                            <property name="marginBottom">4pt</property>
-                            <property name="paddingLeft">8pt</property>
-                            <structure name="numberFormat">
-                                <property name="category">General Number</property>
-                                <property name="pattern">General Number</property>
-                            </structure>
-                            <property name="textAlign">left</property>
-                            <property name="display">block</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">row["actual_value_number"] == -1</expression>
-                                </structure>
-                            </list-property>
-                            <property name="resultSetColumn">actual_value_number</property>
-                        </data>
-                    </cell>
-                    <cell id="1111">
-                        <property name="paddingLeft">0pt</property>
-                        <property name="verticalAlign">top</property>
-                        <data id="1112">
-                            <property name="fontSize">10pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="marginTop">4pt</property>
-                            <property name="marginBottom">7pt</property>
-                            <property name="paddingLeft">35pt</property>
-                            <property name="textAlign">left</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">row["target_value_number"] != -1</expression>
-                                </structure>
-                            </list-property>
-                            <property name="resultSetColumn">target_value</property>
-                        </data>
-                        <data id="1113">
-                            <property name="fontSize">10pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="marginTop">4pt</property>
-                            <property name="marginBottom">4pt</property>
-                            <property name="paddingLeft">35pt</property>
-                            <structure name="numberFormat">
-                                <property name="category">General Number</property>
-                                <property name="pattern">General Number</property>
-                            </structure>
-                            <property name="textAlign">left</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">row["target_value_number"] == -1</expression>
-                                </structure>
-                            </list-property>
-                            <property name="resultSetColumn">target_value_number</property>
-                        </data>
-                    </cell>
-                    <cell id="1114">
-                        <property name="paddingTop">0pt</property>
-                        <property name="verticalAlign">top</property>
-                        <text-data name="percentage1" id="1115">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">7pt</property>
-                            <property name="fontWeight">normal</property>
-                            <property name="borderBottomStyle">none</property>
-                            <property name="borderLeftStyle">none</property>
-                            <property name="borderRightStyle">none</property>
-                            <property name="borderTopStyle">none</property>
-                            <property name="marginTop">0pt</property>
-                            <property name="marginLeft">0pt</property>
-                            <property name="marginBottom">-35pt</property>
-                            <property name="paddingTop">12pt</property>
-                            <property name="paddingLeft">10pt</property>
-                            <property name="paddingBottom">12pt</property>
-                            <property name="textAlign">left</property>
-                            <property name="display">block</property>
-                            <expression name="valueExpr">(row["progress_pct"] != null)&#13;
-?&#13;
- row["progress_pct"] + "%"&#13;
- :&#13;
- ""</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
-                        <extended-item extensionName="Chart" name="clock1" id="1116">
-                            <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
-  <Version>2.6.1</Version>
-  <Type>Pie Chart</Type>
-  <SubType>Standard</SubType>
-  <Block>
-    <Children xsi:type="layout:TitleBlock">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>24.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>false</Visible>
-      <Label>
-        <Caption>
-          <Value>77%</Value>
-          <Font>
-            <Size>16.0</Size>
-            <Bold>true</Bold>
-            <Alignment>
-              <horizontalAlignment>Center</horizontalAlignment>
-              <verticalAlignment>Center</verticalAlignment>
-            </Alignment>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>true</Visible>
-      </Label>
-    </Children>
-    <Children xsi:type="layout:Plot">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>1.0</Top>
-        <Left>1.0</Left>
-        <Bottom>1.0</Bottom>
-        <Right>1.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <HorizontalSpacing>0</HorizontalSpacing>
-      <VerticalSpacing>0</VerticalSpacing>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>0.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>0.0</Right>
-        </Insets>
-      </ClientArea>
-    </Children>
-    <Children xsi:type="layout:Legend">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>false</Visible>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>2.0</Top>
-          <Left>2.0</Left>
-          <Bottom>2.0</Bottom>
-          <Right>2.0</Right>
-        </Insets>
-      </ClientArea>
-      <Text>
-        <Value></Value>
-        <Font>
-          <Alignment/>
-        </Font>
-      </Text>
-      <Orientation>Vertical</Orientation>
-      <Direction>Top_Bottom</Direction>
-      <Separator>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>true</Visible>
-      </Separator>
-      <Position>Right</Position>
-      <ItemType>Categories</ItemType>
-      <Title>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Title>
-      <TitlePosition>Above</TitlePosition>
-    </Children>
-    <Bounds>
-      <Left>0.0</Left>
-      <Top>0.0</Top>
-      <Width>212.0</Width>
-      <Height>130.0</Height>
-    </Bounds>
-    <Insets>
-      <Top>3.0</Top>
-      <Left>3.0</Left>
-      <Bottom>3.0</Bottom>
-      <Right>3.0</Right>
-    </Insets>
-    <Row>-1</Row>
-    <Column>-1</Column>
-    <Rowspan>-1</Rowspan>
-    <Columnspan>-1</Columnspan>
-    <Outline>
-      <Style>Solid</Style>
-      <Thickness>1</Thickness>
-      <Color>
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Color>
-      <Visible>false</Visible>
-    </Outline>
-    <Background xsi:type="attribute:ColorDefinition">
-      <Transparency>0</Transparency>
-      <Red>255</Red>
-      <Green>255</Green>
-      <Blue>255</Blue>
-    </Background>
-    <Visible>true</Visible>
-  </Block>
-  <Dimension>Two_Dimensional</Dimension>
-  <Units>Points</Units>
-  <SeriesThickness>10.0</SeriesThickness>
-  <GridColumnCount>0</GridColumnCount>
-  <ExtendedProperties>
-    <Name>enable.area.alt</Name>
-    <Value>false</Value>
-  </ExtendedProperties>
-  <SampleData>
-    <BaseSampleData>
-      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
-    </BaseSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
-      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-  </SampleData>
-  <Interactivity>
-    <Enable>false</Enable>
-  </Interactivity>
-  <EmptyMessage>
-    <Caption>
-      <Value>This chart contains no data.</Value>
-      <Font>
-        <Alignment>
-          <horizontalAlignment>Center</horizontalAlignment>
-          <verticalAlignment>Center</verticalAlignment>
-        </Alignment>
-      </Font>
-    </Caption>
-    <Background xsi:type="attribute:ColorDefinition">
-      <Transparency>64</Transparency>
-      <Red>127</Red>
-      <Green>127</Green>
-      <Blue>127</Blue>
-    </Background>
-    <Outline>
-      <Color>
-        <Transparency>128</Transparency>
-        <Red>127</Red>
-        <Green>127</Green>
-        <Blue>127</Blue>
-      </Color>
-      <Visible>true</Visible>
-    </Outline>
-    <Insets>
-      <Top>10.0</Top>
-      <Left>10.0</Left>
-      <Bottom>10.0</Bottom>
-      <Right>10.0</Right>
-    </Insets>
-    <Visible>false</Visible>
-  </EmptyMessage>
-  <SeriesDefinitions>
-    <Query>
-      <Definition></Definition>
-    </Query>
-    <SeriesPalette>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>52</Red>
-        <Green>181</Green>
-        <Blue>115</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>52</Red>
-        <Green>181</Green>
-        <Blue>115</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>52</Red>
-        <Green>181</Green>
-        <Blue>115</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>192</Red>
-        <Green>192</Green>
-        <Blue>192</Blue>
-      </Entries>
-    </SeriesPalette>
-    <SeriesDefinitions>
-      <Query>
-        <Definition></Definition>
-      </Query>
-      <SeriesPalette>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>52</Red>
-          <Green>181</Green>
-          <Blue>115</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>52</Red>
-          <Green>181</Green>
-          <Blue>115</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>52</Red>
-          <Green>181</Green>
-          <Blue>115</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>192</Red>
-          <Green>192</Green>
-          <Blue>192</Blue>
-        </Entries>
-      </SeriesPalette>
-      <Series xsi:type="type:PieSeries">
-        <Visible>true</Visible>
-        <Label>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>false</Visible>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>false</Visible>
-        </Label>
-        <DataDefinition>
-          <Definition>row[&quot;number&quot;]</Definition>
-          <Grouping>
-            <GroupType>Text</GroupType>
-            <AggregateExpression>Sum</AggregateExpression>
-          </Grouping>
-        </DataDefinition>
-        <DataPoint>
-          <Components>
-            <Type>Orthogonal_Value</Type>
-          </Components>
-          <Separator>, </Separator>
-        </DataPoint>
-        <LabelPosition>Outside</LabelPosition>
-        <Stacked>false</Stacked>
-        <Triggers>
-          <Condition>onmouseover</Condition>
-          <Action>
-            <Type>Show_Tooltip</Type>
-            <Value xsi:type="attribute:TooltipValue">
-              <Text></Text>
-              <Delay>200</Delay>
-            </Value>
-          </Action>
-        </Triggers>
-        <Translucent>true</Translucent>
-        <Explosion>0</Explosion>
-        <Title>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Size>16.0</Size>
-              <Bold>true</Bold>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>false</Visible>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>false</Visible>
-        </Title>
-        <TitlePosition>Right</TitlePosition>
-        <LeaderLineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Visible>true</Visible>
-        </LeaderLineAttributes>
-        <LeaderLineLength>10.0</LeaderLineLength>
-        <SliceOutline>
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </SliceOutline>
-        <Ratio>1.0</Ratio>
-        <Rotation>90.0</Rotation>
-        <InnerRadius>66.0</InnerRadius>
-      </Series>
-      <Grouping>
-        <GroupType>Text</GroupType>
-        <AggregateExpression>Sum</AggregateExpression>
-      </Grouping>
-    </SeriesDefinitions>
-    <Series>
-      <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Label>
-      <DataDefinition>
-        <Definition>row[&quot;name&quot;]</Definition>
-      </DataDefinition>
-      <DataPoint>
-        <Components>
-          <Type>Orthogonal_Value</Type>
-        </Components>
-        <Separator>, </Separator>
-      </DataPoint>
-      <LabelPosition>Outside</LabelPosition>
-      <Stacked>false</Stacked>
-    </Series>
-    <Grouping>
-      <Enabled>true</Enabled>
-      <GroupType>Text</GroupType>
-      <AggregateExpression>Sum</AggregateExpression>
-    </Grouping>
-    <SortKey/>
-  </SeriesDefinitions>
-  <Coverage>1.0</Coverage>
-</model:ChartWithoutAxes>
-]]></xml-property>
-                            <property name="outputFormat">SVG</property>
-                            <property name="inheritColumns">false</property>
-                            <property name="display">block</property>
-                            <property name="borderTopStyle">none</property>
-                            <property name="borderLeftStyle">none</property>
-                            <property name="borderBottomStyle">none</property>
-                            <property name="borderRightStyle">none</property>
-                            <property name="marginTop">0pt</property>
-                            <property name="marginBottom">0pt</property>
-                            <property name="height">35pt</property>
-                            <property name="width">35pt</property>
-                            <property name="dataSet">Four_rows</property>
-                            <list-property name="visibility">
-                                <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">null == row._outer["progress_pct"]</expression>
-                                </structure>
-                            </list-property>
-                            <list-property name="paramBindings">
-                                <structure>
-                                    <property name="paramName">param_1</property>
-                                    <simple-property-list name="expression">
-                                        <value type="javascript">(row["progress_pct"] &lt; 33)&#13;
-?&#13;
-Math.max(row["progress_pct"],0)&#13;
-:&#13;
-0</value>
-                                    </simple-property-list>
-                                </structure>
-                                <structure>
-                                    <property name="paramName">param_2</property>
-                                    <simple-property-list name="expression">
-                                        <value>(row["progress_pct"] >= 33 &amp;&amp; row["progress_pct"] &lt; 67)&#13;
-?&#13;
-row["progress_pct"]&#13;
-:&#13;
-0</value>
-                                    </simple-property-list>
-                                </structure>
-                                <structure>
-                                    <property name="paramName">param_3</property>
-                                    <simple-property-list name="expression">
-                                        <value type="javascript">(row["progress_pct"] >= 67)&#13;
-?&#13;
-Math.min(row["progress_pct"],100)&#13;
-:&#13;
-0</value>
-                                    </simple-property-list>
-                                </structure>
-                                <structure>
-                                    <property name="paramName">param_4</property>
-                                    <simple-property-list name="expression">
-                                        <value type="javascript">100-Math.max(Math.min(row["progress_pct"],100),0)</value>
-                                    </simple-property-list>
-                                </structure>
-                            </list-property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">number</property>
-                                    <expression name="expression" type="javascript">dataSetRow["number"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                                <structure>
-                                    <property name="name">name</property>
-                                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                            </list-property>
-                            <property name="style">progress_low</property>
-                        </extended-item>
-                    </cell>
-                </row>
-            </detail>
-        </table>
     </body>
 </report>
