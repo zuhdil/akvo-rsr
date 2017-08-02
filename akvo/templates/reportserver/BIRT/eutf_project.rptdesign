@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706142203</property>
     <html-property name="description">Plan Finland MFA reporting</html-property>
     <list-property name="propertyBindings">
         <structure>
@@ -10308,6 +10308,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <text-data id="1128">
+                        <property name="fontSize">11pt</property>
                         <expression name="bookmark" type="javascript">row["id"]</expression>
                         <structure name="toc">
                             <expression name="expressionValue" type="javascript">row["title"]</expression>
