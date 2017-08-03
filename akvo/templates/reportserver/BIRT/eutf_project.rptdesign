@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706142203</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
     <html-property name="description">Plan Finland MFA reporting</html-property>
     <list-property name="propertyBindings">
         <structure>
@@ -9958,8 +9958,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
-            <property name="pageBreakAfter">avoid</property>
-            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
             <property name="dataSet">rsr_project</property>
             <list-property name="boundDataColumns">
@@ -10653,8 +10653,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
-            <property name="pageBreakAfter">avoid</property>
-            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
             <property name="dataSet">rsr_project</property>
             <list-property name="boundDataColumns">
@@ -11250,8 +11250,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
-            <property name="pageBreakAfter">avoid</property>
-            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
             <property name="dataSet">rsr_project</property>
             <list-property name="boundDataColumns">
@@ -11815,8 +11815,9 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
-            <property name="pageBreakAfter">avoid</property>
-            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakInside">avoid</property>
             <property name="width">178.06458333333336mm</property>
             <property name="dataSet">rsr_project</property>
             <list-property name="boundDataColumns">
@@ -12190,8 +12191,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
-            <property name="pageBreakAfter">avoid</property>
-            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
             <property name="dataSet">rsr_project</property>
             <list-property name="boundDataColumns">
@@ -12609,16 +12610,107 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="paddingTop">14pt</property>
                         <text-property name="text">Date report due:  ................................................. Date report sent: .................................................</text-property>
                     </label>
-                    <label id="1469">
-                        <property name="style">H2</property>
-                        <property name="fontFamily">"Verdana"</property>
-                        <property name="color">#7AA80B</property>
-                        <property name="marginTop">4pt</property>
-                        <property name="marginBottom">8pt</property>
-                        <property name="pageBreakBefore">always</property>
-                        <text-property name="text">A. Appendix 1</text-property>
-                    </label>
-                    <table name="Results" id="1398">
+                </cell>
+            </row>
+        </grid>
+        <label id="1469">
+            <property name="style">H2</property>
+            <property name="fontFamily">"Verdana"</property>
+            <property name="color">#7AA80B</property>
+            <property name="marginTop">4pt</property>
+            <property name="marginBottom">8pt</property>
+            <property name="paddingLeft">8pt</property>
+            <property name="pageBreakBefore">always</property>
+            <text-property name="text">A. Appendix 1</text-property>
+        </label>
+        <table name="Results" id="1398">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="dataSet">Results_indicators_periods</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">title</property>
+                    <text-property name="displayName">title</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["title"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">indicator_title</property>
+                    <text-property name="displayName">indicator_title</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["indicator_title"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">baseline_year</property>
+                    <text-property name="displayName">baseline_year</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["baseline_year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">baseline_value</property>
+                    <text-property name="displayName">baseline_value</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_value</property>
+                    <text-property name="displayName">actual_value</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_comment</property>
+                    <text-property name="displayName">actual_comment</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">target_value</property>
+                    <text-property name="displayName">target_value</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">period_start</property>
+                    <text-property name="displayName">period_start</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">period_end</property>
+                    <text-property name="displayName">period_end</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["period_end"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+            </list-property>
+            <structure name="toc"/>
+            <property name="pageBreakInterval">0</property>
+            <column id="1447">
+                <property name="width">25%</property>
+            </column>
+            <column id="1448">
+                <property name="width">25%</property>
+            </column>
+            <column id="1449"/>
+            <column id="1450"/>
+            <column id="1451"/>
+            <column id="1452"/>
+            <column id="1453"/>
+            <header>
+                <row id="1456">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="textAlign">center</property>
+                    <cell id="1457">
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
                         <property name="borderLeftStyle">solid</property>
@@ -12627,345 +12719,255 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <property name="pageBreakBefore">auto</property>
-                        <property name="dataSet">Results_indicators_periods</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">title</property>
-                                <text-property name="displayName">title</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["title"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">indicator_title</property>
-                                <text-property name="displayName">indicator_title</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["indicator_title"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">baseline_year</property>
-                                <text-property name="displayName">baseline_year</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["baseline_year"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">baseline_value</property>
-                                <text-property name="displayName">baseline_value</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">actual_value</property>
-                                <text-property name="displayName">actual_value</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["actual_value"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">actual_comment</property>
-                                <text-property name="displayName">actual_comment</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">target_value</property>
-                                <text-property name="displayName">target_value</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">period_start</property>
-                                <text-property name="displayName">period_start</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
-                                <property name="dataType">date</property>
-                            </structure>
-                            <structure>
-                                <property name="name">period_end</property>
-                                <text-property name="displayName">period_end</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["period_end"]</expression>
-                                <property name="dataType">date</property>
-                            </structure>
-                        </list-property>
-                        <structure name="toc"/>
-                        <property name="pageBreakInterval">0</property>
-                        <column id="1447">
-                            <property name="width">25%</property>
-                        </column>
-                        <column id="1448">
-                            <property name="width">25%</property>
-                        </column>
-                        <column id="1449"/>
-                        <column id="1450"/>
-                        <column id="1451"/>
-                        <column id="1452"/>
-                        <column id="1453"/>
-                        <header>
-                            <row id="1456">
-                                <property name="borderBottomStyle">solid</property>
-                                <property name="borderBottomWidth">thin</property>
-                                <property name="borderTopStyle">solid</property>
-                                <property name="borderTopWidth">thin</property>
-                                <property name="textAlign">center</property>
-                                <cell id="1457">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1401">
-                                        <property name="textAlign">left</property>
-                                        <text-property name="text">Results</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1458">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1403">
-                                        <property name="textAlign">left</property>
-                                        <text-property name="text">Indicators</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1459">
-                                    <property name="colSpan">2</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1466">
-                                        <text-property name="text">Baseline</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1461">
-                                    <property name="colSpan">2</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1467">
-                                        <text-property name="text">Target</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1463">
-                                    <property name="colSpan">1</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1468">
-                                        <property name="textAlign">left</property>
-                                        <text-property name="text">Actuals</text-property>
-                                    </label>
-                                </cell>
-                            </row>
-                            <row id="1399">
-                                <property name="borderBottomStyle">solid</property>
-                                <property name="borderBottomWidth">thin</property>
-                                <property name="textAlign">left</property>
-                                <cell id="1400"/>
-                                <cell id="1402"/>
-                                <cell id="1404">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1405">
-                                        <text-property name="text">Year</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1406">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1407">
-                                        <text-property name="text">baseline_value</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1408">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1409">
-                                        <text-property name="text">Value</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1410">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1411">
-                                        <text-property name="text">Year</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="1412">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <label id="1413">
-                                        <text-property name="text">Value</text-property>
-                                    </label>
-                                </cell>
-                            </row>
-                        </header>
-                        <detail>
-                            <row id="1418">
-                                <property name="fontWeight">normal</property>
-                                <property name="borderTopStyle">solid</property>
-                                <property name="borderTopWidth">thin</property>
-                                <property name="textAlign">left</property>
-                                <cell id="1419">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1420">
-                                        <property name="resultSetColumn">title</property>
-                                    </data>
-                                </cell>
-                                <cell id="1421">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1422">
-                                        <property name="resultSetColumn">indicator_title</property>
-                                    </data>
-                                </cell>
-                                <cell id="1423">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1426">
-                                        <property name="resultSetColumn">baseline_value</property>
-                                    </data>
-                                </cell>
-                                <cell id="1425">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1424">
-                                        <property name="resultSetColumn">baseline_year</property>
-                                    </data>
-                                </cell>
-                                <cell id="1427">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1432">
-                                        <property name="resultSetColumn">target_value</property>
-                                    </data>
-                                </cell>
-                                <cell id="1429">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1430">
-                                        <property name="resultSetColumn">actual_comment</property>
-                                    </data>
-                                </cell>
-                                <cell id="1431">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="1428">
-                                        <property name="resultSetColumn">actual_value</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                        <footer>
-                            <row id="1437">
-                                <cell id="1438"/>
-                                <cell id="1439"/>
-                                <cell id="1440"/>
-                                <cell id="1441"/>
-                                <cell id="1442"/>
-                                <cell id="1443"/>
-                                <cell id="1444"/>
-                            </row>
-                        </footer>
-                    </table>
-                </cell>
-            </row>
-        </grid>
+                        <label id="1401">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Results</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1458">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1403">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Indicators</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1459">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1466">
+                            <text-property name="text">Baseline</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1461">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1467">
+                            <text-property name="text">Target</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1463">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1468">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Actuals</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1399">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="textAlign">left</property>
+                    <cell id="1400"/>
+                    <cell id="1402"/>
+                    <cell id="1404">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1405">
+                            <text-property name="text">Year</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1406">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1407">
+                            <text-property name="text">baseline_value</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1408">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1409">
+                            <text-property name="text">Value</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1410">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1411">
+                            <text-property name="text">Year</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1412">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1413">
+                            <text-property name="text">Value</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="1418">
+                    <property name="fontWeight">normal</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="textAlign">left</property>
+                    <cell id="1419">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1420">
+                            <property name="resultSetColumn">title</property>
+                        </data>
+                    </cell>
+                    <cell id="1421">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1422">
+                            <property name="resultSetColumn">indicator_title</property>
+                        </data>
+                    </cell>
+                    <cell id="1423">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1426">
+                            <property name="resultSetColumn">baseline_value</property>
+                        </data>
+                    </cell>
+                    <cell id="1425">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1424">
+                            <property name="resultSetColumn">baseline_year</property>
+                        </data>
+                    </cell>
+                    <cell id="1427">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1432">
+                            <property name="resultSetColumn">target_value</property>
+                        </data>
+                    </cell>
+                    <cell id="1429">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1430">
+                            <property name="resultSetColumn">actual_comment</property>
+                        </data>
+                    </cell>
+                    <cell id="1431">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1428">
+                            <property name="resultSetColumn">actual_value</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="1437">
+                    <cell id="1438"/>
+                    <cell id="1439"/>
+                    <cell id="1440"/>
+                    <cell id="1441"/>
+                    <cell id="1442"/>
+                    <cell id="1443"/>
+                    <cell id="1444"/>
+                </row>
+            </footer>
+        </table>
     </body>
 </report>
