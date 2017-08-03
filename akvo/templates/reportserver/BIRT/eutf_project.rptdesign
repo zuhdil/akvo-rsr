@@ -9957,7 +9957,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
         <grid name="Description" id="968">
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
-            <property name="marginBottom">14pt</property>
+            <property name="marginBottom">0pt</property>
             <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
@@ -10652,6 +10652,20 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                 </cell>
             </row>
         </grid>
+        <image id="1476">
+            <property name="width">100%</property>
+            <property name="dataSet">rsr_project</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">current_image</property>
+                    <text-property name="displayName">current_image</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["current_image"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="source">url</property>
+            <expression name="uri" type="javascript">'https://rsr.akvo.org/media/'+row["current_image"]</expression>
+        </image>
         <grid name="Assessment" id="1176">
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
