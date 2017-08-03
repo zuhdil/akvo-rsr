@@ -52,6 +52,18 @@
             <property name="name">rowFetchSize</property>
             <property name="id">1260</property>
         </structure>
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">1499</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">1499</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">1499</property>
+        </structure>
     </list-property>
     <property name="units">mm</property>
     <method name="initialize"><![CDATA[function mmd(src)
@@ -9790,6 +9802,562 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Funding partners" id="1477">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">funding_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">funding_amount</text-property>
+                    <text-property name="heading">funding_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">funding_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">RSR-live</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">funding_amount</property>
+                    <property name="nativeName">funding_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select rsr_partnership.funding_amount, rsr_organisation.name
+from rsr_partnership
+left join rsr_project on rsr_project.id = rsr_partnership.project_id
+left join rsr_organisation on rsr_organisation.id = rsr_partnership.organisation_id
+where rsr_project.id = ?
+and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>organisation_id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>organisation_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>organisation_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>project_id</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>project_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>project_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>funding_amount</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>funding_amount</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>funding_amount</design:label>
+            <design:formattingHints>
+              <design:displaySize>16</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>iati_activity_id</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>iati_activity_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>iati_activity_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>internal_id</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>75</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>internal_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>internal_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>75</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>iati_url</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>200</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>iati_url</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>iati_url</design:label>
+            <design:formattingHints>
+              <design:displaySize>200</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>partner_type_extra</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>30</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>partner_type_extra</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>partner_type_extra</design:label>
+            <design:formattingHints>
+              <design:displaySize>30</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>related_activity_id</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>related_activity_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>related_activity_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>iati_organisation_role</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>5</design:nativeDataTypeCode>
+            <design:precision>5</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>iati_organisation_role</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>iati_organisation_role</design:label>
+            <design:formattingHints>
+              <design:displaySize>6</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>is_secondary_reporter</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>is_secondary_reporter</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>is_secondary_reporter</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Contributions" id="1478">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">funding_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">funding_amount</text-property>
+                    <text-property name="heading">funding_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">funding_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">RSR-live</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">funding_amount</property>
+                    <property name="nativeName">funding_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select rsr_partnership.funding_amount, 
+rsr_organisation.id, 
+rsr_organisation.name
+from rsr_partnership
+left join rsr_project on rsr_project.id = rsr_partnership.project_id
+left join rsr_organisation on rsr_organisation.id = rsr_partnership.organisation_id
+where rsr_project.id = ? 
+and rsr_partnership.organisation_id NOT IN ('3394')
+and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>funding_amount</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>funding_amount</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>funding_amount</design:label>
+            <design:formattingHints>
+              <design:displaySize>16</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="eutf_contribution" id="1499">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">funding_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">funding_amount</text-property>
+                    <text-property name="heading">funding_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">funding_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">RSR-live</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">funding_amount</property>
+                    <property name="nativeName">funding_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select rsr_partnership.funding_amount, 
+rsr_organisation.id, 
+rsr_organisation.name
+from rsr_partnership
+left join rsr_project on rsr_project.id = rsr_partnership.project_id
+left join rsr_organisation on rsr_organisation.id = rsr_partnership.organisation_id
+where rsr_project.id = ? 
+and rsr_partnership.organisation_id = '3394'
+and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="38">
@@ -9869,7 +10437,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="backgroundColor">#F7F3ED</property>
         </style>
         <style name="H2" id="1175">
-            <property name="fontFamily">"Verdana"</property>
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="fontSize">18px</property>
             <property name="fontWeight">bold</property>
             <property name="color">#000000</property>
@@ -9937,13 +10505,17 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                 </grid>
             </page-header>
         </simple-master-page>
+        <simple-master-page name="Landscape" id="1524">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+        </simple-master-page>
     </page-setup>
     <body>
         <label id="169">
             <property name="style">H2</property>
             <property name="fontWeight">normal</property>
             <property name="fontStyle">normal</property>
-            <property name="color">#0065A2</property>
+            <property name="color">#000000</property>
             <property name="marginTop">8pt</property>
             <property name="marginLeft">1pt</property>
             <property name="marginBottom">1pt</property>
@@ -9952,12 +10524,14 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="paddingLeft">1pt</property>
             <property name="paddingBottom">1pt</property>
             <property name="textAlign">center</property>
+            <property name="masterPage">Simple MasterPage</property>
             <text-property name="text">Narrative report</text-property>
         </label>
         <grid name="Description" id="968">
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">0pt</property>
+            <property name="masterPage">Simple MasterPage</property>
             <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
@@ -10272,7 +10846,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             </column>
             <row id="1171">
                 <property name="borderBottomStyle">solid</property>
-                <property name="borderBottomWidth">medium</property>
+                <property name="borderBottomWidth">thin</property>
+                <property name="borderLeftStyle">none</property>
+                <property name="borderRightStyle">none</property>
+                <property name="borderTopStyle">none</property>
                 <cell id="1172">
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
@@ -10282,8 +10859,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="paddingRight">8pt</property>
                     <label id="1174">
                         <property name="style">H2</property>
-                        <property name="fontFamily">"Verdana"</property>
-                        <property name="color">#7AA80B</property>
+                        <property name="fontFamily">"Times New Roman"</property>
+                        <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
                         <text-property name="text">1. Description</text-property>
@@ -10535,6 +11112,62 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     </text-data>
                 </cell>
             </row>
+            <row id="1479">
+                <cell id="1480">
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
+                    <label id="1482">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginLeft">0pt</property>
+                        <text-property name="text">Co-funding</text-property>
+                    </label>
+                </cell>
+                <cell id="1481">
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
+                    <table id="1483">
+                        <property name="dataSet">Contributions</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">funding_amount</property>
+                                <text-property name="displayName">funding_amount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["funding_amount"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="1497"/>
+                        <column id="1498"/>
+                        <detail>
+                            <row id="1489">
+                                <cell id="1490">
+                                    <data id="1493">
+                                        <property name="resultSetColumn">name</property>
+                                    </data>
+                                </cell>
+                                <cell id="1492">
+                                    <data id="1491">
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">€#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="resultSetColumn">funding_amount</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
             <row id="1015">
                 <cell id="1016">
                     <property name="paddingTop">8pt</property>
@@ -10552,68 +11185,36 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="paddingLeft">8pt</property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
-                    <table id="1019">
-                        <property name="width">115.35833333333335mm</property>
-                        <property name="dataSet">Budget_items_for_project</property>
-                        <list-property name="paramBindings">
-                            <structure>
-                                <property name="paramName">project_id</property>
-                                <simple-property-list name="expression">
-                                    <value type="javascript">row["id"]</value>
-                                </simple-property-list>
-                            </structure>
-                        </list-property>
+                    <table id="1500">
+                        <property name="dataSet">eutf_contribution</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">amount</property>
-                                <text-property name="displayName">amount</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["amount"]</expression>
+                                <property name="name">funding_amount</property>
+                                <text-property name="displayName">funding_amount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["funding_amount"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">currency</property>
-                                <text-property name="displayName">currency</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["currency"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">label</property>
-                                <text-property name="displayName">label</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["label"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">other_extra</property>
-                                <text-property name="displayName">other_extra</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["other_extra"]</expression>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <column id="1026">
-                            <property name="width">45.861111111111114mm</property>
-                        </column>
-                        <column id="1027">
-                            <property name="width">46.21388888888889mm</property>
-                        </column>
-                        <column id="1028">
-                            <property name="width">22.930555555555557mm</property>
-                        </column>
+                        <column id="1514"/>
+                        <column id="1515"/>
                         <detail>
-                            <row id="1020">
-                                <cell id="1021">
-                                    <property name="textAlign">left</property>
-                                    <data id="1023">
-                                        <property name="style">FinnishCurrency</property>
+                            <row id="1506">
+                                <cell id="1507"/>
+                                <cell id="1509">
+                                    <data id="1508">
                                         <structure name="numberFormat">
                                             <property name="category">Currency</property>
                                             <property name="pattern">€#,##0.00{RoundingMode=HALF_UP}</property>
                                         </structure>
-                                        <property name="textAlign">left</property>
-                                        <property name="resultSetColumn">amount</property>
+                                        <property name="resultSetColumn">funding_amount</property>
                                     </data>
                                 </cell>
-                                <cell id="1022"/>
-                                <cell id="1024"/>
                             </row>
                         </detail>
                     </table>
@@ -10631,9 +11232,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             </row>
         </grid>
         <grid name="Assessment" id="1176">
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
+            <property name="masterPage">Simple MasterPage</property>
             <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
@@ -10943,23 +11545,25 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <column id="1177">
                 <property name="width">61.383333333333326mm</property>
             </column>
-            <column id="1178">
-                <property name="width">116.68125mm</property>
-            </column>
             <row id="1179">
                 <property name="borderBottomStyle">solid</property>
                 <property name="borderBottomWidth">medium</property>
                 <cell id="1180">
-                    <property name="colSpan">2</property>
+                    <property name="colSpan">1</property>
                     <property name="rowSpan">1</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
                     <property name="paddingTop">8pt</property>
                     <property name="paddingLeft">8pt</property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="1181">
                         <property name="style">H2</property>
-                        <property name="fontFamily">"Verdana"</property>
-                        <property name="color">#7AA80B</property>
+                        <property name="fontFamily">"Times New Roman"</property>
+                        <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
                         <text-property name="text">2. Assessment of action activities</text-property>
@@ -10977,12 +11581,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Executive summary of the action</text-property>
                     </label>
-                </cell>
-                <cell id="1237">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1238">
                         <property name="dataSet">cf_ex_summary</property>
                         <list-property name="boundDataColumns">
@@ -11009,12 +11607,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Results and activities </text-property>
                     </label>
-                </cell>
-                <cell id="1242">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1268">
                         <property name="dataSet">cf_results</property>
                         <list-property name="boundDataColumns">
@@ -11047,12 +11639,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Sustainability</text-property>
                     </label>
-                </cell>
-                <cell id="1271">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1274">
                         <property name="dataSet">cf_sustainability</property>
                         <list-property name="boundDataColumns">
@@ -11085,12 +11671,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Monitoring &amp; evaluation</text-property>
                     </label>
-                </cell>
-                <cell id="1277">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1279">
                         <property name="dataSet">cf_me</property>
                         <list-property name="boundDataColumns">
@@ -11123,12 +11703,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Learning from the action </text-property>
                     </label>
-                </cell>
-                <cell id="1282">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1284">
                         <property name="dataSet">cf_learning_from_action</property>
                         <list-property name="boundDataColumns">
@@ -11161,12 +11735,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">List of materials produced</text-property>
                     </label>
-                </cell>
-                <cell id="1287">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1289">
                         <property name="dataSet">cf_list_of_material</property>
                         <list-property name="boundDataColumns">
@@ -11199,12 +11767,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">List of contracts</text-property>
                     </label>
-                </cell>
-                <cell id="1292">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1294">
                         <property name="dataSet">cf_list_of_contracts</property>
                         <list-property name="boundDataColumns">
@@ -11228,9 +11790,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             </row>
         </grid>
         <grid name="Beneficiaries" id="1295">
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
+            <property name="masterPage">Simple MasterPage</property>
             <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
@@ -11540,23 +12103,25 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <column id="1296">
                 <property name="width">61.383333333333326mm</property>
             </column>
-            <column id="1297">
-                <property name="width">116.68125mm</property>
-            </column>
             <row id="1298">
                 <property name="borderBottomStyle">solid</property>
                 <property name="borderBottomWidth">medium</property>
                 <cell id="1299">
-                    <property name="colSpan">2</property>
+                    <property name="colSpan">1</property>
                     <property name="rowSpan">1</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
                     <property name="paddingTop">8pt</property>
                     <property name="paddingLeft">8pt</property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="1300">
                         <property name="style">H2</property>
-                        <property name="fontFamily">"Verdana"</property>
-                        <property name="color">#7AA80B</property>
+                        <property name="fontFamily">"Times New Roman"</property>
+                        <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
                         <text-property name="text">3. Relationship with beneficiaries</text-property>
@@ -11574,12 +12139,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Relationship with beneficiaries </text-property>
                     </label>
-                </cell>
-                <cell id="1304">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1305">
                         <property name="dataSet">cf_relation_with_benef</property>
                         <list-property name="boundDataColumns">
@@ -11612,12 +12171,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Relationship with State authorities </text-property>
                     </label>
-                </cell>
-                <cell id="1309">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1310">
                         <property name="dataSet">cf_relationship_with_state</property>
                         <list-property name="boundDataColumns">
@@ -11650,12 +12203,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Relationship with other organisations </text-property>
                     </label>
-                </cell>
-                <cell id="1314">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1315">
                         <property name="dataSet">cf_relationship_with_other_authorities</property>
                         <list-property name="boundDataColumns">
@@ -11688,12 +12235,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Synergies with other actions</text-property>
                     </label>
-                </cell>
-                <cell id="1324">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1325">
                         <property name="dataSet">cf_synergies_with_other_actions</property>
                         <list-property name="boundDataColumns">
@@ -11726,12 +12267,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">Cooperation with contracting authority </text-property>
                     </label>
-                </cell>
-                <cell id="1329">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1330">
                         <property name="dataSet">cf_cooperation_contracting_authority</property>
                         <list-property name="boundDataColumns">
@@ -11755,11 +12290,12 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             </row>
         </grid>
         <grid name="Visibility" id="1336">
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
+            <property name="masterPage">Simple MasterPage</property>
             <property name="pageBreakAfter">auto</property>
-            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakBefore">auto</property>
             <property name="pageBreakInside">avoid</property>
             <property name="width">178.06458333333336mm</property>
             <property name="dataSet">rsr_project</property>
@@ -12068,14 +12604,11 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <column id="1337">
                 <property name="width">61.383333333333326mm</property>
             </column>
-            <column id="1338">
-                <property name="width">116.68125mm</property>
-            </column>
             <row id="1339">
                 <property name="borderBottomStyle">solid</property>
                 <property name="borderBottomWidth">medium</property>
                 <cell id="1340">
-                    <property name="colSpan">2</property>
+                    <property name="colSpan">1</property>
                     <property name="rowSpan">1</property>
                     <property name="paddingTop">8pt</property>
                     <property name="paddingLeft">8pt</property>
@@ -12083,8 +12616,8 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="paddingRight">8pt</property>
                     <label id="1341">
                         <property name="style">H2</property>
-                        <property name="fontFamily">"Verdana"</property>
-                        <property name="color">#7AA80B</property>
+                        <property name="fontFamily">"Times New Roman"</property>
+                        <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
                         <text-property name="text">4. Relationship with beneficiaries</text-property>
@@ -12102,12 +12635,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="marginLeft">0pt</property>
                         <text-property name="text">EU visibility</text-property>
                     </label>
-                </cell>
-                <cell id="1345">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
                     <text-data id="1346">
                         <property name="dataSet">cf_eu_visibility</property>
                         <list-property name="boundDataColumns">
@@ -12131,9 +12658,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             </row>
         </grid>
         <grid name="Visibility1" id="1372">
-            <property name="fontFamily">"Arial"</property>
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="marginTop">14pt</property>
             <property name="marginBottom">14pt</property>
+            <property name="masterPage">Simple MasterPage</property>
             <property name="pageBreakAfter">auto</property>
             <property name="pageBreakBefore">auto</property>
             <property name="width">178.06458333333336mm</property>
@@ -12452,14 +12980,19 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                 <cell id="1376">
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
                     <property name="paddingTop">8pt</property>
                     <property name="paddingLeft">8pt</property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <label id="1377">
                         <property name="style">H2</property>
-                        <property name="fontFamily">"Verdana"</property>
-                        <property name="color">#7AA80B</property>
+                        <property name="fontFamily">"Times New Roman"</property>
+                        <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
                         <text-property name="text">5. Additional comments</text-property>
@@ -12558,15 +13091,21 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
         </grid>
         <label id="1469">
             <property name="style">H2</property>
-            <property name="fontFamily">"Verdana"</property>
-            <property name="color">#7AA80B</property>
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="color">#000000</property>
+            <property name="borderBottomStyle">none</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderTopStyle">none</property>
             <property name="marginTop">4pt</property>
             <property name="marginBottom">8pt</property>
             <property name="paddingLeft">8pt</property>
+            <property name="masterPage">Landscape</property>
             <property name="pageBreakBefore">always</property>
-            <text-property name="text">A. Appendix 1</text-property>
+            <text-property name="text">Appendix 1 - Logframe</text-property>
         </label>
         <table name="Results" id="1398">
+            <property name="fontFamily">"Times New Roman"</property>
             <property name="borderBottomStyle">solid</property>
             <property name="borderBottomWidth">thin</property>
             <property name="borderLeftStyle">solid</property>
@@ -12575,6 +13114,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="borderRightWidth">thin</property>
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">thin</property>
+            <property name="masterPage">Landscape</property>
             <property name="pageBreakBefore">auto</property>
             <property name="dataSet">Results_indicators_periods</property>
             <list-property name="boundDataColumns">
@@ -12610,15 +13150,17 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                 </structure>
                 <structure>
                     <property name="name">actual_comment</property>
-                    <text-property name="displayName">actual_comment</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                    <text-property name="displayName">target value</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">target_value</property>
                     <text-property name="displayName">target_value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
+                    <expression name="expression" type="javascript">dataSetRow["period_start"] == null ? "" : Formatter.format(dataSetRow["period_start"], "yyyy")</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">period_start</property>
@@ -12632,27 +13174,59 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <expression name="expression" type="javascript">dataSetRow["period_end"]</expression>
                     <property name="dataType">date</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">dataSetRow["type"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_comment_1</property>
+                    <text-property name="displayName">actual_comment</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <structure name="toc"/>
             <property name="pageBreakInterval">0</property>
+            <column id="1532">
+                <property name="width">7%</property>
+            </column>
             <column id="1447">
-                <property name="width">25%</property>
+                <property name="width">20%</property>
             </column>
             <column id="1448">
-                <property name="width">25%</property>
+                <property name="width">20%</property>
             </column>
             <column id="1449"/>
             <column id="1450"/>
             <column id="1451"/>
             <column id="1452"/>
             <column id="1453"/>
+            <column id="1521">
+                <property name="width">20%</property>
+            </column>
             <header>
                 <row id="1456">
+                    <property name="fontWeight">bold</property>
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <property name="textAlign">center</property>
+                    <cell id="1529">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1533">
+                            <text-property name="text">Type</text-property>
+                        </label>
+                    </cell>
                     <cell id="1457">
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -12663,7 +13237,11 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1401">
-                            <property name="textAlign">left</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
                             <text-property name="text">Results</text-property>
                         </label>
                     </cell>
@@ -12677,7 +13255,11 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1403">
-                            <property name="textAlign">left</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
                             <text-property name="text">Indicators</text-property>
                         </label>
                     </cell>
@@ -12693,6 +13275,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1466">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <text-property name="text">Baseline</text-property>
                         </label>
                     </cell>
@@ -12708,6 +13294,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1467">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <text-property name="text">Target</text-property>
                         </label>
                     </cell>
@@ -12723,15 +13313,38 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1468">
-                            <property name="textAlign">left</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
                             <text-property name="text">Actuals</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1517">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="1523">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <text-property name="text">Comments</text-property>
                         </label>
                     </cell>
                 </row>
                 <row id="1399">
+                    <property name="fontWeight">bold</property>
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
                     <property name="textAlign">left</property>
+                    <cell id="1530"/>
                     <cell id="1400"/>
                     <cell id="1402"/>
                     <cell id="1404">
@@ -12744,6 +13357,11 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1405">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
                             <text-property name="text">Year</text-property>
                         </label>
                     </cell>
@@ -12757,7 +13375,12 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1407">
-                            <text-property name="text">baseline_value</text-property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Value</text-property>
                         </label>
                     </cell>
                     <cell id="1408">
@@ -12769,8 +13392,13 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <label id="1409">
-                            <text-property name="text">Value</text-property>
+                        <label id="1411">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Year</text-property>
                         </label>
                     </cell>
                     <cell id="1410">
@@ -12782,8 +13410,13 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <label id="1411">
-                            <text-property name="text">Year</text-property>
+                        <label id="1409">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Value</text-property>
                         </label>
                     </cell>
                     <cell id="1412">
@@ -12796,8 +13429,23 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1413">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
                             <text-property name="text">Value</text-property>
                         </label>
+                    </cell>
+                    <cell id="1518">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
                     </cell>
                 </row>
             </header>
@@ -12807,6 +13455,49 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <property name="textAlign">left</property>
+                    <cell id="1531">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1534">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <list-property name="mapRules">
+                                <structure>
+                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <property name="operator">eq</property>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">1</value>
+                                    </simple-property-list>
+                                    <text-property name="display">Output</text-property>
+                                </structure>
+                                <structure>
+                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <property name="operator">eq</property>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">2</value>
+                                    </simple-property-list>
+                                    <text-property name="display">Outcome</text-property>
+                                </structure>
+                                <structure>
+                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <property name="operator">eq</property>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">3</value>
+                                    </simple-property-list>
+                                    <text-property name="display">Impact</text-property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="1419">
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -12817,6 +13508,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1420">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <property name="resultSetColumn">title</property>
                         </data>
                     </cell>
@@ -12830,6 +13525,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1422">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <property name="resultSetColumn">indicator_title</property>
                         </data>
                     </cell>
@@ -12842,9 +13541,13 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <data id="1426">
+                        <data id="1424">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <property name="textAlign">center</property>
-                            <property name="resultSetColumn">baseline_value</property>
+                            <property name="resultSetColumn">baseline_year</property>
                         </data>
                     </cell>
                     <cell id="1425">
@@ -12856,9 +13559,13 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <data id="1424">
+                        <data id="1426">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <property name="textAlign">center</property>
-                            <property name="resultSetColumn">baseline_year</property>
+                            <property name="resultSetColumn">baseline_value</property>
                         </data>
                     </cell>
                     <cell id="1427">
@@ -12871,6 +13578,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1432">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <property name="textAlign">center</property>
                             <property name="resultSetColumn">target_value</property>
                         </data>
@@ -12885,6 +13596,10 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1430">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
                             <property name="textAlign">center</property>
                             <property name="resultSetColumn">actual_comment</property>
                         </data>
@@ -12898,24 +13613,34 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <data id="1428">
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">actual_value</property>
+                        <text-data id="1535">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <expression name="valueExpr">row["actual_value"]</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                    <cell id="1519">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="1536">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="resultSetColumn">actual_comment</property>
                         </data>
                     </cell>
                 </row>
             </detail>
-            <footer>
-                <row id="1437">
-                    <cell id="1438"/>
-                    <cell id="1439"/>
-                    <cell id="1440"/>
-                    <cell id="1441"/>
-                    <cell id="1442"/>
-                    <cell id="1443"/>
-                    <cell id="1444"/>
-                </row>
-            </footer>
         </table>
     </body>
 </report>
