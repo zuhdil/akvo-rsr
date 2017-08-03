@@ -9872,7 +9872,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
             <property name="fontFamily">"Verdana"</property>
             <property name="fontSize">18px</property>
             <property name="fontWeight">bold</property>
-            <property name="color">#7AA80B</property>
+            <property name="color">#000000</property>
         </style>
     </styles>
     <page-setup>
@@ -10375,7 +10375,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <label id="973">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Name of the project</text-property>
+                        <text-property name="text">Title of the action </text-property>
                     </label>
                 </cell>
                 <cell id="974">
@@ -10429,7 +10429,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <label id="978">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Implementation period (planned)</text-property>
+                        <text-property name="text">Start date and end date of the action </text-property>
                     </label>
                 </cell>
                 <cell id="979">
@@ -10438,7 +10438,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="paddingBottom">8pt</property>
                     <property name="paddingRight">8pt</property>
                     <text-data id="980">
-                        <expression name="valueExpr">(row["date_start_planned"] ? Formatter.format(row["date_start_planned"], "yyyy") : "") +&#13;
+                        <expression name="valueExpr">(row["date_start_actual"] ? Formatter.format(row["date_start_actual"], "yyyy") : "") +&#13;
 " - " +&#13;
 (row["date_end_planned"] ? Formatter.format(row["date_end_planned"], "yyyy") : "")</expression>
                         <property name="contentType">html</property>
@@ -10496,7 +10496,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                             <row id="1153">
                                 <cell id="1154">
                                     <text-data id="1474">
-                                        <expression name="valueExpr">row["name"] + ' - ' + row["Column Binding"] + '%'</expression>
+                                        <expression name="valueExpr">row["name"]</expression>
                                         <property name="contentType">html</property>
                                     </text-data>
                                 </cell>
@@ -10510,28 +10510,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                             </row>
                         </footer>
                     </table>
-                </cell>
-            </row>
-            <row id="991">
-                <cell id="992">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                    <label id="993">
-                        <property name="fontWeight">bold</property>
-                        <property name="marginLeft">0pt</property>
-                        <text-property name="text">IATI id</text-property>
-                    </label>
-                </cell>
-                <cell id="994">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                    <data id="995">
-                        <property name="resultSetColumn">iati_activity_id</property>
-                    </data>
                 </cell>
             </row>
             <row id="1166">
@@ -10566,7 +10544,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <label id="1017">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Budget</text-property>
+                        <text-property name="text">EUTF contribution </text-property>
                     </label>
                 </cell>
                 <cell id="1018">
@@ -10652,20 +10630,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                 </cell>
             </row>
         </grid>
-        <image id="1476">
-            <property name="width">100%</property>
-            <property name="dataSet">rsr_project</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">current_image</property>
-                    <text-property name="displayName">current_image</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["current_image"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-            <property name="source">url</property>
-            <expression name="uri" type="javascript">'https://rsr.akvo.org/media/'+row["current_image"]</expression>
-        </image>
         <grid name="Assessment" id="1176">
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">14pt</property>
@@ -11694,44 +11658,6 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     <property name="paddingRight">8pt</property>
                     <text-data id="1315">
                         <property name="dataSet">cf_relationship_with_other_authorities</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">field</property>
-                                <text-property name="displayName">field</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["field"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">value</property>
-                                <text-property name="displayName">value</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["value"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                        </list-property>
-                        <expression name="valueExpr">row["value"]</expression>
-                        <property name="contentType">html</property>
-                    </text-data>
-                </cell>
-            </row>
-            <row id="1316">
-                <cell id="1317">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                    <label id="1318">
-                        <property name="fontWeight">bold</property>
-                        <property name="marginLeft">0pt</property>
-                        <text-property name="text">Synergies with other actions</text-property>
-                    </label>
-                </cell>
-                <cell id="1319">
-                    <property name="paddingTop">8pt</property>
-                    <property name="paddingLeft">8pt</property>
-                    <property name="paddingBottom">8pt</property>
-                    <property name="paddingRight">8pt</property>
-                    <text-data id="1320">
-                        <property name="dataSet">cf_synergies_with_other_actions</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">field</property>
@@ -12917,6 +12843,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1426">
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">baseline_value</property>
                         </data>
                     </cell>
@@ -12930,6 +12857,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1424">
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">baseline_year</property>
                         </data>
                     </cell>
@@ -12943,6 +12871,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1432">
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">target_value</property>
                         </data>
                     </cell>
@@ -12956,6 +12885,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1430">
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">actual_comment</property>
                         </data>
                     </cell>
@@ -12969,6 +12899,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1428">
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">actual_value</property>
                         </data>
                     </cell>
