@@ -10648,6 +10648,16 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     </table>
                 </cell>
             </row>
+            <row id="1470">
+                <cell id="1471">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="paddingTop">8pt</property>
+                    <property name="paddingLeft">8pt</property>
+                    <property name="paddingBottom">8pt</property>
+                    <property name="paddingRight">8pt</property>
+                </cell>
+            </row>
         </grid>
         <grid name="Assessment" id="1176">
             <property name="fontFamily">"Arial"</property>
