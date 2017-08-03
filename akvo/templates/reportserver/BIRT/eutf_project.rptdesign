@@ -10495,19 +10495,12 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                         <detail>
                             <row id="1153">
                                 <cell id="1154">
-                                    <data id="1155">
-                                        <property name="resultSetColumn">name</property>
-                                    </data>
+                                    <text-data id="1474">
+                                        <expression name="valueExpr">row["name"] + ' - ' + row["Column Binding"] + '%'</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
                                 </cell>
-                                <cell id="1160">
-                                    <data id="1165">
-                                        <structure name="numberFormat">
-                                            <property name="category">Custom</property>
-                                            <property name="pattern">0 %</property>
-                                        </structure>
-                                        <property name="resultSetColumn">Column Binding_1</property>
-                                    </data>
-                                </cell>
+                                <cell id="1160"/>
                             </row>
                         </detail>
                         <footer>
