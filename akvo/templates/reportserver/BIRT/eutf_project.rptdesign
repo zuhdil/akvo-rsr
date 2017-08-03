@@ -10837,6 +10837,13 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <expression name="expression" type="javascript">dataSetRow["contact_person"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <text-property name="displayName">Rowindex</text-property>
+                    <expression name="expression" type="javascript">row.__rownum</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="969">
                 <property name="width">61.383333333333326mm</property>
@@ -10863,6 +10870,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
+                        <structure name="toc"/>
                         <text-property name="text">1. Description</text-property>
                     </label>
                 </cell>
@@ -10876,7 +10884,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1126">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Contact person </text-property>
+                        <text-property name="text">1.1. Contact person </text-property>
                     </label>
                 </cell>
                 <cell id="1125">
@@ -10904,7 +10912,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1008">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Partners</text-property>
+                        <text-property name="text">1.2. Partners</text-property>
                     </label>
                 </cell>
                 <cell id="1131">
@@ -10952,7 +10960,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="973">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Title of the action </text-property>
+                        <text-property name="text">1.3. Title of the action </text-property>
                     </label>
                 </cell>
                 <cell id="974">
@@ -10979,7 +10987,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1140">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Contract number</text-property>
+                        <text-property name="text">1.4. Contract number</text-property>
                     </label>
                 </cell>
                 <cell id="1139">
@@ -11006,7 +11014,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="978">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Start date and end date of the action </text-property>
+                        <text-property name="text">1.5. Start date and end date of the action </text-property>
                     </label>
                 </cell>
                 <cell id="979">
@@ -11031,7 +11039,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1148">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Target country(ies) or region (s) </text-property>
+                        <text-property name="text">1.6. Target country(ies) or region (s) </text-property>
                     </label>
                 </cell>
                 <cell id="1147">
@@ -11098,7 +11106,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1169">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Final beneficiaries &amp;/or target groups</text-property>
+                        <text-property name="text">1.7.Final beneficiaries &amp;/or target groups</text-property>
                     </label>
                 </cell>
                 <cell id="1168">
@@ -11121,7 +11129,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1482">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Co-funding</text-property>
+                        <text-property name="text">1.8. Co-funding</text-property>
                     </label>
                 </cell>
                 <cell id="1481">
@@ -11150,17 +11158,17 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <detail>
                             <row id="1489">
                                 <cell id="1490">
-                                    <data id="1493">
-                                        <property name="resultSetColumn">name</property>
-                                    </data>
-                                </cell>
-                                <cell id="1492">
                                     <data id="1491">
                                         <structure name="numberFormat">
                                             <property name="category">Currency</property>
                                             <property name="pattern">€#,##0.00{RoundingMode=HALF_UP}</property>
                                         </structure>
                                         <property name="resultSetColumn">funding_amount</property>
+                                    </data>
+                                </cell>
+                                <cell id="1492">
+                                    <data id="1538">
+                                        <property name="resultSetColumn">name</property>
                                     </data>
                                 </cell>
                             </row>
@@ -11177,7 +11185,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1017">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">EUTF contribution </text-property>
+                        <text-property name="text">1.9. EUTF contribution </text-property>
                     </label>
                 </cell>
                 <cell id="1018">
@@ -11205,9 +11213,8 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <column id="1515"/>
                         <detail>
                             <row id="1506">
-                                <cell id="1507"/>
-                                <cell id="1509">
-                                    <data id="1508">
+                                <cell id="1507">
+                                    <data id="1537">
                                         <structure name="numberFormat">
                                             <property name="category">Currency</property>
                                             <property name="pattern">€#,##0.00{RoundingMode=HALF_UP}</property>
@@ -11215,6 +11222,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                                         <property name="resultSetColumn">funding_amount</property>
                                     </data>
                                 </cell>
+                                <cell id="1509"/>
                             </row>
                         </detail>
                     </table>
