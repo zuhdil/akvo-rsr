@@ -11555,7 +11555,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
             </column>
             <row id="1179">
                 <property name="borderBottomStyle">solid</property>
-                <property name="borderBottomWidth">medium</property>
+                <property name="borderBottomWidth">thin</property>
                 <cell id="1180">
                     <property name="colSpan">1</property>
                     <property name="rowSpan">1</property>
@@ -12113,7 +12113,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
             </column>
             <row id="1298">
                 <property name="borderBottomStyle">solid</property>
-                <property name="borderBottomWidth">medium</property>
+                <property name="borderBottomWidth">thin</property>
                 <cell id="1299">
                     <property name="colSpan">1</property>
                     <property name="rowSpan">1</property>
@@ -12614,10 +12614,12 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
             </column>
             <row id="1339">
                 <property name="borderBottomStyle">solid</property>
-                <property name="borderBottomWidth">medium</property>
+                <property name="borderBottomWidth">thin</property>
                 <cell id="1340">
                     <property name="colSpan">1</property>
                     <property name="rowSpan">1</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="paddingTop">8pt</property>
                     <property name="paddingLeft">8pt</property>
                     <property name="paddingBottom">8pt</property>
