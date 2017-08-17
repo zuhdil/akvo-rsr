@@ -162,6 +162,12 @@
                     <text-property name="heading">baseline_value</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">measure</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">measure</text-property>
+                    <text-property name="heading">measure</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">indicator_order</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">indicator_order</text-property>
@@ -267,41 +273,46 @@
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">indicator_order</property>
+                        <property name="name">measure</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">indicatorperiod_pk</property>
+                        <property name="name">indicator_order</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
+                        <property name="name">indicatorperiod_pk</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
                         <property name="name">actual_value</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">13</property>
                         <property name="name">actual_comment</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">14</property>
                         <property name="name">target_value</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">15</property>
                         <property name="name">target_comment</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">16</property>
                         <property name="name">period_start</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">17</property>
                         <property name="name">period_end</property>
                         <property name="dataType">date</property>
                     </structure>
@@ -367,55 +378,62 @@
                 </structure>
                 <structure>
                     <property name="position">9</property>
-                    <property name="name">indicator_order</property>
-                    <property name="nativeName">indicator_order</property>
+                    <property name="name">measure</property>
+                    <property name="nativeName">measure</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">5</property>
+                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
                     <property name="position">10</property>
+                    <property name="name">indicator_order</property>
+                    <property name="nativeName">indicator_order</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">5</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
                     <property name="name">indicatorperiod_pk</property>
                     <property name="nativeName">indicatorperiod_pk</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">12</property>
                     <property name="name">actual_value</property>
                     <property name="nativeName">actual_value</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">13</property>
                     <property name="name">actual_comment</property>
                     <property name="nativeName">actual_comment</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">14</property>
                     <property name="name">target_value</property>
                     <property name="nativeName">target_value</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">15</property>
                     <property name="name">target_comment</property>
                     <property name="nativeName">target_comment</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">15</property>
+                    <property name="position">16</property>
                     <property name="name">period_start</property>
                     <property name="nativeName">period_start</property>
                     <property name="dataType">date</property>
                     <property name="nativeDataType">91</property>
                 </structure>
                 <structure>
-                    <property name="position">16</property>
+                    <property name="position">17</property>
                     <property name="name">period_end</property>
                     <property name="nativeName">period_end</property>
                     <property name="dataType">date</property>
@@ -430,6 +448,7 @@
  rsr_indicator.baseline_year,
  rsr_indicator.baseline_comment,
  rsr_indicator.baseline_value,
+ rsr_indicator.measure,
  rsr_indicator.order as indicator_order,
  rsr_indicatorperiod.id as indicatorperiod_pk,
  rsr_indicatorperiod.actual_value,
@@ -4378,6 +4397,7 @@ reportContext.setGlobalVariable("planned_end",this.getRowData().getExpressionVal
                 </structure>
                 <structure>
                     <property name="name">actual_value_number</property>
+                    <text-property name="displayName">actual_value_number</text-property>
                     <expression name="expression" type="javascript">dataSetRow["actual_value"] &amp;&amp; !isNaN(dataSetRow["actual_value"]) ? dataSetRow["actual_value"] : -1</expression>
                     <property name="dataType">integer</property>
                     <property name="allowExport">true</property>
@@ -4392,14 +4412,30 @@ reportContext.setGlobalVariable("planned_end",this.getRowData().getExpressionVal
                 <structure>
                     <property name="name">progress_pct</property>
                     <text-property name="displayName">progress_pct</text-property>
-                    <expression name="expression" type="javascript">(row["actual_value_number"] > -1 &amp;&amp; row["target_value_number"] > -1 )&#13;
+                    <expression name="expression" type="javascript">v = row["actual_value_number"];&#13;
+t = row["target_value_number"];&#13;
+&#13;
+(row["actual_value"] === null )&#13;
 ?&#13;
- ( row["baseline_value"] ?&#13;
-  Math.round((row["actual_value_number"]-row["baseline_value"]) * 100 / (row["target_value_number"] - row["baseline_value"]))&#13;
- : Math.round(row["actual_value_number"] * 100 / row["target_value_number"])&#13;
- )&#13;
- :&#13;
-null</expression>
+null&#13;
+:&#13;
+(row["actual_value"].toLowerCase() == "available" )&#13;
+?&#13;
+100&#13;
+:&#13;
+(row["actual_value"].toLowerCase() == "not available" )&#13;
+?&#13;
+0&#13;
+:&#13;
+(v == -1 || t == -1 )&#13;
+?&#13;
+null&#13;
+:&#13;
+(row["baseline_value"]  &amp;&amp; !isNaN(row["baseline_value"]))&#13;
+?&#13;
+  ( (t - row["baseline_value"]) &lt; 0.001 ? null :  Math.round((v - row["baseline_value"]) * 100 / (t - row["baseline_value"])))&#13;
+:&#13;
+  (t&lt;0.001 ? null : Math.round(v * 100 / t))</expression>
                     <property name="dataType">integer</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -4430,6 +4466,24 @@ null</expression>
                     <expression name="expression" type="javascript">dataSetRow["indicator_pk"]</expression>
                     <property name="dataType">integer</property>
                     <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">measure</property>
+                    <text-property name="displayName">measure</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["measure"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">indicatorperiod_pk</property>
+                    <text-property name="displayName">indicatorperiod_pk</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["indicatorperiod_pk"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">target_comment</property>
+                    <text-property name="displayName">target_comment</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["target_comment"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
             <method name="onCreate"><![CDATA[var allan = 7;
@@ -5401,6 +5455,7 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                             </structure>
                             <property name="textAlign">center</property>
+                            <property name="display">inline</property>
                             <list-property name="highlightRules">
                                 <structure>
                                     <property name="operator">between</property>
@@ -5437,6 +5492,18 @@ Math.min(row["progress_pct"],100)&#13;
                             </list-property>
                             <property name="resultSetColumn">actual_value_number</property>
                         </data>
+                        <label id="322">
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="display">inline</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["actual_value_number"] == -1 || row["measure"]  != "2"</expression>
+                                </structure>
+                            </list-property>
+                            <text-property name="text">%</text-property>
+                        </label>
                     </cell>
                     <cell id="30">
                         <property name="verticalAlign">middle</property>
