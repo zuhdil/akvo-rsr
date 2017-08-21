@@ -5425,6 +5425,7 @@ Math.min(row["progress_pct"],100)&#13;
                         </text-data>
                     </cell>
                     <cell id="163">
+                        <property name="textAlign">center</property>
                         <property name="verticalAlign">middle</property>
                         <data id="106">
                             <property name="fontSize">12pt</property>
