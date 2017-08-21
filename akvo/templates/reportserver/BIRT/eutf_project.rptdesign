@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706142203</property>
     <html-property name="description">Plan Finland MFA reporting</html-property>
     <list-property name="propertyBindings">
         <structure>
@@ -10525,7 +10525,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
             <property name="paddingBottom">1pt</property>
             <property name="textAlign">center</property>
             <property name="masterPage">Simple MasterPage</property>
-            <text-property name="text">Narrative report</text-property>
+            <text-property name="text">Narrative report [RAPPORT NARRATIF]</text-property>
         </label>
         <grid name="Description" id="968">
             <property name="fontFamily">"Times New Roman"</property>
@@ -10871,7 +10871,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
                         <structure name="toc"/>
-                        <text-property name="text">1. Description</text-property>
+                        <text-property name="text">1. Description </text-property>
                     </label>
                 </cell>
             </row>
@@ -11574,7 +11574,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">2. Assessment of action activities</text-property>
+                        <text-property name="text">2. Assessment of action activities [Évaluation de la mise en œuvre des activités de l’action]&#13;</text-property>
                     </label>
                 </cell>
             </row>
@@ -12132,7 +12132,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">3. Relationship with beneficiaries</text-property>
+                        <text-property name="text">3. Beneficiaries/affiliated entities and other Cooperation [Bénéficiaires/entités affiliées et autre coopération]</text-property>
                     </label>
                 </cell>
             </row>
@@ -12630,7 +12630,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">4. Relationship with beneficiaries</text-property>
+                        <text-property name="text">4. Visibility [Visibilité]&#13;</text-property>
                     </label>
                 </cell>
             </row>
@@ -13005,7 +13005,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">5. Additional comments</text-property>
+                        <text-property name="text">5. Additional comments [Commentaires additionnels]</text-property>
                     </label>
                 </cell>
             </row>
