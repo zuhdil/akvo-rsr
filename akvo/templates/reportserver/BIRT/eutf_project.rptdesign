@@ -11587,7 +11587,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1236">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Executive summary of the action</text-property>
+                        <text-property name="text">2.1. Executive summary of the action</text-property>
                     </label>
                     <text-data id="1238">
                         <property name="dataSet">cf_ex_summary</property>
@@ -11613,7 +11613,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1241">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Results and activities </text-property>
+                        <text-property name="text">2.2. Results and activities </text-property>
                     </label>
                     <text-data id="1268">
                         <property name="dataSet">cf_results</property>
@@ -11645,7 +11645,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1272">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Sustainability</text-property>
+                        <text-property name="text">2.3. Sustainability</text-property>
                     </label>
                     <text-data id="1274">
                         <property name="dataSet">cf_sustainability</property>
@@ -11677,7 +11677,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1278">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Monitoring &amp; evaluation</text-property>
+                        <text-property name="text">2.4. Monitoring &amp; evaluation</text-property>
                     </label>
                     <text-data id="1279">
                         <property name="dataSet">cf_me</property>
@@ -11709,7 +11709,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1283">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Learning from the action </text-property>
+                        <text-property name="text">2.5. Learning from the action </text-property>
                     </label>
                     <text-data id="1284">
                         <property name="dataSet">cf_learning_from_action</property>
@@ -11741,7 +11741,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1288">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">List of materials produced</text-property>
+                        <text-property name="text">2.6. List of materials produced</text-property>
                     </label>
                     <text-data id="1289">
                         <property name="dataSet">cf_list_of_material</property>
@@ -11773,7 +11773,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1293">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">List of contracts</text-property>
+                        <text-property name="text">2.7. List of contracts</text-property>
                     </label>
                     <text-data id="1294">
                         <property name="dataSet">cf_list_of_contracts</property>
@@ -12145,7 +12145,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1303">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Relationship with beneficiaries </text-property>
+                        <text-property name="text">3.1. Relationship with beneficiaries </text-property>
                     </label>
                     <text-data id="1305">
                         <property name="dataSet">cf_relation_with_benef</property>
@@ -12177,7 +12177,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1308">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Relationship with State authorities </text-property>
+                        <text-property name="text">3.2. Relationship with State authorities </text-property>
                     </label>
                     <text-data id="1310">
                         <property name="dataSet">cf_relationship_with_state</property>
@@ -12209,7 +12209,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1313">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Relationship with other organisations </text-property>
+                        <text-property name="text">3.3. Relationship with other organisations </text-property>
                     </label>
                     <text-data id="1315">
                         <property name="dataSet">cf_relationship_with_other_authorities</property>
@@ -12241,7 +12241,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1323">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Synergies with other actions</text-property>
+                        <text-property name="text">3.4. Synergies with other actions</text-property>
                     </label>
                     <text-data id="1325">
                         <property name="dataSet">cf_synergies_with_other_actions</property>
@@ -12273,7 +12273,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1328">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Cooperation with contracting authority </text-property>
+                        <text-property name="text">3.5. Cooperation with contracting authority </text-property>
                     </label>
                     <text-data id="1330">
                         <property name="dataSet">cf_cooperation_contracting_authority</property>
@@ -12643,7 +12643,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1344">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">EU visibility</text-property>
+                        <text-property name="text">4.1. EU visibility</text-property>
                     </label>
                     <text-data id="1346">
                         <property name="dataSet">cf_eu_visibility</property>
@@ -13018,7 +13018,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <label id="1380">
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">0pt</property>
-                        <text-property name="text">Additional comments </text-property>
+                        <text-property name="text">5.1. Additional comments </text-property>
                     </label>
                 </cell>
                 <cell id="1381">
