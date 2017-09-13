@@ -298,6 +298,12 @@
                     <text-property name="displayName">period_end</text-property>
                     <text-property name="heading">period_end</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">measure</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">measure</text-property>
+                    <text-property name="heading">measure</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -388,6 +394,11 @@
                         <property name="position">15</property>
                         <property name="name">period_end</property>
                         <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">measure</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -498,6 +509,13 @@
                     <property name="dataType">date</property>
                     <property name="nativeDataType">91</property>
                 </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">measure</property>
+                    <property name="nativeName">measure</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select rsr_result.title,
  rsr_result.id as result_pk,
@@ -513,12 +531,13 @@
  rsr_indicatorperiod.target_value,
  rsr_indicatorperiod.target_comment,
  rsr_indicatorperiod.period_start,
- rsr_indicatorperiod.period_end
+ rsr_indicatorperiod.period_end,
+ rsr_indicator.measure
 from rsr_result
 left join rsr_indicator on result_id=rsr_result.id
 left join rsr_indicatorperiod on indicator_id=rsr_indicator.id
 where rsr_result.project_id = ?
-order by rsr_result.type, rsr_result.title, rsr_result.id, rsr_indicator.id, rsr_indicatorperiod.period_start]]></xml-property>
+order by rsr_result.type DESC]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -10525,7 +10544,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
             <property name="paddingBottom">1pt</property>
             <property name="textAlign">center</property>
             <property name="masterPage">Simple MasterPage</property>
-            <text-property name="text">Narrative report [RAPPORT NARRATIF]</text-property>
+            <text-property name="text">Narrative report </text-property>
         </label>
         <grid name="Description" id="968">
             <property name="fontFamily">"Times New Roman"</property>
@@ -11574,7 +11593,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">2. Assessment of action activities [Évaluation de la mise en œuvre des activités de l’action]&#13;</text-property>
+                        <text-property name="text">2. Assessment of action activities &#13;</text-property>
                     </label>
                 </cell>
             </row>
@@ -12132,7 +12151,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">3. Beneficiaries/affiliated entities and other Cooperation [Bénéficiaires/entités affiliées et autre coopération]</text-property>
+                        <text-property name="text">3. Beneficiaries/affiliated entities and other Cooperation </text-property>
                     </label>
                 </cell>
             </row>
@@ -12630,7 +12649,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">4. Visibility [Visibilité]&#13;</text-property>
+                        <text-property name="text">4. Visibility </text-property>
                     </label>
                 </cell>
             </row>
@@ -13005,7 +13024,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="color">#000000</property>
                         <property name="marginTop">4pt</property>
                         <property name="marginBottom">4pt</property>
-                        <text-property name="text">5. Additional comments [Commentaires additionnels]</text-property>
+                        <text-property name="text">5. Additional comments </text-property>
                     </label>
                 </cell>
             </row>
@@ -13151,6 +13170,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <text-property name="displayName">baseline_value</text-property>
                     <expression name="expression" type="javascript">dataSetRow["baseline_value"]</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">actual_value</property>
@@ -13161,15 +13181,10 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                 <structure>
                     <property name="name">actual_comment</property>
                     <text-property name="displayName">target value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">target_value</property>
-                    <text-property name="displayName">target_value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["period_start"] == null ? "" : Formatter.format(dataSetRow["period_start"], "yyyy")</expression>
-                    <property name="dataType">string</property>
+                    <expression name="expression" type="javascript">dataSetRow["measure"] ==1
+? dataSetRow["actual_value"] 
+: dataSetRow["actual_value"] * 100 + '%'</expression>
+                    <property name="dataType">decimal</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
@@ -13185,16 +13200,62 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <property name="dataType">date</property>
                 </structure>
                 <structure>
-                    <property name="name">Column Binding</property>
+                    <property name="name">actual_comment_1</property>
+                    <text-property name="displayName">actual_comment</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">target</property>
+                    <text-property name="displayName">target_value</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["measure"] ==2
+? dataSetRow["target_value"]
+: dataSetRow["target_value"] * 100 + '%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">actual_value_number</property>
+                    <text-property name="displayName">actual_value_number</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["actual_value"] &amp;&amp; !isNaN(dataSetRow["actual_value"]) ? dataSetRow["actual_value"] : -1</expression>
+                    <property name="dataType">decimal</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">targeted_value_number</property>
+                    <text-property name="displayName">targeted_value_number</text-property>
+                    <expression name="expression" type="javascript">(dataSetRow["target_value"] &amp;&amp; !isNaN(dataSetRow["target_value"])) 
+? dataSetRow["target_value"] : 0</expression>
+                    <property name="dataType">decimal</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">measure</property>
+                    <text-property name="displayName">measure</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["measure"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">type</property>
+                    <text-property name="displayName">type</text-property>
                     <expression name="expression" type="javascript">dataSetRow["type"]</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">actual_comment_1</property>
-                    <text-property name="displayName">actual_comment</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                    <property name="name">target_value</property>
+                    <text-property name="displayName">target_value</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["target_value"]</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">target_year</property>
+                    <text-property name="displayName">target_year</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["period_start"] == null ? "" : Formatter.format(dataSetRow["period_start"], "yyyy")</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
             <structure name="toc"/>
@@ -13234,6 +13295,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1533">
+                            <property name="textAlign">right</property>
                             <text-property name="text">Type</text-property>
                         </label>
                     </cell>
@@ -13505,7 +13567,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                                     <text-property name="display">Impact</text-property>
                                 </structure>
                             </list-property>
-                            <property name="resultSetColumn">Column Binding</property>
+                            <property name="resultSetColumn">type</property>
                         </data>
                     </cell>
                     <cell id="1419">
@@ -13587,13 +13649,8 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <data id="1432">
-                            <property name="paddingTop">3pt</property>
-                            <property name="paddingLeft">3pt</property>
-                            <property name="paddingBottom">3pt</property>
-                            <property name="paddingRight">3pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">target_value</property>
+                        <data id="1539">
+                            <property name="resultSetColumn">target_year</property>
                         </data>
                     </cell>
                     <cell id="1429">
@@ -13610,9 +13667,43 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                             <property name="paddingLeft">3pt</property>
                             <property name="paddingBottom">3pt</property>
                             <property name="paddingRight">3pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                <property name="locale">en</property>
+                            </structure>
+                            <structure name="stringFormat">
+                                <property name="category">Custom</property>
+                            </structure>
                             <property name="textAlign">center</property>
-                            <property name="resultSetColumn">actual_comment</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["measure"]==2</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">targeted_value_number</property>
                         </data>
+                        <text-data id="1535">
+                            <property name="color">black</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="whiteSpace">nowrap</property>
+                            <property name="display">block</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["measure"] != 2</expression>
+                                </structure>
+                            </list-property>
+                            <expression name="valueExpr">(row["target_value"] &amp;&amp; ! isNaN(row["target_value"]))
+? row["target_value"] +"%"
+:""</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
                     </cell>
                     <cell id="1431">
                         <property name="borderBottomStyle">solid</property>
@@ -13623,14 +13714,6 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
-                        <text-data id="1535">
-                            <property name="paddingTop">3pt</property>
-                            <property name="paddingLeft">3pt</property>
-                            <property name="paddingBottom">3pt</property>
-                            <property name="paddingRight">3pt</property>
-                            <expression name="valueExpr">row["actual_value"]</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
                     </cell>
                     <cell id="1519">
                         <property name="borderBottomStyle">solid</property>
@@ -13646,6 +13729,15 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                             <property name="paddingLeft">3pt</property>
                             <property name="paddingBottom">3pt</property>
                             <property name="paddingRight">3pt</property>
+                            <property name="dataSet">Results_indicators_periods</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">actual_comment</property>
+                                    <text-property name="displayName">actual_comment</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">actual_comment</property>
                         </data>
                     </cell>
