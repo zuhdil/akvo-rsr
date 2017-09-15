@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Akvo Foundation</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706142203</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
     <html-property name="description">Plan Finland MFA reporting</html-property>
     <list-property name="propertyBindings">
         <structure>
@@ -137,51 +137,7 @@
         </scalar-parameter>
     </parameters>
     <data-sources>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="RSR-test" id="49">
-            <list-property name="privateDriverProperties">
-                <ex-property>
-                    <name>metadataBidiFormatStr</name>
-                    <value>ILYNN</value>
-                </ex-property>
-                <ex-property>
-                    <name>disabledMetadataBidiFormatStr</name>
-                </ex-property>
-                <ex-property>
-                    <name>contentBidiFormatStr</name>
-                    <value>ILYNN</value>
-                </ex-property>
-                <ex-property>
-                    <name>disabledContentBidiFormatStr</name>
-                </ex-property>
-            </list-property>
-            <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:1234/rsr</property>
-            <property name="odaUser">rsr</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cGFzc3dvcmQ=</encrypted-property>
-        </oda-data-source>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="RSR readonly" id="122">
-            <list-property name="privateDriverProperties">
-                <ex-property>
-                    <name>metadataBidiFormatStr</name>
-                    <value>ILYNN</value>
-                </ex-property>
-                <ex-property>
-                    <name>disabledMetadataBidiFormatStr</name>
-                </ex-property>
-                <ex-property>
-                    <name>contentBidiFormatStr</name>
-                    <value>ILYNN</value>
-                </ex-property>
-                <ex-property>
-                    <name>disabledContentBidiFormatStr</name>
-                </ex-property>
-            </list-property>
-            <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:1234/rsr</property>
-            <property name="odaUser">rsr_readonly</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">cmVtb25zdHJhdGluZ3JvZGVudA==</encrypted-property>
-        </oda-data-source>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="RSR-live" id="212">
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="RSR-readonly" id="212">
             <list-property name="privateDriverProperties">
                 <ex-property>
                     <name>metadataBidiFormatStr</name>
@@ -402,7 +358,7 @@
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -1640,7 +1596,7 @@ order by rsr_result.type DESC]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2686,7 +2642,7 @@ order by rsr_projectupdate.id desc]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -2852,7 +2808,7 @@ where rsr_partnership.project_id=?]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -3597,7 +3553,7 @@ where project_id=?]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -4160,7 +4116,7 @@ where
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -4310,7 +4266,7 @@ where
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -4423,7 +4379,7 @@ where (rsr_relatedproject.relation = '2') and (rsr_relatedproject.related_projec
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -4581,7 +4537,7 @@ select ? as number, 'B' as name
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -4759,7 +4715,7 @@ select ? as number, 'D' as name
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -5352,7 +5308,7 @@ select ? as number, 'D' as name
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -7401,7 +7357,7 @@ where rsr_project.id = ?]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -7851,7 +7807,7 @@ and codelists_country.version_id = '6']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -7985,7 +7941,7 @@ and rsr_projectcustomfield.name = 'Executive summary of the action']]></xml-prop
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8119,7 +8075,7 @@ and rsr_projectcustomfield.name = 'Results and activities']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8253,7 +8209,7 @@ and rsr_projectcustomfield.name = 'Sustainability']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8387,7 +8343,7 @@ and rsr_projectcustomfield.name = 'Monitoring &amp; evaluation']]></xml-property
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR readonly</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8522,7 +8478,7 @@ and rsr_projectcustomfield.name = 'Learning from the action']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR readonly</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8656,7 +8612,7 @@ and rsr_projectcustomfield.name = 'List of materials produced']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR readonly</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8790,7 +8746,7 @@ and rsr_projectcustomfield.name = 'List of contracts']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR readonly</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -8924,7 +8880,7 @@ and rsr_projectcustomfield.name = 'Relationship with beneficiaries']]></xml-prop
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9058,7 +9014,7 @@ and rsr_projectcustomfield.name = 'Relationship with State authorities']]></xml-
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9192,7 +9148,7 @@ and rsr_projectcustomfield.name = 'Relationship with other organisations']]></xm
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR readonly</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9326,7 +9282,7 @@ and rsr_projectcustomfield.name = 'Relationship with other organisations']]></xm
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR readonly</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9460,7 +9416,7 @@ and rsr_projectcustomfield.name = 'Synergies with other actions']]></xml-propert
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9594,7 +9550,7 @@ and rsr_projectcustomfield.name = 'Cooperation with contracting authority']]></x
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9728,7 +9684,7 @@ and rsr_projectcustomfield.name = 'EU visibility']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -9863,7 +9819,7 @@ and rsr_projectcustomfield.name = 'Additional comments']]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -10182,7 +10138,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -10343,7 +10299,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RSR-live</property>
+            <property name="dataSource">RSR-readonly</property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
@@ -13650,6 +13606,11 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <data id="1539">
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">target_year</property>
                         </data>
                     </cell>
