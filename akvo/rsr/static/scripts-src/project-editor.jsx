@@ -35,6 +35,7 @@ var orgsAPIUrl = '/rest/v1/typeaheads/organisations?format=json';
 var responses = {};
 responses[projectsAPIUrl] = null;
 responses[orgsAPIUrl] = null;
+var update_section_states_timer;
 
 // LOCAL STORAGE
 var MAX_LOCALSTORAGE_DAYS = 30;
@@ -45,13 +46,13 @@ var localStorageResponses = localStorage.getItem(localStorageName);
 // PARTIALS
 var partials = [
     'related-project', 'humanitarian-scope', 'budget-item', 'condition', 'contact-information',
-    'country-budget-item', 'document', 'document-category', 'indicator', 'indicator-period',
-    'indicator-reference', 'indicator-period-actual-dimension', 'indicator-period-actual-location',
-    'indicator-period-target-dimension', 'indicator-period-target-location', 'link', 'partner',
-    'planned-disbursement', 'policy-marker', 'recipient-country', 'recipient-region',
-    'related-project','result', 'sector', 'transaction', 'transaction-sector',
-    'location-administrative', 'project-location', 'keyword', 'crs-add', 'crsadd-other-flag', 'fss',
-    'fss-forecast', 'legacy-data'
+    'country-budget-item', 'document', 'document-category', 'indicator', 'indicator-dimension',
+    'indicator-label', 'indicator-period', 'indicator-reference', 'indicator-period-actual-dimension',
+    'indicator-period-actual-location', 'indicator-period-target-dimension',
+    'indicator-period-target-location', 'link', 'partner', 'planned-disbursement', 'policy-marker',
+    'recipient-country', 'recipient-region', 'related-project','result', 'sector', 'transaction',
+    'transaction-sector', 'location-administrative', 'project-location', 'keyword', 'crs-add',
+    'crsadd-other-flag', 'fss', 'fss-forecast', 'legacy-data'
 ];
 
 // Measure the percentage of completion for each panel and display the results to the user
@@ -83,12 +84,12 @@ function serialize(form) {
        Modified to skip hidden fields and added / removed some field types.
        Modified to only serialize fields that have been changed. */
 
-	var  q = [];
+  var  q = [];
 
-	for (var i = 0; i < form.elements.length; i++) {
+  for (var i = 0; i < form.elements.length; i++) {
         var formField = form.elements[i];
 
-		if (formField.name !== "" && fieldChanged(formField)) {
+    if (formField.name !== "" && fieldChanged(formField)) {
             // Form field has a name and is changed (and not hidden), only then process it
             if (formField.nodeName === 'INPUT') {
                 if (formField.type === 'text' || formField.type === 'number') {
@@ -103,8 +104,8 @@ function serialize(form) {
                 q.push(formField.name + "=" + encodeURIComponent(formField.value));
             }
         }
-	}
-	return q.join("&");
+  }
+  return q.join("&");
 }
 
 function startSave(saveButton) {
@@ -1010,14 +1011,34 @@ function buildReactComponents(typeaheadOptions, typeaheadCallback, displayOption
     selectorTypeahead.appendChild(label);
     selectorTypeahead.appendChild(help);
     elAddClass(selectorClass, 'has-typeahead');
+}
+
+function updateSectionState(section) {
+    // FIXME: Not all functions called here update just the section state --
+    // some of them update the state everywhere in the page!
+
+    // Check if the section was already updated, and return if so
+    if (elHasClass(section, 'section-state-updated')) {
+        return;
+    }
 
     updateAllHelpIcons();
-    markMandatoryFields();
-    setHiddenFields();
+    markMandatoryFields(section);
+    setHiddenFields(section);
     checkPartnerships();
     setAllSectionsCompletionPercentage();
-    setAllSectionsChangeListener();
+    setSectionChangeListener(section);
     setPageCompletionPercentage();
+
+    // Mark section as updated
+    elAddClass(section, 'section-state-updated');
+
+}
+
+function updateAllSectionState(){
+    document.querySelectorAll('.myPanel').forEach(function(section){
+        updateSectionState(section);
+    });
 }
 
 function loadAsync(url, retryCount, retryLimit, callback, forceReloadOrg) {
@@ -1116,6 +1137,10 @@ function processResponse(response, selector, childClass, valueId, label, help, f
     };
 
     buildReactComponents(typeaheadOptions, typeaheadCallback, displayOption, selector, childClass, valueId, label, help, filterOption, inputType);
+
+    // Clear all old timers to update the section states and setup a new one in a second.
+    clearTimeout(update_section_states_timer);
+    update_section_states_timer = setTimeout(updateAllSectionState, 1000);
 }
 
 function getCallback(selector, childClass, valueId, label, help, filterOption, inputType) {
@@ -1181,6 +1206,9 @@ function setPartialOnClicks() {
             // Set the budget item labels onchange
             if (selectInputId[0] == 'rsr_budgetitem' && selectInputId[1] == 'label') {
                 selectInputs[m].onchange = toggleOtherLabel(selectInputs[m]);
+            }
+            if (selectInputId[0] == 'rsr_indicator' && selectInputId[1] == 'type') {
+                selectInputs[m].onchange = setMeasureVisibility.bind(null, selectInputs[m]);
             }
         }
     }
@@ -1427,8 +1455,24 @@ function togglePartner(selectNode) {
         }
 
         checkPartnerships();
-        markMandatoryFields();
+        markMandatoryFields(parent);
     };
+}
+
+function setMeasureVisibility(indicatorTypeSelect) {
+    /*
+        Show or hide measure fields depending on indicator type
+     */
+    // parent is the div wrapping one whole indicator form, it's the outer node in
+    // related_objects/indicator_input.html
+    var parent = findAncestorByClass(indicatorTypeSelect, 'parent');
+    var measureRow = parent.getElementsByClassName('measure')[0];
+    // hide measure fields for qualitative indicators
+    if (indicatorTypeSelect.value === '2') {
+        elAddClass(measureRow, 'hidden');
+    } else {
+        elRemoveClass(measureRow, 'hidden');
+    }
 }
 
 function togglePartial(hidePartial) {
@@ -1538,6 +1582,8 @@ function addPartial(partialName, partialContainer) {
             ['result', 'indicator', 'indicator-period', 'indicator-period-actual-location'],
             ['result', 'indicator', 'indicator-period', 'indicator-period-target-dimension'],
             ['result', 'indicator', 'indicator-period', 'indicator-period-target-location'],
+            ['result', 'indicator', 'indicator-dimension'],
+            ['result', 'indicator', 'indicator-label'],
             ['result', 'indicator', 'indicator-reference'],
             ['transaction', 'transaction-sector'],
             ['project-location', 'location-administrative'],
@@ -1929,12 +1975,14 @@ function shouldBeHidden(el) {
     return validationSets.length === hideAccordingToValidationSet.length;
 }
 
-function setHiddenFields() {
+function setHiddenFields(parent) {
     /* Hide fields based on the selected validation sets. */
+
+    parent = parent || document;
 
     // Check per field if it should be hidden or not
     for (var i = 0; i < INPUT_ELEMENTS.length; i++) {
-        var allElements = document.querySelectorAll(INPUT_ELEMENTS[i]);
+        var allElements = parent.querySelectorAll(INPUT_ELEMENTS[i]);
         for (var j = 0; j < allElements.length; j++) {
             var formGroupNode = findAncestorByClass(allElements[j], 'form-group');
             if (formGroupNode !== null) {
@@ -1948,7 +1996,7 @@ function setHiddenFields() {
     }
 
     // Also check the related objects if they should be hidden or not
-    var relatedObjectContainers = document.querySelectorAll('.related-object-container');
+    var relatedObjectContainers = parent.querySelectorAll('.related-object-container');
     for (var k = 0; k < relatedObjectContainers.length; k++) {
         var relatedObjectContainer = relatedObjectContainers[k];
         if (!shouldBeHidden(relatedObjectContainer)) {
@@ -1959,6 +2007,8 @@ function setHiddenFields() {
     }
 
     // Finally, even check the sections if they should be hidden or not
+    // FIXME: If called with a section, this may not be required, but leaving
+    // this as it is, for now.
     var sections = document.querySelectorAll('.myPanel');
     for (var l = 0; l < sections.length; l++) {
         var section = sections[l];
@@ -1990,12 +2040,15 @@ function setPageCompletionPercentage() {
     var numInputsCompleted = inputResults[1];
     var completionPercentage = renderCompletionPercentage(numInputsCompleted, numInputs, document.querySelector('.progress-and-publish'));
 
-    var publishButton = document.getElementById('publishProject');
-    if (publishButton !== null) {
-        if (completionPercentage !== 100 && publishButton.getAttribute('status') === 'unpublished') {
-            publishButton.setAttribute('disabled', '');
-        } else {
-            publishButton.removeAttribute('disabled');
+    // Don't mess with the Publish button if you're not allowed to publish!
+    if (defaultValues.can_create_projects) {
+        var publishButton = document.getElementById('publishProject');
+        if (publishButton !== null) {
+            if (completionPercentage !== 100 && publishButton.getAttribute('status') === 'unpublished') {
+                publishButton.setAttribute('disabled', '');
+            } else {
+                publishButton.removeAttribute('disabled');
+            }
         }
     }
 }
@@ -2156,7 +2209,7 @@ function setSectionChangeListener(section) {
                 continue;
             }
 
-            listener = getChangeListener(section, this);
+            listener = getChangeListener(section, el);
             el.addEventListener('change', listener);
         }
     }
@@ -2170,7 +2223,7 @@ function getChangeListener(section, el) {
         setSectionCompletionPercentage(currentSection);
         elAddClass(el, 'has-listener');
         setPageCompletionPercentage();
-        markMandatoryFields();
+        markMandatoryFields(findAncestorByClass(el, 'parent')||section);
     };
 }
 
@@ -2224,11 +2277,13 @@ function markMandatoryField(element) {
     }
 }
 
-function markMandatoryFields() {
+function markMandatoryFields(parent) {
     /* Mark mandatory fields with an asterisk */
 
+    parent = parent || document;
+
     // Clear any existing markers
-    var existingMarkers = document.querySelectorAll('.mandatory:not(.in-org-modal)');
+    var existingMarkers = parent.querySelectorAll('.mandatory:not(.in-org-modal)');
     for (var i = 0; i < existingMarkers.length; i++) {
         existingMarkers[i].parentNode.removeChild(existingMarkers[i]);
     }
@@ -2237,7 +2292,7 @@ function markMandatoryFields() {
     var validationSets = getValidationSets();
     for (var j = 0; j < validationSets.length; j++) {
         var mandatoryIndicator = '.mandatory-' + validationSets[j];
-        var elementsToMark = document.querySelectorAll(mandatoryIndicator);
+        var elementsToMark = parent.querySelectorAll(mandatoryIndicator);
         for (var k = 0; k < elementsToMark.length; k++) {
             if (!elementsToMark[k].hasAttribute("disabled") &&
                 !findAncestorByClass(elementsToMark[k], 'always-hidden') &&
@@ -2925,6 +2980,7 @@ function toggleSection(node) {
             if (infoIcon.className.indexOf('hidden') > -1) {
                 infoIcon.className = infoIcon.className.replace('hidden', '');
             }
+            updateSectionState(div);
         } else {
             formBlock.className += ' hidden';
             infoIcon.className += ' hidden';
@@ -3027,7 +3083,11 @@ function getImportResults(importButton) {
 
         request.onload = function() {
             var response, divNode;
-            response = JSON.parse(request.responseText);
+            try {
+                response = JSON.parse(request.responseText);
+            } catch (e) {
+                response = {code: 0};
+            }
             divNode = document.createElement('div');
 
             if (response.code === 1) {
@@ -3444,6 +3504,7 @@ function addOrgModal() {
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             request.onload = function() {
+                var response;
                 if (request.status === 201) {
                     var organisation_id;
 
@@ -3479,7 +3540,6 @@ function addOrgModal() {
                     updateOrganisationTypeaheads(true);
                     cancelModal();
                 } else if (request.status === 400) {
-                    var response;
                     response = JSON.parse(request.responseText);
 
                     document.querySelector('.orgModal').scrollTop = 0;

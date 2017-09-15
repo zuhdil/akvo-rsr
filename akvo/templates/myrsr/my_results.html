@@ -1,6 +1,6 @@
 {% extends "myrsr/myrsr_base.html" %}
 
-{% load compressed i18n %}
+{% load pipeline i18n %}
 
 {% block title %}{% trans 'MyRSR - My Results' %}{% endblock title %}
 
@@ -8,6 +8,7 @@
     <h4 class="resultProjectTitle" id="resultProjectTitle">
         <a href="{% url 'project-main' project.pk %}">{{ project.title }}</a>
         <a href="{% url 'project_editor' project.pk %}"><button class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i> {% trans 'Edit project' %}</button></a>
+        {# <a href="{% url 'my_new_results' project.pk %}"><button class="btn btn-default btn-sm"><i class="fa fa-snowflake-o"></i> {% trans 'New results' %}</button></a> #}
     </h4>
     {% if not project.is_impact_project %}
         <div id="draft" class="">{% trans 'This is not an RSR Impact project, it is not possible to place updates on this project.' %}</div>
@@ -37,7 +38,7 @@
     {# Initial data endpoints #}
     <script type="application/json" id="data-endpoints">
         {
-            "base_url": "http://{{ request.META.HTTP_HOST }}",
+            "base_url": "//{{ request.META.HTTP_HOST }}",
             "result": "/rest/v1/result/{result}/?format=json",
             "results_of_project": "/rest/v1/result/?format=json&project={project}",
             "indicators_of_project": "/rest/v1/indicator/?format=json&result__project={project}",
@@ -119,7 +120,7 @@
             "current": "{% trans 'Current'|escapejs %}",
             "add_to_actual_value": "{% trans 'Add to actual value'|escapejs %}",
             "input_placeholder": "{% trans 'Fill in a value to add to the actual value'|escapejs %}",
-            "actual_value_comment": "{% trans 'Value description'|escapejs %}",
+            "actual_value_comment": "{% trans 'Actual value comment'|escapejs %}",
             "comment_placeholder": "{% trans 'Add a comment to provide additional background information for this update'|escapejs %}",
             "new_total_value": "{% trans 'New total for this period'|escapejs %}",
             "total_value_after_update": "{% trans 'Actual total for this period (after this update)'|escapejs %}",
@@ -146,8 +147,8 @@
             "unknown_date": "{% trans 'Unknown date'|escapejs %}",
             "comment": "{% trans 'Comment'|escapejs %}",
             "comments": "{% trans 'Comments'|escapejs %}",
-            "add_comment": "{% trans 'Add comment'|escapejs %}",
-            "add_comment_placeholder": "{% trans 'Add an internal comment to the update'|escapejs %}",
+            "add_comment": "{% trans 'Add a note'|escapejs %}",
+            "add_comment_placeholder": "{% trans 'Add an internal note to the update'|escapejs %}",
             "and": "{% trans 'and'|escapejs %}",
             "others": "{% trans 'others'|escapejs %}",
             "general_error": "{% trans 'An error occurred'|escapejs %}",
@@ -156,7 +157,7 @@
     </script>
 
     {% if project.is_impact_project and project.results.all %}
-        {% compressed_js 'my_results' %}
+        {% javascript 'my_results' %}
     {% endif %}
 
 {% endblock js %}

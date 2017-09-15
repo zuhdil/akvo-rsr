@@ -9,11 +9,12 @@ see < http://www.gnu.org/licenses/agpl.html >.
 
 from django import template
 from django.db import models
-from django.db.models import get_model
+from django.db.models import get_model, QuerySet
 
 from akvo.rsr.models import ProjectEditorValidation
 
 register = template.Library()
+VALIDATION_CACHE = {}
 
 
 def retrieve_model(obj):
@@ -34,6 +35,45 @@ def retrieve_id(obj):
             return obj.project.id
     else:
         return "{0}_{1}".format(obj.split('.')[1], "new-0")
+
+
+def get_validations():
+    """ Populate the VALIDATION_CACHE and return it."""
+
+    if VALIDATION_CACHE.get('CACHE_VALID', False):
+        return VALIDATION_CACHE
+
+    fields = ('validation', 'action', 'validation_set__pk')
+    for name, action, validation_set in ProjectEditorValidation.objects.values_list(*fields):
+        if action == ProjectEditorValidation.MANDATORY_ACTION:
+            action = 'mandatory'
+        elif action == ProjectEditorValidation.HIDDEN_ACTION:
+            action = 'hidden'
+
+        names = name.split('||')
+        for name in names:
+            indication = VALIDATION_CACHE.get(name, '')
+            indication += ' {0}-{1} '.format(action, validation_set)
+
+            if action == 'mandatory' and len(names) > 1:
+                other_names = set(names) - set([name])
+                for or_name in other_names:
+                    indication += 'mandatory-{0}-or-{1} '.format(
+                        validation_set, or_name.split('.')[1]
+                    )
+
+            VALIDATION_CACHE[name] = indication.strip()
+
+    VALIDATION_CACHE['CACHE_VALID'] = True
+
+    return VALIDATION_CACHE
+
+
+def invalidate_validation_cache():
+    global VALIDATION_CACHE
+    VALIDATION_CACHE = {}
+
+    return VALIDATION_CACHE
 
 
 @register.filter
@@ -171,24 +211,57 @@ def value(obj, field):
 @register.filter
 def choices(obj, field):
     """
-    Retrieves the choices of a given object's field.
+    Retrieves the choices of a given object's field and the IDs of the choices
 
-    :returns ((1, "Core Activity"), (2, "Sub Activity"), (3, "Lower Sub Activity"))
+    :returns [((1, "Core Activity"), (2, "Sub Activity"), (3, "Lower Sub Activity")), [1, 2, 3]]
     """
-    model_field = retrieve_model(obj)._meta.get_field(field)
+
+    def first_items_list(iterable):
+        return [item[0] for item in iterable]
+
+    def values_list_of(model, *fields):
+        if isinstance(model, QuerySet):
+            objects = model
+        else:
+            objects = get_model('rsr', model).objects.all()
+        return objects.values_list(*fields)
+
+    def choices_and_ids(model, *fields):
+        choices_list = values_list_of(model, *fields)
+        return [
+            choices_list,
+            first_items_list(choices_list)
+        ]
+
+    model = retrieve_model(obj)
+    model_field = model._meta.get_field(field)
+
     if not isinstance(model_field, models.ForeignKey):
-        return [model_field.choices, [choice[0] for choice in model_field.choices]]
+        return [model_field.choices, first_items_list(model_field.choices)]
+
     elif isinstance(obj, get_model('rsr', 'BudgetItem')) or \
             (isinstance(obj, basestring) and 'BudgetItem' in obj):
         # The ForeignKey field on budget items is the budget item labels
-        all_budget_labels = get_model('rsr', 'budgetitemlabel').objects.all()
-        return [all_budget_labels.values_list('id', 'label'),
-                [label.pk for label in all_budget_labels]]
+        return choices_and_ids('budgetitemlabel', 'id', 'label')
+
     elif isinstance(obj, get_model('rsr', 'ProjectLocation')) or \
             (isinstance(obj, basestring) and 'ProjectLocation' in obj):
         # The ForeignKey field on locations is the countries
-        all_countries = get_model('rsr', 'country').objects.all()
-        return [all_countries.values_list('id', 'name'), [country.pk for country in all_countries]]
+        return choices_and_ids('country', 'id', 'name')
+
+    elif isinstance(obj, get_model('rsr', 'IndicatorLabel')) or \
+            (isinstance(obj, basestring) and 'IndicatorLabel' in obj):
+
+        if isinstance(obj, basestring) and 'IndicatorLabel' in obj:
+            # String looking like: u'IndicatorLabel.5577_22634_19197', 5577 is the project ID
+            project_pk = obj.split('.')[1].split('_')[0]
+            project = get_model('rsr', 'Project').objects.get(pk=project_pk)
+        else:
+            project = obj.indicator.result.project
+        organisation_indicator_labels = get_model('rsr', 'OrganisationIndicatorLabel').objects.filter(
+            organisation=project.primary_organisation
+        )
+        return choices_and_ids(organisation_indicator_labels, 'id', 'label')
 
 
 @register.filter
@@ -218,38 +291,23 @@ def mandatory_or_hidden(validations, field):
 
     :returns A string of the form mandatory-{validation ID} and/or hidden-{validation_ID}
     """
-    indications = ''
 
     if '.' in field:
         # Model fields like 'rsr_relatedproject.12.relation'
         field_name_list = field.split('.')
         new_field_name = '.'.join([field_name_list[0], field_name_list[1]])
-        for validation in validations.filter(validation__contains=new_field_name):
-            validation_list = validation.validation.split('||')
-            validation_action = validation.action
-
-            if new_field_name in validation_list:
-                if (validation_action == ProjectEditorValidation.MANDATORY_ACTION and not
-                        field == 'rsr_project.current_image'):
-                    indications += 'mandatory-{0} '.format(str(validation.validation_set.pk))
-
-                    if len(validation_list) > 1:
-                        validation_list.remove(new_field_name)
-                        for or_indication in validation_list:
-                            indications += 'mandatory-{0}-or-{1} '.format(
-                                str(validation.validation_set.pk),
-                                or_indication.split('.')[1]
-                            )
-                elif validation_action == ProjectEditorValidation.HIDDEN_ACTION:
-                    indications += 'hidden-{0} '.format(str(validation.validation_set.pk))
 
     else:
         # Full models like 'rsr_relatedproject'
-        for validation in validations.filter(validation=field):
-            if validation.action == ProjectEditorValidation.MANDATORY_ACTION:
-                indications += 'mandatory-{0} '.format(str(validation.validation_set.pk))
-            elif validation.action == ProjectEditorValidation.HIDDEN_ACTION:
-                indications += 'hidden-{0} '.format(str(validation.validation_set.pk))
+        new_field_name = field
 
-    return indications
+    indication = get_validations().get(new_field_name, '')
 
+    # XXX: Not sure why exactly 'rsr_project.current_image' needs to be special
+    # cased, but this code just retains the behavior of the older code.
+    if field == 'rsr_project.current_image':
+        indication = ' '.join(
+            filter(lambda x: not x.startswith('mandatory'), indication.split())
+        )
+
+    return indication

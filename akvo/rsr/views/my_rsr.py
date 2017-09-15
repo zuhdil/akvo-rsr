@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.db.models import Max
+from django.db.models import Max, Q
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
@@ -20,7 +20,8 @@ from django.shortcuts import get_object_or_404, render
 from tastypie.models import ApiKey
 
 from akvo.codelists.models import Country, Version
-from akvo.codelists.store.codelists_v202 import SECTOR_CATEGORY,SECTOR
+from akvo.codelists.store.codelists_v202 import SECTOR_CATEGORY, SECTOR
+from akvo.rsr.models import IndicatorPeriodData
 
 from ..forms import (PasswordForm, ProfileForm, UserOrganisationForm, UserAvatarForm,
                      SelectOrgForm)
@@ -35,11 +36,11 @@ import json
 @login_required
 def my_rsr(request):
     """
-    Redirect to the 'My Details' page in MyRSR, if the user is logged in.
+    Redirect to the 'My Projects' page in MyRSR, if the user is logged in.
 
     :param request; A Django request.
     """
-    return HttpResponseRedirect(reverse('my_details', args=[]))
+    return HttpResponseRedirect(reverse('my_projects', args=[]))
 
 
 @login_required
@@ -109,7 +110,7 @@ def my_updates(request):
     page, paginator, page_range = pagination(page, updates, 10)
 
     org_admin_view = True if request.user.get_admin_employment_orgs() or \
-                             request.user.is_admin or request.user.is_superuser else False
+        request.user.is_admin or request.user.is_superuser else False
 
     context = {
         'page': page,
@@ -163,10 +164,11 @@ def my_projects(request):
         except Project.DoesNotExist:
             Project.objects.none()
         except ValueError:
-            q_list = q.split()
-            for q_item in q_list:
-                projects = projects.filter(title__icontains=q_item) | \
-                    projects.filter(subtitle__icontains=q_item)
+            filter_expressions = [
+                Q(title__icontains=q_item) | Q(subtitle__icontains=q_item)
+                for q_item in q.split()
+            ]
+            projects = projects.filter(reduce(lambda x, y: x & y, filter_expressions))
 
     # Pagination
     qs = remove_empty_querydict_items(request.GET)
@@ -235,12 +237,19 @@ def project_editor(request, project_id):
         project = Project.objects.prefetch_related(
             'related_projects',
             'related_projects__project',
+            'related_projects__related_project',
             'contacts',
             'partnerships',
             'partnerships__organisation',
             'results',
             'results__indicators',
+            'results__indicators__references',
             'results__indicators__periods',
+            'results__indicators__periods__data',
+            'results__indicators__periods__actual_dimensions',
+            'results__indicators__periods__target_dimensions',
+            'results__indicators__periods__actual_locations',
+            'results__indicators__periods__target_locations',
             'conditions',
             'budget_items',
             'budget_items__label',
@@ -261,7 +270,8 @@ def project_editor(request, project_id):
             'documents',
             'keywords',
         ).select_related(
-            'publishingstatus__status'
+            'publishingstatus__status',
+            'primary_organisation',
         ).get(pk=project_id)
     except Project.DoesNotExist:
         return Http404
@@ -269,19 +279,6 @@ def project_editor(request, project_id):
     if (not request.user.has_perm('rsr.change_project', project) or project.iati_status in Project.EDIT_DISABLED) and not \
             (request.user.is_superuser or request.user.is_admin):
         raise PermissionDenied
-
-    # Custom fields
-    custom_fields_section_1 = project.custom_fields.filter(section=1).order_by('order', 'id')
-    custom_fields_section_2 = project.custom_fields.filter(section=2).order_by('order', 'id')
-    custom_fields_section_3 = project.custom_fields.filter(section=3).order_by('order', 'id')
-    custom_fields_section_4 = project.custom_fields.filter(section=4).order_by('order', 'id')
-    custom_fields_section_5 = project.custom_fields.filter(section=5).order_by('order', 'id')
-    custom_fields_section_6 = project.custom_fields.filter(section=6).order_by('order', 'id')
-    custom_fields_section_7 = project.custom_fields.filter(section=7).order_by('order', 'id')
-    custom_fields_section_8 = project.custom_fields.filter(section=8).order_by('order', 'id')
-    custom_fields_section_9 = project.custom_fields.filter(section=9).order_by('order', 'id')
-    custom_fields_section_10 = project.custom_fields.filter(section=10).order_by('order', 'id')
-    custom_fields_section_11 = project.custom_fields.filter(section=11).order_by('order', 'id')
 
     # Validations / progress bars
     validations = ProjectEditorValidation.objects.select_related('validation_set')
@@ -330,19 +327,12 @@ def project_editor(request, project_id):
         # Default indicator
         'default_indicator': default_indicator,
 
-        # Custom fields
-        'custom_fields_section_1': custom_fields_section_1,
-        'custom_fields_section_2': custom_fields_section_2,
-        'custom_fields_section_3': custom_fields_section_3,
-        'custom_fields_section_4': custom_fields_section_4,
-        'custom_fields_section_5': custom_fields_section_5,
-        'custom_fields_section_6': custom_fields_section_6,
-        'custom_fields_section_7': custom_fields_section_7,
-        'custom_fields_section_8': custom_fields_section_8,
-        'custom_fields_section_9': custom_fields_section_9,
-        'custom_fields_section_10': custom_fields_section_10,
-        'custom_fields_section_11': custom_fields_section_11,
     }
+
+    # Custom fields context
+    for section_id in xrange(1, 12):
+        context['custom_fields_section_{}'.format(section_id)] = \
+            project.custom_fields.filter(section=section_id).order_by('order', 'id')
 
     return render(request, 'myrsr/project_editor/project_editor.html', context)
 
@@ -449,7 +439,12 @@ def user_management(request):
     # Order employments in reverse chronological order, but also group
     # employments by the user.
     employments = employments.annotate(max_id=Max('user__employers__id'))
-    employments = employments.order_by('-max_id', '-id')
+    employments = employments.order_by('-max_id', '-id').select_related(
+        'user',
+        'organisation',
+        'group',
+        'country',
+    )
 
     qs = remove_empty_querydict_items(request.GET)
     page = request.GET.get('page')
@@ -491,10 +486,7 @@ def user_management(request):
             employment_dict["user"] = user_dict
         employments_array.append(employment_dict)
 
-    organisations_list = []
-    for organisation in organisations:
-        organisation_dict = {'id': organisation.id, 'name': organisation.name}
-        organisations_list.append(organisation_dict)
+    organisations_list = list(organisations.values('id', 'name'))
 
     roles_list = []
     for role in roles:
@@ -538,7 +530,7 @@ def my_results_select(request):
 
 
 @login_required
-def my_results(request, project_id):
+def my_results(request, project_id, template='myrsr/my_results.html'):
     """
     My results section. Only accessible to M&E Managers, Admins and Project editors.
 
@@ -556,13 +548,18 @@ def my_results(request, project_id):
     admins_group = Group.objects.get(name='Admins')
     me_managers = project.publishing_orgs.employments().approved().\
         filter(group__in=[admins_group, me_managers_group])
+    # Can we unlock and approve?
+    user_is_me_manager = user.is_superuser or user.is_admin or user.me_manager_for_project(project)
 
     context = {
         'project': project,
         'parent_projects_ids': [parent_project.id for parent_project in project.parents()],
         'child_projects_ids': [child_project.id for child_project in project.children()],
         'user': user,
+        # turn it into JSON boolean
+        'user_is_me_manager': 'true' if user_is_me_manager else 'false',
         'me_managers': me_managers.exists(),
+        'update_statuses': json.dumps(dict(IndicatorPeriodData.STATUSES)),
     }
 
-    return render(request, 'myrsr/my_results.html', context)
+    return render(request, template, context)

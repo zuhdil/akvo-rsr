@@ -659,7 +659,7 @@ nav.navbar-fixed-top {
                 display: inline;
                 @include responsive(small-max-screens) {
                     bottom: -8px;
-                }                
+                }
                 a {
                     color: $primary5;
                     padding: 15px;
@@ -821,7 +821,7 @@ div.update-confirm-container {
                         display: inline-block;
                         @include border-radius(2px);
                         color: $akvoTvRed;
-                        border: 1px solid $akvoTvRed; 
+                        border: 1px solid $akvoTvRed;
                         font-size: 80%;
                         font-weight: 600;
                     }
@@ -840,7 +840,7 @@ div.update-confirm-container {
                         display: inline-block;
                         @include border-radius(2px);
                         color: $akvoTvRed;
-                        border: 1px solid $akvoTvRed; 
+                        border: 1px solid $akvoTvRed;
                         font-size: 80%;
                         font-weight: 600;
                     }
@@ -957,7 +957,7 @@ div.paginationWrap {
         &.locationTab {
         overflow: hidden;
         overflow-x: scroll;
-        max-width: 100%;        
+        max-width: 100%;
         thead {
             th {
                 width: 15.33% !important;
@@ -1208,6 +1208,10 @@ h4.detailedInfo {
 
 .searchContainer {
     position: relative;
+    #search-view {
+        position: absolute;
+        top: -65px;
+    }
     #search {
         .showFilters {
             /*background-color: rgba(white,0.2);
@@ -1326,6 +1330,19 @@ h4.detailedInfo {
     }
     div#filter {
         padding: 5px 15px 15px 15px;
+        overflow-y: hidden;
+        #advanced-filter-status {
+            text-align: center;
+            font-weight: bold;
+            display: block;
+            padding-top: 40px !important;
+        }
+        #advanced-filter-nav {
+            padding-top: 25px;
+            li {
+                padding: 5px 0;
+            }
+        }
         div {
             .btn-group {
                 width: 100%;
@@ -1356,11 +1373,12 @@ h4.detailedInfo {
 #wrapper.toggled {
     padding-left: 200px;
     #sidebar-wrapper {
-        width: 200px;
-    }
-    #page-content-wrapper {
-        position: absolute;
-        margin-right: -200px;
+        width: 350px;
+        .dropdown-menu {
+            li > a {
+                white-space: normal !important;
+            }
+        }
     }
 }
 
@@ -1696,7 +1714,7 @@ header {
 }
 
 .donateSection {
-    @include box-sizing(border-box);  
+    @include box-sizing(border-box);
     background: rgba(complement($rsrBlue2), 0.1);
     padding: 10px 15px;
     box-shadow: 0 0 1px rgba(complement($rsrBlue2), 0.8);
@@ -2475,8 +2493,8 @@ dd {
 
 .projectReport {
     @include responsive(small-max-screens) {
-      tr { 
-        display: flex; 
+      tr {
+        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         margin: 0.5em 0;
@@ -2507,10 +2525,10 @@ dd {
             }
             tr:nth-child(even) {
                 background-color: rgba(white, 0.1);
-            }     
+            }
             tr:nth-child(odd) {
                 background-color: rgba($primary5, 0.05);
-            }       
+            }
         }
         &.table-bordered {
             border: 2px solid rgb(255,255,255);
@@ -3252,7 +3270,7 @@ article {
 }
 
 .sidebar {
-    width: 30%;
+    width: 50%;
     min-width: 200px;
     overflow-y: auto;
     vertical-align: top;
@@ -3471,7 +3489,7 @@ article {
         color: rgba($primary4, 0.5);
         text-shadow: 1px 1px 0 rgba(white, 1);
         align-items: center;
-        span:first-child { 
+        span:first-child {
             display: block;
             font-size: 150%;
         }
@@ -3494,7 +3512,7 @@ article {
                 &:hover {
                     color: $anchorLinkHover;
                 }
-            
+
         }
     }
     .indicator-period {
@@ -4825,4 +4843,16 @@ div.iatiFilters {
 .employment-error {
     color: $akvoTvRed;
     font-size: 85%;
+}
+
+.fa-paperclip, .fa-camera {
+    margin-right: 0.3em;
+}
+
+// Registration honeypot field
+
+#id_hp_title {
+    display: none;
+    position: absolute;
+    top: -9999px;
 }

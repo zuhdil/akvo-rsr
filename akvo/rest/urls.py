@@ -32,7 +32,9 @@ router.register(r'iati_activity_export', views.IatiActivityExportViewSet)
 router.register(r'iati_check', views.IatiCheckViewSet)
 router.register(r'iati_export', views.IatiExportViewSet)
 router.register(r'indicator', views.IndicatorViewSet)
+router.register(r'indicator_dimension', views.IndicatorDimensionViewSet)
 router.register(r'indicator_framework', views.IndicatorFrameworkViewSet)
+router.register(r'indicator_label', views.IndicatorLabelViewSet)
 router.register(r'indicator_period', views.IndicatorPeriodViewSet)
 router.register(r'indicator_period_framework', views.IndicatorPeriodFrameworkViewSet)
 router.register(r'indicator_period_actual_dimension', views.IndicatorPeriodActualDimensionViewSet)
@@ -40,6 +42,7 @@ router.register(r'indicator_period_actual_location', views.IndicatorPeriodActual
 router.register(r'indicator_period_data', views.IndicatorPeriodDataViewSet)
 router.register(r'indicator_period_data_framework', views.IndicatorPeriodDataFrameworkViewSet)
 router.register(r'indicator_period_data_comment', views.IndicatorPeriodDataCommentViewSet)
+router.register(r'disaggregation', views.DisaggregationViewSet)
 router.register(r'indicator_period_target_dimension', views.IndicatorPeriodTargetDimensionViewSet)
 router.register(r'indicator_period_target_location', views.IndicatorPeriodTargetLocationViewSet)
 router.register(r'indicator_reference', views.IndicatorReferenceViewSet)
@@ -191,6 +194,9 @@ urlpatterns += patterns(
     url(r'typeaheads/projects$',
         views.typeahead_project,
         name='project_typeahead'),
+    url(r'typeaheads/project_filters$',
+        views.typeahead_project_filters,
+        name='project_filters_typeahead'),
     url(r'typeaheads/user_projects$',
         views.typeahead_user_projects,
         name='user_projects_typeahead'),
@@ -200,6 +206,9 @@ urlpatterns += patterns(
     url(r'typeaheads/project_updates$',
         views.typeahead_projectupdate,
         name='projectupdate_typeahead'),
+    url(r'typeaheads/keywords$',
+        views.typeahead_keyword,
+        name='keyword_typeahead'),
 )
 
 # My reports

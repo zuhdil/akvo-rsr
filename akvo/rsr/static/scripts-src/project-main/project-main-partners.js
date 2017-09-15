@@ -9,6 +9,13 @@ var endpointsPartners,
     i18nPartners,
     projectIdPartners;
 
+// Polyfill from MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function(searchString, position){
+      return this.substr(position || 0, searchString.length) === searchString;
+  };
+}
+
 /* CSRF TOKEN (this should really be added in base.html, we use it everywhere) */
 function getCookie(name) {
     var cookieValue = null;
@@ -27,7 +34,7 @@ function getCookie(name) {
 csrftoken = getCookie('csrftoken');
 
 function renderPartnersTab() {
-    var PartnersApp = React.createClass({displayName: 'PartnersApp',
+    var PartnersApp = React.createClass({displayName: "PartnersApp",
         getInitialState: function() {
             return {
                 partnerships: null
@@ -73,18 +80,50 @@ function renderPartnersTab() {
 
             if (logoUrl !== '') {
                 return (
-                    React.DOM.img( {src:'/media/' + logoUrl, style:logoStyle} )
+                    React.createElement("img", {src: logoUrl, style: logoStyle})
                 );
             } else {
                 return (
-                    React.DOM.img( {src:'/static/images/default-org-logo.jpg', style:logoStyle} )
+                    React.createElement("img", {src: '/static/images/default-org-logo.jpg', style: logoStyle})
                 );
             }
         },
 
+        partnerName: function(partner){
+            /*
+            Return org.long_name if org.name looks like a truncated version of org.long_name
+
+            When importing organisations from IATI, the name field may have been truncated to 25 or
+            (more seldom) 40 characters.
+            Therefore we check if the name is exactly 25 or 40 chars long AND is identical to the
+            substring of long_name to that length. If this is the case we use the long_name as there
+            is a very high probability that the name field has been truncated.
+
+            NOTE: this is also done in the Organisation.get_name method
+            */
+            var org = partner[0].organisation;
+            var SHORT_TRUNCATED_NAME_LENGTH = 25;
+            var LONG_TRUNCATED_NAME_LENGTH = 40;
+            var name = org.name;
+            var long_name = org.long_name;
+            if (name.length === 0 ||
+                (
+                    ((name.length == SHORT_TRUNCATED_NAME_LENGTH &&
+                      long_name.length > SHORT_TRUNCATED_NAME_LENGTH) ||
+                     (name.length == LONG_TRUNCATED_NAME_LENGTH &&
+                      long_name.length > LONG_TRUNCATED_NAME_LENGTH)) &&
+                    long_name.startsWith(name)
+                )
+            )
+            {
+                return long_name.trim();
+            }
+            return name.trim();
+        },
+
         compare: function(o1, o2) {
-            var o1Name = o1[0].organisation.name;
-            var o2Name = o2[0].organisation.name;
+            var o1Name = this.partnerName(o1),
+                o2Name = this.partnerName(o2);
             if (o1Name < o2Name) {
                 return -1;
             } else if (o1Name > o2Name) {
@@ -97,13 +136,11 @@ function renderPartnersTab() {
         render: function() {
             if (this.state.partnerships === null) {
                 return (
-                    React.DOM.div(null, 
-                        React.DOM.i( {className:"fa fa-spin fa-spinner"} ), " ", i18nPartners.loading, " ", i18nPartners.partners,"..."
+                    React.createElement("div", null, 
+                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", i18nPartners.loading, " ", i18nPartners.partners, "..."
                     )
                 );
             } else {
-
-
                 var partnershipsArray = [];
                 for (var orgId in this.state.partnerships) {
                     if(this.state.partnerships.hasOwnProperty(orgId)) {
@@ -121,28 +158,30 @@ function renderPartnersTab() {
                         }
                     }
 
+                    var id = partner[0].organisation.id;
+
                     return (
-                        React.DOM.div( {className:"row verticalPadding projectPartners"}, 
-                            React.DOM.div( {className:"col-sm-2 img"}, 
-                                React.DOM.a( {href:'/en/organisation/' + partner[0].organisation.id + '/'}, 
+                        React.createElement("div", {className: "row verticalPadding projectPartners", key: id}, 
+                            React.createElement("div", {className: "col-sm-2 img"}, 
+                                React.createElement("a", {href: '/organisation/' + id + '/'}, 
                                     thisApp.orgLogo(partner[0].organisation.logo, 120, 120)
                                 )
-                            ),
-                            React.DOM.div( {className:"col-sm-6"}, 
-                                React.DOM.a( {href:'/en/organisation/' + partner[0].organisation.id + '/', className:"org-link"}, 
-                                    React.DOM.i( {className:"fa fa-users"} ), " ", React.DOM.h2(null, partner[0].organisation.name)
+                            ), 
+                            React.createElement("div", {className: "col-sm-6"}, 
+                                React.createElement("a", {href: '/organisation/' + id + '/', className: "org-link"}, 
+                                    React.createElement("i", {className: "fa fa-users"}), " ", React.createElement("h2", null, thisApp.partnerName(partner))
                                 )
-                            ),
-                            React.DOM.div( {className:"col-sm-4"}, 
-                                React.DOM.h4( {className:"detailedInfo"}, i18nPartners.roles),
-                                React.DOM.div(null, roles.join(', '))
+                            ), 
+                            React.createElement("div", {className: "col-sm-4"}, 
+                                React.createElement("h4", {className: "detailedInfo"}, i18nPartners.roles), 
+                                React.createElement("div", null, roles.join(', '))
                             )
                         )
                     );
                 });
 
                 return (
-                    React.DOM.div(null, 
+                    React.createElement("div", null, 
                         organisations
                     )
                 );

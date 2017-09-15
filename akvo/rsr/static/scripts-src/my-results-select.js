@@ -29,63 +29,34 @@ var csrftoken = getCookie('csrftoken');
 
 function initReact() {
     // Load globals
-    Typeahead = ReactTypeahead.Typeahead;
+    Typeahead = ReactBootstrapTypeahead.Typeahead;
 
-    var ProjectTypeahead = React.createClass({displayName: 'ProjectTypeahead',
-        selectProject: function(project) {
-            var currentUrl = window.location.href;
+    var ProjectTypeahead = React.createClass({displayName: "ProjectTypeahead",
+        selectProject: function(selections) {
+            var project = selections[0];
+            var resultsURL = endpoints.results_url
+            var resultsURL = resultsURL.substr(0, resultsURL.length - 2);
             if (project.id !== '') {
-                window.location.assign(currentUrl + project.id + '/');
+                window.location.assign(resultsURL + project.id + '/');
             }
         },
 
         render: function() {
             return (
-                React.DOM.div(null, 
+                React.createElement("div", null, 
                     React.createElement(Typeahead, {
                         placeholder: i18n.typeahead_placeholder,
-                        maxVisible: 15,
                         options: this.props.projects,
-                        onOptionSelected: this.selectProject,
-                        displayOption: 'displayOption',
-                        filterOption: 'filterOption',
-                        customClasses: {input: 'form-control'}
-                    })
+                        onChange: this.selectProject,
+                        filterBy: ['filterOption', 'subtitle'],
+                        labelKey: 'displayOption'})
                 )
             );
         }
+
     });
 
-    var ProjectDropDown = React.createClass({displayName: 'ProjectDropDown',
-        selectProject: function(event) {
-            var currentUrl = window.location.href;
-            var newProjectId = event.target.value;
-            if (newProjectId !== '') {
-                window.location.assign(currentUrl + newProjectId + '/');
-            }
-        },
-
-        render: function() {
-            var projectOptions = this.props.projects.map(function(project) {
-                return (
-                    React.DOM.option( {key:project.id, value:project.id}, project.title, " (ID: ", project.id,")")
-                );
-            });
-
-            return (
-                React.DOM.div(null, 
-                    React.DOM.div( {className:"select-group control"}, 
-                        React.DOM.select( {className:"form-control", defaultValue:"", onChange:this.selectProject}, 
-                            React.DOM.option( {value:""} ),
-                            projectOptions
-                        )
-                    )
-                )
-            );
-        }
-    });
-
-    var MyResultsSelectApp  = React.createClass({displayName: 'MyResultsSelectApp',
+    var MyResultsSelectApp  = React.createClass({displayName: "MyResultsSelectApp",
         getInitialState: function() {
             return {
                 projects: [],
@@ -125,13 +96,13 @@ function initReact() {
         renderLoading: function() {
             if (this.state.loading) {
                 return (
-                    React.DOM.div( {className:"loading"}, 
-                        React.DOM.i( {className:"fa fa-spin fa-spinner"} ), " ", i18n.loading_projects
+                    React.createElement("div", {className: "loading"}, 
+                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", i18n.loading_projects
                     )
                 );
             } else {
                 return (
-                    React.DOM.span(null )
+                    React.createElement("span", null)
                 );
             }
         },
@@ -140,23 +111,14 @@ function initReact() {
             if (!this.state.loading) {
                 if (this.state.projects.length === 0) {
                     return (
-                        React.DOM.div( {className:"noProjects"}, 
+                        React.createElement("div", {className: "noProjects"}, 
                             i18n.no_projects_found
-                        )
-                    );
-                } else if (this.state.projects.length < 15) {
-                    return (
-                        React.DOM.div(null, 
-                            React.DOM.label(null, i18n.select_project),
-                            React.createElement(ProjectDropDown, {
-                                projects: this.state.projects
-                            })
                         )
                     );
                 } else {
                     return (
-                        React.DOM.div(null, 
-                            React.DOM.label(null, i18n.select_project),
+                        React.createElement("div", null, 
+                            React.createElement("label", null, i18n.select_project), 
                             React.createElement(ProjectTypeahead, {
                                 projects: this.state.projects
                             })
@@ -165,16 +127,16 @@ function initReact() {
                 }
             } else {
                 return (
-                    React.DOM.span(null )
+                    React.createElement("span", null)
                 );
             }
         },
 
         render: function() {
             return (
-                React.DOM.div( {id:"my-results-select"}, 
-                    React.DOM.h3(null, i18n.my_results),
-                    this.renderLoading(),
+                React.createElement("div", {id: "my-results-select"}, 
+                    React.createElement("h3", null, i18n.my_results), 
+                    this.renderLoading(), 
                     this.renderProjectSelect()
                 )
             );
@@ -204,7 +166,7 @@ var loadJS = function(url, implementationCode, location){
 
 function loadAndRenderReact() {
     function loadReactTypeahead() {
-        var reactTypeaheadSrc = document.getElementById('react-typeahead').src;
+        var reactTypeaheadSrc = document.getElementById('react-bootstrap-typeahead').src;
         loadJS(reactTypeaheadSrc, initReact, document.body);
     }
 

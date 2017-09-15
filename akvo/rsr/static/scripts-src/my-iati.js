@@ -40,7 +40,12 @@ function apiCall(method, url, data, followPages, successCallback, retries) {
 
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == XMLHttpRequest.DONE) {
-            var response = xmlHttp.responseText !== '' ? JSON.parse(xmlHttp.responseText) : '';
+            var response;
+            try {
+                response = xmlHttp.responseText !== '' ? JSON.parse(xmlHttp.responseText) : '';
+            } catch (e) {
+                response = {"error": xmlHttp.statusText || e};
+            }
             if (xmlHttp.status >= 200 && xmlHttp.status < 400) {
                 if (method === 'GET' && response.next !== undefined) {
                     if (response.next !== null && followPages) {
@@ -69,7 +74,7 @@ function apiCall(method, url, data, followPages, successCallback, retries) {
                     }
                 }
             } else {
-                // var message = i18nResults.general_error + ': ';
+                // TODO: Use a translated string
                 var message = 'general error: ';
                 for (var key in response) {
                     if (response.hasOwnProperty(key)) {
@@ -172,7 +177,7 @@ function displayDate(dateString) {
 }
 
 function loadComponents() {
-    var ProjectRow = React.createClass({displayName: 'ProjectRow',
+    var ProjectRow = React.createClass({displayName: "ProjectRow",
         getInitialState: function() {
             return {
                 openChecks: false
@@ -182,7 +187,7 @@ function loadComponents() {
         switchAction: function() {
             this.props.switchProject(this.props.project.id);
         },
-        
+
         inLastExport: function() {
             if (this.props.lastExport.length > 0) {
                 var lastExportProjects = this.props.lastExport[0].projects;
@@ -192,7 +197,7 @@ function loadComponents() {
             }
             return false;
         },
-        
+
         statusLabel: function() {
             switch (this.props.project.iati_status) {
                 case '1':
@@ -221,11 +226,11 @@ function loadComponents() {
         renderInput: function() {
             if (!this.props.exporting) {
                 return (
-                    React.DOM.input( {type:"checkbox", onClick:this.switchAction, checked:this.props.selected} )
+                    React.createElement("input", {type: "checkbox", onClick: this.switchAction, checked: this.props.selected})
                 );
             } else {
                 return (
-                    React.DOM.input( {type:"checkbox", checked:this.props.selected, disabled:true} )
+                    React.createElement("input", {type: "checkbox", checked: this.props.selected, disabled: true})
                 );
             }
         },
@@ -241,7 +246,7 @@ function loadComponents() {
         renderChecks: function() {
             if (this.props.project.checks_errors.length === 0 && this.props.project.checks_warnings.length === 0) {
                 return (
-                    React.DOM.span(null, cap(i18n.checks_success))
+                    React.createElement("span", null, cap(i18n.checks_success))
                 );
             } else {
                 var errorLength = this.props.project.checks_errors.length,
@@ -255,7 +260,7 @@ function loadComponents() {
                     checksText += errorLength + ' ' + errorText;
                     allErrors = this.props.project.checks_errors.map(function(check) {
                         return (
-                            React.DOM.span(null, "- ", cap(i18n.error),": ", cap(check),React.DOM.br(null))
+                            React.createElement("span", null, "- ", cap(i18n.error), ": ", cap(check), React.createElement("br", null))
                         );
                     });
                 }
@@ -267,23 +272,23 @@ function loadComponents() {
                     checksText += warningLength + ' ' + warningText;
                     allWarnings = this.props.project.checks_warnings.map(function(check) {
                         return (
-                            React.DOM.span(null, "- ", cap(i18n.warning),": ", cap(check),React.DOM.br(null))
+                            React.createElement("span", null, "- ", cap(i18n.warning), ": ", cap(check), React.createElement("br", null))
                         );
                     });
                 }
 
                 if (this.state.openChecks) {
                     return (
-                        React.DOM.span(null, 
-                            checksText, " ", React.DOM.a( {onClick:this.hideChecks}, "- ", cap(i18n.hide_all)),React.DOM.br(null),
-                            allErrors,
+                        React.createElement("span", null, 
+                            checksText, " ", React.createElement("a", {onClick: this.hideChecks}, "- ", cap(i18n.hide_all)), React.createElement("br", null), 
+                            allErrors, 
                             allWarnings
                         )
                     );
                 } else {
                     return (
-                        React.DOM.span(null, 
-                            checksText, " ", React.DOM.a( {onClick:this.openChecks}, "+ ", cap(i18n.show_all))
+                        React.createElement("span", null, 
+                            checksText, " ", React.createElement("a", {onClick: this.openChecks}, "+ ", cap(i18n.show_all))
                         )
                     );
                 }
@@ -292,22 +297,22 @@ function loadComponents() {
 
         render: function() {
             return (
-                React.DOM.tr(null, 
-                    React.DOM.td(null, this.renderInput()),
-                    React.DOM.td(null, this.props.project.id),
-                    React.DOM.td(null, 
-                        this.props.project.title || '\<' + cap(i18n.untitled) + ' ' + i18n.project + '\>',React.DOM.br(null),
-                        React.DOM.span( {className:"small"}, this.publishedAndPublicLabel())
-                    ),
-                    React.DOM.td(null, this.statusLabel()),
-                    React.DOM.td(null, this.inLastExport() ? cap(i18n.yes) : cap(i18n.no)),
-                    React.DOM.td(null, this.renderChecks())
+                React.createElement("tr", null, 
+                    React.createElement("td", null, this.renderInput()), 
+                    React.createElement("td", null, this.props.project.id), 
+                    React.createElement("td", null, 
+                        this.props.project.title || '\<' + cap(i18n.untitled) + ' ' + i18n.project + '\>', React.createElement("br", null), 
+                        React.createElement("span", {className: "small"}, this.publishedAndPublicLabel())
+                    ), 
+                    React.createElement("td", null, this.statusLabel()), 
+                    React.createElement("td", null, this.inLastExport() ? cap(i18n.yes) : cap(i18n.no)), 
+                    React.createElement("td", null, this.renderChecks())
                 )
             );
         }
     });
 
-    var ProjectsTable = React.createClass({displayName: 'ProjectsTable',
+    var ProjectsTable = React.createClass({displayName: "ProjectsTable",
         sortedProjects: function() {
             // Sort the projects by ID
             function compare(u1, u2) {
@@ -348,29 +353,29 @@ function loadComponents() {
                 var language = window.location.pathname.substring(0, 3);
                 checked = false;
                 onclickAll = function() {return false;};
-                projects = React.DOM.tr(null, 
-                    React.DOM.td( {colSpan:"5", className:"text-center"}, 
-                        React.DOM.p( {className:"noItem"}, 
-                            i18n.no_projects_1 + ' ' + i18n.no_projects_2 + ' ' + i18n.no_projects_3,
-                            React.DOM.a( {href:language + "/myrsr/projects/"}, i18n.here),"."
+                projects = React.createElement("tr", null, 
+                    React.createElement("td", {colSpan: "5", className: "text-center"}, 
+                        React.createElement("p", {className: "noItem"}, 
+                            i18n.no_projects_1 + ' ' + i18n.no_projects_2 + ' ' + i18n.no_projects_3, 
+                            React.createElement("a", {href: language + "/myrsr/projects/"}, i18n.here), "."
                         )
                     )
                 );
             }
 
             return (
-                React.DOM.table( {className:"table table-striped table-responsive myProjectList topMargin"}, 
-                    React.DOM.thead(null, 
-                        React.DOM.tr(null, 
-                            React.DOM.th(null, React.DOM.input( {type:"checkbox", onClick:onclickAll, checked:checked} )),
-                            React.DOM.th(null, i18n.id),
-                            React.DOM.th(null, cap(i18n.title)),
-                            React.DOM.th(null, cap(i18n.status)),
-                            React.DOM.th(null, cap(i18n.included_export)),
-                            React.DOM.th(null, i18n.iati_checks)
+                React.createElement("table", {className: "table table-striped table-responsive myProjectList topMargin"}, 
+                    React.createElement("thead", null, 
+                        React.createElement("tr", null, 
+                            React.createElement("th", null, React.createElement("input", {type: "checkbox", onClick: onclickAll, checked: checked})), 
+                            React.createElement("th", null, i18n.id), 
+                            React.createElement("th", null, cap(i18n.title)), 
+                            React.createElement("th", null, cap(i18n.status)), 
+                            React.createElement("th", null, cap(i18n.included_export)), 
+                            React.createElement("th", null, i18n.iati_checks)
                         )
-                    ),
-                    React.DOM.tbody(null, 
+                    ), 
+                    React.createElement("tbody", null, 
                         projects
                     )
                 )
@@ -378,7 +383,7 @@ function loadComponents() {
         }
     });
 
-    var NewExportOverview = React.createClass({displayName: 'NewExportOverview',
+    var NewExportOverview = React.createClass({displayName: "NewExportOverview",
         getInitialState: function() {
             return {
                 initializing: true,
@@ -439,7 +444,7 @@ function loadComponents() {
 
             this.setState({selectedProjects: newSelection});
         },
-        
+
         createExport: function() {
             var url = endpoints.new_iati_export,
                 data = JSON.stringify({
@@ -520,7 +525,7 @@ function loadComponents() {
         renderNoErrorsButton: function() {
             if (this.state.allProjects === null || this.state.allProjects.results.length === 0 || this.checkNoErrors() === 0) {
                 return (
-                    React.DOM.span(null )
+                    React.createElement("span", null)
                 );
             } else {
                 var buttonClass = "btn btn-default btn-sm";
@@ -530,8 +535,8 @@ function loadComponents() {
                 }
 
                 return (
-                    React.DOM.button( {className:buttonClass, onClick:this.clickNoErrorsProjects}, 
-                        React.DOM.input( {type:"checkbox", checked:this.state.noErrorsChecked} ), " ", cap(i18n.without_errors)
+                    React.createElement("button", {className: buttonClass, onClick: this.clickNoErrorsProjects}, 
+                        React.createElement("input", {type: "checkbox", checked: this.state.noErrorsChecked}), " ", cap(i18n.without_errors)
                     )
                 );
             }
@@ -579,7 +584,7 @@ function loadComponents() {
         renderPublishedButton: function() {
             if (this.state.allProjects === null || this.state.allProjects.results.length === 0 || !this.checkPublished()) {
                 return (
-                    React.DOM.span(null )
+                    React.createElement("span", null)
                 );
             } else {
                 var buttonClass = "btn btn-default btn-sm";
@@ -589,8 +594,8 @@ function loadComponents() {
                 }
 
                 return (
-                    React.DOM.button( {className:buttonClass, onClick:this.clickPublishedProjects}, 
-                        React.DOM.input( {type:"checkbox", checked:this.state.publishedChecked} ), " ", cap(i18n.published)
+                    React.createElement("button", {className: buttonClass, onClick: this.clickPublishedProjects}, 
+                        React.createElement("input", {type: "checkbox", checked: this.state.publishedChecked}), " ", cap(i18n.published)
                     )
                 );
             }
@@ -641,7 +646,7 @@ function loadComponents() {
             if (this.state.initializing || this.state.allProjects.results.length === 0 ||
                     this.state.lastExport.length === 0 || this.state.lastExport[0].projects.length === 0) {
                 return (
-                    React.DOM.span(null )
+                    React.createElement("span", null)
                 );
             } else {
                 var buttonClass = "btn btn-default btn-sm";
@@ -651,8 +656,8 @@ function loadComponents() {
                 }
 
                 return (
-                    React.DOM.button( {className:buttonClass, onClick:this.clickPreviousProjects}, 
-                        React.DOM.input( {type:"checkbox", checked:this.state.previousChecked} ), " ", cap(i18n.included_export)
+                    React.createElement("button", {className: buttonClass, onClick: this.clickPreviousProjects}, 
+                        React.createElement("input", {type: "checkbox", checked: this.state.previousChecked}), " ", cap(i18n.included_export)
                     )
                 );
             }
@@ -724,15 +729,15 @@ function loadComponents() {
 
         renderFilters: function() {
             return (
-                React.DOM.div( {className:"row iatiFilters"}, 
-                    React.DOM.div( {className:"col-sm-8 filterGroup"}, 
-                        React.DOM.h5(null, cap(i18n.project_selection)),
-                        this.renderNoErrorsButton(),
-                        this.renderSelectPreviousButton(),
+                React.createElement("div", {className: "row iatiFilters"}, 
+                    React.createElement("div", {className: "col-sm-8 filterGroup"}, 
+                        React.createElement("h5", null, cap(i18n.project_selection)), 
+                        this.renderNoErrorsButton(), 
+                        this.renderSelectPreviousButton(), 
                         this.renderPublishedButton()
-                    ),
-                    React.DOM.div( {className:"col-sm-4 newIatiExport text-center"}, 
-                        React.DOM.p(null, this.state.selectedProjects.length, " ", i18n.projects_selected),
+                    ), 
+                    React.createElement("div", {className: "col-sm-4 newIatiExport text-center"}, 
+                        React.createElement("p", null, this.state.selectedProjects.length, " ", i18n.projects_selected), 
                         this.renderCreateButton()
                     )
                 )
@@ -743,21 +748,21 @@ function loadComponents() {
             if (!this.state.exporting) {
                 if (this.state.selectedProjects.length > 0) {
                     return (
-                        React.DOM.button( {className:"btn btn-default btn-sm", onClick:this.createExport}, 
-                            React.DOM.i( {className:"fa fa-file-text-o"} ), " ", cap(i18n.create_new), " ", i18n.iati_export
+                        React.createElement("button", {className: "btn btn-default btn-sm", onClick: this.createExport}, 
+                            React.createElement("i", {className: "fa fa-file-text-o"}), " ", cap(i18n.create_new), " ", i18n.iati_export
                         )
                     );
                 } else {
                     return (
-                        React.DOM.button( {className:"btn btn-default btn-sm disabled"}, 
-                            React.DOM.i( {className:"fa fa-file-text-o"} ), " ", cap(i18n.create_new), " ", i18n.iati_export
+                        React.createElement("button", {className: "btn btn-default btn-sm disabled"}, 
+                            React.createElement("i", {className: "fa fa-file-text-o"}), " ", cap(i18n.create_new), " ", i18n.iati_export
                         )
                     );
                 }
             } else {
                 return (
-                    React.DOM.button( {className:"btn btn-default btn-sm disabled"}, 
-                        React.DOM.i( {className:"fa fa-spin fa-spinner"} ), " ", cap(i18n.create_new), " ", i18n.iati_export
+                    React.createElement("button", {className: "btn btn-default btn-sm disabled"}, 
+                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", cap(i18n.create_new), " ", i18n.iati_export
                     )
                 );
             }
@@ -767,15 +772,15 @@ function loadComponents() {
             if (this.state.initializing) {
                 // Only show a message that data is being loading when initializing
                 return (
-                    React.DOM.span( {className:"small"}, 
-                        React.DOM.i( {className:"fa fa-spin fa-spinner"}), " ", cap(i18n.loading), " ", i18n.projects,"..."
+                    React.createElement("span", {className: "small"}, 
+                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", cap(i18n.loading), " ", i18n.projects, "..."
                     )
                 );
             } else {
                 // Show a table of projects when the data has been loaded
                 return (
-                    React.DOM.div(null, 
-                        this.renderFilters(),
+                    React.createElement("div", null, 
+                        this.renderFilters(), 
                         React.createElement(ProjectsTable, {
                             projects: this.state.allProjects.results,
                             selectedProjects: this.state.selectedProjects,
@@ -793,7 +798,7 @@ function loadComponents() {
         }
     });
 
-    var ExportRow = React.createClass({displayName: 'ExportRow',
+    var ExportRow = React.createClass({displayName: "ExportRow",
         openPublicFile: function() {
             window.open(i18n.last_exports_url, '_blank');
         },
@@ -809,38 +814,38 @@ function loadComponents() {
         renderActions: function() {
             if (this.props.publicFile) {
                 return (
-                    React.DOM.button( {className:"btn btn-success btn-sm", onClick:this.openPublicFile}, 
-                        React.DOM.i( {className:"fa fa-globe"} ), " ", cap(i18n.view_latest_file)
+                    React.createElement("button", {className: "btn btn-success btn-sm", onClick: this.openPublicFile}, 
+                        React.createElement("i", {className: "fa fa-globe"}), " ", cap(i18n.view_latest_file)
                     )
                 );
             } else if (this.props.exp.iati_file) {
                 if (!this.props.actionInProgress) {
                     return (
-                        React.DOM.div(null, 
-                            React.DOM.button( {className:"btn btn-default btn-sm", onClick:this.openFile}, 
-                                React.DOM.i( {className:"fa fa-code"} ), " ", cap(i18n.view_file)
-                            ),
-                            React.DOM.button( {className:"btn btn-default btn-sm", onClick:this.setPublic}, 
-                                React.DOM.i( {className:"fa fa-globe"} ), " ", cap(i18n.set_latest)
+                        React.createElement("div", null, 
+                            React.createElement("button", {className: "btn btn-default btn-sm", onClick: this.openFile}, 
+                                React.createElement("i", {className: "fa fa-code"}), " ", cap(i18n.view_file)
+                            ), 
+                            React.createElement("button", {className: "btn btn-default btn-sm", onClick: this.setPublic}, 
+                                React.createElement("i", {className: "fa fa-globe"}), " ", cap(i18n.set_latest)
                             )
                         )
                     );
                 } else {
                     return (
-                        React.DOM.div(null, 
-                            React.DOM.button( {className:"btn btn-default btn-sm", onClick:this.openFile}, 
-                                React.DOM.i( {className:"fa fa-code"} ), " ", cap(i18n.view_file)
-                            ),
-                            React.DOM.button( {className:"btn btn-default btn-sm disabled"}, 
-                                React.DOM.i( {className:"fa fa-globe"} ), " ", cap(i18n.set_latest)
+                        React.createElement("div", null, 
+                            React.createElement("button", {className: "btn btn-default btn-sm", onClick: this.openFile}, 
+                                React.createElement("i", {className: "fa fa-code"}), " ", cap(i18n.view_file)
+                            ), 
+                            React.createElement("button", {className: "btn btn-default btn-sm disabled"}, 
+                                React.createElement("i", {className: "fa fa-globe"}), " ", cap(i18n.set_latest)
                             )
                         )
                     );
                 }
             } else {
                 return (
-                    React.DOM.button( {className:"btn btn-default btn-sm disabled"}, 
-                        React.DOM.i( {className:"fa fa-globe"} ), " ", cap(i18n.no_iati_file)
+                    React.createElement("button", {className: "btn btn-default btn-sm disabled"}, 
+                        React.createElement("i", {className: "fa fa-globe"}), " ", cap(i18n.no_iati_file)
                     )
                 );
             }
@@ -868,19 +873,19 @@ function loadComponents() {
 
         render: function() {
             return (
-                React.DOM.tr( {className:this.renderRowClass()}, 
-                    React.DOM.td(null, this.props.exp.status_label),
-                    React.DOM.td(null, this.renderNumberOfProjects()),
-                    React.DOM.td(null, this.props.exp.user_name),
-                    React.DOM.td(null, displayDate(this.props.exp.created_at)),
-                    React.DOM.td(null, 'v' + this.props.exp.version),
-                    React.DOM.td( {className:"text-right"}, this.renderActions())
+                React.createElement("tr", {className: this.renderRowClass()}, 
+                    React.createElement("td", null, this.props.exp.status_label), 
+                    React.createElement("td", null, this.renderNumberOfProjects()), 
+                    React.createElement("td", null, this.props.exp.user_name), 
+                    React.createElement("td", null, displayDate(this.props.exp.created_at)), 
+                    React.createElement("td", null, 'v' + this.props.exp.version), 
+                    React.createElement("td", {className: "text-right"}, this.renderActions())
                 )
             );
         }
     });
 
-    var ExportsTable = React.createClass({displayName: 'ExportsTable',
+    var ExportsTable = React.createClass({displayName: "ExportsTable",
         render: function() {
             var thisTable = this,
                 exports;
@@ -900,9 +905,9 @@ function loadComponents() {
                 });
             } else {
                 // In case there are no existing IATI exports yet, show a message.
-                exports = React.DOM.tr(null, 
-                    React.DOM.td( {colSpan:"6", className:"text-center"}, 
-                        React.DOM.p( {className:"noItem"}, 
+                exports = React.createElement("tr", null, 
+                    React.createElement("td", {colSpan: "6", className: "text-center"}, 
+                        React.createElement("p", {className: "noItem"}, 
                             cap(i18n.no_exports)
                         )
                     )
@@ -910,26 +915,26 @@ function loadComponents() {
             }
 
             return (
-                React.DOM.table( {className:"table table-striped table-responsive myProjectList topMargin"}, 
-                    React.DOM.thead(null, 
-                        React.DOM.tr(null, 
-                            React.DOM.th(null, cap(i18n.status)),
-                            React.DOM.th(null, i18n.number_of_projects),
-                            React.DOM.th(null, cap(i18n.created_by)),
-                            React.DOM.th(null, cap(i18n.created_at)),
-                            React.DOM.th(null, i18n.iati_version),
-                            React.DOM.th( {className:"text-right"}, cap(i18n.actions))
+                React.createElement("table", {className: "table table-striped table-responsive myProjectList topMargin"}, 
+                    React.createElement("thead", null, 
+                        React.createElement("tr", null, 
+                            React.createElement("th", null, cap(i18n.status)), 
+                            React.createElement("th", null, i18n.number_of_projects), 
+                            React.createElement("th", null, cap(i18n.created_by)), 
+                            React.createElement("th", null, cap(i18n.created_at)), 
+                            React.createElement("th", null, i18n.iati_version), 
+                            React.createElement("th", {className: "text-right"}, cap(i18n.actions))
                         )
-                    ),
-                    React.DOM.tbody(null, 
+                    ), 
+                    React.createElement("tbody", null, 
                         exports
                     )
                 )
             );
         }
     });
-    
-    var ExportsOverview = React.createClass({displayName: 'ExportsOverview',
+
+    var ExportsOverview = React.createClass({displayName: "ExportsOverview",
         getInitialState: function() {
             return {
                 exports: null,
@@ -1035,7 +1040,7 @@ function loadComponents() {
             }
             return null;
         },
-        
+
         pendingOrInProgress: function() {
             // Check to see whether there is at least one export pending or in progress.
             if (!this.state.initializing) {
@@ -1043,7 +1048,7 @@ function loadComponents() {
                     var exp = this.state.exports.results[i];
                     if (exp.status < 3) {
                         return true;
-                    } 
+                    }
                 }
                 return false;
             } else {
@@ -1052,7 +1057,7 @@ function loadComponents() {
         },
 
         setPublic: function(exportId) {
-            // Basically what we do is to set this export to public first, and then set all 
+            // Basically what we do is to set this export to public first, and then set all
             // newer exports to private. This automatically makes this export the public export.
             var thisApp = this,
                 exportUrl = endpoints.base_url + endpoints.iati_export,
@@ -1097,23 +1102,23 @@ function loadComponents() {
             this.setState({actionInProgress: true});
             apiCall('PATCH', exportUrl.replace('{iati_export}', exportId), publicData, true, exportUpdated);
         },
-        
+
         renderRefreshing: function() {
             if (this.state.refreshing) {
                 return (
-                    React.DOM.span( {className:"small"}, 
-                        React.DOM.i( {className:"fa fa-spin fa-spinner"} ), " ", cap(i18n.refreshing) + ' ' + i18n.iati_exports + '...'
+                    React.createElement("span", {className: "small"}, 
+                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", cap(i18n.refreshing) + ' ' + i18n.iati_exports + '...'
                     )
                 );
             } else if (this.pendingOrInProgress()) {
                 return (
-                    React.DOM.span( {className:"small"}, 
-                        React.DOM.i( {className:"fa fa-spin fa-spinner"} ), " ", cap(i18n.pending_or_progress) + '. ' + cap(i18n.refreshing) + ' ' + i18n.in + ' ' + this.state.refreshingIn + ' ' + i18n.seconds + '...'
+                    React.createElement("span", {className: "small"}, 
+                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", cap(i18n.pending_or_progress) + '. ' + cap(i18n.refreshing) + ' ' + i18n.in + ' ' + this.state.refreshingIn + ' ' + i18n.seconds + '...'
                     )
                 );
             } else {
                 return (
-                    React.DOM.span(null )
+                    React.createElement("span", null)
                 );
             }
         },
@@ -1128,7 +1133,7 @@ function loadComponents() {
 
             if (this.state.initializing) {
                 // Only show a message that data is being loading when initializing
-                initOrTable = React.DOM.span( {className:"small"}, React.DOM.i( {className:"fa fa-spin fa-spinner"}),' ' + cap(i18n.loading) + ' ' + i18n.last + ' ' + i18n.iati_exports + '...');
+                initOrTable = React.createElement("span", {className: "small"}, React.createElement("i", {className: "fa fa-spin fa-spinner"}), ' ' + cap(i18n.loading) + ' ' + i18n.last + ' ' + i18n.iati_exports + '...');
             } else {
                 // Show a table of existing imports when the data has been loaded
                 initOrTable = React.createElement(ExportsTable, {
@@ -1141,9 +1146,9 @@ function loadComponents() {
             }
 
             return (
-                React.DOM.div(null, 
-                    React.DOM.h4( {className:"topMargin"}, cap(i18n.last) + exportCountString + i18n.iati_exports),
-                    this.renderRefreshing(),
+                React.createElement("div", null, 
+                    React.createElement("h4", {className: "topMargin"}, cap(i18n.last) + exportCountString + i18n.iati_exports), 
+                    this.renderRefreshing(), 
                     initOrTable
                 )
             );

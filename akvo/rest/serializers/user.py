@@ -74,7 +74,7 @@ class UserSerializer(BaseRSRSerializer):
         del self.fields['absolute_url']
 
         # Remove the fields unless we're called via Tastypie URLs
-        request =  kwargs.get("context", {}).get("request", None)
+        request = kwargs.get("context", {}).get("request", None)
         if request and "/api/v1/" not in request.path:
             del self.fields['legacy_org']
             del self.fields['username']
@@ -123,11 +123,13 @@ class UserPasswordSerializer(serializers.Serializer):
 class UserDetailsSerializer(BaseRSRSerializer):
 
     approved_organisations = OrganisationBasicSerializer(many=True, required=False)
+    email = serializers.ReadOnlyField()
 
     class Meta:
         model = get_user_model()
         fields = (
             'id',
+            'email',
             'first_name',
             'last_name',
             'approved_organisations',

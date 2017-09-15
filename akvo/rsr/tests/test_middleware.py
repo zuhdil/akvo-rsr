@@ -46,24 +46,29 @@ class HostHeaderTestCase(TestCase):
 
     """Testing boot traffic."""
 
-    def setUp(self):
-        """Setup."""
-        self.c = Client(HTTP_HOST='_')
-
     def test_underscore_host(self):
         """When host is '_'."""
+        self.c = Client(HTTP_HOST='_')
         resp = self.c.get('/')
-        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.status_code, 302)
 
     def test_empy_host(self):
         """When host is ''."""
-        resp = self.c.get('')
-        self.assertEqual(resp.status_code, 400)
+        self.c = Client(HTTP_HOST='')
+        resp = self.c.get('/')
+        self.assertEqual(resp.status_code, 302)
 
     def test_oddchar_host(self):
         """When host is ''."""
-        resp = self.c.get('$')
-        self.assertEqual(resp.status_code, 400)
+        self.c = Client(HTTP_HOST='$')
+        resp = self.c.get('/')
+        self.assertEqual(resp.status_code, 302)
+
+    def test_wildcard_host(self):
+        """When host is ''*.live.akvo-ops.org"""
+        self.c = Client(HTTP_HOST='*.live.akvo-ops.org')
+        resp = self.c.get('/')
+        self.assertEqual(resp.status_code, 302)
 
 
 class InValidStockRSRTestCase(TestCase):
@@ -125,10 +130,13 @@ class ValidAkvoPageTestCase(TestCase):
         """Setup."""
         valid_host = "partner1.{}".format(settings.AKVOAPP_DOMAIN)
         self.c = Client(HTTP_HOST=valid_host)
-        o1 = Organisation(name='p1', long_name='Partner1')
-        o1.save()
-        ps1 = PartnerSite(organisation=o1, hostname='partner1', cname='projects.partner1.org')
-        ps1.save()
+        o1 = Organisation.objects.create(name='p1', long_name='Partner1')
+        PartnerSite.objects.create(
+            organisation=o1,
+            hostname='partner1',
+            cname='projects.partner1.org',
+            piwik_id=0,
+        )
         iati_version = Version(code=settings.IATI_VERSION)
         iati_version.save()
 
@@ -154,10 +162,13 @@ class ValidCnameAkvoPageTestCase(TestCase):
         # valid_host = "partner1.{}".format(settings.AKVOAPP_DOMAIN)
         self.cname = "projects.partner1.org"
         self.c = Client(HTTP_HOST=self.cname)
-        o1 = Organisation(name='p1', long_name='Partner1')
-        o1.save()
-        ps1 = PartnerSite(organisation=o1, hostname='partner1', cname=self.cname)
-        ps1.save()
+        o1 = Organisation.objects.create(name='p1', long_name='Partner1')
+        PartnerSite.objects.create(
+            organisation=o1,
+            hostname='partner1',
+            cname=self.cname,
+            piwik_id=0,
+        )
         iati_version = Version(code=settings.IATI_VERSION)
         iati_version.save()
 

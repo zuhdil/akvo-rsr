@@ -12,16 +12,33 @@ var plumber = require('gulp-plumber');
 var react = require('gulp-react');
 var sass = require('gulp-sass');
 
+var jsfiles = [
+    '../../akvo/rsr/static/scripts-src/**/*.js',
+    // excluded files
+    '!../../akvo/rsr/static/scripts-src/**/bundle.js',
+    '!../../akvo/rsr/static/scripts-src/**/vendors.js',
+    '!../../akvo/rsr/static/scripts-src/**/vendors.bundle.js',
+    // Ignored since webpack is used to build this code, and linting these files
+    // here doesn't really help the developers while working on this code.
+    '!../../akvo/rsr/static/scripts-src/**/app.js',
+    '!../../akvo/rsr/static/scripts-src/my-results/**/*.js',
+];
+
+var jsxfiles = [
+    '../../akvo/rsr/static/scripts-src/**/*.jsx',
+    // excluded files
+    '!../../akvo/rsr/static/scripts-src/my-results/**/*.jsx',
+];
 
 gulp.task('lint', function() {
-  return gulp.src('../../akvo/rsr/static/scripts-src/**/*.js')
+  return gulp.src(jsfiles)
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 gulp.task('jsx', function () {
-  return gulp.src('../../akvo/rsr/static/scripts-src/**/*.jsx')
+  return gulp.src(jsxfiles)
     .pipe(plumber())
     .pipe(react())
     .pipe(gulp.dest('../../akvo/rsr/static/scripts-src'));
@@ -37,7 +54,7 @@ gulp.task('sass', function() {
 gulp.task('watch', function() {
     gulp.watch('../../akvo/rsr/static/styles-src/**/*.scss', ['sass']);
     gulp.watch('../../akvo/rsr/static/scripts-src/**/*.jsx', ['jsx']);
-    gulp.watch('../../akvo/rsr/static/scripts-src/**/*.js', ['lint']);
+    gulp.watch(jsfiles, ['lint']);
 });
 
 // Default Task

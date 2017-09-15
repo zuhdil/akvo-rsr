@@ -1,4 +1,368 @@
-# Currently in develop
+# Akvo RSR Release Notes
+----
+## Version 3.30 - Paramaribo 
+
+Date: 2017-08-14
+
+## New and Noteworthy
+
+* Qualitative indicators introduced – The first step of incorporating qualitative indicators within the improved RSR Results Framework. Partners are now also able to capture data from their qualitative indicators in RSR, with this data able to be included in RSR reports. ( [#2755](https://github.com/akvo/akvo-rsr/issues/2755), [#2756](https://github.com/akvo/akvo-rsr/issues/2756), [#2808](https://github.com/akvo/akvo-rsr/pull/2808) )
+
+* Aggregation of percentage indicators  – Entering the 'raw data' behind result values in percentages, namely the numerator and denominator, introduced. Users are now able to have more complete percentage results data. ( [#2446](https://github.com/akvo/akvo-rsr/issues/2446), [#2791](https://github.com/akvo/akvo-rsr/issues/2810), [#2810](https://github.com/akvo/akvo-rsr/issues/2810), [#2817](https://github.com/akvo/akvo-rsr/pull/2817) )
+
+* Indicator Reporting Update design now fully introduced – With the completion of the UI work to right-side panel of the Indicator Reporting update the final piece of the redesigned results framework has been completed. ( [#2781](https://github.com/akvo/akvo-rsr/issues/2781), [#2801](https://github.com/akvo/akvo-rsr/pull/2801), [#2802](https://github.com/akvo/akvo-rsr/issues/2802), [#2788](https://github.com/akvo/akvo-rsr/pull/2788) )
+
+
+## Resolved issues
+
+* Results Framework UI stabilized – Scrolling, navigating through the redesigned RSR Results Framework has been improved.   ( [#2787](https://github.com/akvo/akvo-rsr/issues/2787), [#2788](https://github.com/akvo/akvo-rsr/pull/2788), [#2801](https://github.com/akvo/akvo-rsr/pull/2801), [#2802](https://github.com/akvo/akvo-rsr/issues/2802) ) 
+
+* 504 timeouts on the results framework page for projects with many children and indicators resolved – Stabilized the issue of too many queries leading to 504 timeouts for parent projects with many child projects and indicators. ( [#2782](https://github.com/akvo/akvo-rsr/issues/2782), [#2783](https://github.com/akvo/akvo-rsr/pull/2783) )
+
+* Advanced Filters now work in the IE browser – a javascript error leading to the malfunctioning of the RSR Advanced Filter functionality when you the IE browser has been fixed. ( [#2785](https://github.com/akvo/akvo-rsr/issues/2785), [#2786](https://github.com/akvo/akvo-rsr/pull/2786) ) 
+
+* Display complete (long) names of partners – text pending ( [#2773](https://github.com/akvo/akvo-rsr/pull/2773), [#2796](https://github.com/akvo/akvo-rsr/pull/2796) )
+
+
+
+# Version 3.30 - Paramaribo
+
+Date: 2017-08-14
+
+## New and Noteworthy
+
+* Qualitative indicators introduced – The first step of incorporating qualitative indicators within the improved RSR Results Framework has been completed. Partners are now also able to capture data from their qualitative indicators in RSR; this results data can be exported to RSR reports. ( [#2755](https://github.com/akvo/akvo-rsr/issues/2755), [#2756](https://github.com/akvo/akvo-rsr/issues/2756), [#2808](https://github.com/akvo/akvo-rsr/pull/2808) )
+
+* Aggregation of percentage indicators  – Entering the 'raw data' behind result values in percentages, namely the numerator and denominator, introduced to the new results framework. Users are now able to have more complete results data for their indicators measured in percentage. ( [#2446](https://github.com/akvo/akvo-rsr/issues/2446), [#2791](https://github.com/akvo/akvo-rsr/issues/2810), [#2810](https://github.com/akvo/akvo-rsr/issues/2810), [#2817](https://github.com/akvo/akvo-rsr/pull/2817) )
+
+* Indicator Reporting Update design now fully introduced – With the completion of the UI work to the right-side panel of the Indicator Reporting Update, the final piece of the redesigned results framework has been completed. ( [#2781](https://github.com/akvo/akvo-rsr/issues/2781), [#2801](https://github.com/akvo/akvo-rsr/pull/2801), [#2802](https://github.com/akvo/akvo-rsr/issues/2802), [#2788](https://github.com/akvo/akvo-rsr/pull/2788) )
+
+
+## Resolved issues
+
+* Results Framework UI stabilized – Scrolling, navigating through the redesigned RSR Results Framework has been further improved.   ( [#2787](https://github.com/akvo/akvo-rsr/issues/2787), [#2788](https://github.com/akvo/akvo-rsr/pull/2788), [#2801](https://github.com/akvo/akvo-rsr/pull/2801), [#2802](https://github.com/akvo/akvo-rsr/issues/2802) )
+
+* 504 timeouts on the results framework page for projects with many children and indicators resolved – Fixed the issue of too many queries leading to 504 timeouts for parent projects with many child projects and indicators. ( [#2782](https://github.com/akvo/akvo-rsr/issues/2782), [#2783](https://github.com/akvo/akvo-rsr/pull/2783) )
+
+* Advanced Filters now work in the IE browser – A javascript error leading to the malfunctioning of the RSR Advanced Filter functionality when you use the IE browser has been resolved. ( [#2785](https://github.com/akvo/akvo-rsr/issues/2785), [#2786](https://github.com/akvo/akvo-rsr/pull/2786) )
+
+* Display complete (long) names of partners – In the name field, long names led to an incomplete/truncated version of the full name. Full names, regardless of length can now be displayed. ( [#2773](https://github.com/akvo/akvo-rsr/pull/2773), [#2796](https://github.com/akvo/akvo-rsr/pull/2796) )
+
+### Code maintenance
+
+* Remove the `IndicatorPeriodData.relative_data` field ( [#2789](https://github.com/akvo/akvo-rsr/issues/2789) )
+
+
+# Version 3.29 - La Paz
+
+Date: 2017-07-20
+
+## Noteworthy
+
+ * Indicator Reporting design further improved in the beta RSR Results Framework
+
+ * New partner introduced to the beta RSR Results Framework
+
+ * JavaScript testing framework added; based on Mocha, Chai and Enzyme to focus initially on unit testing of new React based development [#2735](https://github.com/akvo/akvo-rsr/issues/2735)
+
+## Resolved Issues
+
+ * Actual vs. Target Progress Indicator in the beta RSR Results Framework can now accommodate longer titles
+
+
+# Akvo RSR – Version 3.28 Georgetown
+
+Date: 2017-07-06
+
+## Issues Resolved
+
+Problem with displaying report types for some users has been
+resolved - [#2745](https://github.com/akvo/akvo-rsr/issues/2745)
+
+Open the advanced filters pane only if it was previously opened by the user, not
+otherwise - [#2741](https://github.com/akvo/akvo-rsr/issues/2741)
+
+Links from the organisation page that filters projects in different states have
+been fixed - [#2740](fa8094647b1270ec5aa28f15c09b10f7f1b24693)
+
+Problem with page set being reset to 10, after filters are applied has been
+fixed - [#2684](https://github.com/akvo/akvo-rsr/issues/2684)
+
+# Akvo RSR – Version 3.27 Lima
+
+Date: 2017-06-16
+
+## Continued improvements
+
+An assortment of important beta features for the new RSR Results Framework,
+which is being pilot by limited number of RSR partners
+
+# Akvo RSR – Version 3.26.2 Panama City (hot-fix)
+
+Date: 2017-06-01
+
+## Issues Resolved
+
+Missing custom stylesheet for Akvo
+pages has been fixed - [#2710](https://github.com/akvo/akvo-rsr/issues/2710)
+
+Problem with react elements not being closed when clicking outside
+them corrected - [#2708](https://github.com/akvo/akvo-rsr/issues/2708)
+
+# Akvo RSR – Version 3.26.1 Panama City (hot-fix)
+
+Date: 2017-05-30
+
+## Continued improvements
+
+Creating organization specific reports, visible only to users
+belonging to those organizations for which the report is
+created, has been enabled - [#2697](https://github.com/akvo/akvo-rsr/issues/2697)
+
+Dynamic filters made more responsive by using client side caching of
+options - [#2552](https://github.com/akvo/akvo-rsr/issues/2552)
+
+## Issues Resolved
+
+Add new states to indicator period updates to complete the
+workflow. [#2696](https://github.com/akvo/akvo-rsr/issues/2696)
+
+# Akvo RSR – Version 3.26 Panama City
+
+Date: 2017-05-25
+
+## Continued improvements
+
+Advanced filters on the project directory are now dynamic -- selecting an option
+for one filter, changes the options shown in the other filters
+accordingly - [#2552](https://github.com/akvo/akvo-rsr/issues/2552)
+
+Admin action created to mark projects as
+complete [#2671](https://github.com/akvo/akvo-rsr/issues/2671)
+
+Related links now open in a new
+tab - [#2656](https://github.com/akvo/akvo-rsr/issues/2656)
+
+## Issues Resolved
+
+Missing indicator descriptions in IATI
+file now available - [#2686](https://github.com/akvo/akvo-rsr/issues/2686)
+
+Problem with saving document category in some
+cases fixed - [#2658](https://github.com/akvo/akvo-rsr/issues/2658)
+
+User management page timeouts for users with too many
+employments fixed - [#2651](https://github.com/akvo/akvo-rsr/issues/2651)
+
+# Akvo RSR – Version 3.25.1 Monte Video hotfix
+
+Date: 2017-05-22
+
+## Issues Resolved
+
+Broken date fields issue fixed – [#2634](https://github.com/akvo/akvo-rsr/issues/2677)
+
+# Akvo RSR – Version 3.25 Monte Video
+
+Date: 2017-05-16
+
+## Continued improvements
+
+More User friendly MyResults – filter for MyResults has been refined to make it easier to quickly
+find your results frameworks – [#2612](https://github.com/akvo/akvo-rsr/issues/2612)
+
+Increased web page speed – enhanced speed using CDN and Cache-Control –
+[#2533](https://github.com/akvo/akvo-rsr/issues/2533) and
+[#2649](https://github.com/akvo/akvo-rsr/issues/2649)
+
+Better performance of MyRSR – searching for projects made more efficient and faster –
+[#2636](https://github.com/akvo/akvo-rsr/issues/2636)
+
+## Issues Resolved
+
+Project Location Unicode issues fixed. – [#2634](https://github.com/akvo/akvo-rsr/issues/2634)
+
+My Results filter less "sensitive” – [#2612](https://github.com/akvo/akvo-rsr/issues/2612) and
+[#2650](https://github.com/akvo/akvo-rsr/issues/2650)
+
+Private projects only visible through MyRSR by members of the organisations which are partners of
+the projects. This fixes Forbidden Error 403 messages fixed for EUTF –
+[#2615](https://github.com/akvo/akvo-rsr/issues/2615) and
+[#2647](https://github.com/akvo/akvo-rsr/issues/2647)
+
+Unused template tags for maps removed – [#2640](https://github.com/akvo/akvo-rsr/issues/2640)
+
+# Akvo RSR version 3.24.1 Stockholm hotfix
+
+Date: 25 April 2017
+
+## Bug fixes
+
+[#2638](https://github.com/akvo/akvo-rsr/issues/2638) Fix duplicate related projects in IATI XML export
+
+# Akvo RSR version 3.24 Stockholm
+
+Date: 13 April 2017
+
+## General improvements
+
+[#2609](https://github.com/akvo/akvo-rsr/issues/2609) Add a link to the project editor on the project page
+
+[#2616](https://github.com/akvo/akvo-rsr/issues/2616) Reordering of Advanced Filter window, move Keywords to the top
+
+[#2618](https://github.com/akvo/akvo-rsr/issues/2618) Project subtitle part of the search query
+
+## Bug fixes
+
+[#2619](https://github.com/akvo/akvo-rsr/issues/2619) Advanced filter for Location doesn't work correctly
+
+[#2356](https://github.com/akvo/akvo-rsr/issues/2356) Disable Publish button in project editor for users without publishing permission.
+
+[#2362](https://github.com/akvo/akvo-rsr/issues/2362) Add new project buttons in MyRsr only shown if user has permissions to add projects.
+
+# Akvo RSR version 3.23.1 New Delhi hotfix
+
+Date: 04 April 2017
+
+## Bug fixes
+
+[#2605](https://github.com/akvo/akvo-rsr/issues/2605) UnicodeError when handling errors in project editor
+
+[#2603](https://github.com/akvo/akvo-rsr/issues/2603) Fix bug in listing non partner projects on partner site
+
+# Akvo RSR version 3.23 New Delhi
+
+Date: 31 March 2017
+
+## General improvements
+
+[#2581](https://github.com/akvo/akvo-rsr/issue/2581) Change landing page for My
+RSR to the My Projects page
+
+[#2577](https://github.com/akvo/akvo-rsr/issues/2577) Add links to be able to
+view more projects in the project directory
+
+[#2454](https://github.com/akvo/akvo-rsr/issues/2454) Add hidden field to registration form as
+honeypot for bots and add a management command to delete spam users
+
+[#2466](https://github.com/akvo/akvo-rsr/issues/2466) Country associated with a
+location is automatically computed from the latitude and longitude.
+This
+[fixes missing country information](https://github.com/akvo/akvo-rsr/issues/2466) for
+some locations and
+broken [location advanced filter](https://github.com/akvo/akvo-rsr/issues/2527)
+
+[#29](https://github.com/akvo/akvo-rsr/issues/29) Enable SSL for the site
+
+[#2548](https://github.com/akvo/akvo-rsr/issues/2548) Allow filtering projects
+in the directory using Keyword advanced filter.  Also, removed organisation and
+location from the search bar typeahead.
+
+[#2593](https://github.com/akvo/akvo-rsr/issues/2593) More French translations
+
+## Bug fixes
+
+[#2573](https://github.com/akvo/akvo-rsr/issues/2573) Fix typeahead organisations in Pages
+
+[#2563](https://github.com/akvo/akvo-rsr/issues/2563) Deleting indicator update
+removes associated comment from the actual value comment
+
+# Akvo RSR version 3.22.1 Chisinau hotfix
+
+Date: 14 March 2017
+
+## Bug fixes
+
+[#2569](https://github.com/akvo/akvo-rsr/issues/2569) Django pipeline not configured correctly after
+upgrade
+
+[#29](https://github.com/akvo/akvo-rsr/issues/29) Generation of cache keys fails if the key value
+ contains whitespace. This is part of the ongoing work on SSL for RSR.
+
+# Akvo RSR version 3.22 Chisinau
+
+Date: 10 March 2017
+
+## General improvements
+
+[#2540](https://github.com/akvo/akvo-rsr/issues/2540) Improve the performance of RSR in several
+places and make the limit on projects shown in the project directory configurable.
+
+## Bug fixes
+
+[#2559](https://github.com/akvo/akvo-rsr/issues/2559) Logos of Project partners not displayed on
+project page
+
+[#1853](https://github.com/akvo/akvo-rsr/issues/1853) Don't show projects not related to an
+organisation when searching for projects in their Akvo page.
+
+[#2554](https://github.com/akvo/akvo-rsr/issues/2554) Increase the max_length of Keyword.label to
+100 characters
+
+[#2486](https://github.com/akvo/akvo-rsr/issues/2486) Akvoapp pages missing Piwik web analytic ids.
+Partial fix, we've made the PiWik Id mandatory.
+
+[#2472](https://github.com/akvo/akvo-rsr/issues/2472) Fix "Recently modified projects" table in
+Organisation Summary report
+
+[#2543](https://github.com/akvo/akvo-rsr/issues/2543) Fix faulty username validation restriction to max length of 30 characters in admin interface. It was restored to the max length of 254 characters
+
+## Code quality
+
+[#2477](https://github.com/akvo/akvo-rsr/issues/2477) Replace Landscape code quality tests with flake8
+
+# Akvo RSR version 3.21 Wellington
+
+## Improvements
+
+[#2338](https://github.com/akvo/akvo-rsr/issues/2338) Add report types and
+report formats to the database to make it easier to add new report types.
+
+[#2536](https://github.com/akvo/akvo-rsr/issues/2536) Improve translation
+coverage for the Spanish version of the site.
+
+## Bug fixes
+
+[#2516](https://github.com/akvo/akvo-rsr/issues/2516) ProjectCustomFields with
+unicode data can cause UnicodeEncodeErrors.
+
+[#2514](https://github.com/akvo/akvo-rsr/issues/2514) API call for fetching
+recipient country fails if the country has unicode characters in it's name.
+
+[#2511](https://github.com/akvo/akvo-rsr/issues/2511) Fix 504 (Gateway Timeout
+errors) on the Results framework page.
+
+[#2534](https://github.com/akvo/akvo-rsr/issues/2534) Improve handling of
+non-JSON responses at multiple places in the site's javascript, to show users
+better error messages in case of 50x errors.
+
+[#2519](https://github.com/akvo/akvo-rsr/issues/2519) Make code for re-ordering
+results and indicators more robust and prevent `MultipleObjectsReturned` or
+`DoesNotExist` errors.
+
+[#2514](https://github.com/akvo/akvo-rsr/issues/2514) Fix problems with unicode
+country names.
+
+[#2516](https://github.com/akvo/akvo-rsr/issues/2516) Fix problems with unicode
+values in ProjectCustomFields.
+
+# Akvo RSR version 3.20.2 Bogotá (hot-fix)
+
+## Bug fixes
+
+[#2528](https://github.com/akvo/akvo-rsr/issues/2528) Fix bug with some editing
+actions in the Results Framework of parent projects making some indicator
+periods of child projects orphaned.
+
+# Akvo RSR version 3.20.1 Bogotá (hot-fix)
+
+## Bug fixes
+
+[#2507](https://github.com/akvo/akvo-rsr/issues/2507) Fix bug in pagination of
+PublicProjectViewSet and it's subclasses, which caused an indicator to be
+missing from the Results page.
+
+# Akvo RSR version 3.20 Bogotá
 
 ## Improvements
 
@@ -10,6 +374,25 @@ GitHub issue: [#2430](https://github.com/akvo/akvo-rsr/issues/2430)
 
 ## Bug fixes
 
+[#2381] (https://github.com/akvo/akvo-rsr/issues/2381) Ensure that the legacy
+organisation is always an organisation where user has an approved employment.
+
+[#2484](https://github.com/akvo/akvo-rsr/issues/2484) Import
+IndicatorReferences also when Results are imported to a child project.
+
+[#2482](https://github.com/akvo/akvo-rsr/issues/2482) Fix bug with organisation
+admin not being able to delete an AdministrativeLocation.
+
+[#2457](https://github.com/akvo/akvo-rsr/issues/2457) Fix the Results type
+column in the Results and Indicators table report to show the type string
+instead of the type's id.
+
+[#2456](https://github.com/akvo/akvo-rsr/issues/2456) Fix sorting of the
+results and indicators in the Results and Indicators Overview report.
+
+[#2494](https://github.com/akvo/akvo-rsr/issues/2494) Fix (potential) timeouts
+on authentication from Up app for some users.
+
 [#2403](https://github.com/akvo/akvo-rsr/issues/2403) Fix the 'Read more'
 button for project summary, when it ends with a list.
 
@@ -20,13 +403,22 @@ browser.
 [#2374](https://github.com/akvo/akvo-rsr/issues/2374) Prevent duplicate
 employments to the same organisation & group.
 
-[#2427] (https://github.com/akvo/akvo-rsr/issues/2427) Show Results type in
+[#2427](https://github.com/akvo/akvo-rsr/issues/2427) Show Results type in
 'Results and indicators table' report as text, not numbers.
 
 ## Under the hood
 
 [#2298](https://github.com/akvo/akvo-rsr/issues/2298) Django REST Framework has
 been upgraded to 3.2.5 from v2.3.13 which is quite old.
+
+# Akvo RSR version 3.18.4 Vilnius (hot-fix)
+
+## Bug fixes
+
+[#2496](https://github.com/akvo/akvo-rsr/issues/2496) Fix 504 (Gateway Timeout
+errors) when opening the project editor for big projects by speeding up
+fetching field validation rules and prefetching more attributes related to the
+results when querying for the project being edited.
 
 # Akvo RSR version 3.18.3 Vilnius (hot-fix)
 
@@ -55,9 +447,6 @@ wiki page](https://github.com/akvo/akvo-rsr/wiki/IATI-Import-mapping).
 
 [#2442](https://github.com/akvo/akvo-rsr/issues/2442) Custom mapper to import Result data only, using the IATI import,
 without over-writing the content of an existing project.
-
-[#2381] (https://github.com/akvo/akvo-rsr/issues/2381) Ensure that the legacy
-organisation is always an organisation where user has an approved employment.
 
 # Akvo RSR version 3.18 Vilnius
 

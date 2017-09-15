@@ -5,45 +5,47 @@
 # For additional details on the GNU license please see < http://www.gnu.org/licenses/agpl.html >.
 
 # utility functions for RSR
-
+from collections import namedtuple
+from datetime import datetime
 import hashlib
 import inspect
-import pytz
-import random
+import json
 import logging
+from os.path import abspath, dirname, exists, join, splitext
 import zipfile
-
-from BeautifulSoup import BeautifulSoup
-from datetime import datetime
-from os.path import splitext
-from urlparse import urljoin
-from workflows.models import State
-from workflows.utils import get_state
 
 from django.conf import settings
 from django.contrib.auth.models import Group
-from django.core.mail import send_mail, EmailMessage, get_connection, EmailMultiAlternatives
+from django.core.cache import cache
+from django.core.mail import EmailMultiAlternatives, get_connection
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.urlresolvers import reverse
 from django.db.models import get_model
 from django.http import HttpResponse
-from django.template import loader, Context
-from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext, get_language, activate
+from django.template import loader
+from django.utils.text import slugify
+import pytz
+import requests
+from shapely.geometry import shape, Point
 
-from notification.models import (Notice, NoticeType, get_notification_language, should_send,
-                                 LanguageStoreNotAvailable, get_formatted_messages)
-
-from akvo.rsr.iso3166 import COUNTRY_CONTINENTS, ISO_3166_COUNTRIES, CONTINENTS
+from akvo.rsr.iso3166 import COUNTRY_CONTINENTS, CONTINENTS, ISO_3166_COUNTRIES, ISO_ALPHA3_ALPHA2_MAP
 
 logger = logging.getLogger('akvo.rsr')
 
 RSR_LIMITED_CHANGE = u'rsr_limited_change'
+DATA_DIR = join(dirname(abspath(__file__)), '..', 'data')
+GEOJSON_FILE = join(DATA_DIR, 'countries.geojson')
+# http://data.okfn.org/data/core/geo-countries#readme
+GEOJSON_URL = 'https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson'
+COUNTRY_SHAPES = None
 
 
 class HttpResponseNoContent(HttpResponse):
     status_code = 204
+
+
+# tuple holding a Django table full name, app name and model name.
+# Used in the project_editor DRF code
+DjangoModel = namedtuple('DjangoModel', 'table_name, app, model_name')
 
 
 def rsr_image_path(instance, file_name, path_template='db/project/%s/%s'):
@@ -64,8 +66,8 @@ def rsr_image_path(instance, file_name, path_template='db/project/%s/%s'):
 
 
 def send_mail_with_attachments(subject, message, from_email, recipient_list,
-              fail_silently=False, auth_user=None, auth_password=None,
-              connection=None, html_message=None, attachments=None):
+                               fail_silently=False, auth_user=None, auth_password=None,
+                               connection=None, html_message=None, attachments=None):
     """
     Extension of django.core.main.send_mail to allow the inclusion of attachments
 
@@ -112,7 +114,7 @@ def rsr_send_mail(to_list, subject='templates/email/test_subject.txt',
     if undefined
     """
     subject_context = subject_context or {}
-    msg_context = msg_context  or {}
+    msg_context = msg_context or {}
     current_site = getattr(settings, 'RSR_DOMAIN', 'rsr.akvo.org')
 
     subject_context.update({'site': current_site})
@@ -204,7 +206,7 @@ def right_now_in_akvo():
     """
     Calculate the numbers used in the "Right now in Akvo" box on the home page.
     """
-    projects = get_model('rsr', 'Project').objects.published()
+    projects = get_model('rsr', 'Project').objects.public().published()
     organisations = get_model('rsr', 'Organisation').objects.all()
     updates = get_model('rsr', 'ProjectUpdate').objects.all()
     people_served = projects.get_largest_value_sum(
@@ -249,11 +251,11 @@ def pagination(page, object_list, objects_per_page):
     if not len(page_range) < 10:
         if active > 4:
             page_range[1] = '...'
-            del page_range[2:active-2]
+            del page_range[2:active - 2]
         if (page_range[-1] - active) > 3:
             page_range[-2] = '...'
             active_index = page_range.index(active)
-            del page_range[active_index+2:-2]
+            del page_range[active_index + 2:-2]
 
     return page, paginator, page_range
 
@@ -304,13 +306,30 @@ def codelist_value(model, instance, field, version=settings.IATI_VERSION):
     :return: String of the codelist instance
     """
     value = getattr(instance, field, None)
-    if value:
-        try:
-            objects = getattr(model, 'objects')
-            return objects.get(code=value, version__code=version)
-        except model.DoesNotExist:
-            return value
-    return ''
+    if not value:
+        return ''
+
+    key = u'{}-{}-{}'.format(version, model.__name__, value,)
+    # Memcached keys can't have whitespace and has a max length of 250
+    # https://github.com/memcached/memcached/blob/master/doc/protocol.txt#L41
+    key = slugify(key).encode('utf-8')[:250]
+    result = cache.get(key)
+    if result is not None:
+        return result
+
+    try:
+        objects = getattr(model, 'objects')
+        result = objects.get(code=value, version__code=version)
+
+    except model.DoesNotExist:
+        result = value
+
+    else:
+        # Update the cache only if the required data is in the DB!
+        cache.set(key, result)
+
+    finally:
+        return result
 
 
 def codelist_name(model, instance, field, version=settings.IATI_VERSION):
@@ -322,14 +341,9 @@ def codelist_name(model, instance, field, version=settings.IATI_VERSION):
     :param version: String of version (optional)
     :return: String of the codelist instance
     """
-    value = getattr(instance, field, None)
-    if value:
-        try:
-            objects = getattr(model, 'objects')
-            return objects.get(code=value, version__code=version).name
-        except model.DoesNotExist:
-            return value
-    return ''
+
+    value = codelist_value(model, instance, field, version)
+    return value.name if hasattr(value, 'name') else value
 
 
 def check_auth_groups(group_names):
@@ -344,7 +358,7 @@ def file_from_zip_archive(zip, file_name):  # pragma: no cover
     :param file_name: name of the file to retrieve from the archive
     :return: the file or None
     """
-    zip = zipfile.ZipFile(zip, 'r') #TODO: in test
+    zip = zipfile.ZipFile(zip, 'r')  # TODO: in test
     try:
         return zip.open(file_name)
     except KeyError:
@@ -356,3 +370,67 @@ def get_sha1_hash(s):
     hash = hashlib.sha1()
     hash.update(s)
     return hash.hexdigest()
+
+
+def download_file(url, path):
+    """Download the content at URL to the given PATH."""
+    r = requests.get(url, stream=True)
+    with open(path, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=1024):
+            if chunk:
+                f.write(chunk)
+    return path
+
+
+def get_country(latitude, longitude):
+    """Return (country_name, iso_code) given a latitude and longitude.
+
+    NOTE: The GEOJSON_FILE is downloaded if it's not present.
+
+    """
+
+    global COUNTRY_SHAPES
+    if COUNTRY_SHAPES is None:
+
+        # Download country geojson if not present
+        if not exists(GEOJSON_FILE):
+            download_file(GEOJSON_URL, GEOJSON_FILE)
+
+        # Create country shape objects
+        with open(GEOJSON_FILE) as f:
+            data = fix_country_codes(json.load(f)['features'])
+            COUNTRY_SHAPES = [
+                (shape(country_json['geometry']), country_json['name'], country_json['iso_code'])
+                for country_json in data
+            ]
+
+    p = Point(longitude, latitude)
+    for country_shape, name, iso_code in COUNTRY_SHAPES:
+        if country_shape.contains(p):
+            return name, iso_code
+
+    return (None, None)
+
+
+def fix_country_codes(data):
+    """Fixes country codes in the geojson data to match the codelist."""
+
+    code_name_map = {code: u'{}'.format(name) for code, name in ISO_3166_COUNTRIES}
+    fixed_data = []
+
+    for country_json in data:
+        properties, geometry = country_json['properties'], country_json['geometry']
+        country_name, iso_a3 = properties['ADMIN'], properties['ISO_A3']
+        if iso_a3 == '-99':
+            continue
+
+        iso_code = ISO_ALPHA3_ALPHA2_MAP[iso_a3].lower()
+        country_json = {
+            'geometry': geometry,
+            'iso_code': iso_code,
+            'name': code_name_map.get(iso_code, country_name),
+        }
+
+        fixed_data.append(country_json)
+
+    return fixed_data

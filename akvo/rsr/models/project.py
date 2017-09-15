@@ -5,7 +5,6 @@ See more details in the license.txt file located at the root folder of the Akvo 
 For additional details on the GNU license please see < http://www.gnu.org/licenses/agpl.html >.
 """
 
-import math
 
 from decimal import Decimal, InvalidOperation
 
@@ -19,7 +18,7 @@ from django.db.models.signals import post_save, post_delete
 from django.db.models.query import QuerySet as DjangoQuerySet
 from django.dispatch import receiver
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 
 from django_counter.models import ViewCounter
@@ -50,6 +49,7 @@ from .partnership import Partnership
 from .project_update import ProjectUpdate
 from .project_editor_validation import ProjectEditorValidationSet
 from .publishing_status import PublishingStatus
+from .related_project import RelatedProject
 from .budget_item import BudgetItem
 
 
@@ -476,8 +476,8 @@ class Project(TimestampsMixin, models.Model):
             # Update aggregation to parent
             if self.aggregate_to_parent != orig_aggregate_to_parent:
                 for period in IndicatorPeriod.objects.filter(indicator__result__project_id=self.pk):
-                    if period.parent_period():
-                        period.parent_period().recalculate_period()
+                    if period.parent_period:
+                        period.parent_period.recalculate_period()
 
     def clean(self):
         # Don't allow a start date before an end date
@@ -502,7 +502,6 @@ class Project(TimestampsMixin, models.Model):
         if not self.iati_activity_id:
             self.iati_activity_id = None
 
-
     @models.permalink
     def get_absolute_url(self):
         return ('project-main', (), {'project_id': self.pk})
@@ -511,8 +510,8 @@ class Project(TimestampsMixin, models.Model):
         """Returns True if a project accepts donations, otherwise False.
         A project accepts donations when the donate url is set, the project is published,
         the project needs funding and is not cancelled or archived."""
-        if self.donate_url and self.is_published() and self.funds_needed > 0 and not \
-                self.iati_status in Project.DONATE_DISABLED:
+        if self.donate_url and self.is_published() and self.funds_needed > 0 and \
+                self.iati_status not in Project.DONATE_DISABLED:
             return True
         return False
 
@@ -646,6 +645,18 @@ class Project(TimestampsMixin, models.Model):
                 iati_organisation_role=Partnership.IATI_REPORTING_ORGANISATION
             )
 
+    def countries(self):
+        """Return a list of countries for the project."""
+
+        country_codes = set([c.country.lower() for c in self.recipient_countries.all()])
+        return (
+            [country for country in self.recipient_countries.all()] +
+            [
+                location.country for location in self.locations.all()
+                if location.country and location.country.iso_code not in country_codes
+            ]
+        )
+
     class QuerySet(DjangoQuerySet):
         def of_partner(self, organisation):
             "return projects that have organisation as partner"
@@ -702,16 +713,6 @@ class Project(TimestampsMixin, models.Model):
 
         def status_not_archived(self):
             return self.exclude(iati_status__exact='6')
-
-        def active(self):
-            """Return projects that are published and not cancelled or archived"""
-            return self.published().status_not_cancelled().status_not_archived()
-
-        def euros(self):
-            return self.filter(currency='EUR')
-
-        def dollars(self):
-            return self.filter(currency='USD')
 
         # aggregates
         def budget_sum(self):
@@ -847,6 +848,14 @@ class Project(TimestampsMixin, models.Model):
         def publishingstatuses(self):
             return PublishingStatus.objects.filter(project__in=self)
 
+        def keywords(self):
+            Keyword = get_model('rsr', 'Keyword')
+            return Keyword.objects.filter(projects__in=self).distinct()
+
+        def sectors(self):
+            Sector = get_model('rsr', 'Sector')
+            return Sector.objects.filter(project__in=self).distinct()
+
     def __unicode__(self):
         return u'%s' % self.title
 
@@ -897,8 +906,8 @@ class Project(TimestampsMixin, models.Model):
         )
 
     latest_update.allow_tags = True
-    #no go, results in duplicate projects entries in the admin change list
-    #latest_update.admin_order_field = 'project_updates__time'
+    # no go, results in duplicate projects entries in the admin change list
+    # latest_update.admin_order_field = 'project_updates__time'
 
     def show_status(self):
         "Show the current project status"
@@ -955,6 +964,18 @@ class Project(TimestampsMixin, models.Model):
         return False
     is_published.boolean = True
 
+    def publish(self):
+        """Set the publishing status to published."""
+
+        self.publishingstatus.status = PublishingStatus.STATUS_PUBLISHED
+        self.publishingstatus.save()
+
+    def unpublish(self):
+        """Set the publishing status to unpublished."""
+
+        self.publishingstatus.status = PublishingStatus.STATUS_UNPUBLISHED
+        self.publishingstatus.save()
+
     def is_empty(self):
         exclude_fields = ['benchmarks', 'categories', 'created_at', 'crsadd', 'currency',
                           'custom_fields', 'fss', 'iati_checks', 'iati_project_exports',
@@ -981,13 +1002,13 @@ class Project(TimestampsMixin, models.Model):
         return Project.objects.budget_total().get(pk=self.pk).budget_total
 
     def has_multiple_budget_currencies(self):
-        budget_items = BudgetItem.objects.filter(project__id=self.pk)
-        num_currencies = len(set([self.currency] + [c.currency if c.currency else self.currency for c in budget_items]))
-
-        if num_currencies > 1:
-            return True
-        else:
-            return False
+        # Using a python loop for iteration, because it's faster when
+        # budget_items have been pre-fetched
+        budget_items = self.budget_items.all()
+        num_currencies = len(
+            set([self.currency] + [c.currency for c in budget_items if c.currency])
+        )
+        return num_currencies > 1
 
     def budget_currency_totals(self):
         budget_items = BudgetItem.objects.filter(project__id=self.pk)
@@ -1013,7 +1034,6 @@ class Project(TimestampsMixin, models.Model):
 
         return total_string[:-2]
 
-
     def focus_areas(self):
         from .focus_area import FocusArea
         return FocusArea.objects.filter(categories__in=self.categories.all()).distinct()
@@ -1037,7 +1057,7 @@ class Project(TimestampsMixin, models.Model):
             areas += [area]
         return areas
 
-    #shortcuts to linked orgs for a single project
+    # shortcuts to linked orgs for a single project
     def _partners(self, role=None):
         """
         Return the partner organisations to the project.
@@ -1173,68 +1193,44 @@ class Project(TimestampsMixin, models.Model):
         return self.parents() or self.children() or self.siblings()
 
     def parents(self):
-        return (
-            Project.objects.filter(
-                related_projects__related_project=self,
-                related_projects__relation=2
-            ) | Project.objects.filter(
-                related_to_projects__project=self,
-                related_to_projects__relation=1
-            )
-        ).distinct().published().public()
+        return self.parents_all().published().public()
 
     def parents_all(self):
         return (
             Project.objects.filter(
                 related_projects__related_project=self,
-                related_projects__relation=2
+                related_projects__relation=RelatedProject.PROJECT_RELATION_CHILD
             ) | Project.objects.filter(
                 related_to_projects__project=self,
-                related_to_projects__relation=1
+                related_to_projects__relation=RelatedProject.PROJECT_RELATION_PARENT
             )
         ).distinct()
 
     def children(self):
-        return (
-            Project.objects.filter(
-                related_projects__related_project=self,
-                related_projects__relation=1
-            ) | Project.objects.filter(
-                related_to_projects__project=self,
-                related_to_projects__relation=2
-            )
-        ).distinct().published().public()
+        return self.children_all().published().public()
 
     def children_all(self):
         return (
             Project.objects.filter(
                 related_projects__related_project=self,
-                related_projects__relation=1
+                related_projects__relation=RelatedProject.PROJECT_RELATION_PARENT
             ) | Project.objects.filter(
                 related_to_projects__project=self,
-                related_to_projects__relation=2
+                related_to_projects__relation=RelatedProject.PROJECT_RELATION_CHILD
             )
         ).distinct()
 
     def siblings(self):
-        return (
-            Project.objects.filter(
-                related_projects__related_project=self,
-                related_projects__relation=3
-            ) | Project.objects.filter(
-                related_to_projects__project=self,
-                related_to_projects__relation=3
-            )
-        ).distinct().published().public()
+        return self.siblings_all().published().public()
 
     def siblings_all(self):
         return (
             Project.objects.filter(
                 related_projects__related_project=self,
-                related_projects__relation=3
+                related_projects__relation=RelatedProject.PROJECT_RELATION_SIBLING
             ) | Project.objects.filter(
                 related_to_projects__project=self,
-                related_to_projects__relation=3
+                related_to_projects__relation=RelatedProject.PROJECT_RELATION_SIBLING
             )
         ).distinct()
 
@@ -1298,7 +1294,7 @@ class Project(TimestampsMixin, models.Model):
         return [keyword.label for keyword in self.keywords.all()]
 
     ###################################
-    ####### RSR Impact projects #######
+    # RSR Impact projects #############
     ###################################
 
     def import_results(self):
@@ -1321,21 +1317,22 @@ class Project(TimestampsMixin, models.Model):
         return import_success, 'Results imported'
 
     def add_result(self, result):
-        self_result = get_model('rsr', 'Result').objects.create(
+        child_result = get_model('rsr', 'Result').objects.create(
             project=self,
+            parent_result=result,
             title=result.title,
             type=result.type,
             aggregation_status=result.aggregation_status,
             description=result.description,
-            parent_result=result
         )
 
         for indicator in result.indicators.all():
-            self.add_indicator(self_result, indicator)
+            self.add_indicator(child_result, indicator)
 
     def add_indicator(self, result, indicator):
-        self_indicator = get_model('rsr', 'Indicator').objects.create(
+        child_indicator = get_model('rsr', 'Indicator').objects.create(
             result=result,
+            parent_indicator=indicator,
             title=indicator.title,
             measure=indicator.measure,
             ascending=indicator.ascending,
@@ -1346,14 +1343,15 @@ class Project(TimestampsMixin, models.Model):
         )
 
         for period in indicator.periods.all():
-            self.add_period(self_indicator, period)
+            self.add_period(child_indicator, period)
 
         for reference in indicator.references.all():
-            self.add_reference(self_indicator, reference)
+            self.add_reference(child_indicator, reference)
 
     def add_period(self, indicator, period):
         get_model('rsr', 'IndicatorPeriod').objects.create(
             indicator=indicator,
+            parent_period=period,
             period_start=period.period_start,
             period_end=period.period_end,
             target_value=period.target_value,
@@ -1403,7 +1401,7 @@ class Project(TimestampsMixin, models.Model):
             for indicator in result.indicators.all():
                 if indicator.is_child_indicator():
                     for period in indicator.periods.all():
-                        parent = period.parent_period()
+                        parent = period.parent_period
                         if parent and period.actual_value:
                             if indicator.measure == '2':
                                 self.update_parents(parent, parent.child_periods_average(), 1)
@@ -1421,7 +1419,7 @@ class Project(TimestampsMixin, models.Model):
                     Decimal(update_period.actual_value) + sign * Decimal(difference))
             update_period.save()
 
-            parent_period = update_period.parent_period()
+            parent_period = update_period.parent_period
             if parent_period and parent_period.indicator.result.project.aggregate_children:
                 if update_period.indicator.measure == '2':
                     self.update_parents(parent_period, parent_period.child_periods_average(), 1)

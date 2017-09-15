@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap3 compressed humanize i18n maps rsr_tags rsr_utils thumbnail %}
+{% load addparam bootstrap3 pipeline humanize i18n maps rsr_tags rsr_utils thumbnail %}
 {% block title %}{% trans 'Projects' %}{% endblock %}
 {% block maincontent %}
   <section id="map" class="touch-navbar">
@@ -11,14 +11,19 @@
   <form id="filterForm" action="" method="get" accept-charset="uft-8" class="searchContainer">
     <section id="search-filter">
       <div class="container-fluid">
+          <div id="search-view">
+              <!-- A hack to bring the search bar into view without being covered by the top nav bar -->
+          </div>
         <div id="search" class="verticalPadding">
           <p>{% trans "Refine the project list below by searching by name, organisation or sector" %}</p>
           <div class="form-inline" role="form">
             <div class="form-group">
               <div class="input-group">
-                {% bootstrap_field filter.form.title field_class='search-query' show_label=False %}
+                {% bootstrap_field filter.form.title_or_subtitle field_class='search-query' show_label=False %}
                 <span class="input-group-btn">
-                   <button class="btn btn-primary" type="submit">{% trans "Search" %} &#8250;</button>
+                    <button class="btn btn-primary" onclick="advanced_filter_form.preSubmitHack()">
+                        {% trans "Search" %} &#8250;
+                    </button>
                 </span>
               </div>
               <a class="btn showFilters menu-toggle"><i class="fa fa-toggle-off"></i> {% trans 'Advanced filters' %}</a>
@@ -30,46 +35,9 @@
         </div>
       </div>
     </section>
-    <div id="wrapper">
-      <aside  id="sidebar-wrapper" class="{{ show_filters }}">
-        <div id="filter" class="">
-            <div>
-                  <div class="btn-group">
-                    {% bootstrap_field filter.form.location %}
-                  </div>
-            </div>
-            <div>
-                  <div class="btn-group">
-                    {% bootstrap_field filter.form.iati_status %}
-                  </div>
-                </div>
-            <div>
-              {% if rsr_page %}
-                <div class="btn-group">
-                  {% bootstrap_field filter.form.organisation %}
-                </div>
-              {% else %}
-                <div class="btn-group" id="org-filter-container">
-                </div>
-                <input type="hidden" name="organisation" id="org-filter-input" type="text">
-              {% endif %}
-            </div>
-            <div>
-              <div class="btn-group">
-                {% bootstrap_field filter.form.sector %}
-              </div>
-            </div>
-            <div>
-              <nav>
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a class="showFilters text-center" id="apply-filter">{% trans 'Apply filter' %}</a></li>
-                  <li><a class="showFilters menu-toggle text-center"><i class="fa fa-toggle-off"></i> {% trans 'Close this' %}</a></li>
-                </ul>
-              </nav>
-            </div>
-        </div>
-      </aside>
-    </div>
+    <div id="wrapper"></div>
+    <!-- hidden input field to keep the page limit when using the filters -->
+    <input style="display: none;" name="limit" value="{{limit}}"/>
   </form>
 
   <div class="container">
@@ -78,6 +46,11 @@
       {% blocktrans with start_index=page.start_index end_index=page.end_index paginator_count=paginator.count %}
           Viewing {{ start_index }} - {{ end_index }} of {{ paginator_count }} projects
       {% endblocktrans %}
+          | View
+          {% for page_number, page_size in page_info|slice:"1:" %}
+              <a class="btn pageSize" href="{% addparam 'limit' page_size 'page' page_number %}">{{page_size}}</a>
+          {% endfor %}
+          projects
       </p>
     </div>
       {% include 'navigation/pagination-sort.html' %}
@@ -97,10 +70,10 @@
             <h1><a href="{% url 'project-main' project.id %}"><i class="fa fa-folder-o"></i> {{project.title}}</a></h1>
             <p class="projectSubT">{{project.subtitle}}</p>
             <p class="projectLocation"><i class="fa fa-map-marker"></i>
-                {% for recipient_country in project.recipient_countries.all %}
-                    {{ recipient_country }}{% if not forloop.last %}, {% endif %}
+                {% for country in project.countries %}
+                    {{ country }}{% if not forloop.last %}, {% endif %}
                 {% empty %}
-                    {% trans 'No recipient countries specified' %}
+                    {% trans 'No project locations or recipient countries specified' %}
                 {% endfor %}
             </p>
             {% if project.primary_organisation %}
@@ -210,10 +183,13 @@
     {{ block.super }}
 
     {# Twitter Typeahead #}
-    <script id="typeahead" src="{{ STATIC_URL }}lib/scripts/typeahead.js"></script>
+    <script id="typeahead"
+            src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.js"
+            integrity="sha256-9PktWqeso0y5/rAR0iDepG9qzPITS+ccSjYHU9vMCf4="
+            crossorigin="anonymous"></script>
 
     {# Google Maps API #}
-    <script src="http://maps.google.com/maps/api/js"></script>
+    <script src="//maps.google.com/maps/api/js"></script>
 
     <script type="application/json" id="akvo-rsr-typeahead-thumbs">
         {
@@ -227,31 +203,43 @@
     </script>
 
     {# Translation strings #}
-    <script type="application/json" id="typeahead-header-text">
-    {
+    <script type="application/json" id="typeahead-text">
+        {
         "projects_text": "{% trans 'Projects'|escapejs %}",
+        "search_text": "{% trans 'Search'|escapejs %}",
+        "loading_text": "{% trans 'Loading...'|escapejs %}",
         "organisations_text": "{% trans 'Organisations'|escapejs %}",
         "locations_text": "{% trans 'Locations'|escapejs %}",
-        "organisation_text": "{% trans 'organisation'|escapejs %}",
         "all_text": "{% trans 'All'|escapejs %}",
+        "keyword_text": "{% trans 'keyword'|escapejs %}",
+        "location_text": "{% trans 'location'|escapejs %}",
+        "status_text": "{% trans 'status'|escapejs %}",
+        "organisation_text": "{% trans 'organisation'|escapejs %}",
+        "sector_text": "{% trans 'sector'|escapejs %}",
+        "apply_filter_text": "{% trans 'Apply filter'|escapejs %}",
+        "close_this_text": "{% trans 'Close this'|escapejs %}"
+        }
+    </script>
 
+    <script type="application/json" id="donate-text">
+        {
         "donate_heading": "{% trans 'Donate'|escapejs %}",
         "donate_summary": "{% trans 'You will be sent to an external website that accepts donations for this project. To continue, click Donate.'|escapejs %}",
         "donate_text": "{% trans 'Donate'|escapejs %}",
         "donate_confirm_cancel_text": "{% trans 'Cancel'|escapejs %}"
-    }
+        }
     </script>
 
     <script type="application/json" id="react-typeahead-org">
-     {
-       "currentOrg": "{{ current_org }}"
-     }
+        {
+        "currentOrg": "{{ current_org }}"
+        }
     </script>
 
     {#  Initial data endpoints #}
     <script type="application/json" id="data-endpoints">
         {
-            "base_url": "http://{{ request.META.HTTP_HOST }}",
+            "base_url": "//{{ request.META.HTTP_HOST }}",
             "partnerships_of_project": "/rest/v1/partnership_more_link/?format=json&project={project}"
         }
     </script>
@@ -264,8 +252,14 @@
         }
     </script>
 
-  {% compressed_js 'project_directory' %}
-  {% compressed_js 'project_directory_typeahead' %}
-  {% compressed_js 'more_partners' %}
-  {% compressed_js 'donate_popup' %}
+    {# More partners data #}
+    {% for project in page %}
+        {% include 'project_partner_data.html' %}
+    {% endfor %}
+
+    {% javascript 'project_directory_filters' %}
+    {% javascript 'project_directory' %}
+    {% javascript 'more_partners' %}
+    {% javascript 'donate_popup' %}
+
 {% endblock js %}

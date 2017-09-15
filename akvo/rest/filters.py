@@ -9,7 +9,7 @@ import ast
 from django.db.models import Q
 from django.core.exceptions import FieldError
 
-from rest_framework import filters, status
+from rest_framework import filters
 from rest_framework.exceptions import APIException
 
 
@@ -23,15 +23,15 @@ class RSRGenericFilterBackend(filters.BaseFilterBackend):
         kwargs in queryset.filter and queryset.exclude respectively.
 
         Example URLs:
-            http://rsr.akvo.org/rest/v1/project/?filter={'title__icontains':'water','currency':'EUR'}
-            http://rsr.akvo.org/rest/v1/project/?filter={'title__icontains':'water'}&exclude={'currency':'EUR'}
+            https://rsr.akvo.org/rest/v1/project/?filter={'title__icontains':'water','currency':'EUR'}
+            https://rsr.akvo.org/rest/v1/project/?filter={'title__icontains':'water'}&exclude={'currency':'EUR'}
 
         It's also possible to specify models to be included in select_related() and
         prefetch_related() calls on the queryset, but specifying these in lists of strings as the
         values for the query sting params select_relates and prefetch_related.
 
         Example:
-            http://rsr.akvo.org/rest/v1/project/?filter={'partners__in':[42,43]}&prefetch_related=['partners']
+            https://rsr.akvo.org/rest/v1/project/?filter={'partners__in':[42,43]}&prefetch_related=['partners']
 
         Finally limited support for filtering on multiple arguments using logical OR between
         those expressions is available. To use this supply two or more query string keywords on the
@@ -60,7 +60,7 @@ class RSRGenericFilterBackend(filters.BaseFilterBackend):
             if args_or_kwargs:
                 # filter and exclude are called with a dict kwarg, the _related methods with a list
                 try:
-                    if param in ['filter', 'exclude',]:
+                    if param in ['filter', 'exclude', ]:
                         queryset = getattr(queryset, param)(**args_or_kwargs)
                     else:
                         queryset = getattr(queryset, param)(*args_or_kwargs)

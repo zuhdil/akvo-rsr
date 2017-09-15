@@ -22,7 +22,9 @@ from akvo.rsr.models import (IatiExport, Organisation, Partnership, Project, Use
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-import datetime, os, shutil
+import datetime
+import os
+import shutil
 from lxml import etree
 from xmlunittest import XmlTestMixin
 
@@ -151,17 +153,17 @@ class IatiExportTestCase(TestCase, XmlTestMixin):
         RelatedProject.objects.create(
             project=project,
             related_project=related_project,
-            relation='1'
+            relation=RelatedProject.PROJECT_RELATION_PARENT
         )
         RelatedProject.objects.create(
             project=project,
             related_iati_id="NL-KVK-related",
-            relation='1'
+            relation=RelatedProject.PROJECT_RELATION_PARENT
         )
         RelatedProject.objects.create(
             project=related_project,
             related_project=project,
-            relation='1'
+            relation=RelatedProject.PROJECT_RELATION_CHILD
         )
 
         # Add sector
@@ -403,7 +405,7 @@ class IatiExportTestCase(TestCase, XmlTestMixin):
             measure="1",
             ascending=True,
             title="Title",
-            description="Description",
+            description="Indicator Description",
             baseline_year=2016,
             baseline_value="1",
             baseline_comment="Comment"
@@ -477,6 +479,21 @@ class IatiExportTestCase(TestCase, XmlTestMixin):
                                            './iati-activity/iati-identifier',
                                            './iati-activity/reporting-org',
                                            './iati-activity/title'))
+
+        # Test related activities are listed only once
+        related_activity_id = related_project.iati_activity_id
+        attributes = {'ref': related_activity_id, 'type': RelatedProject.PROJECT_RELATION_PARENT}
+        related_activities = root_test.xpath(
+            './iati-activity/related-activity[@ref="{}"]'.format(related_activity_id)
+        )
+        self.assertEqual(1, len(related_activities))
+        self.assertEqual(attributes, related_activities[0].attrib)
+
+        # Test indicator has description
+        indicator_description_xpath = './iati-activity/result/indicator/description/narrative'
+        self.assertXpathsExist(root_test, (indicator_description_xpath,))
+        indicators = root_test.xpath(indicator_description_xpath)
+        self.assertEqual(indicators[0].text, 'Indicator Description')
 
     def test_different_complete_project_export(self):
         """

@@ -8,21 +8,30 @@ For additional details on the GNU license please see < http://www.gnu.org/licens
 import datetime
 import decimal
 import json
-import collections
 
-from akvo.rsr.fields import (LatitudeField, LongitudeField, ProjectLimitedTextField,
-                             ValidXMLCharField, ValidXMLTextField)
-from akvo.rsr.models import (AdministrativeLocation, BudgetItemLabel, Country, CrsAdd,
-                             CrsAddOtherFlag, Fss, FssForecast, Indicator, IndicatorPeriod,
-                             IndicatorReference, IndicatorPeriodActualDimension,
-                             IndicatorPeriodActualLocation, IndicatorPeriodTargetDimension,
-                             IndicatorPeriodTargetLocation, Keyword, Organisation, Project,
-                             ProjectDocument, ProjectDocumentCategory, ProjectEditorValidationSet,
-                             ProjectLocation, Result, Transaction, TransactionSector)
+from collections import namedtuple
+
+from akvo.rsr.fields import (LatitudeField, LongitudeField,
+                             ProjectLimitedTextField, ValidXMLCharField,
+                             ValidXMLTextField)
+from akvo.rsr.models import (AdministrativeLocation, BudgetItemLabel, Country,
+                             CrsAdd, CrsAddOtherFlag, Fss, FssForecast,
+                             Indicator, IndicatorDimension, IndicatorLabel,
+                             IndicatorPeriod, IndicatorReference,
+                             IndicatorPeriodActualDimension,
+                             IndicatorPeriodActualLocation,
+                             IndicatorPeriodTargetDimension,
+                             IndicatorPeriodTargetLocation, Keyword,
+                             Organisation, Project, OrganisationIndicatorLabel,
+                             ProjectDocument, ProjectDocumentCategory,
+                             ProjectEditorValidationSet, ProjectLocation,
+                             Result, Transaction, TransactionSector)
+from akvo.utils import DjangoModel
 
 from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.db import transaction
 from django.db.models import (get_model, BooleanField, DateField, DecimalField, EmailField,
                               ForeignKey, ManyToManyField, NullBooleanField, PositiveIntegerField,
                               PositiveSmallIntegerField, URLField)
@@ -40,8 +49,10 @@ from sorl.thumbnail import get_thumbnail
 RELATED_OBJECTS_MAPPING = {
     # Special mapping for related objects without a 'project' field
     Indicator: (Result, 'result'),
+    IndicatorLabel: (Indicator, 'indicator'),
     IndicatorPeriod: (Indicator, 'indicator'),
     IndicatorReference: (Indicator, 'indicator'),
+    IndicatorDimension: (Indicator, 'indicator'),
     IndicatorPeriodActualDimension: (IndicatorPeriod, 'period'),
     IndicatorPeriodActualLocation: (IndicatorPeriod, 'period'),
     IndicatorPeriodTargetDimension: (IndicatorPeriod, 'period'),
@@ -64,7 +75,7 @@ def add_error(errors, message, field_name):
     """Appends a new error to the errors list."""
     errors.append(
         {'name': field_name,
-         'error': str(message).capitalize()}
+         'error': message.encode('utf8').capitalize()}
     )
     return errors
 
@@ -126,12 +137,16 @@ def log_changes(changes, user, project):
 def split_key(key):
     """
     Helper function for splitting the keys of the form data. Key input will be a string like
-    'rsr_relatedproject.relation.1234_new-0' and it will return a tuple as such:
-
-    ('rsr', 'relatedproject'), 'relation', ('1234', 'new-0')
+    'rsr_relatedproject.relation.1234_new-0' and it will return a KeyInfo namedtuple
     """
-    key_info = key.split('.')
-    return key_info[0].split('_'), key_info[1], key_info[2].split('_')
+    KeyParts = namedtuple('KeyParts', 'model, field, ids')
+
+    key_parts = KeyParts._make(key.split('.'))
+    return KeyParts._make([
+        DjangoModel._make([key_parts.model] + key_parts.model.split('_')),
+        key_parts.field,
+        key_parts.ids.split('_')
+    ])
 
 
 def pre_process_data(key, data, errors):
@@ -140,9 +155,9 @@ def pre_process_data(key, data, errors):
     models. Returns the processed data and any errors that have occurred so far.
     """
     # Retrieve field information first
-    model, field, obj_id = split_key(key)
-    Model = get_model(model[0], model[1])
-    model_field = Model._meta.get_field(field)
+    key_parts = split_key(key)
+    Model = get_model(key_parts.model.app, key_parts.model.model_name)
+    model_field = Model._meta.get_field(key_parts.field)
 
     # Text data does not need pre-processing
     if isinstance(model_field, (EmailField, ProjectLimitedTextField, URLField, ValidXMLCharField,
@@ -215,16 +230,19 @@ def pre_process_data(key, data, errors):
     if isinstance(model_field, ForeignKey):
         if data:
             try:
-                if 'project' in field:
+                if 'project' in key_parts.field:
                     return Project.objects.get(pk=int(data)), errors
-                elif 'organisation' in field:
+                if 'organisation' in key_parts.field:
                     return Organisation.objects.get(pk=int(data)), errors
-                elif 'label' in field:
+                if key_parts.model.model_name == 'indicatorlabel' and key_parts.field == 'label':
+                    return OrganisationIndicatorLabel.objects.get(pk=int(data)), errors
+                if key_parts.model.model_name == 'budgetitem' and key_parts.field == 'label':
                     return BudgetItemLabel.objects.get(pk=int(data)), errors
-                elif 'country' in field:
+                if 'country' in key_parts.field:
                     return Country.objects.get(pk=int(data)), errors
+                return None, errors
             except (Project.DoesNotExist, Organisation.DoesNotExist, BudgetItemLabel.DoesNotExist,
-                    Country.DoesNotExist) as e:
+                    Country.DoesNotExist, OrganisationIndicatorLabel.DoesNotExist) as e:
                 errors = add_error(errors, e, key)
                 return None, errors
         else:
@@ -255,6 +273,7 @@ def convert_related_objects(rel_objects):
         'indicatorperiodtargetdimension': 'indicator_period_target_dimension',
         'indicatorperiodtargetlocation': 'indicator_period_target_location',
         'indicatorreference': 'indicator_reference',
+        'indicatordimension': 'indicator_dimension',
         'projectcondition': 'project_condition',
         'budgetitem': 'budget_item',
         'countrybudgetitem': 'country_budget_item',
@@ -304,7 +323,7 @@ def add_changes(changes, obj, field, field_name, orig_data):
     per related object, so we need to check if the object is already in the changes list and
     append the new changes to it.
     """
-    if not obj in [change[0] for change in changes]:
+    if obj not in [change[0] for change in changes]:
         # Object not yet in changes list
         changes.append([obj, [[field, field_name, orig_data]]])
     else:
@@ -433,7 +452,7 @@ def project_editor(request, pk=None):
         for key in sorted(data.keys()):
             # The keys in form data are of format "rsr_project.title.1234".
             # Separated by .'s, the data contains the model name, field name and object id list
-            model, field, id_list = split_key(key)
+            key_parts = split_key(key)
 
             # We pre-process the data first. E.g. dates will be converted to datetime objects
             obj_data, errors = pre_process_data(key, data[key], errors)
@@ -442,49 +461,51 @@ def project_editor(request, pk=None):
                 continue
 
             # Retrieve the model and related object ID (e.g. rsr_project.1234)
-            Model = get_model(model[0], model[1])
-            related_obj_id = model[0] + '_' + model[1] + '.' + '_'.join(id_list)
+            Model = get_model(key_parts.model.app, key_parts.model.model_name)
+            related_obj_id = ''.join(
+                [key_parts.model.table_name, '.', '_'.join(key_parts.ids)]
+            )
 
             if Model in MANY_TO_MANY_FIELDS.keys():
                 # This field is a many to many field, which need special handling
                 m2m_relation = getattr(project, MANY_TO_MANY_FIELDS[Model])
                 try:
                     m2m_object = Model.objects.get(pk=int(obj_data))
-                    if len(id_list) == 1:
+                    if len(key_parts.ids) == 1:
                         # If there already was an appointed object in the many to many relation,
                         # remove the old object first
-                        old_m2m_object = Model.objects.get(pk=int(id_list[0]))
+                        old_m2m_object = Model.objects.get(pk=int(key_parts.ids[0]))
                         if old_m2m_object in m2m_relation.all():
                             m2m_relation.remove(old_m2m_object)
                     # Add the new many to many object to the project
                     m2m_relation.add(m2m_object)
-                    changes = add_changes(changes, m2m_object, field, key, obj_data)
-                    if not related_obj_id in rel_objects.keys():
+                    changes = add_changes(changes, m2m_object, key_parts.field, key, obj_data)
+                    if related_obj_id not in rel_objects.keys():
                         rel_objects[related_obj_id] = obj_data
                 except Model.DoesNotExist as e:
                     errors = add_error(errors, str(e), key)
                 data.pop(key, None)
 
-            elif len(id_list) == 1:
+            elif len(key_parts.ids) == 1:
                 # Already existing object, update it
                 changes, errors, rel_objects = update_object(
-                    Model, id_list[0], field, obj_data, key, data[key], changes, errors,
+                    Model, key_parts.ids[0], key_parts.field, obj_data, key, data[key], changes, errors,
                     rel_objects, related_obj_id
                 )
                 data.pop(key, None)
 
             else:
                 # New object, with potentially a new parent as well
-                parent_id = '_'.join(id_list[:-1])
+                parent_id = '_'.join(key_parts.ids[:-1])
 
-                if not 'new' in parent_id:
+                if 'new' not in parent_id:
                     # New object, but parent is already existing
-                    parent_obj_id = id_list[-2]
+                    parent_obj_id = key_parts.ids[-2]
 
                     if related_obj_id not in rel_objects.keys():
                         # Related object has not yet been created (not added to rel_objects dict)
                         kwargs = dict()
-                        kwargs[field] = obj_data
+                        kwargs[key_parts.field] = obj_data
 
                         if Model in RELATED_OBJECTS_MAPPING.keys():
                             # Special mapping needed
@@ -495,16 +516,16 @@ def project_editor(request, pk=None):
                             kwargs['project'] = Project.objects.get(pk=parent_obj_id)
 
                         # Add field data, create new object and add new id to rel_objects dict
-                        kwargs[field] = obj_data
+                        kwargs[key_parts.field] = obj_data
                         changes, errors, rel_objects = create_object(
-                            Model, kwargs, field, key, data[key], changes, errors, rel_objects,
+                            Model, kwargs, key_parts.field, key, data[key], changes, errors, rel_objects,
                             related_obj_id
                         )
                         data.pop(key, None)
                     else:
                         # Object was already created earlier in this script, update object
                         changes, errors, rel_objects = update_object(
-                            Model, rel_objects[related_obj_id], field, obj_data, key, data[key],
+                            Model, rel_objects[related_obj_id], key_parts.field, obj_data, key, data[key],
                             changes, errors, rel_objects, related_obj_id
                         )
                         data.pop(key, None)
@@ -522,7 +543,7 @@ def project_editor(request, pk=None):
                         if related_obj_id not in rel_objects.keys():
                             # Related object itself has not yet been created yet
                             kwargs = dict()
-                            kwargs[field] = obj_data
+                            kwargs[key_parts.field] = obj_data
 
                             if Model in RELATED_OBJECTS_MAPPING.keys():
                                 # Special mapping needed
@@ -533,9 +554,9 @@ def project_editor(request, pk=None):
                                 kwargs['project'] = Project.objects.get(pk=parent_obj_id)
 
                             # Add field data, create new object and add new id to rel_objects dict
-                            kwargs[field] = obj_data
+                            kwargs[key_parts.field] = obj_data
                             changes, errors, rel_objects = create_object(
-                                Model, kwargs, field, key, data[key], changes, errors, rel_objects,
+                                Model, kwargs, key_parts.field, key, data[key], changes, errors, rel_objects,
                                 related_obj_id
                             )
 
@@ -543,7 +564,7 @@ def project_editor(request, pk=None):
                         else:
                             # Related object itself has also been created earlier, update it
                             changes, errors, rel_objects = update_object(
-                                Model, rel_objects[related_obj_id], field, obj_data, key, data[key],
+                                Model, rel_objects[related_obj_id], key_parts.field, obj_data, key, data[key],
                                 changes, errors, rel_objects, related_obj_id
                             )
                             data.pop(key, None)
@@ -583,6 +604,7 @@ def project_editor(request, pk=None):
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
+@transaction.atomic
 def project_editor_reorder_items(request, project_pk=None):
     """API call to reorder results or indicators"""
 
@@ -602,8 +624,8 @@ def project_editor_reorder_items(request, project_pk=None):
         errors += ['Invalid item type']
 
     if not errors:
-        # assign order if it doesn't already exist
-        if item_list and not item_list[0].order:
+        # assign order if it doesn't already exist or is messed up
+        if item_list and set(item_list.values_list('order', flat=True)) != set(range(item_list.count())):
             for i, item in enumerate(item_list):
                 item.order = i
                 item.save()
@@ -621,7 +643,7 @@ def project_editor_reorder_items(request, project_pk=None):
             swap_id = item_swap.id
 
             if item_selected:
-                item_selected.order = item_original_order-1
+                item_selected.order = item_original_order - 1
                 item_selected.save()
 
         elif item_direction == 'down' and not item_original_order >= len(item_list) - 1:
@@ -645,6 +667,7 @@ def project_editor_reorder_items(request, project_pk=None):
             'swap_id': swap_id,
         }
     )
+
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
@@ -690,12 +713,12 @@ def project_editor_default_periods(request, project_pk=None):
         default_indicator.default_periods = False
         default_indicator.save()
 
-
     return Response(
         {
             'errors': errors,
         }
     )
+
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
@@ -705,7 +728,7 @@ def project_editor_upload_file(request, pk=None):
     project = Project.objects.get(pk=pk)
     user = request.user
 
-    errors, changes, rel_objects, new_file_url = [], [], {}, ''
+    errors, changes, rel_objects = [], [], {}
     field_id = request.POST.copy()['field_id']
     upload_file = request.data['file']
 
@@ -713,27 +736,29 @@ def project_editor_upload_file(request, pk=None):
         return HttpResponseForbidden()
 
     # Retrieve field information first
-    model, field, id_list = split_key(field_id)
+    key_parts = split_key(field_id)
 
     # Retrieve the model and related object ID (e.g. rsr_projectdocument.1234_new-0)
-    Model = get_model(model[0], model[1])
-    related_obj_id = model[0] + '_' + model[1] + '.' + '_'.join(id_list)
+    Model = get_model(key_parts.model.app, key_parts.model.model_name)
+    related_obj_id = ''.join(
+        [key_parts.model.table_name, '.', '_'.join(key_parts.ids)]
+    )
 
-    if len(id_list) == 1:
+    if len(key_parts.ids) == 1:
         # Either the photo or an already existing project document
         changes, errors, rel_objects = update_object(
-            Model, id_list[0], field, upload_file, field_id, '', changes, errors,
+            Model, key_parts.ids[0], key_parts.field, upload_file, field_id, '', changes, errors,
             rel_objects, related_obj_id
         )
     else:
         # A non-existing project document
         kwargs = dict()
-        kwargs[field] = upload_file
+        kwargs[key_parts.field] = upload_file
         kwargs['project'] = project
 
         # Add field data, create new object and add new id to rel_objects dict
         changes, errors, rel_objects = create_object(
-            Model, kwargs, field, field_id, '', changes, errors, rel_objects,
+            Model, kwargs, key_parts.field, field_id, '', changes, errors, rel_objects,
             related_obj_id
         )
 
@@ -781,7 +806,7 @@ def project_editor_add_validation(request, project_pk=None, validation_pk=None):
     if not user.has_perm('rsr.change_project', project):
         return HttpResponseForbidden()
 
-    if not validation_set in project.validations.all():
+    if validation_set not in project.validations.all():
         project.validations.add(validation_set)
 
         change_message = u'%s %s.' % (_(u'Project editor, added: validation set'),

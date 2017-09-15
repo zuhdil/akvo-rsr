@@ -76,7 +76,7 @@ class Employment(models.Model):
         return codelist_value(codelist_models.Country, self, 'country')
 
     def iati_country_unicode(self):
-        return str(self.iati_country())
+        return unicode(self.iati_country())
 
     def approve(self, approved_by):
         """
@@ -113,8 +113,8 @@ class Employment(models.Model):
 
         return dict(
             id=self.pk,
-            organisation_full=model_to_dict(self.organisation, fields=['id', 'name', 'long_name',]),
-            user_full=model_to_dict(self.user, fields=['id', 'first_name', 'last_name', 'email',]),
+            organisation_full=model_to_dict(self.organisation, fields=['id', 'name', 'long_name', ]),
+            user_full=model_to_dict(self.user, fields=['id', 'first_name', 'last_name', 'email', ]),
             is_approved=self.is_approved,
             job_title=self.job_title,
             country_full=self.iati_country().name if self.country else '',

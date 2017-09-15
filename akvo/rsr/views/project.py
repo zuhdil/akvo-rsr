@@ -7,8 +7,6 @@ Akvo RSR module. For additional details on the GNU license please see
 < http://www.gnu.org/licenses/agpl.html >.
 """
 
-import collections
-import django_filters
 import json
 from datetime import datetime
 from sorl.thumbnail import get_thumbnail
@@ -19,17 +17,13 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils.translation import ugettext_lazy as _
 from lxml import etree
 
 from ..forms import ProjectUpdateForm
-from ..filters import (build_choices, location_choices, ProjectFilter,
-                       remove_empty_querydict_items)
+from ..filters import (create_project_filter_class, remove_empty_querydict_items)
 from ..models import Project, ProjectUpdate
 from ...utils import pagination, filter_query_string
 from ...iati.exports.iati_export import IatiXML
-from .utils import apply_keywords, org_projects
-from .organisation import _page_organisations
 from akvo.codelists.models import SectorCategory, Sector, Version
 
 
@@ -38,36 +32,28 @@ from akvo.codelists.models import SectorCategory, Sector, Version
 ###############################################################################
 
 
-def _published_projects():
-    """Return all active projects."""
-    return Project.objects.public().published()
-
-
-def _page_projects(page):
-    """Dig out the list of projects to use.
-
-    First get a list based on page settings (orgs or all projects). Then apply
-    keywords filtering / exclusion.
-    """
-    projects = org_projects(page.organisation) if page.partner_projects else _published_projects()
-    return apply_keywords(page, projects)
-
-
 def _project_directory_coll(request):
     """Dig out and pass correct projects to the view."""
     page = request.rsr_page
-    if not page:
-        return _published_projects()
-    return _page_projects(page)
+    return (
+        page.projects() if page is not None
+        else Project.objects.public().published()
+    )
 
 
 def directory(request):
     """The project list view."""
     qs = remove_empty_querydict_items(request.GET)
 
+    # iati_status was renamed to sector in fa8094647b
+    if 'status' not in qs:
+        qs['status'] = qs.pop('iati_status', [''])[0]
+
     # Set show_filters to "in" if any filter is selected
     show_filters = "in"  # To simplify template use bootstrap class
-    available_filters = ['location', 'status', 'iati_status', 'organisation', 'sector', 'sort_by']
+    available_filters = [
+        'location', 'status', 'iati_status', 'organisation', 'sector', 'keyword', 'sort_by'
+    ]
     if frozenset(qs.keys()).isdisjoint(available_filters):
         show_filters = ""
 
@@ -79,24 +65,20 @@ def directory(request):
 
     # Yank project collection
     all_projects = _project_directory_coll(request)
-    f = ProjectFilter(qs, queryset=all_projects)
-
-    # Change filter options further when on an Akvo Page
-    if request.rsr_page:
-        # Filter location filter list to only populated locations
-        f.filters['location'].extra['choices'] = location_choices(all_projects)
-
-        # Swap to choice filter for RSR pages
-        f.filters['organisation'] = django_filters.ChoiceFilter(
-            choices=build_choices(_page_organisations(request.rsr_page)),
-            label=_(u'organisation'),
-            name='partners__id')
-
+    project_filter = create_project_filter_class(request, all_projects)
+    f = project_filter(qs, queryset=all_projects)
     sorted_projects = f.qs.distinct().order_by(sorting)
 
     # Build page
-    page = request.GET.get('page')
-    page, paginator, page_range = pagination(page, sorted_projects, 10)
+    page_number = request.GET.get('page')
+    limit = request.GET.get('limit', settings.PROJECT_DIRECTORY_PAGE_SIZES[0])
+    limit = min(int(limit), settings.PROJECT_DIRECTORY_PAGE_SIZES[-1])
+    page, paginator, page_range = pagination(page_number, sorted_projects, limit)
+    start_index = page.start_index()
+    page_info = [
+        (start_index // size + 1, size)
+        for size in settings.PROJECT_DIRECTORY_PAGE_SIZES
+    ]
 
     # Get the current org filter for typeahead
     org_filter = request.GET.get('organisation', '')
@@ -112,7 +94,11 @@ def directory(request):
     page.object_list = page.object_list.prefetch_related(
         'publishingstatus',
         'recipient_countries',
-        'sectors'
+        'locations',
+        'locations__country',
+        'sectors',
+        'budget_items',
+        'partnerships__organisation',
     ).select_related(
         'primary_organisation',
         'last_update'
@@ -136,6 +122,7 @@ def directory(request):
     context = {
         'project_count': sorted_projects.count(),
         'filter': f,
+        'page_info': page_info,
         'page': page,
         'page_range': page_range,
         'paginator': paginator,
@@ -145,6 +132,7 @@ def directory(request):
         'current_org': org_filter,
         'map_projects': map_projects,
         'sectors_dict': sectors_dict,
+        'limit': limit,
     }
     return render(request, 'project_directory.html', context)
 
@@ -342,24 +330,21 @@ def hierarchy(request, project_id):
 def report(request, project_id):
     """Show the full data report tab on the project main page."""
     return HttpResponseRedirect(
-        reverse('project-main', kwargs={'project_id': project_id})
-        + '#report'
+        reverse('project-main', kwargs={'project_id': project_id}) + '#report'
     )
 
 
 def partners(request, project_id):
     """Show the partners tab on the project main page."""
     return HttpResponseRedirect(
-        reverse('project-main', kwargs={'project_id': project_id})
-        + '#partners'
+        reverse('project-main', kwargs={'project_id': project_id}) + '#partners'
     )
 
 
 def finance(request, project_id):
     """Show finance tab on the project main page."""
     return HttpResponseRedirect(
-        reverse('project-main', kwargs={'project_id': project_id})
-        + '#finance'
+        reverse('project-main', kwargs={'project_id': project_id}) + '#finance'
     )
 
 ###############################################################################
@@ -399,7 +384,7 @@ def widgets(request, project_id):
 
     if selected_widget in ['narrow', 'cobranded', 'small', 'map', 'list']:
         context['widget'] = selected_widget
-        context['domain_url'] = 'http://' + request.META['HTTP_HOST']
+        context['domain_url'] = '{}://{}'.format(request.scheme, request.META['HTTP_HOST'])
         return render(request, 'project_widgets2.html', context)
 
     else:

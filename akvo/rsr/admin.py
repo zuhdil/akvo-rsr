@@ -13,8 +13,11 @@ from django.contrib import admin
 from django.contrib.admin import helpers, widgets
 from django.contrib.admin.options import IS_POPUP_VAR
 from django.contrib.admin.util import flatten_fieldsets
-from django.contrib.auth import get_permission_codename, get_user_model
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.auth.forms import (
+    UserChangeForm as DjangoUserChangeForm, UserCreationForm as DjangoUserCreationForm
+)
 from django.contrib.auth.models import Group
 from django.db import models, transaction
 from django.db.models import get_model
@@ -30,6 +33,7 @@ from sorl.thumbnail.fields import ImageField
 from embed_video.admin import AdminVideoMixin
 import os.path
 
+from admin_actions import set_project_status_complete
 from akvo.rsr.mixins import TimestampsAdminDisplayMixin
 from akvo.utils import custom_get_or_create_country
 from akvo.rsr.fields import ValidXMLCharField
@@ -223,6 +227,18 @@ class OrganisationCustomFieldInline(NestedTabularInline):
             return 1
 
 
+class OrganisationIndicatorLabelInline(NestedTabularInline):
+    model = get_model('rsr', 'OrganisationIndicatorLabel')
+    fields = ('label',)
+    fk_name = 'organisation'
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj:
+            return 1 if obj.indicator_labels.count() == 0 else 0
+        else:
+            return 1
+
+
 class InternalOrganisationIDAdmin(admin.ModelAdmin):
     list_display = (u'identifier', u'recording_org', u'referenced_org',)
     search_fields = (u'identifier', u'recording_org__name', u'referenced_org__name',)
@@ -258,7 +274,8 @@ class OrganisationAdmin(TimestampsAdminDisplayMixin, ObjectPermissionsModelAdmin
     inlines = (OrganisationLocationInline, OrganisationTotalBudgetInline,
                OrganisationRecipientOrgBudgetInline, OrganisationRegionBudgetInline,
                OrganisationCountryBudgetInline, OrganisationTotalExpenditureInline,
-               OrganisationDocumentInline, OrganisationCustomFieldInline)
+               OrganisationDocumentInline, OrganisationCustomFieldInline,
+               OrganisationIndicatorLabelInline)
     exclude = ('internal_org_ids',)
     list_display = ('name', 'long_name', 'website', 'language')
     search_fields = ('name', 'long_name')
@@ -311,7 +328,7 @@ class OrganisationAdmin(TimestampsAdminDisplayMixin, ObjectPermissionsModelAdmin
                 prefix = FormSet.get_default_prefix()
                 # check if we're trying to create a new project by copying an existing one. If so
                 # we ignore location and benchmark inlines
-                if "_saveasnew" not in request.POST or not prefix in ['benchmarks',
+                if "_saveasnew" not in request.POST or prefix not in ['benchmarks',
                                                                       'rsr-location-content_type-object_id']:
                     # end of add although the following block is indented as a result
                     prefixes[prefix] = prefixes.get(prefix, 0) + 1
@@ -766,7 +783,7 @@ class TransactionInline(NestedStackedInline):
         }),
         ('IATI fields (advanced)', {
             'classes': ('collapse',),
-            'fields': ('currency',  'value_date', 'provider_organisation',
+            'fields': ('currency', 'value_date', 'provider_organisation',
                        'provider_organisation_activity', 'receiver_organisation',
                        'receiver_organisation_activity', 'aid_type', 'disbursement_channel',
                        'finance_type', 'flow_type', 'tied_status', 'recipient_country',
@@ -958,8 +975,10 @@ class ProjectAdmin(TimestampsAdminDisplayMixin, ObjectPermissionsModelAdmin, Nes
     search_fields = ('title', 'subtitle', 'project_plan_summary', 'iati_activity_id',)
     list_filter = ('currency', 'status', 'keywords',)
     # created_at and last_modified_at MUST be readonly since they have the auto_now/_add attributes
-    readonly_fields = ('budget', 'funds',  'funds_needed', 'created_at', 'last_modified_at',
+    readonly_fields = ('budget', 'funds', 'funds_needed', 'created_at', 'last_modified_at',
                        'last_update')
+
+    actions = [set_project_status_complete]
 
     def __init__(self, model, admin_site):
         """To support ImageField override to add self.formfield_overrides."""
@@ -1017,7 +1036,7 @@ class ProjectAdmin(TimestampsAdminDisplayMixin, ObjectPermissionsModelAdmin, Nes
                 prefix = FormSet.get_default_prefix()
                 # check if we're trying to create a new project by copying an existing one. If so
                 # we ignore location and benchmark inlines
-                if "_saveasnew" not in request.POST or not prefix in ['benchmarks', 'rsr-location-content_type-object_id']:
+                if "_saveasnew" not in request.POST or prefix not in ['benchmarks', 'rsr-location-content_type-object_id']:
                     # end of add although the following block is indented as a result
                     prefixes[prefix] = prefixes.get(prefix, 0) + 1
                     if prefixes[prefix] != 1 or not prefix:
@@ -1106,6 +1125,29 @@ class ApiKeyInline(admin.StackedInline):
         return False
 
 
+class UserCreationForm(DjangoUserCreationForm):
+
+    username = forms.RegexField(
+        label=_("Username"), max_length=254,
+        regex=r'^[\w.@+-]+$',
+        help_text=_("Required. 254 characters or fewer. Letters, digits and "
+                    "@/./+/-/_ only."),
+        error_messages={
+            'invalid': _("This value may contain only letters, numbers and "
+                         "@/./+/-/_ characters.")})
+
+
+class UserChangeForm(DjangoUserChangeForm):
+
+    username = forms.RegexField(
+        label=_("Username"), max_length=254, regex=r"^[\w.@+-]+$",
+        help_text=_("Required. 254 characters or fewer. Letters, digits and "
+                    "@/./+/-/_ only."),
+        error_messages={
+            'invalid': _("This value may contain only letters, numbers and "
+                         "@/./+/-/_ characters.")})
+
+
 class UserAdmin(DjangoUserAdmin):
     model = get_model('rsr', 'user')
     fieldsets = (
@@ -1130,6 +1172,9 @@ class UserAdmin(DjangoUserAdmin):
     )
     search_fields = ('username', 'email', 'first_name', 'last_name')
     ordering = ('username',)
+
+    form = UserChangeForm
+    add_form = UserCreationForm
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_superuser:
@@ -1237,8 +1282,8 @@ class PartnerSiteAdmin(TimestampsAdminDisplayMixin, admin.ModelAdmin):
             ),
             'fields': ('partner_projects', 'exclude_keywords', 'keywords'),
         }),
-        (u'HTTP', dict(fields=('hostname', 'cname', 'custom_return_url', 'custom_return_url_text',
-                               'piwik_id',))),
+        (u'HTTP', dict(fields=('hostname', ('cname', 'redirect_cname'), 'custom_return_url',
+                               'custom_return_url_text', 'piwik_id',))),
         (u'Style and content',
             dict(fields=('all_maps', 'custom_css', 'custom_logo',
                          'custom_favicon', 'show_keyword_logos',))),
@@ -1467,8 +1512,20 @@ class IndicatorPeriodDataCommentInline(admin.TabularInline):
 
 class IndicatorPeriodDataAdmin(admin.ModelAdmin):
     model = get_model('rsr', 'IndicatorPeriodData')
-    list_display = ('period', 'user', 'data', 'relative_data', 'status')
+    list_display = ('period', 'user', 'value', 'status')
     readonly_fields = ('created_at', 'last_modified_at')
     inlines = (IndicatorPeriodDataCommentInline, )
 
 admin.site.register(get_model('rsr', 'IndicatorPeriodData'), IndicatorPeriodDataAdmin)
+
+
+class ReportAdmin(admin.ModelAdmin):
+    model = get_model('rsr', 'Report')
+
+admin.site.register(get_model('rsr', 'Report'), ReportAdmin)
+
+
+class ReportFormatAdmin(admin.ModelAdmin):
+    model = get_model('rsr', 'ReportFormat')
+
+admin.site.register(get_model('rsr', 'Reportformat'), ReportFormatAdmin)

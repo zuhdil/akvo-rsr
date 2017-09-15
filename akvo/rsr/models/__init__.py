@@ -18,7 +18,7 @@ from ..signals import (
     change_name_of_file_on_change, change_name_of_file_on_create,
     create_publishing_status, create_organisation_account,
     act_on_log_entry, employment_post_save, employment_pre_save,
-    update_project_budget, update_project_funding
+    update_project_budget, update_project_funding, update_project_editor_validation_cache
 )
 
 from .benchmark import Benchmark, Benchmarkname
@@ -39,10 +39,13 @@ from .iati_export import IatiExport
 from .iati_import import IatiImport
 from .iati_import_job import IatiImportJob, CordaidZipIatiImportJob
 from .iati_import_log import IatiImportLog
-from .indicator import (Indicator, IndicatorPeriod, IndicatorPeriodData,
+from .indicator import (Disaggregation, Indicator, IndicatorDimension,
+                        IndicatorLabel, IndicatorPeriod, IndicatorPeriodData,
                         IndicatorPeriodDataComment, IndicatorReference,
-                        IndicatorPeriodActualDimension, IndicatorPeriodTargetDimension,
-                        IndicatorPeriodActualLocation, IndicatorPeriodTargetLocation)
+                        IndicatorPeriodActualDimension,
+                        IndicatorPeriodTargetDimension,
+                        IndicatorPeriodActualLocation,
+                        IndicatorPeriodTargetLocation)
 from .internal_organisation_id import InternalOrganisationID
 from .keyword import Keyword
 from .legacy_data import LegacyData
@@ -50,6 +53,7 @@ from .link import Link
 from .location import (OrganisationLocation, ProjectLocation, ProjectUpdateLocation,
                        AdministrativeLocation)
 from .organisation import Organisation
+from .organisation_indicator_label import OrganisationIndicatorLabel
 from .organisation_account import OrganisationAccount
 from .organisation_budget import (OrganisationCountryBudget, OrganisationRegionBudget,
                                   OrganisationRecipientOrgBudget, OrganisationTotalBudget,
@@ -72,6 +76,7 @@ from .project_update import ProjectUpdate
 from .publishing_status import PublishingStatus
 from .region import RecipientRegion
 from .related_project import RelatedProject
+from .report import Report, ReportFormat
 from .result import Result
 from .sector import Sector
 from .transaction import Transaction, TransactionSector
@@ -104,10 +109,13 @@ __all__ = [
     'CordaidZipIatiImportJob',
     'IatiImportLog',
     'Indicator',
+    'IndicatorDimension',
+    'IndicatorLabel',
     'IndicatorPeriod',
     'IndicatorPeriodActualDimension',
     'IndicatorPeriodActualLocation',
     'IndicatorPeriodData',
+    'Disaggregation',
     'IndicatorPeriodDataComment',
     'IndicatorPeriodTargetDimension',
     'IndicatorPeriodTargetLocation',
@@ -127,6 +135,7 @@ __all__ = [
     'OrganisationDocumentCategory',
     'OrganisationDocumentCountry',
     'OrganisationExpenseLine',
+    'OrganisationIndicatorLabel',
     'OrganisationLocation',
     'OrganisationRecipientOrgBudget',
     'OrganisationRecipientOrgBudgetLine',
@@ -152,6 +161,8 @@ __all__ = [
     'PublishingStatus',
     'RecipientRegion',
     'RelatedProject',
+    'Report',
+    'ReportFormat',
     'Result',
     'Sector',
     'Transaction',
@@ -185,6 +196,10 @@ rules.add_perm('rsr.add_indicator', is_rsr_admin | is_org_admin | is_org_project
 rules.add_perm('rsr.change_indicator', is_rsr_admin | is_org_admin | is_org_project_editor)
 rules.add_perm('rsr.delete_indicator', is_rsr_admin | is_org_admin | is_org_project_editor)
 
+rules.add_perm('rsr.add_indicatordimension', is_rsr_admin | is_org_admin | is_org_project_editor)
+rules.add_perm('rsr.change_indicatordimension', is_rsr_admin | is_org_admin | is_org_project_editor)
+rules.add_perm('rsr.delete_indicatordimension', is_rsr_admin | is_org_admin | is_org_project_editor)
+
 rules.add_perm('rsr.add_indicatorperiod', is_rsr_admin | is_org_admin | is_org_project_editor)
 rules.add_perm('rsr.change_indicatorperiod', is_rsr_admin | is_org_admin | is_org_project_editor)
 rules.add_perm('rsr.delete_indicatorperiod', is_rsr_admin | is_org_admin | is_org_project_editor)
@@ -192,6 +207,10 @@ rules.add_perm('rsr.delete_indicatorperiod', is_rsr_admin | is_org_admin | is_or
 rules.add_perm('rsr.add_indicatorperioddata', is_rsr_admin | is_org_admin | is_org_project_editor)
 rules.add_perm('rsr.change_indicatorperioddata', is_rsr_admin | is_org_admin | is_org_project_editor)
 rules.add_perm('rsr.delete_indicatorperioddata', is_rsr_admin | is_org_admin | is_org_project_editor)
+
+rules.add_perm('rsr.add_disaggregation', is_rsr_admin | is_org_admin | is_org_project_editor)
+rules.add_perm('rsr.change_disaggregation', is_rsr_admin | is_org_admin | is_org_project_editor)
+rules.add_perm('rsr.delete_disaggregation', is_rsr_admin | is_org_admin | is_org_project_editor)
 
 rules.add_perm('rsr.add_indicatorperioddatacomment', is_rsr_admin | is_org_admin | is_org_project_editor)
 rules.add_perm('rsr.change_indicatorperioddatacomment', is_rsr_admin | is_org_admin | is_org_project_editor)
@@ -427,3 +446,5 @@ post_delete.connect(update_project_budget, sender=BudgetItem)
 post_delete.connect(update_project_funding, sender=Partnership)
 
 post_save.connect(create_api_key, sender=User)
+
+post_save.connect(update_project_editor_validation_cache, sender=ProjectEditorValidation)

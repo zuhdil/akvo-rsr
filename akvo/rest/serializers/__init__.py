@@ -15,6 +15,7 @@ from .category import CategorySerializer
 from .country import CountrySerializer
 from .crs_add import CrsAddSerializer, CrsAddOtherFlagSerializer
 from .custom_field import OrganisationCustomFieldSerializer, ProjectCustomFieldSerializer
+from .disaggregation import DisaggregationSerializer
 from .employment import EmploymentSerializer
 from .focus_area import FocusAreaSerializer
 from .fss import FssSerializer, FssForecastSerializer
@@ -23,6 +24,7 @@ from .humanitarian_scope import HumanitarianScopeSerializer
 from .iati_check import IatiCheckSerializer
 from .iati_export import IatiActivityExportSerializer, IatiExportSerializer
 from .indicator import (IndicatorSerializer, IndicatorFrameworkSerializer)
+from .indicator_label import IndicatorLabelSerializer
 from .indicator_period import IndicatorPeriodSerializer, IndicatorPeriodFrameworkSerializer
 from .indicator_period_data import (IndicatorPeriodDataSerializer,
                                     IndicatorPeriodDataFrameworkSerializer,
@@ -31,6 +33,7 @@ from .indicator_period_dimension import (IndicatorPeriodActualDimensionSerialize
                                          IndicatorPeriodTargetDimensionSerializer)
 from .indicator_period_location import (IndicatorPeriodActualLocationSerializer,
                                         IndicatorPeriodTargetLocationSerializer)
+from .indicator_dimension import IndicatorDimensionSerializer
 from .indicator_reference import IndicatorReferenceSerializer
 from .internal_organisation_id import InternalOrganisationIDSerializer
 from .keyword import KeywordSerializer
@@ -81,6 +84,7 @@ from .project_update_location import (ProjectUpdateLocationSerializer,
 from .publishing_status import PublishingStatusSerializer
 from .recipient_country import RecipientCountrySerializer, RecipientCountryRawSerializer
 from .region import RecipientRegionSerializer, RecipientRegionRawSerializer
+from .report import ReportSerializer, ReportFormatSerializer
 from .related_project import RelatedProjectSerializer, RelatedProjectRawSerializer
 from .result import ResultSerializer, ResultsFrameworkSerializer, ResultRawSerializer
 from .sector import SectorSerializer, SectorRawSerializer
@@ -89,7 +93,9 @@ from .transaction import (TransactionSerializer, TransactionSectorSerializer,
 from .typeahead import (TypeaheadCountrySerializer,
                         TypeaheadOrganisationSerializer,
                         TypeaheadProjectSerializer,
-                        TypeaheadProjectUpdateSerializer)
+                        TypeaheadProjectUpdateSerializer,
+                        TypeaheadKeywordSerializer,
+                        TypeaheadSectorSerializer)
 from .user import UserSerializer, UserDetailsSerializer, UserPasswordSerializer, UserRawSerializer
 
 __all__ = [
@@ -104,6 +110,7 @@ __all__ = [
     'CountryBudgetItemSerializer',
     'CrsAddSerializer',
     'CrsAddOtherFlagSerializer',
+    'DisaggregationSerializer',
     'EmploymentSerializer',
     'FocusAreaSerializer',
     'FssSerializer',
@@ -114,7 +121,9 @@ __all__ = [
     'IatiCheckSerializer',
     'IatiExportSerializer',
     'IndicatorSerializer',
+    'IndicatorDimensionSerializer',
     'IndicatorFrameworkSerializer',
+    'IndicatorLabelSerializer',
     'IndicatorPeriodActualDimensionSerializer',
     'IndicatorPeriodActualLocationSerializer',
     'IndicatorPeriodDataCommentSerializer',
@@ -188,6 +197,8 @@ __all__ = [
     'RecipientRegionRawSerializer',
     'RelatedProjectSerializer',
     'RelatedProjectRawSerializer',
+    'ReportSerializer',
+    'ReportFormatSerializer',
     'ResultSerializer',
     'ResultRawSerializer',
     'ResultsFrameworkSerializer',
@@ -198,9 +209,11 @@ __all__ = [
     'TransactionSectorSerializer',
     'TransactionRawDeepSerializer',
     'TypeaheadCountrySerializer',
+    'TypeaheadKeywordSerializer',
     'TypeaheadOrganisationSerializer',
     'TypeaheadProjectSerializer',
     'TypeaheadProjectUpdateSerializer',
+    'TypeaheadSectorSerializer',
     'UserDetailsSerializer',
     'UserPasswordSerializer',
     'UserSerializer',

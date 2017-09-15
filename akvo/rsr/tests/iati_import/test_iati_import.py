@@ -6,6 +6,7 @@ Akvo RSR is covered by the GNU Affero General Public License.
 See more details in the license.txt file located at the root folder of the Akvo RSR module.
 For additional details on the GNU license please see < http://www.gnu.org/licenses/agpl.html >.
 """
+from datetime import datetime
 
 from akvo.rsr.models import IatiImport, IatiImportJob, Organisation, Project, User, BudgetItemLabel
 from akvo.codelists.models import BudgetIdentifier, Currency, ResultType, Version
@@ -83,17 +84,21 @@ class IatiImportTestCase(TestCase):
         self.assertEqual(project_v1.language, "en")
         self.assertEqual(project_v1.currency, "USD")
         self.assertEqual(project_v1.title, "Test project for IATI import v1")
+        self.assertEqual(project_v1.date_start_planned, datetime(2012, 04, 15).date())
+        self.assertEqual(project_v1.date_start_actual, datetime(2012, 04, 28).date())
+        self.assertEqual(project_v1.date_end_planned, datetime(2015, 12, 31).date())
+        self.assertEqual(project_v1.date_end_actual, datetime(2015, 12, 31).date())
         self.assertEqual(project_v1.partners.count(), 4)
+        self.assertEqual(project_v1.transactions.count(), 2)
+        self.assertEqual(project_v1.transactions.count(), 2)
+        self.assertEqual(project_v1.reporting_org.iati_org_id, "NL-KVK-0987654321")
 
-        self.assertEqual(project_v1.transactions.count(), 2)
-        self.assertEqual(project_v1.transactions.count(), 2)
         self.assertEqual(transaction_1.reference, '1234')
         self.assertEqual(transaction_1.currency, 'EUR')
         self.assertEqual(transaction_1.iati_currency(), u'Euro')
         self.assertEqual(transaction_2.reference, '4321')
         self.assertEqual(transaction_2.currency, 'USD')
         self.assertEqual(transaction_2.iati_currency(), u'US Dollar')
-        self.assertEqual(project_v1.reporting_org.iati_org_id, "NL-KVK-0987654321")
 
     def test_iati_v2_import(self):
         """
@@ -113,6 +118,10 @@ class IatiImportTestCase(TestCase):
         self.assertEqual(project_v2.currency, "USD")
         self.assertEqual(project_v2.hierarchy, 1)
         self.assertEqual(project_v2.title, "Test project for IATI import v2")
+        self.assertEqual(project_v2.date_start_planned, datetime(2012, 04, 15).date())
+        self.assertEqual(project_v2.date_start_actual, datetime(2012, 04, 28).date())
+        self.assertEqual(project_v2.date_end_planned, datetime(2015, 12, 31).date())
+        self.assertEqual(project_v2.date_end_actual, datetime(2015, 12, 31).date())
         self.assertEqual(project_v2.partners.count(), 4)
         self.assertEqual(project_v2.transactions.count(), 1)
         self.assertEqual(project_v2.reporting_org.iati_org_id, "NL-KVK-0987654321")
@@ -253,7 +262,7 @@ class IatiImportTestCase(TestCase):
         legacy-data, location, participating-org, planned-disbursement, policy-marker,
         recipient-country, recipient-region, related-activity, result, sector and transaction
         """
-        #import a project
+        # import a project
         iati_v2_import = IatiImport.objects.create(label="Test IATI v2 import", user=self.user)
         iati_v2_xml_file = NamedTemporaryFile(delete=True)
         iati_v2_xml_file.write(IATI_V2_STRING)
@@ -283,7 +292,7 @@ class IatiImportTestCase(TestCase):
         partial_import_xml_file.write(IATI_PARTIAL_IMPORT)
         partial_import_xml_file.flush()
         partial_import_job = IatiImportJob.objects.create(
-                iati_import=partial_import, iati_xml_file=File(partial_import_xml_file))
+            iati_import=partial_import, iati_xml_file=File(partial_import_xml_file))
         partial_import_job.run()
 
         project_partial_import = Project.objects.get(iati_activity_id="NL-KVK-0987654321-v2")
@@ -310,7 +319,7 @@ class IatiImportTestCase(TestCase):
         humanitarian_scope_1 = project_v2.humanitarian_scopes.get(vocabulary="1-2")
         humanitarian_scope_2 = project_v2.humanitarian_scopes.get(vocabulary="99")
         self.assertEqual(humanitarian_scope_1.code, "2015-000050")
-        self.assertEqual(humanitarian_scope_2.vocabulary_uri,"http://example.com/vocab.html")
+        self.assertEqual(humanitarian_scope_2.vocabulary_uri, "http://example.com/vocab.html")
 
         # three participating orgs, and one reporting org
         self.assertEqual(project_v2.partners.count(), 4)
@@ -320,7 +329,7 @@ class IatiImportTestCase(TestCase):
         self.assertEqual(project_v2.recipient_regions.count(), 3)
 
         related_project_1 = project_v2.related_projects.get(
-                related_iati_id="AA-AAA-123456789-6789")
+            related_iati_id="AA-AAA-123456789-6789")
         self.assertIsInstance(related_project_1, RelatedProject)
         self.assertEqual(project_v2.sectors.count(), 3)
         self.assertEqual(project_v2.transactions.count(), 1)
