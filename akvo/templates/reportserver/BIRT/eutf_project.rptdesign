@@ -13499,7 +13499,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                             <property name="paddingRight">3pt</property>
                             <list-property name="mapRules">
                                 <structure>
-                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <expression name="testExpr" type="javascript">row["type"]</expression>
                                     <property name="operator">eq</property>
                                     <simple-property-list name="value1">
                                         <value type="javascript">1</value>
@@ -13507,7 +13507,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                                     <text-property name="display">Output</text-property>
                                 </structure>
                                 <structure>
-                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <expression name="testExpr" type="javascript">row["type"]</expression>
                                     <property name="operator">eq</property>
                                     <simple-property-list name="value1">
                                         <value type="javascript">2</value>
@@ -13515,7 +13515,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                                     <text-property name="display">Outcome</text-property>
                                 </structure>
                                 <structure>
-                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <expression name="testExpr" type="javascript">row["type"]</expression>
                                     <property name="operator">eq</property>
                                     <simple-property-list name="value1">
                                         <value type="javascript">3</value>
