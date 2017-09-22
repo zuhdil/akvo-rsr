@@ -13135,15 +13135,6 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">actual_comment</property>
-                    <text-property name="displayName">target value</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["measure"] ==1
-? dataSetRow["actual_value"] 
-: dataSetRow["actual_value"] * 100 + '%'</expression>
-                    <property name="dataType">decimal</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
                     <property name="name">period_start</property>
                     <text-property name="displayName">period_start</text-property>
                     <expression name="expression" type="javascript">dataSetRow["period_start"]</expression>
@@ -13173,15 +13164,16 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                 <structure>
                     <property name="name">actual_value_number</property>
                     <text-property name="displayName">actual_value_number</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["actual_value"] &amp;&amp; !isNaN(dataSetRow["actual_value"]) ? dataSetRow["actual_value"] : -1</expression>
+                    <expression name="expression" type="javascript">(dataSetRow["actual_value"] != null &amp;&amp; !isNaN(dataSetRow["actual_value"])) ? dataSetRow["actual_value"] : null</expression>
                     <property name="dataType">decimal</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">targeted_value_number</property>
-                    <text-property name="displayName">targeted_value_number</text-property>
-                    <expression name="expression" type="javascript">(dataSetRow["target_value"] &amp;&amp; !isNaN(dataSetRow["target_value"])) 
-? dataSetRow["target_value"] : 0</expression>
+                    <property name="name">target_value_number</property>
+                    <text-property name="displayName">target_value_number</text-property>
+                    <expression name="expression" type="javascript">(dataSetRow["target_value"] &amp;&amp; !isNaN(dataSetRow["target_value"])) &#13;
+? dataSetRow["target_value"]&#13;
+: null</expression>
                     <property name="dataType">decimal</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -13251,7 +13243,11 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
                         <label id="1533">
-                            <property name="textAlign">right</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">left</property>
                             <text-property name="text">Type</text-property>
                         </label>
                     </cell>
@@ -13640,10 +13636,10 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                             <list-property name="visibility">
                                 <structure>
                                     <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">row["measure"]==2</expression>
+                                    <expression name="valueExpr" type="javascript">row["target_value"] == null || row["measure"]==2</expression>
                                 </structure>
                             </list-property>
-                            <property name="resultSetColumn">targeted_value_number</property>
+                            <property name="resultSetColumn">target_value_number</property>
                         </data>
                         <text-data id="1535">
                             <property name="color">black</property>
@@ -13657,7 +13653,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                             <list-property name="visibility">
                                 <structure>
                                     <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">row["measure"] != 2</expression>
+                                    <expression name="valueExpr" type="javascript">row["measure"] != 2 || row["target_value_number"] == null</expression>
                                 </structure>
                             </list-property>
                             <expression name="valueExpr">(row["target_value"] &amp;&amp; ! isNaN(row["target_value"]))
@@ -13675,6 +13671,50 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                         <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">thin</property>
+                        <data id="1540">
+                            <property name="color">black</property>
+                            <property name="textLineThrough">none</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                <property name="locale">en</property>
+                            </structure>
+                            <structure name="stringFormat">
+                                <property name="category">Custom</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["measure"]==2 || row["actual_value_number"] == null</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">actual_value_number</property>
+                        </data>
+                        <text-data id="1541">
+                            <property name="color">black</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="whiteSpace">nowrap</property>
+                            <property name="display">block</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["measure"] != 2 || row[actual_value_number] == null</expression>
+                                </structure>
+                            </list-property>
+                            <expression name="valueExpr">(row["actual_value"] &amp;&amp; ! isNaN(row["actual_value"]))
+? row["actual_value"] +"%"
+:""</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
                     </cell>
                     <cell id="1519">
                         <property name="borderBottomStyle">solid</property>
@@ -13690,16 +13730,7 @@ and rsr_partnership.funding_amount IS NOT NULL ]]></xml-property>
                             <property name="paddingLeft">3pt</property>
                             <property name="paddingBottom">3pt</property>
                             <property name="paddingRight">3pt</property>
-                            <property name="dataSet">Results_indicators_periods</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">actual_comment</property>
-                                    <text-property name="displayName">actual_comment</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["actual_comment"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                            </list-property>
-                            <property name="resultSetColumn">actual_comment</property>
+                            <property name="resultSetColumn">actual_comment_1</property>
                         </data>
                     </cell>
                 </row>
