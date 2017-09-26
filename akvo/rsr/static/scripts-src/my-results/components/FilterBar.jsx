@@ -51,6 +51,10 @@ const InteractiveLabel = ({label, selector}) => {
     ({value, icon} = fieldValueOrSpinner(selector, 'length'));
     return <ButtonLabel label={label} value={value} icon={icon}/>;
 };
+InteractiveLabel.propTypes = {
+    label: PropTypes.string,
+    selector: PropTypes.array,
+};
 
 
 const PeriodLockingButtons = ({user, disabled}) => {
@@ -67,6 +71,11 @@ const PeriodLockingButtons = ({user, disabled}) => {
         <div className="col-xs-6">
         </div>;
 };
+PeriodLockingButtons.propTypes = {
+    user: PropTypes.object.isRequired,
+    disabled: PropTypes.bool,
+};
+
 
 @connect((store) => {
     return {

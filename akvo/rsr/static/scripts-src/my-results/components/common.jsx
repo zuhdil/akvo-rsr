@@ -37,7 +37,7 @@ export const ButtonLabel = ({label, value, icon}) => {
     </span>
 };
 ButtonLabel.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     value: PropTypes.number,
     icon: PropTypes.object,
 };
