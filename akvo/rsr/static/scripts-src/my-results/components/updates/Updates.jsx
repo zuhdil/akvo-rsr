@@ -81,7 +81,7 @@ const UpdateValue =({update}) => {
     const {value, actual_value} = update;
     return (
         <ul className="valueMeta">
-            <li className="updateValue">Update value: <span>{value}</span></li>
+            <li className="updateValue">{_('update_value')}: <span>{value}</span></li>
         </ul>
     )
 };
@@ -93,7 +93,7 @@ UpdateValue.propTypes = {
 const UpdateStatus =({update}) => {
     return (
         <ul>
-            <li className="statusMeta">Status:
+            <li className="statusMeta">{_('status')}:
                 <span> {_('update_statuses')[update.status]}</span>
             </li>
         </ul>
@@ -138,7 +138,7 @@ const ShowDisaggregations = ({dimensions, disaggregations, isQualitative}) => {
 const QuantitativeUpdateBody = ({update, dimensions, disaggregations}) => {
     const {user_details, approver_details} = update;
     const approvedBy = approver_details ?
-        <TimestampInfo update={update} user={approver_details} label="Approved on " />
+        <TimestampInfo update={update} user={approver_details} label={_('approved_on')} />
     :
         undefined;
     return (
@@ -146,7 +146,7 @@ const QuantitativeUpdateBody = ({update, dimensions, disaggregations}) => {
             <UpdateValue update={update} />
             <ShowDisaggregations dimensions={dimensions} disaggregations={disaggregations}/>
             <div className="timestamp-info-container">
-                <TimestampInfo update={update} user={user_details} label="Created on " />
+                <TimestampInfo update={update} user={user_details} label={_('created_on')} />
                 {approvedBy}
             </div>
             <UpdateStatus update={update} />
@@ -161,8 +161,8 @@ QuantitativeUpdateBody.propTypes = {
 const UpdateNarrative =({period, update}) => {
     return (
         <ul className="valueMeta">
-            <li className="updateValue">Target: <span>{period.target_value}</span></li>
-            <li className="updateValue">Actual: <span>{update.narrative}</span></li>
+            <li className="updateValue">{_('target')}: <span>{period.target_value}</span></li>
+            <li className="updateValue">{_('actual')}: <span>{update.narrative}</span></li>
         </ul>
     )
 };
@@ -174,14 +174,14 @@ UpdateValue.propTypes = {
 const QualitativeUpdateBody = ({period, update, dimensions, disaggregations}) => {
     const {user_details, approver_details} = update;
     const approvedBy = approver_details ?
-                       <TimestampInfo update={update} user={approver_details} label="Approved on " />
+                       <TimestampInfo update={update} user={approver_details} label={_('approved_on')} />
 :
                        undefined;
     return (
         <div className="UpdateBody">
             <UpdateNarrative period={period} update={update} />
             <ShowDisaggregations dimensions={dimensions} disaggregations={disaggregations} isQualitative={true}/>
-            <TimestampInfo update={update} user={user_details} label="Created on " />
+            <TimestampInfo update={update} user={user_details} label={_('created_on')} />
             {approvedBy}
             <UpdateStatus update={update} />
         </div>
@@ -195,13 +195,13 @@ QualitativeUpdateBody.propTypes = {
 
 const UserInfo = ({user_details}) => {
     const organisation = user_details.approved_organisations.length ?
-                         user_details.approved_organisations[0].name
-:
-                         null;
+        user_details.approved_organisations[0].name
+    :
+        null;
     const userName = user_details.first_name +" "+ user_details.last_name;
 
     return (
-        <span><span>{userName}</span> {organisation ? " at " + organisation: ''}</span>
+        <span><span>{userName}</span> {organisation ? ", " + organisation : ''}</span>
     )
 };
 UserInfo.propTypes = {
@@ -493,7 +493,7 @@ export default class Updates extends React.Component {
                     null
                 :
                     <div className="emptyData">
-                        <p>No updates</p>
+                        <p>{_('no_updates')}</p>
                     </div>
             );
         }

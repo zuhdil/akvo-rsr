@@ -149,7 +149,7 @@ export default class Results extends React.Component {
 
         if (!results.fetched) {
             return (
-                <p className="loading">Loading <i className="fa fa-spin fa-spinner" /></p>
+                <p className="loading">{_('loading')} <i className="fa fa-spin fa-spinner" /></p>
             );
         } else if (resultIds.length > 0) {
             return (
@@ -165,7 +165,7 @@ export default class Results extends React.Component {
         } else {
             return (
                 <div className="emptyData">
-                     <p>No results</p>
+                     <p>{_('no_results')}</p>
                 </div>
             );
         }

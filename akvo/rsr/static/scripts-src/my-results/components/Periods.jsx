@@ -69,12 +69,12 @@ PeriodSelect.propTypes = {
 
 
 const PeriodHeader = ({period, actualValue, user, toggleCheckbox, isChecked, isQualitative,
-                       newUpdateButton, delUpdateAlert, formOpen, showLockButton}) => {
+                       newUpdateButton, delUpdateAlert, formOpen, showPeriodSelect}) => {
                            const periodStart = displayDate(period.period_start);
                            const periodEnd = displayDate(period.period_end);
                            const periodDate = `${periodStart} - ${periodEnd}`;
                            let periodSelect;
-                           if (user.isMEManager && showLockButton) {
+                           if (user.isMEManager && showPeriodSelect) {
                                periodSelect = <PeriodSelect id={period.id}
                                                             toggleCheckbox={toggleCheckbox}
                                                             isChecked={isChecked}/>;
@@ -228,7 +228,7 @@ export default class Periods extends React.Component {
 
                 let className = this.hideMe(id) ? 'hidePanel' : '';
                 className += isChecked ? ' periodSelected' : needsReporting ? ' needsReporting' : '';
-                const showLockButton = this.props.ui.activeFilter !== c.FILTER_NEED_REPORTING &&
+                const showPeriodSelect = this.props.ui.activeFilter !== c.FILTER_NEED_REPORTING &&
                                        this.props.ui.activeFilter !== c.FILTER_SHOW_PENDING;
                 return (
                     <Panel header={
@@ -241,7 +241,7 @@ export default class Periods extends React.Component {
                                       newUpdateButton={newUpdateButton}
                                       delUpdateAlert={delUpdateAlert}
                                       formOpen={formOpen}
-                                      showLockButton={showLockButton}/>}
+                                      showPeriodSelect={showPeriodSelect}/>}
                            key={id}
                            showArrow={!page.mode.public}
                            disabled={page.mode.public}

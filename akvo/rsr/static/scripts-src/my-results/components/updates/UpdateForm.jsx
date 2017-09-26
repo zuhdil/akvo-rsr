@@ -524,7 +524,7 @@ const DisaggregatedInputs = ({measure, dimensions, disaggregations, onChange}) =
                   </div>
               );
           }),
-          headline = dimensions.length > 0 ?  (<h4>Disaggregations</h4>): undefined;
+          headline = dimensions.length > 0 ?  (<h4>{_('disaggregations')}</h4>): undefined;
           return  (
               <div className="disaggregationFields">
                   {headline}
@@ -557,8 +557,7 @@ const DisaggregatedValueInput = ({dimension, disaggregation, measure, onChange})
         case c.MEASURE_PERCENTAGE: {
             const numerator = (
                 <div>
-                    {/* FIXME: Use translated strings*/}
-                    <label htmlFor="actualValueNumerator">Numerator</label>
+                    <label htmlFor="actualValueNumerator">{_('numerator')}</label>
                     <input className="form-control"
                            value={disaggregation.numerator}
                            onChange={onChange}
@@ -568,8 +567,7 @@ const DisaggregatedValueInput = ({dimension, disaggregation, measure, onChange})
                 </div>),
                   denominator = (
                       <div>
-                          {/* FIXME: Use translated strings*/}
-                          <label htmlFor="actualValueDenominator">Denominator</label>
+                          <label htmlFor="actualValueDenominator">{_('denominator')}</label>
                           <input className="form-control"
                                  value={disaggregation.denominator}
                                  onChange={onChange}
