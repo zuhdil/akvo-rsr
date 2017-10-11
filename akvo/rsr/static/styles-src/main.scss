@@ -4730,11 +4730,17 @@ main.results-page {
                                             .statusMeta {
                                                 display: none;
                                             }
-
-                                            .updateValue {
+                                            
+                                            .updateValue, .updateValueComment {
                                                 span {
                                                     width: calc(100% - 40px);
-                                                    display: inline;
+                                                    display: block;
+                                                    padding-right: 20px;
+                                                }
+                                                &:first-child {
+                                                    span{
+                                                        display: inline;
+                                                    }
                                                 }
                                             }
 
@@ -5219,6 +5225,8 @@ main.results-page {
         }
 
         .comment {
+            width: calc(100% - 60px) !important;
+            display: block;
             color: $akvoBlack;
 
             .comment-header {
