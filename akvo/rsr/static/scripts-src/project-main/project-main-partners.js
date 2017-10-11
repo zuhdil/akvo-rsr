@@ -34,7 +34,7 @@ function getCookie(name) {
 csrftoken = getCookie('csrftoken');
 
 function renderPartnersTab() {
-    var PartnersApp = React.createClass({displayName: "PartnersApp",
+    var PartnersApp = React.createClass({displayName: 'PartnersApp',
         getInitialState: function() {
             return {
                 partnerships: null
@@ -80,11 +80,11 @@ function renderPartnersTab() {
 
             if (logoUrl !== '') {
                 return (
-                    React.createElement("img", {src: logoUrl, style: logoStyle})
+                    React.DOM.img( {src:logoUrl, style:logoStyle} )
                 );
             } else {
                 return (
-                    React.createElement("img", {src: '/static/images/default-org-logo.jpg', style: logoStyle})
+                    React.DOM.img( {src:'/static/images/default-org-logo.jpg', style:logoStyle} )
                 );
             }
         },
@@ -136,8 +136,8 @@ function renderPartnersTab() {
         render: function() {
             if (this.state.partnerships === null) {
                 return (
-                    React.createElement("div", null, 
-                        React.createElement("i", {className: "fa fa-spin fa-spinner"}), " ", i18nPartners.loading, " ", i18nPartners.partners, "..."
+                    React.DOM.div(null, 
+                        React.DOM.i( {className:"fa fa-spin fa-spinner"} ), " ", i18nPartners.loading, " ", i18nPartners.partners,"..."
                     )
                 );
             } else {
@@ -161,27 +161,27 @@ function renderPartnersTab() {
                     var id = partner[0].organisation.id;
 
                     return (
-                        React.createElement("div", {className: "row verticalPadding projectPartners", key: id}, 
-                            React.createElement("div", {className: "col-sm-2 img"}, 
-                                React.createElement("a", {href: '/organisation/' + id + '/'}, 
+                        React.DOM.div( {className:"row verticalPadding projectPartners", key:id}, 
+                            React.DOM.div( {className:"col-sm-2 img"}, 
+                                React.DOM.a( {href:'/organisation/' + id + '/'}, 
                                     thisApp.orgLogo(partner[0].organisation.logo, 120, 120)
                                 )
-                            ), 
-                            React.createElement("div", {className: "col-sm-6"}, 
-                                React.createElement("a", {href: '/organisation/' + id + '/', className: "org-link"}, 
-                                    React.createElement("i", {className: "fa fa-users"}), " ", React.createElement("h2", null, thisApp.partnerName(partner))
+                            ),
+                            React.DOM.div( {className:"col-sm-6"}, 
+                                React.DOM.a( {href:'/organisation/' + id + '/', className:"org-link"}, 
+                                    React.DOM.i( {className:"fa fa-users"} ), " ", React.DOM.h2(null, thisApp.partnerName(partner))
                                 )
-                            ), 
-                            React.createElement("div", {className: "col-sm-4"}, 
-                                React.createElement("h4", {className: "detailedInfo"}, i18nPartners.roles), 
-                                React.createElement("div", null, roles.join(', '))
+                            ),
+                            React.DOM.div( {className:"col-sm-4"}, 
+                                React.DOM.h4( {className:"detailedInfo"}, i18nPartners.roles),
+                                React.DOM.div(null, roles.join(', '))
                             )
                         )
                     );
                 });
 
                 return (
-                    React.createElement("div", null, 
+                    React.DOM.div(null, 
                         organisations
                     )
                 );

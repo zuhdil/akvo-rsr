@@ -16,22 +16,22 @@ var trim_label = function(obj) {
     return obj;
 };
 
-var Filter = React.createClass({displayName: "Filter",
+var Filter = React.createClass({displayName: 'Filter',
     render: function(){
         var Typeahead = ReactBootstrapTypeahead.Typeahead;
         return (
-            React.createElement("div", null, 
-                React.createElement("label", null, this.props.display_name), 
-                React.createElement(Typeahead, {
-                    ref: "typeahead", 
-                    name: this.props.name, 
-                    selected: this.props.selected, 
-                    options: this.props.options, 
-                    onChange: this.onChange, 
-                    filterBy: ['filterBy'], 
-                    label: "label", 
-                    clearButton: true, 
-                    disabled: this.props.disabled}
+            React.DOM.div(null, 
+                React.DOM.label(null, this.props.display_name),
+                Typeahead(
+                    {ref:"typeahead",
+                    name:this.props.name,
+                    selected:this.props.selected,
+                    options:this.props.options,
+                    onChange:this.onChange,
+                    filterBy:['filterBy'],
+                    label:"label",
+                    clearButton:true,
+                    disabled:this.props.disabled}
                 )
             )
         );
@@ -42,7 +42,7 @@ var Filter = React.createClass({displayName: "Filter",
     }
 });
 
-var FilterForm = React.createClass({displayName: "FilterForm",
+var FilterForm = React.createClass({displayName: 'FilterForm',
     /* React class methods */
     getInitialState: function(){
         var options = {
@@ -70,43 +70,43 @@ var FilterForm = React.createClass({displayName: "FilterForm",
     render: function(){
         var create_filter = function(filter_name){
             return (
-                React.createElement(Filter, {
-                    ref: filter_name, 
-                    key: filter_name, 
-                    options: this.state.options[filter_name], 
-                    name: filter_name, 
-                    display_name: this.props.i18n[filter_name+'_text'], 
-                    selected: this.state.initial_selection[filter_name]||[], 
-                    onChange: this.onChange, 
-                    disabled: this.state.disabled}
+                Filter(
+                    {ref:filter_name,
+                    key:filter_name,
+                    options:this.state.options[filter_name],
+                    name:filter_name,
+                    display_name:this.props.i18n[filter_name+'_text'],
+                    selected:this.state.initial_selection[filter_name]||[],
+                    onChange:this.onChange,
+                    disabled:this.state.disabled}
                 )
             );
         };
-        var project_count = this.state.disabled?(React.createElement("a", null, this.props.i18n.loading_text)):(
-            React.createElement("p", null, this.props.i18n.search_text + ' ' + this.state.project_count + ' ' + this.props.i18n.projects_text
+        var project_count = this.state.disabled?(React.DOM.a(null, this.props.i18n.loading_text)):(
+            React.DOM.p(null, this.props.i18n.search_text + ' ' + this.state.project_count + ' ' + this.props.i18n.projects_text
             )
         );
         return (
-            React.createElement("aside", {id: "sidebar-wrapper"}, 
-                React.createElement("div", {id: "filter"}, 
-                    this.props.filters.map(create_filter, this), 
-                    React.createElement("div", null, 
-                        React.createElement("nav", {id: "advanced-filter-nav"}, 
-                            React.createElement("ul", {className: "nav nav-pills nav-stacked"}, 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {className: "showFilters text-center", 
-                                       id: "apply-filter", 
-                                       onClick: this.submitForm}, 
+            React.DOM.aside( {id:"sidebar-wrapper"}, 
+                React.DOM.div( {id:"filter"}, 
+                    this.props.filters.map(create_filter, this),
+                    React.DOM.div(null, 
+                        React.DOM.nav( {id:"advanced-filter-nav"}, 
+                            React.DOM.ul( {className:"nav nav-pills nav-stacked"}, 
+                                React.DOM.li(null, 
+                                    React.DOM.a( {className:"showFilters text-center",
+                                       id:"apply-filter",
+                                       onClick:this.submitForm}, 
                                         this.props.i18n.apply_filter_text
                                     )
-                                ), 
-                                React.createElement("li", null, 
-                                    React.createElement("a", {className: "showFilters menu-toggle text-center", onClick: this.toggleForm}, 
-                                        React.createElement("i", {className: "fa fa-toggle-off"}), 
-                                        React.createElement("span", null, " ", this.props.i18n.close_this_text)
+                                ),
+                                React.DOM.li(null, 
+                                    React.DOM.a( {className:"showFilters menu-toggle text-center", onClick:this.toggleForm}, 
+                                        React.DOM.i( {className:"fa fa-toggle-off"}),
+                                        React.DOM.span(null,  " ", this.props.i18n.close_this_text)
                                     )
-                                ), 
-                                React.createElement("li", {id: "advanced-filter-status"}, 
+                                ),
+                                React.DOM.li( {id:"advanced-filter-status"}, 
                                     project_count
                                 )
                             )
@@ -271,6 +271,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var url = '/rest/v1/typeaheads/project_filters';
 
     ReactDOM.render(
-        React.createElement(FilterForm, {filters: filters, options_url: url, i18n: i18n}),
+        FilterForm( {filters:filters, options_url:url, i18n:i18n}),
         filtersWrapper);
 });
