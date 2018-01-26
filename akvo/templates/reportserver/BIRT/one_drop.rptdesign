@@ -28,42 +28,6 @@
             <property name="name">rowFetchSize</property>
             <property name="id">224</property>
         </structure>
-        <structure>
-            <property name="name">odaDriverClass</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">odaURL</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">odaUser</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">odaAutoCommit</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">odaIsolationMode</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">odaPassword</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">odaJndiName</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileName</property>
-            <property name="id">212</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileStorePath</property>
-            <property name="id">212</property>
-        </structure>
     </list-property>
     <property name="units">mm</property>
     <method name="initialize"><![CDATA[function akvoProgress(actual, target, baseline)
@@ -4294,205 +4258,15 @@ order by result_order, result_pk, indicator_order, indicator_pk, p.period_start
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Disaggregation" id="2544">
             <property name="nullsOrdering">nulls lowest</property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">title</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">title</text-property>
-                    <text-property name="heading">title</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">result_pk</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">result_pk</text-property>
-                    <text-property name="heading">result_pk</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">result_order</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">result_order</text-property>
-                    <text-property name="heading">result_order</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">indicator_title</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">indicator_title</text-property>
-                    <text-property name="heading">indicator_title</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">indicator_pk</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">indicator_pk</text-property>
-                    <text-property name="heading">indicator_pk</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">baseline_year</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">baseline_year</text-property>
-                    <text-property name="heading">baseline_year</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">baseline_comment</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">baseline_comment</text-property>
-                    <text-property name="heading">baseline_comment</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">baseline_value</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">baseline_value</text-property>
-                    <text-property name="heading">baseline_value</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">measure</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">measure</text-property>
-                    <text-property name="heading">measure</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">indicator_order</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">indicator_order</text-property>
-                    <text-property name="heading">indicator_order</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">indicatorperiod_pk</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">indicatorperiod_pk</text-property>
-                    <text-property name="heading">indicatorperiod_pk</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">actual_value</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">actual_value</text-property>
-                    <text-property name="heading">actual_value</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">actual_comment</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">actual_comment</text-property>
-                    <text-property name="heading">actual_comment</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">target_value</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">target_value</text-property>
-                    <text-property name="heading">target_value</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">target_comment</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">target_comment</text-property>
-                    <text-property name="heading">target_comment</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">period_start</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">period_start</text-property>
-                    <text-property name="heading">period_start</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">period_end</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">period_end</text-property>
-                    <text-property name="heading">period_end</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">period_numerator</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">period_numerator</text-property>
-                    <text-property name="heading">period_numerator</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">period_denominator</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">period_denominator</text-property>
-                    <text-property name="heading">period_denominator</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">summed_value</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">summed_value</text-property>
-                    <text-property name="heading">summed_value</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">summed_denominator</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">summed_denominator</text-property>
-                    <text-property name="heading">summed_denominator</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">summed_numerator</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">summed_numerator</text-property>
-                    <text-property name="heading">summed_numerator</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">disagg_pk</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">disagg_pk</text-property>
-                    <text-property name="heading">disagg_pk</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">dimension_name</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">dimension_name</text-property>
-                    <text-property name="heading">dimension_name</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">dimension_value</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">dimension_value</text-property>
-                    <text-property name="heading">dimension_value</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">value</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">value</text-property>
-                    <text-property name="heading">value</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">numerator</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">numerator</text-property>
-                    <text-property name="heading">numerator</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">denominator</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">denominator</text-property>
-                    <text-property name="heading">denominator</text-property>
-                </structure>
-            </list-property>
+            <list-property name="columnHints"/>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">projid</property>
-                    <property name="paramName">ID</property>
+                    <property name="name">period_id</property>
                     <property name="nativeName"></property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                     <property name="position">1</property>
-                    <expression name="defaultValue" type="javascript">2849</expression>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">StartDate</property>
-                    <property name="paramName">StartDate</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
-                    <property name="position">2</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">EndDate</property>
-                    <property name="paramName">EndDate</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
-                    <property name="position">3</property>
+                    <expression name="defaultValue" type="javascript">0</expression>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -4501,141 +4275,31 @@ order by result_order, result_pk, indicator_order, indicator_pk, p.period_start
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">title</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">result_pk</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">result_order</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">indicator_title</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">indicator_pk</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">baseline_year</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">baseline_comment</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">baseline_value</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">measure</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">indicator_order</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">indicatorperiod_pk</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
-                        <property name="name">actual_value</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">13</property>
-                        <property name="name">actual_comment</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">14</property>
-                        <property name="name">target_value</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">15</property>
-                        <property name="name">target_comment</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">16</property>
-                        <property name="name">period_start</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">17</property>
-                        <property name="name">period_end</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">18</property>
-                        <property name="name">period_numerator</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">19</property>
-                        <property name="name">period_denominator</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">20</property>
-                        <property name="name">summed_value</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">21</property>
-                        <property name="name">summed_denominator</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">22</property>
-                        <property name="name">summed_numerator</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">23</property>
                         <property name="name">disagg_pk</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">24</property>
+                        <property name="position">2</property>
                         <property name="name">dimension_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">25</property>
+                        <property name="position">3</property>
                         <property name="name">dimension_value</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">26</property>
+                        <property name="position">4</property>
                         <property name="name">value</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">27</property>
+                        <property name="position">5</property>
                         <property name="name">numerator</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">28</property>
+                        <property name="position">6</property>
                         <property name="name">denominator</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -4645,238 +4309,53 @@ order by result_order, result_pk, indicator_order, indicator_pk, p.period_start
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">title</property>
-                    <property name="nativeName">title</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">result_pk</property>
-                    <property name="nativeName">result_pk</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">result_order</property>
-                    <property name="nativeName">result_order</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">5</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">indicator_title</property>
-                    <property name="nativeName">indicator_title</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">indicator_pk</property>
-                    <property name="nativeName">indicator_pk</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">baseline_year</property>
-                    <property name="nativeName">baseline_year</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">baseline_comment</property>
-                    <property name="nativeName">baseline_comment</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">baseline_value</property>
-                    <property name="nativeName">baseline_value</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">measure</property>
-                    <property name="nativeName">measure</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">indicator_order</property>
-                    <property name="nativeName">indicator_order</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">5</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
-                    <property name="name">indicatorperiod_pk</property>
-                    <property name="nativeName">indicatorperiod_pk</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
-                    <property name="name">actual_value</property>
-                    <property name="nativeName">actual_value</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">13</property>
-                    <property name="name">actual_comment</property>
-                    <property name="nativeName">actual_comment</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">14</property>
-                    <property name="name">target_value</property>
-                    <property name="nativeName">target_value</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">15</property>
-                    <property name="name">target_comment</property>
-                    <property name="nativeName">target_comment</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">16</property>
-                    <property name="name">period_start</property>
-                    <property name="nativeName">period_start</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
-                </structure>
-                <structure>
-                    <property name="position">17</property>
-                    <property name="name">period_end</property>
-                    <property name="nativeName">period_end</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">91</property>
-                </structure>
-                <structure>
-                    <property name="position">18</property>
-                    <property name="name">period_numerator</property>
-                    <property name="nativeName">period_numerator</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">19</property>
-                    <property name="name">period_denominator</property>
-                    <property name="nativeName">period_denominator</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">20</property>
-                    <property name="name">summed_value</property>
-                    <property name="nativeName">summed_value</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">21</property>
-                    <property name="name">summed_denominator</property>
-                    <property name="nativeName">summed_denominator</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">22</property>
-                    <property name="name">summed_numerator</property>
-                    <property name="nativeName">summed_numerator</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">23</property>
                     <property name="name">disagg_pk</property>
                     <property name="nativeName">disagg_pk</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
-                    <property name="position">24</property>
+                    <property name="position">2</property>
                     <property name="name">dimension_name</property>
                     <property name="nativeName">dimension_name</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">25</property>
+                    <property name="position">3</property>
                     <property name="name">dimension_value</property>
                     <property name="nativeName">dimension_value</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">26</property>
+                    <property name="position">4</property>
                     <property name="name">value</property>
                     <property name="nativeName">value</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">27</property>
+                    <property name="position">5</property>
                     <property name="name">numerator</property>
                     <property name="nativeName">numerator</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">28</property>
+                    <property name="position">6</property>
                     <property name="name">denominator</property>
                     <property name="nativeName">denominator</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select r.title,
- r.id as result_pk,
- r.order as result_order,
- i.title as indicator_title,
- i.id as indicator_pk,
- i.baseline_year,
- i.baseline_comment,
- i.baseline_value,
- i.measure,
- i.order as indicator_order,
- p.id as indicatorperiod_pk,
- p.actual_value,
- p.actual_comment,
- p.target_value,
- p.target_comment,
- p.period_start,
- p.period_end,
- p.numerator as period_numerator,
- p.denominator as period_denominator,
- v.value as summed_value,
- v.numerator as summed_denominator,
- v.denominator as summed_numerator,
+            <xml-property name="queryText"><![CDATA[select
  d.id as disagg_pk,
  d.dimension_name,
  d.dimension_value,
  d.value,
  d.numerator,
  d.denominator
-from rsr_result r
-left join rsr_indicator i on result_id=r.id
-left join rsr_indicatorperiod p on indicator_id=i.id
-left join rsr_indicator_period_actual_value v on v.period_id = p.id
-left join rsr_indicator_period_disaggregation d on d.period_id = p.id
-where r.project_id = ? 
-  and (p.period_start is null or p.period_start >= ?)
-  and (p.period_end is null or p.period_end <= ?)
-order by result_order, result_pk, indicator_order, indicator_pk, p.period_start
+from 
+ rsr_indicator_period_disaggregation d
+where
+ d.period_id = ? 
+
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -21289,13 +20768,13 @@ akvoProgress(row["summed_value_sum"], row["target_sum_old"], row["baseline_value
                 <structure>
                     <property name="name">actual_fmt</property>
                     <text-property name="displayName">actual_fmt</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["measure"]  == "2" &amp;&amp; dataSetRow["summed_numerator"]  != null &amp;&amp; dataSetRow["summed_denominator"] != null &amp;&amp; dataSetRow["summed_denominator"] != 0.0  &#13;
+                    <expression name="expression" type="javascript">dataSetRow["measure"]  == "2" &amp;&amp; row["summed_numerator_sum"]  != null &amp;&amp; row["summed_denominator_sum"] != null &amp;&amp; row["summed_denominator_sum"] != 0.0  &#13;
 ?&#13;
-Formatter.format(Number(dataSetRow["summed_numerator"]),"#,##0{RoundingMode=HALF_UP}") +&#13;
+Formatter.format(Number(row["summed_numerator_sum"]),"#,##0{RoundingMode=HALF_UP}") +&#13;
 " / " +&#13;
-Formatter.format(Number(dataSetRow["summed_denominator"]),"#,##0{RoundingMode=HALF_UP}") +&#13;
+Formatter.format(Number(row["summed_denominator_sum"]),"#,##0{RoundingMode=HALF_UP}") +&#13;
 " (" +&#13;
-Formatter.format(100.0 * Number(dataSetRow["summed_numerator"])/Number(dataSetRow["summed_denominator"]),"#,##0{RoundingMode=HALF_UP}")+"%)"&#13;
+Formatter.format(100.0 * Number(row["summed_numerator_sum"])/Number(row["summed_denominator_sum"]),"#,##0{RoundingMode=HALF_UP}") + "%)"&#13;
 :&#13;
 Formatter.format(Number(row["summed_value_sum"]),"#,##0{RoundingMode=HALF_UP}")</expression>
                     <property name="dataType">string</property>
@@ -21390,6 +20869,38 @@ dataSetRow["target_value"]</expression>
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["summed_value"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">summed_numerator_sum</property>
+                    <text-property name="displayName">summed_numerator_sum</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IndicatorTableGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["period_numerator"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">summed_denominator_sum</property>
+                    <text-property name="displayName">summed_denominator_sum</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>IndicatorTableGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["summed_denominator"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -21683,17 +21194,6 @@ var comments = [];</expression>
                         <property name="borderRightWidth">thin</property>
                         <property name="verticalAlign">middle</property>
                         <cell id="2517">
-                            <label id="2529">
-                                <property name="fontStyle">italic</property>
-                                <property name="color">silver</property>
-                                <list-property name="visibility">
-                                    <structure>
-                                        <property name="format">all</property>
-                                        <expression name="valueExpr" type="javascript">true</expression>
-                                    </structure>
-                                </list-property>
-                                <text-property name="text">Display the summed values for all the periods</text-property>
-                            </label>
                             <text-data name="percentage211" id="2522">
                                 <property name="fontFamily">"Brandon Grotesque"</property>
                                 <property name="fontSize">10pt</property>
@@ -22395,23 +21895,12 @@ Math.min(row["progress_pct"],100)&#13;
                                 <property name="resultSetColumn">actual_fmt</property>
                             </data>
                             <text-data id="2540">
-                                <expression name="valueExpr">if (row["indicator_pk"] == 35132) {&#13;
-	accumulator["Ubicación - Rural"] = 322;&#13;
-	accumulator["Ubicación - Urbano"] = 600;&#13;
-}&#13;
-if (row["indicator_pk"] == 35133) {&#13;
-	accumulator["Ubicación - Rural"] = 900;&#13;
-	accumulator["Ubicación - Urbano"] = 50;&#13;
-}&#13;
-&#13;
-var res = "";&#13;
+                                <expression name="valueExpr">var res = "";&#13;
 for (var key in accumulator) {&#13;
     if (accumulator.hasOwnProperty(key)) {&#13;
 		res = res + key + ":" + accumulator[key] + "&lt;BR>";&#13;
 	}&#13;
-};&#13;
-&#13;
-res</expression>
+}; res</expression>
                                 <property name="contentType">html</property>
                             </text-data>
                         </cell>
@@ -22481,6 +21970,12 @@ res</expression>
                             <property name="contentType">html</property>
                         </text-data>
                         <text-data id="2547">
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">true</expression>
+                                </structure>
+                            </list-property>
                             <expression name="valueExpr">var yr=(row["period_start"] ? Formatter.format(row["period_start"], "yyyy") : "");&#13;
 if (row["actual_comment"]) {comments.push(yr + ": " + row["actual_comment"])};&#13;
 yr</expression>
@@ -22510,22 +22005,67 @@ yr</expression>
                     </cell>
                     <cell id="1671">
                         <property name="verticalAlign">middle</property>
-                        <text-data id="2542">
-                            <property name="color">purple</property>
-                            <list-property name="visibility">
+                        <list id="2548">
+                            <property name="dataSet">Disaggregation</property>
+                            <list-property name="paramBindings">
                                 <structure>
-                                    <property name="format">all</property>
-                                    <expression name="valueExpr" type="javascript">true</expression>
+                                    <property name="paramName">period_id</property>
+                                    <simple-property-list name="expression">
+                                        <value type="javascript">row["indicatorperiod_pk"]</value>
+                                    </simple-property-list>
                                 </structure>
                             </list-property>
-                            <expression name="valueExpr">var key = row["dimension_name"] + " - " + row["dimension_value"];&#13;
-var value = row["dimension_value"];&#13;
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">dimension_name</property>
+                                    <text-property name="displayName">dimension_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["dimension_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">dimension_value</property>
+                                    <text-property name="displayName">dimension_value</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["dimension_value"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">value</property>
+                                    <text-property name="displayName">value</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["value"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">numerator</property>
+                                    <text-property name="displayName">numerator</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["numerator"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">denominator</property>
+                                    <text-property name="displayName">denominator</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["denominator"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
+                            <detail>
+                                <text-data id="2542">
+                                    <property name="color">purple</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <expression name="valueExpr">var key = row["dimension_name"] + " - " + row["dimension_value"];&#13;
+var value = row["value"];&#13;
 if (value != null) {&#13;
 	accumulator[key] = accumulator[key] ? accumulator[key] + value : value;&#13;
 	};&#13;
 key + " = " + value</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
+                                    <property name="contentType">html</property>
+                                </text-data>
+                            </detail>
+                        </list>
                         <text-data id="2537">
                             <property name="color">aqua</property>
                             <list-property name="visibility">
