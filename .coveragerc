@@ -11,7 +11,28 @@ omit =
     akvo/wsgi.py
     # Cheating a lot here obviously:
     akvo/rest/*
-    akvo/rsr/*
+    # akvo/rsr/*
+    akvo/rsr/tests/deployed_code_tests.py
+    akvo/rsr/management/*
+    akvo/rsr/models/*
+    akvo/rsr/views/*
+    akvo/rsr/templatetags/*
+    akvo/rsr/tests/*
+    akvo/rsr/sorl_processors.py
+    akvo/rsr/decorators.py
+    akvo/rsr/feeds.py
+    akvo/rsr/admin_actions.py
+    akvo/rsr/mixins.py
+    akvo/rsr/admin.py
+    akvo/rsr/forms.py
+    akvo/rsr/middleware.py
+    akvo/rsr/backends.py
+    akvo/rsr/signals.py
+    akvo/rsr/filters.py
+    akvo/rsr/fields.py
+    akvo/rsr/validators.py
+    akvo/rsr/context_processors.py
+    akvo/rsr/permissions.py
 
 [report]
 exclude_lines =
@@ -23,4 +44,4 @@ exclude_lines =
     if not chunk:
     raise NotImplementedError
 sort = Cover
-fail_under = 100
+# fail_under = 100
