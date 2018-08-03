@@ -200,107 +200,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.is_admin = set_it
         self.save()
 
-    def get_is_org_admin(self, org):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            return False
-        return employment.group == Group.objects.get(name='Admins') if \
-            employment.is_approved else False
-    get_is_org_admin.boolean = True  # make pretty icons in the admin list view
-    get_is_org_admin.short_description = _(u'organisation admin')
-
-    def set_is_org_admin(self, org, set_it):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            pass
-        if set_it:
-            employment.group = Group.objects.get(name='Admins')
-            employment.save()
-        else:
-            employment.group.delete()
-
     def get_admin_employment_orgs(self):
         employments = Employment.objects.filter(user=self, is_approved=True, group__name='Admins')
         return employments.organisations()
-
-    def get_owned_org_users(self):
-        owned_organisation_users = []
-        for o in self.get_admin_employment_orgs():
-            owned_organisation_users += o.content_owned_organisations().users()
-        return owned_organisation_users
-
-    def get_is_user_manager(self, org):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            return False
-        return employment.group == Group.objects.get(name='User manager') \
-            if employment.is_approved else False
-    get_is_user_manager.boolean = True  # make pretty icons in the admin list view
-    get_is_user_manager.short_description = _(u'organisation admin')
-
-    def set_is_user_manager(self, org, set_it):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            pass
-        if set_it:
-            employment.group = Group.objects.get(name='User manager')
-            employment.save()
-        else:
-            employment.group.delete()
-
-    def get_is_project_editor(self, org):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            return False
-        return employment.group == Group.objects.get(name='Project Editors') \
-            if employment.is_approved else False
-    get_is_project_editor.boolean = True  # make pretty icons in the admin list view
-    get_is_project_editor.short_description = _(u'organisation admin')
-
-    def set_is_project_editor(self, org, set_it):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            pass
-        if set_it:
-            employment.group = Group.objects.get(name='Project Editors')
-            employment.save()
-        else:
-            employment.group.delete()
-
-    def get_is_user(self, org):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            return False
-        return employment.group == Group.objects.get(name='Users') if \
-            employment.is_approved else False
-    get_is_user.boolean = True  # make pretty icons in the admin list view
-    get_is_user.short_description = _(u'organisation admin')
-
-    def set_is_user(self, org, set_it):
-        from .employment import Employment
-        try:
-            employment = Employment.objects.get(user=self, organisation=org)
-        except:
-            pass
-        if set_it:
-            employment.group = Group.objects.get(name='Users')
-            employment.save()
-        else:
-            employment.group.delete()
 
     def my_projects(self):
         return self.approved_organisations().all_projects()
@@ -311,36 +213,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             return all_orgs[0]
         else:
             return None
-
-    def allow_edit(self, project):
-        """ Support partner organisations may "take ownership" of projects, meaning that editing
-        of them is restricted. This method is used "on top" of normal checking for user access to
-        projects since it is only relevant for Partner users.
-        """
-        allow_edit = True
-        partner_admins_allowed = []
-        # compile list of support orgs that limit editing
-        for partner in project.support_partners():
-            if not partner.allow_edit:
-                allow_edit = False
-                partner_admins_allowed.append(partner)
-        # no-one limits editing, all systems go
-        if allow_edit:
-            return True
-        # Only Partner admins on the list of "limiters" list may edit
-        else:
-            if self.organisation in partner_admins_allowed:
-                return True
-        return False
-
-    @property
-    def get_api_key(self, key=""):
-        try:
-            api_key = ApiKey.objects.get(user=self)
-            key = api_key.key
-        except:
-            pass
-        return key
 
     def email_user(self, subject, message, from_email=None):
         """
