@@ -127,14 +127,6 @@ class Result(models.Model):
     def iati_type_unicode(self):
         return str(self.iati_type())
 
-    def has_info(self):
-        if self.title or self.type or self.aggregation_status or self.description:
-            return True
-        return False
-
-    def is_calculated(self):
-        return self.project.is_impact_project
-
     def parent_project(self):
         """
         Return a dictionary of this result's parent project.
