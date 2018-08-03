@@ -20,10 +20,8 @@ from ..fields import ValidXMLCharField, ValidXMLTextField
 from akvo.codelists.store.default_codelists import CURRENCY, ORGANISATION_TYPE
 from akvo.codelists.models import Currency
 
-from .country import Country
 from .partner_site import PartnerSite
 from .partnership import Partnership
-from .publishing_status import PublishingStatus
 from .project_update import ProjectUpdate
 
 ORG_TYPE_NGO = 'N'
@@ -230,50 +228,6 @@ class Organisation(TimestampsMixin, models.Model):
         def has_location(self):
             return self.filter(primary_location__isnull=False)
 
-        def partners(self, role):
-            "return the organisations in the queryset that are partners of type role"
-            return self.filter(partnerships__iati_organisation_role__exact=role).distinct()
-
-        def allpartners(self):
-            return self.distinct()
-
-        def fieldpartners(self):
-            return self.partners(Partnership.IATI_IMPLEMENTING_PARTNER)
-
-        def fundingpartners(self):
-            return self.partners(Partnership.IATI_FUNDING_PARTNER)
-
-        def sponsorpartners(self):
-            return self.partners(Partnership.AKVO_SPONSOR_PARTNER)
-
-        def supportpartners(self):
-            return self.partners(Partnership.IATI_ACCOUNTABLE_PARTNER)
-
-        def extendingpartners(self):
-            return self.partners(Partnership.IATI_EXTENDING_PARTNER)
-
-        def supportpartners_with_projects(self):
-            """return the organisations in the queryset that are support partners with published
-            projects, not counting archived projects"""
-            from .project import Project
-            return self.filter(
-                partnerships__iati_organisation_role=Partnership.IATI_ACCOUNTABLE_PARTNER,
-                partnerships__project__publishingstatus__status=PublishingStatus.STATUS_PUBLISHED,
-                partnerships__project__iati_status__in=Project.NOT_SUSPENDED
-            ).distinct()
-
-        def ngos(self):
-            return self.filter(organisation_type__exact=ORG_TYPE_NGO)
-
-        def governmental(self):
-            return self.filter(organisation_type__exact=ORG_TYPE_GOV)
-
-        def commercial(self):
-            return self.filter(organisation_type__exact=ORG_TYPE_COM)
-
-        def knowledge(self):
-            return self.filter(organisation_type__exact=ORG_TYPE_KNO)
-
         def all_projects(self):
             "returns a queryset with all projects that has self as any kind of partner"
             from .project import Project
@@ -335,6 +289,10 @@ class Organisation(TimestampsMixin, models.Model):
         return PartnerSite.objects.filter(organisation=self)
 
     def website(self):
+        """Returns a link to the organisation's website
+
+        Used to display the URL in the Django Admin.
+        """
         return '<a href="%s">%s</a>' % (self.url, self.url,)
     website.allow_tags = True
 
@@ -372,13 +330,6 @@ class Organisation(TimestampsMixin, models.Model):
         all_updates = self.all_updates()
         return all_updates.filter(project__in=self.published_projects()).distinct()
 
-    def reporting_on_projects(self):
-        """returns a queryset with all projects that has self as reporting organisation."""
-        return self.projects.filter(
-            partnerships__organisation=self,
-            partnerships__iati_organisation_role=Partnership.IATI_REPORTING_ORGANISATION
-        )
-
     def active_projects(self):
         return self.published_projects().status_not_cancelled().status_not_archived()
 
@@ -402,16 +353,6 @@ class Organisation(TimestampsMixin, models.Model):
         one project in common with.
         """
         return self.all_projects().field_partners().exclude(id__exact=self.id)
-
-    def has_partner_types(self, project):
-        """Return a list of partner types of this organisation to the project"""
-        return [
-            dict(Partnership.IATI_ROLES)[role] for role in Partnership.objects.filter(
-                project=project,
-                organisation=self,
-                iati_organisation_role__isnull=False
-            ).values_list('iati_organisation_role', flat=True)
-        ]
 
     def content_owned_organisations(self):
         """
@@ -443,22 +384,6 @@ class Organisation(TimestampsMixin, models.Model):
 
         return queryset.distinct()
 
-    def countries_where_active(self):
-        """Returns a Country queryset of countries where this organisation has
-        published projects."""
-        return Country.objects.filter(
-            projectlocation__project__partnerships__organisation=self,
-            projectlocation__project__publishingstatus__status=PublishingStatus.STATUS_PUBLISHED
-        ).distinct()
-
-    def organisation_countries(self):
-        """Returns a list of the organisations countries."""
-        countries = []
-        for location in self.locations.all():
-            if location.iati_country:
-                countries.append(location.iati_country_value().name)
-        return countries
-
     def iati_file(self):
         """
         Looks up the latest public IATI file of this organisation.
@@ -472,8 +397,6 @@ class Organisation(TimestampsMixin, models.Model):
 
     def iati_file_unicode(self):
         return str(self.iati_file())
-
-    # New API
 
     def has_multiple_project_currencies(self):
         "Check if organisation has projects with different currencies"
