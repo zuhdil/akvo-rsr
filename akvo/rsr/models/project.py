@@ -24,8 +24,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 
-from django_counter.models import ViewCounter
-
 from sorl.thumbnail.fields import ImageField
 
 from akvo.codelists.models import (AidType, ActivityScope, ActivityStatus, CollaborationType,
@@ -44,7 +42,6 @@ from ..mixins import TimestampsMixin
 from .country import Country
 from .iati_check import IatiCheck
 from .result import IndicatorPeriod
-from .link import Link
 from .models_utils import OrganisationsQuerySetManager, QuerySetManager
 from .organisation import Organisation
 from .partnership import Partnership
@@ -615,11 +612,6 @@ class Project(TimestampsMixin, models.Model):
                     last_modified_at=last_modified_at)
 
     @property
-    def view_count(self):
-        counter = ViewCounter.objects.get_for_object(self)
-        return counter.count or 0
-
-    @property
     def reporting_partner(self):
         """ In some cases we need the partnership object instead of the organisation to be able to
             access is_secondary_reporter
@@ -777,40 +769,6 @@ class Project(TimestampsMixin, models.Model):
                 Sum('max_value')
             )['max_value__sum'] or 0  # we want to return 0 instead of an empty QS
 
-        def get_planned_water_calc(self):
-            "how many will get improved water"
-            return self.status_not_cancelled().get_largest_value_sum(
-                getattr(settings, 'AFFECTED_BENCHMARKNAME', 'people affected'),
-                ['Water']
-            ) - self.status_complete().get_largest_value_sum(
-                getattr(settings, 'AFFECTED_BENCHMARKNAME', 'people affected'),
-                ['Water']
-            )
-
-        def get_planned_sanitation_calc(self):
-            "how many will get improved sanitation"
-            return self.status_not_cancelled().get_largest_value_sum(
-                getattr(settings, 'AFFECTED_BENCHMARKNAME', 'people affected'),
-                ['Sanitation']
-            ) - self.status_complete().get_largest_value_sum(
-                getattr(settings, 'AFFECTED_BENCHMARKNAME', 'people affected'),
-                ['Sanitation']
-            )
-
-        def get_actual_water_calc(self):
-            "how many have gotten improved water"
-            return self.status_complete().get_largest_value_sum(
-                getattr(settings, 'AFFECTED_BENCHMARKNAME', 'people affected'),
-                ['Water']
-            )
-
-        def get_actual_sanitation_calc(self):
-            "how many have gotten improved sanitation"
-            return self.status_complete().get_largest_value_sum(
-                getattr(settings, 'AFFECTED_BENCHMARKNAME', 'people affected'),
-                ['Sanitation']
-            )
-
         def all_updates(self):
             """Return ProjectUpdates for self, newest first."""
             return ProjectUpdate.objects.filter(project__in=self).distinct()
@@ -874,52 +832,6 @@ class Project(TimestampsMixin, models.Model):
         """ProjectUpdate list for self, newest first."""
         return self.project_updates.select_related('user')
 
-    def latest_update(self):
-        """
-        for use in the admin
-        lists data useful when looking for projects that haven't been updated in a while
-        (or not at all)
-        note: it would have been useful to make this column sortable via the
-        admin_order_field attribute, but this results in multiple rows shown for the project
-        in the admin change list view and there's no easy way to distinct() them
-        """
-        # TODO: probably this can be solved by customizing ModelAdmin.queryset
-        updates = self.updates_desc()
-        if updates:
-            update = updates[0]
-            # date of update shown as link poiting to the update page
-            update_info = '<a href="%s">%s</a><br/>' % (update.get_absolute_url(),
-                                                        update.created_at,)
-            # if we have an email of the user doing the update, add that as a mailto link
-            if update.user.email:
-                update_info = '%s<a href="mailto:%s">%s</a><br/><br/>' % (
-                    update_info, update.user.email, update.user.email,
-                )
-            else:
-                update_info = '%s<br/>' % update_info
-        else:
-            update_info = u'%s<br/><br/>' % (_(u'No update yet'),)
-        # links to the project's support partners
-        update_info = "%sSP: %s" % (
-            update_info, ", ".join(
-                [u'<a href="%s">%s</a>' % (
-                    partner.get_absolute_url(), partner.name
-                ) for partner in self.support_partners()]
-            )
-        )
-        # links to the project's field partners
-        return "%s<br/>FP: %s" % (
-            update_info, ", ".join(
-                [u'<a href="%s">%s</a>' % (
-                    partner.get_absolute_url(), partner.name
-                ) for partner in self.field_partners()]
-            )
-        )
-
-    latest_update.allow_tags = True
-    # no go, results in duplicate projects entries in the admin change list
-    # latest_update.admin_order_field = 'project_updates__time'
-
     def show_status(self):
         "Show the current project status"
         if not self.iati_status == '0':
@@ -949,25 +861,6 @@ class Project(TimestampsMixin, models.Model):
     show_keywords.short_description = 'Keywords'
     show_keywords.allow_tags = True
     show_keywords.admin_order_field = 'keywords'
-
-    def show_map(self):
-        try:
-            return '<img src="%s" />' % (self.map.url,)
-        except:
-            return ''
-    show_map.allow_tags = True
-
-    def connected_to_user(self, user):
-        '''
-        Test if a user is connected to self through an organisation
-        '''
-        try:
-            for organisation in user.organisations.all():
-                if self in organisation.all_projects():
-                    return True
-        except:
-            pass
-        return False
 
     def is_published(self):
         if self.publishingstatus:
@@ -1002,12 +895,6 @@ class Project(TimestampsMixin, models.Model):
                     return False
 
         return True
-
-    def akvopedia_links(self):
-        return self.links.filter(kind=Link.LINK_AKVOPEDIA)
-
-    def external_links(self):
-        return self.links.filter(kind=Link.LINK_EXTRNAL)
 
     def budget_total(self):
         return Project.objects.budget_total().get(pk=self.pk).budget_total
@@ -1044,29 +931,6 @@ class Project(TimestampsMixin, models.Model):
             total_string += '%s %s, ' % ("{:,.0f}".format(totals[t]), t)
 
         return total_string[:-2]
-
-    def focus_areas(self):
-        from .focus_area import FocusArea
-        return FocusArea.objects.filter(categories__in=self.categories.all()).distinct()
-    focus_areas.allow_tags = True
-
-    def areas_and_categories(self):
-        from .focus_area import FocusArea
-        from .category import Category
-        area_objs = FocusArea.objects.filter(
-            categories__projects__exact=self
-        ).distinct().order_by('name')
-        areas = []
-        for area_obj in area_objs:
-            area = {'area': area_obj}
-            area['categories'] = []
-            for cat_obj in Category.objects.filter(
-                    focus_area=area_obj,
-                    projects=self
-            ).order_by('name'):
-                area['categories'] += [cat_obj.name]
-            areas += [area]
-        return areas
 
     # shortcuts to linked orgs for a single project
     def _partners(self, role=None):
@@ -1117,27 +981,6 @@ class Project(TimestampsMixin, models.Model):
 
     def all_partners(self):
         return self._partners()
-
-    def partners_info(self):
-        """
-        Return a dict of the distinct partners with the organisation as key and as content:
-        1. The partnerships of the organisation
-        2. The (added up) funding amount, if available. Otherwise None.
-        E.g. {<Organisation 1>: [[<Partnership 1>,], 10000],}
-        """
-        partners_info = {}
-        for partnership in Partnership.objects.filter(project=self):
-            funding_amount = partnership.funding_amount if partnership.funding_amount else None
-            if partnership.organisation not in partners_info.keys():
-                partners_info[partnership.organisation] = [[partnership], funding_amount]
-            else:
-                partners_info[partnership.organisation][0].append(partnership)
-                existing_funding_amount = partners_info[partnership.organisation][1]
-                if funding_amount and existing_funding_amount:
-                    partners_info[partnership.organisation][1] += funding_amount
-                elif funding_amount:
-                    partners_info[partnership.organisation][1] = funding_amount
-        return partners_info
 
     def funding_partnerships(self):
         "Return the Partnership objects associated with the project that have funding information"
@@ -1338,12 +1181,6 @@ class Project(TimestampsMixin, models.Model):
     def iati_checks_status(self, status):
         return self.iati_checks.filter(status=status)
 
-    def iati_successes(self):
-        return [check.description for check in self.iati_checks_status(1)]
-
-    def iati_successes_unicode(self):
-        return str(self.iati_successes())
-
     def iati_warnings(self):
         return [check.description for check in self.iati_checks_status(2)]
 
@@ -1542,56 +1379,6 @@ class Project(TimestampsMixin, models.Model):
 
     def has_indicator_labels(self):
         return self.indicator_labels().count() > 0
-
-    def toggle_aggregate_children(self, aggregate):
-        """
-        If aggregation to children is turned off,
-
-        :param aggregate; Boolean, indicating if aggregation is turned on (True) or off (False)
-        """
-        for result in self.results.all():
-            for indicator in result.indicators.all():
-                if indicator.is_parent_indicator():
-                    for period in indicator.periods.all():
-                        if indicator.measure == '2':
-                            self.update_parents(period, period.child_periods_average(), 1)
-                        else:
-                            sign = 1 if aggregate else -1
-                            self.update_parents(period, period.child_periods_sum(), sign)
-
-    def toggle_aggregate_to_parent(self, aggregate):
-        """ Add/subtract child indicator period values from parent if aggregation is toggled """
-        for result in self.results.all():
-            for indicator in result.indicators.all():
-                if indicator.is_child_indicator():
-                    for period in indicator.periods.all():
-                        parent = period.parent_period
-                        if parent and period.actual_value:
-                            if indicator.measure == '2':
-                                self.update_parents(parent, parent.child_periods_average(), 1)
-                            else:
-                                sign = 1 if aggregate else -1
-                                self.update_parents(parent, period.actual_value, sign)
-
-    def update_parents(self, update_period, difference, sign):
-        """ Update parent indicator periods if they exist and allow aggregation """
-        try:
-            if update_period.indicator.measure == '2':
-                update_period.actual_value = str(Decimal(difference))
-            else:
-                update_period.actual_value = str(
-                    Decimal(update_period.actual_value) + sign * Decimal(difference))
-            update_period.save()
-
-            parent_period = update_period.parent_period
-            if parent_period and parent_period.indicator.result.project.aggregate_children:
-                if update_period.indicator.measure == '2':
-                    self.update_parents(parent_period, parent_period.child_periods_average(), 1)
-                else:
-                    self.update_parents(parent_period, difference, sign)
-
-        except (InvalidOperation, TypeError):
-            pass
 
 
 @receiver(post_save, sender=Project)
