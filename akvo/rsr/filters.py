@@ -9,29 +9,10 @@ see < http://www.gnu.org/licenses/agpl.html >.
 from copy import deepcopy
 
 from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
-
-from akvo.codelists.store.default_codelists import SECTOR_CATEGORY
-from akvo.utils import codelist_choices
 from .models import (Organisation, OrganisationLocation,
                      Project, ProjectLocation, ProjectUpdate, ProjectUpdateLocation,
                      RecipientCountry)
 from .m49 import M49_CODES, M49_HIERARCHY
-
-ANY_CHOICE = (('', _('All')), )
-
-
-def sectors():
-    sectors_list = []
-    for sector in codelist_choices(SECTOR_CATEGORY):
-        sectors_list.append(sector)
-    return sectors_list
-
-
-def get_orgs():
-    orgs = list(Organisation.objects.all().values_list(
-                'id', 'name', flat=False))
-    return [('', _('All'))] + orgs
 
 
 def remove_empty_querydict_items(request_get):
@@ -62,29 +43,6 @@ def get_m49_filter(value, use_recipient_country=True):
     if use_recipient_country:
         filter_ = (Q(recipient_countries__country__in=countries) | filter_)
     return filter_
-
-
-def filter_m49(queryset, value):
-    """Filters countries from the m49 list, for projects."""
-    if not value:
-        return queryset
-    else:
-        return queryset.filter(get_m49_filter(value))
-
-
-def filter_m49_orgs(queryset, value):
-    """Filters countries from the m49 list, for projects."""
-    if not value:
-        return queryset
-    countries = walk(deepcopy(M49_HIERARCHY)[int(value)])
-    return queryset.filter(locations__iati_country__in=countries)
-
-
-def filter_title_or_subtitle(queryset, value):
-    """Filters projects based on whether title or subtitle contains value."""
-    if not value:
-        return queryset
-    return queryset.filter(Q(title__icontains=value) | Q(subtitle__icontains=value))
 
 
 def get_id_for_iso(i):
@@ -165,8 +123,3 @@ def get_location_country_ids(qs):
         get_id_for_iso(location['country__iso_code'].upper())
         for location in locations_qs if location['country__iso_code']
     ]
-
-
-def build_choices(qs):
-    """Build choices from queryset and add an All option"""
-    return [('', _('All'))] + list(qs.values_list('id', 'name', flat=False))
