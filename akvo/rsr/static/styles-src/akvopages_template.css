@@ -1,0 +1,111 @@
+/*---------------------------------------------------------------------------------
+
+            Title:   Akvo Page Template
+            Author:  Loic Sans, akvo.org
+            LICENSE: GNU Affero General Public License
+
+/*---------------------------------------------------------------------------------*/
+
+/*--------------------------------- LOGO -------------------------------*/
+
+body {
+    /* Change your font type */
+    font-family: helvetica !important;
+    /* Change the color of text across the whole website */
+    color: #897900 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* Change titles' font */
+    font-family: helvetica !important;
+    /* Change title color */
+    color: #568980 !important;
+    /* Change title font type (bold, normal)*/
+    font-weight: normal !important;
+}
+
+a,
+a:link,
+a:visited {
+    /* Change link color */
+    color: #897900 !important;
+    /* Change underlined effect (none / underlined) */
+    text-decoration: none !important;
+    /* Change title font type (bold, normal)*/
+    font-weight: normal !important;
+}
+
+a:hover {
+    /* Change link color when hovering it*/
+    color: #897900 !important;
+}
+
+/*--------------------------------- Text selection color (optional nice touch) -------------------------------*/
+
+::-moz-selection {
+    /* Color the background selection */
+    background: rgb(114, 205, 255) !important;
+    /* Color the selected text on top of the background color above */
+    color: #fff !important;
+    text-shadow: none !important;
+}
+
+::selection {
+    /* Color the background selection */
+    background: rgb(114, 205, 255) !important;
+    /* Color the selected text on top of the background color above */
+    color: #fff !important;
+    text-shadow: none !important;
+}
+
+/*--------------------------------- button color -------------------------------*/
+
+a.btn,
+button.btn, button {
+    border: 1px solid transparent !important;
+    /* Color the button text */
+    color: white !important;
+    /* Color the button background */
+    background: blue !important;
+}
+
+a.btn:hover,
+button.btn:hover, button:hover {
+    /* Color the button text */
+    color: white !important;
+    /* Color the button background */
+    background: red !important;
+    border: 1px solid transparent !important;
+}
+
+/*--------------------------------- LOGO -------------------------------*/
+
+.navbar-brand > img {
+    /* Do not change this value */
+    display: block !important;
+    /* Do not change this value */
+    margin-top: 0px !important;
+    /* Do not change this value */
+    max-height: 52px !important;
+}
+
+/*--------------------------------- Header tagline -------------------------------*/
+
+nav.navbar-fixed-top .tagLine h2 {
+    /* Change the color of the tag line in the header */
+    color: red !important;
+    /* Switch the value to display the tagline or not (block = displayed / none = not displayed) */
+    display: none !important;
+}
+
+/*--------------------------------- Project title on project listing page -------------------------------*/
+
+.main-list.projects .projectListUlcontain ul.projectListUl li h1 a {
+    /* Change title color on project listing page */
+    color: #568980 !important;
+}
