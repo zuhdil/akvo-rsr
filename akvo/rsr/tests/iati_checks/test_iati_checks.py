@@ -180,7 +180,7 @@ class IatiChecksTestCase(TestCase):
         RelatedProject.objects.create(
             project=related_project,
             related_project=project,
-            relation=RelatedProject.PROJECT_RELATION_PARENT
+            relation=RelatedProject.PROJECT_RELATION_SIBLING
         )
 
         # Add sector

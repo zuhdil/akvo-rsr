@@ -5,6 +5,8 @@
 # For additional details on the GNU license please see < http://www.gnu.org/licenses/agpl.html >.
 
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from ..fields import ValidXMLCharField
@@ -91,3 +93,44 @@ class RelatedProject(models.Model):
         elif self.related_iati_id:
             return self.related_iati_id
         return u'%s' % _(u'No related project specified')
+
+
+class IncorrectRelationship(Exception):
+    pass
+
+
+@receiver(pre_save, sender=RelatedProject)
+def prevent_incorrect_relationships(sender, **kwargs):
+    """ Prevent incorrect/meaningless relationships from being created.
+
+    - A project cannot be related to itself
+    - A project cannot have it's child as it's parent too
+
+    """
+
+    R = kwargs['instance']
+    if R.project_id is None or R.related_project_id is None:
+        return
+
+    if R.project_id == R.related_project_id:
+        raise IncorrectRelationship(_(u'A project cannot be related to itself'))
+
+    # If relation is symmetric, then cycles cannot be formed
+    if not R.relation or R.relation == R.reciprocal_relation:
+        return
+
+    # Check for reciprocal relations,
+    # 1. project & related_project are swapped with relation being the same OR
+    # 2. project & related_project are the same, but with reciprocal relation
+
+    # NOTE: We only check for the first case, since the second case is made
+    # invalid because RelatedProject's unique_together ensures there's only one
+    # relation with (project, related_project) pair
+    cyclic_relations = RelatedProject.objects.filter(
+        project_id=R.related_project_id,
+        related_project_id=R.project_id,
+        relation=R.relation,
+    )
+
+    if cyclic_relations.exists():
+        raise IncorrectRelationship(_(u'Cannot create cyclic relationships'))
