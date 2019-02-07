@@ -4679,6 +4679,7 @@ function expandAccordion(highlight) {
             element.querySelector(".hide-partial-click").click();
         }
         if (highlight) {
+            $(".error-highlight").removeClass("error-highlight");
             element.classList.add("error-highlight");
             element.scrollIntoView(true);
             // Avoid scrolling the element under the header
